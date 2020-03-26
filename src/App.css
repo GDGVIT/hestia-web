@@ -2,10 +2,38 @@
     width: 100vw;
     height: 100vh;
     text-align: center;
+    background-color: #fafafa;
 }
-.App *{
-    display: inline-block;
+
+/* Home page css */
+
+.hestia-logo{
+    margin-top: 30vh;
 }
+.hestia-logo img{
+    width: 80%;
+    height: auto;
+}
+.home-but{
+    margin: auto auto;
+    margin-top: 10vh;
+}
+.home-but a{
+    display: block;
+    width: 100%;
+    margin-bottom: 3vh;
+}
+.home-but a button{
+    width: 30vw;
+    height: 5vh;
+    background-color: #00d2d2;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+
+}
+
+
 /* Main page cdd */
 .ant-tabs-bar, .ant-tabs-nav-container, .ant-tabs-nav-wrap, .ant-tabs-nav-scroll, .ant-tabs-nav, .ant-tabs-nav > div{
     width: 100%;
@@ -16,4 +44,119 @@
 
 .ant-tabs-bottom .ant-tabs-bottom-bar .ant-tabs-ink-bar{
     display: none !important;
+}
+
+
+/* login page css */
+.login-form{
+    margin-top: 60px;
+}
+.ant-input{
+    width: 75%;
+    border: 1px solid #00d2d2;
+    border-radius: 6px;
+    height: 60px;
+}   
+.login-form-button, .ant-btn-primary{
+    width: 30vw;
+    height: 5vh;
+    background-color: #00d2d2;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-right: 20px;
+}
+.oauth{
+    width: 30vw;
+    height: 5vh;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    box-shadow: 0px 0px 3px lightgray
+}
+
+/* reg page css */
+.hestia-logo-reg{
+    margin-top: 20vh;
+}
+.hestia-logo-reg img{
+    width: 80%;
+    height: auto;
+}
+
+/* Nav css */
+.ant-tabs-bottom .ant-tabs-bottom-bar{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 65px;
+    box-shadow: 0px -2px 8px lightgray;
+    background-color: white;
+    opacity: 1;
+}
+.ant-tabs-bottom .ant-tabs-bottom-bar div{
+    height: 100%;
+}
+.textz{
+    position: relative;
+    top: 25%;
+}
+.ant-tabs-nav .ant-tabs-tab-active{
+    color: #00d2d2;
+}
+/* Main content css */
+.main-title{
+    width: 80%;
+    margin: auto auto;
+    margin-top: 98px;
+    margin-bottom: 40px;
+}
+
+.main-title h1{
+    font-size: 32px;
+    letter-spacing: 1.14px;
+    font-weight: 900;
+}
+.ant-card{
+    width: 80%;
+    margin: auto auto;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    box-shadow: 0px 0px 2px lightgray;
+}
+.ant-card-body{
+    padding: 20px
+}
+.imgback{
+    background-color: #00d2d2;
+    border: none;
+    border-radius: 14px;
+    float: right;
+    width: 30px;
+    height: 30px;
+    margin-right: 4px;
+}
+.imgback img{
+    padding-top: 4px;
+}
+.iconz{
+    float: right;
+}
+.feed-card-header{
+    width: 100%;
+}
+.feed-card-header span {
+    width: 60%;
+    float: left;
+    text-align: left;
+}
+.feed-card-header p{
+    width: 40%;
+    float: left;
+    text-align: left;
+    margin: 0px;
+}
+.feed-card-date p{
+    float: left;
+    margin: 0px;
 }

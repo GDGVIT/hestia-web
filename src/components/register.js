@@ -1,6 +1,5 @@
 import React from 'react'
 import { Form, Input, InputNumber, Button } from 'antd';
-import { LockOutlined } from '@ant-design/icons';
 import logo from '../assets/group_5.png';
 import {Link} from 'react-router-dom';
 
@@ -15,11 +14,7 @@ const layout = {
 const validateMessages = {
   required: 'This field is required!',
   types: {
-    email: 'Not a validate email!',
-    number: 'Not a validate number!',
-  },
-  number: {
-    range: 'Must be 10 digits!',
+    email: 'Not a validate email!'
   },
 };
 
@@ -30,35 +25,39 @@ const Register = () => {
 
   return (
       <div>
-      <div>
+      <div className="hestia-logo-reg">
           <img src={logo} alt="Hestialogo"></img>
       </div>
-    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} className="login-form">
       <Form.Item
         name={['user', 'name']}
-        label="Name"
         rules={[
           {
             required: true,
           },
         ]}
       >
-        <Input />
+        <Input 
+        placeholder="Name"
+        />
       </Form.Item>
       <Form.Item
         name={['user', 'email']}
-        label="Email"
         rules={[
           {
+            required: true,
             type: 'email',
+            message: 'Please input a valid email!'
           },
         ]}
       >
-        <Input />
+        <Input 
+        placeholder="Email"
+        />
       </Form.Item>
       <Form.Item
         name="password"
-        label="Password"
+        placeholder="Password"
         rules={[
           {
             required: true,
@@ -67,27 +66,29 @@ const Register = () => {
         ]}
       >
         <Input
-          prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
           placeholder="Password"
         />
       </Form.Item>
       <Form.Item
-        name={['user', 'number']}
-        label="Number"
+        name={['user', 'num']}
         rules={[
           {
-            type: 'number',
-            min: 1000000000,
-            max: 10000000000,
+            required: true,
+            message: 'Please input your Number!',
           },
         ]}
       >
-        <InputNumber />
+        <Input
+        placeholder="Number"
+        />
       </Form.Item>
-      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+      <Form.Item>
         <Button type="primary" htmlType="submit">
           Submit
+        </Button>
+        <Button type="dashed" className="oauth">
+                Login with G 
         </Button>
       </Form.Item>
       <Form.Item>

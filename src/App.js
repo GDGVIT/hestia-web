@@ -6,6 +6,8 @@ import Login from "./components/login";
 import Register from "./components/register";
 import Nav from "./components/nav";
 import Home from "./components/home";
+import Chat from "./components/chat/chats";
+
 class App extends React.Component {
   constructor(){
     super();
@@ -34,7 +36,7 @@ class App extends React.Component {
           <Route exact path='/login' component={Login}/>
           <Route exact path='/register' component={Register}/>
           <Route exact path='/home' component={Nav}/>
-
+          <Route exact path='/chat' component={Chat}/>
         </div>
       </BrowserRouter>
 
