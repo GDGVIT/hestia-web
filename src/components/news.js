@@ -1,17 +1,14 @@
 import React from 'react';
 import { Card, Row, Col } from 'antd';
 import profile from '../assets/profile.png';
-import plus from '../assets/plus.png';
-import store from '../assets/store.png';
-import check from '../assets/check.png';
-
+import {Link} from 'react-router-dom';
 
 
 class News extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            selected: null
+            current: "const"
         }
     }
     render(){
@@ -20,124 +17,117 @@ class News extends React.Component {
                 <div className="main-title">    
                 <Row>
                     <Col span={18}>
-                        <h1>Requests</h1>
+                        <h1>News</h1>
                     </Col>
-                    <Col span={6}><img src={profile} alt="Profile logo"></img></Col>
+                    <Col span={6}>
+                    <Link to="/profile"><img src={profile} alt="Profile logo"></img></Link>
+                    </Col>
                 </Row>
  
                 </div>
                 <div className="main-content">
                     <Card>
                         <Row>
-                            <Col span={17}>
-                                <div className="feed-card-header">
+                            <Col span={24}>
+                                <div className="news-card-header">
                                     <span>
-                                        <strong>Heading of card</strong>
+                                        Heading of card
                                     </span>
                                     <p>4</p>
                                 </div>
-                                <div className="feed-card-date">
-                                    <p>Date and time</p>
+                                <div className="news-card-content">
+                                    <p>This is the description of the news we can show upto 60 words here and then if they want they can click on the link below and visit it. Makes sense eh?</p>
                                 </div>
                             </Col>
-                            <Col span={7} className="iconz">
-                                <div className="imgback">
-                                    <img src={store} alt="location"></img>
-                                </div>
-                                <div className="imgback">
-                                    <img src={check} alt="location"></img>
-                                </div>
+                            <Col span={24} className="news-bottom-select">
+                                <p>
+                                    Date and Time
+                                </p>
+                                <a href="#"> Read full story </a>
                             </Col>
                         </Row>
                     </Card>
                     <Card>
                         <Row>
-                            <Col span={17}>
-                                <div className="feed-card-header">
+                            <Col span={24}>
+                                <div className="news-card-header">
                                     <span>
-                                        <strong>Heading of card</strong>
+                                        Heading of card
                                     </span>
                                     <p>4</p>
                                 </div>
-                                <div className="feed-card-date">
-                                    <p>Date and time</p>
+                                <div className="news-card-content">
+                                    <p>This is the description of the news we can show upto 60 words here and then if they want they can click on the link below and visit it. Makes sense eh?</p>
                                 </div>
                             </Col>
-                            <Col span={7} className="iconz">
-                                <div className="imgback">
-                                    <img src={store} alt="location"></img>
-                                </div>
-                                <div className="imgback">
-                                    <img src={check} alt="location"></img>
-                                </div>
-                            </Col>
-                        </Row>
-                    </Card>                    <Card>
-                        <Row>
-                            <Col span={17}>
-                                <div className="feed-card-header">
-                                    <span>
-                                        <strong>Heading of card</strong>
-                                    </span>
-                                    <p>4</p>
-                                </div>
-                                <div className="feed-card-date">
-                                    <p>Date and time</p>
-                                </div>
-                            </Col>
-                            <Col span={7} className="iconz">
-                                <div className="imgback">
-                                    <img src={store} alt="location"></img>
-                                </div>
-                                <div className="imgback">
-                                    <img src={check} alt="location"></img>
-                                </div>
+                            <Col span={24} className="news-bottom-select">
+                                <p>
+                                    Date and Time
+                                </p>
+                                <a href="#"> Read full story </a>
                             </Col>
                         </Row>
                     </Card>
                     <Card>
                         <Row>
-                            <Col span={17}>
-                                <div className="feed-card-header">
+                            <Col span={24}>
+                                <div className="news-card-header">
                                     <span>
-                                        <strong>Heading of card</strong>
+                                        Heading of card
                                     </span>
                                     <p>4</p>
                                 </div>
-                                <div className="feed-card-date">
-                                    <p>Date and time</p>
+                                <div className="news-card-content">
+                                    <p>This is the description of the news we can show upto 60 words here and then if they want they can click on the link below and visit it. Makes sense eh?</p>
                                 </div>
                             </Col>
-                            <Col span={7} className="iconz">
-                                <div className="imgback">
-                                    <img src={store} alt="location"></img>
-                                </div>
-                                <div className="imgback">
-                                    <img src={check} alt="location"></img>
-                                </div>
+                            <Col span={24} className="news-bottom-select">
+                                <p>
+                                    Date and Time
+                                </p>
+                                <a href="#"> Read full story </a>
                             </Col>
                         </Row>
                     </Card>
                     <Card>
                         <Row>
-                            <Col span={17}>
-                                <div className="feed-card-header">
+                            <Col span={24}>
+                                <div className="news-card-header">
                                     <span>
-                                        <strong>Heading of card</strong>
+                                        Heading of card
                                     </span>
                                     <p>4</p>
                                 </div>
-                                <div className="feed-card-date">
-                                    <p>Date and time</p>
+                                <div className="news-card-content">
+                                    <p>This is the description of the news we can show upto 60 words here and then if they want they can click on the link below and visit it. Makes sense eh?</p>
                                 </div>
                             </Col>
-                            <Col span={7} className="iconz">
-                                <div className="imgback">
-                                    <img src={store} alt="location"></img>
+                            <Col span={24} className="news-bottom-select">
+                                <p>
+                                    Date and Time
+                                </p>
+                                <a href="#"> Read full story </a>
+                            </Col>
+                        </Row>
+                    </Card>
+                    <Card>
+                        <Row>
+                            <Col span={24}>
+                                <div className="news-card-header">
+                                    <span>
+                                        Heading of card
+                                    </span>
+                                    <p>4</p>
                                 </div>
-                                <div className="imgback">
-                                    <img src={check} alt="location"></img>
+                                <div className="news-card-content">
+                                    <p>This is the description of the news we can show upto 60 words here and then if they want they can click on the link below and visit it. Makes sense eh?</p>
                                 </div>
+                            </Col>
+                            <Col span={24} className="news-bottom-select">
+                                <p>
+                                    Date and Time
+                                </p>
+                                <a href="#"> Read full story </a>
                             </Col>
                         </Row>
                     </Card>

@@ -51,9 +51,11 @@ const Login = () => {
       </Form.Item>
 
       <Form.Item>
+            <Link to="/home">
             <Button type="primary" htmlType="submit" className="login-form-button">
                 Log in
             </Button>
+            </Link>
             <Button type="dashed" className="oauth">
                 Login with G 
             </Button>
