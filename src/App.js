@@ -9,6 +9,7 @@ import Register from "./components/register";
 import Nav from "./components/nav";
 import Home from "./components/home";
 import Chat from "./components/chat/chats";
+import Profile from "./components/profile/profile"
 
 class App extends React.Component {
   constructor(){
@@ -39,6 +40,7 @@ class App extends React.Component {
           <Route exact path='/register' component={Register}/>
           <Route exact path='/home' component={Nav}/>
           <Route exact path='/chat' component={Chat}/>
+          <Route exact path='/profile' component={Profile}/>
         </div>
       </BrowserRouter>
 

@@ -30,7 +30,6 @@
     border: none;
     border-radius: 6px;
     font-size: 14px;
-
 }
 
 
@@ -104,6 +103,19 @@
 .ant-tabs-nav .ant-tabs-tab-active{
     color: #00d2d2;
 }
+
+.addReq{
+    background-color: #00d2d2;
+    position: fixed;
+    bottom: 95px;
+    left: 48%;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+.addReq img{
+    padding-top: 10px;
+}
 /* Main content css */
 .main-title{
     width: 80%;
@@ -142,6 +154,9 @@
 .iconz{
     float: right;
 }
+.main-content{
+    margin-bottom: 150px;
+}
 .feed-card-header{
     width: 100%;
 }
@@ -160,3 +175,48 @@
     float: left;
     margin: 0px;
 }
+
+.ant-tabs-tabpane{
+    background-color: #fafafa;
+}
+
+/* news tab css */
+
+.news-card-header{
+    width: 100%;
+}
+.news-card-header span {
+    width: 40%;
+    float: left;
+    text-align: left;
+    font-size: 14px;
+    color: #141414;
+    letter-spacing: 0.5px;
+}
+.news-card-header p{
+    width: 60%;
+    float: left;
+    text-align: left;
+    margin: 0px;
+    font-weight: bold;
+}
+.news-card-content p{
+    float: left;
+    margin: 0px;
+    text-align: left;
+    color: #989898;
+}
+.news-bottom-select p{
+    float: left;
+    margin: 0px;
+}
+.news-bottom-select a{
+    float: right;
+    color: #00d2d2;
+}
+.news-bottom-select{
+    margin-top: 5px;
+}
+
+
+
