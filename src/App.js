@@ -7,11 +7,8 @@ import Feed from "./components/feed";
 import News from "./components/news";
 import Register from "./components/register";
 import Nav from "./components/nav";
-<<<<<<< HEAD
-=======
 import Home from "./components/home";
 import Chat from "./components/chat/chats";
->>>>>>> 35955e87945b72e9759f99e7454e34addbc295b9
 
 class App extends React.Component {
   constructor(){
@@ -37,19 +34,11 @@ class App extends React.Component {
     return(
       <BrowserRouter> 
         <div className="App">
-<<<<<<< HEAD
-          <Route path='/login' component={Login}/>
-          <Route path='/register' component={Register}/>
-          <Route path='/feed' component={Feed}/>
-          <Route path='/news' component={News}/>
-          {this.navtoggle()}
-=======
           <Route exact path='/' component={Home}/>
           <Route exact path='/login' component={Login}/>
           <Route exact path='/register' component={Register}/>
           <Route exact path='/home' component={Nav}/>
           <Route exact path='/chat' component={Chat}/>
->>>>>>> 35955e87945b72e9759f99e7454e34addbc295b9
         </div>
       </BrowserRouter>
 
