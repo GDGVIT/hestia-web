@@ -1,18 +1,32 @@
 import React from 'react';
 import { Card, Row, Col } from 'antd';
 import profile from '../assets/profile.png';
-import {Link} from 'react-router-dom';
-
+import Profile from '../components/profile/profile';
 
 class News extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            current: "const"
+            goto: this.props.new
         }
     }
+    gotoProfile = () =>{
+        this.setState({
+            goto: "profile"
+        });
+    }
+    componentWillReceiveProps(){
+        this.setState({
+            goto: "news"
+        });
+    }
     render(){
-        return(
+        if(this.state.goto === "profile"){
+            return(
+                <Profile />
+            );
+        }else if(this.state.goto === "news"){
+            return(
             <div>
                 <div className="main-title">    
                 <Row>
@@ -20,7 +34,7 @@ class News extends React.Component {
                         <h1>News</h1>
                     </Col>
                     <Col span={6}>
-                    <Link to="/profile"><img src={profile} alt="Profile logo"></img></Link>
+                    <img onClick={this.gotoProfile} src={profile} alt="Profile logo"></img>
                     </Col>
                 </Row>
  
@@ -134,6 +148,7 @@ class News extends React.Component {
                 </div>
           </div>
         );
+        }
     }
 }
 
