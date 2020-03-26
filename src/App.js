@@ -36,6 +36,7 @@ class App extends React.Component {
           <Route path='/register' component={Register}/>
           <Route path='/feed' component={Feed}/>
           <Route path='/news' component={News}/>
+          <Route path='/chat' component={Chat}/>
           {this.navtoggle()}
         </div>
       </BrowserRouter>
