@@ -7,8 +7,10 @@ import { Button } from 'antd';
 const Home = () =>{
     return(
         <div>
-            <img src={logo} alt="Hestialogo"></img>
-            <div>
+            <div className="hestia-logo">    
+                <img src={logo} alt="Hestialogo"></img>
+            </div>
+            <div className="home-but">
                 
                 <Link to="/login">
                     <Button type="primary">

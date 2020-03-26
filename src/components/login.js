@@ -1,7 +1,6 @@
 import React from 'react'
  
 import { Form, Input, Button, Checkbox } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {Link} from 'react-router-dom';
 
 import logo from '../assets/group_5.png';
@@ -14,7 +13,7 @@ const Login = () => {
 
   return (
     <div>
-    <div>
+    <div className="hestia-logo">
         <img src={logo} alt="Hestialogo"></img>
     </div>
     <Form
@@ -34,7 +33,7 @@ const Login = () => {
           },
         ]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+        <Input placeholder="Username" />
       </Form.Item>
       <Form.Item
         name="password"
@@ -46,27 +45,23 @@ const Login = () => {
         ]}
       >
         <Input
-          prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
           placeholder="Password"
         />
       </Form.Item>
+
       <Form.Item>
-        <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox>Remember me</Checkbox>
+            <Button type="primary" htmlType="submit" className="login-form-button">
+                Log in
+            </Button>
+            <Button type="dashed" className="oauth">
+                Login with G 
+            </Button>
+        </Form.Item>
+        <Form.Item>
+        Dont have an account? <Link to="/register">Register!</Link>
         </Form.Item>
 
-        <a className="login-form-forgot" href="">
-          Forgot password
-        </a>
-      </Form.Item>
-
-      <Form.Item>
-        <Button type="primary" htmlType="submit" className="login-form-button">
-          Log in
-        </Button>
-        Or <Link to="/register">Register!</Link>
-      </Form.Item>
     </Form>
     </div>
 
