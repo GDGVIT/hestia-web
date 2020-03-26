@@ -12,12 +12,12 @@ class Feed extends React.Component {
     render(){
         return(
             <div>
-                <Card title="Request1" extra={<a href="#">More</a>} style={{ width: 300 }}>
+                <Card title="Request1" extra={<a href="#">More</a>}>
                     <p>Card content</p>
                     <p>Card content</p>
                     <p>Card content</p>
                 </Card>
-                <Card title="Request2" extra={<a href="#">More</a>} style={{ width: 300 }}>
+                <Card title="Request2" extra={<a href="#">More</a>}>
                     <p>Card content</p>
                     <p>Card content</p>
                     <p>Card content</p>

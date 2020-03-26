@@ -1,4 +1,8 @@
 .App{
     width: 95vw;
     height: 100vh;
+    text-align: center;
+}
+.App *{
+    display: inline-block;
 }

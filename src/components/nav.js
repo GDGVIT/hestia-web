@@ -1,6 +1,7 @@
 import React from 'react'
 import { Tabs } from 'antd';
-import { NavLink, withRouter } from 'react-router-dom';
+import News from './news';
+import Feed from './feed';
 
 const { TabPane } = Tabs;
 
@@ -16,11 +17,11 @@ class Nav extends React.Component {
         return(
             <div>
                 <Tabs tabPosition="bottom">
-                    <TabPane tab="Tab 1" key="feed">
-                        <NavLink to="/feed">Feed</NavLink>
+                    <TabPane tab="Feed" key="feed">
+                        <News />
                     </TabPane>
-                    <TabPane tab="Tab 2" key="news">
-                        <NavLink to="/news">News</NavLink>
+                    <TabPane tab="News" key="news">
+                        <Feed />
                     </TabPane>
                 </Tabs>
             </div>

@@ -13,12 +13,12 @@ class News extends React.Component {
     render(){
         return(
             <div>
-                <Card title="News2" extra={<a href="#">More</a>} style={{ width: 300 }}>
+                <Card title="News2" extra={<a href="#">More</a>}>
                     <p>Card content</p>
                     <p>Card content</p>
                     <p>Card content</p>
                 </Card>
-                <Card title="News1" extra={<a href="#">More</a>} style={{ width: 300 }}>
+                <Card title="News1" extra={<a href="#">More</a>}>
                     <p>Card content</p>
                     <p>Card content</p>
                     <p>Card content</p>
