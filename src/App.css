@@ -1,8 +1,19 @@
 .App{
-    width: 95vw;
+    width: 100vw;
     height: 100vh;
     text-align: center;
 }
 .App *{
     display: inline-block;
+}
+/* Main page cdd */
+.ant-tabs-bar, .ant-tabs-nav-container, .ant-tabs-nav-wrap, .ant-tabs-nav-scroll, .ant-tabs-nav, .ant-tabs-nav > div{
+    width: 100%;
+}
+.ant-tabs-tab{
+    width: 40%;
+}
+
+.ant-tabs-bottom .ant-tabs-bottom-bar .ant-tabs-ink-bar{
+    display: none !important;
 }

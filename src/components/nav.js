@@ -18,10 +18,10 @@ class Nav extends React.Component {
             <div>
                 <Tabs tabPosition="bottom">
                     <TabPane tab="Feed" key="feed">
-                        <News />
+                        <Feed />
                     </TabPane>
                     <TabPane tab="News" key="news">
-                        <Feed />
+                        <News />
                     </TabPane>
                 </Tabs>
             </div>

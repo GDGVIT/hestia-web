@@ -2,6 +2,10 @@ import React from 'react'
  
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import {Link} from 'react-router-dom';
+
+import logo from '../assets/group_5.png';
+
 
 const Login = () => {
   const onFinish = values => {
@@ -9,6 +13,10 @@ const Login = () => {
   };
 
   return (
+    <div>
+    <div>
+        <img src={logo} alt="Hestialogo"></img>
+    </div>
     <Form
       name="normal_login"
       className="login-form"
@@ -57,9 +65,11 @@ const Login = () => {
         <Button type="primary" htmlType="submit" className="login-form-button">
           Log in
         </Button>
-        Or <a href="">register now!</a>
+        Or <Link to="/register">Register!</Link>
       </Form.Item>
     </Form>
+    </div>
+
   );
 };
 

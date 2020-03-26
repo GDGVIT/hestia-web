@@ -1,7 +1,8 @@
 import React from 'react'
 import { Form, Input, InputNumber, Button } from 'antd';
 import { LockOutlined } from '@ant-design/icons';
-
+import logo from '../assets/group_5.png';
+import {Link} from 'react-router-dom';
 
 const layout = {
   labelCol: {
@@ -28,6 +29,10 @@ const Register = () => {
   };
 
   return (
+      <div>
+      <div>
+          <img src={logo} alt="Hestialogo"></img>
+      </div>
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
       <Form.Item
         name={['user', 'name']}
@@ -53,6 +58,7 @@ const Register = () => {
       </Form.Item>
       <Form.Item
         name="password"
+        label="Password"
         rules={[
           {
             required: true,
@@ -67,8 +73,8 @@ const Register = () => {
         />
       </Form.Item>
       <Form.Item
-        name={['user', 'age']}
-        label="Age"
+        name={['user', 'number']}
+        label="Number"
         rules={[
           {
             type: 'number',
@@ -84,7 +90,11 @@ const Register = () => {
           Submit
         </Button>
       </Form.Item>
+      <Form.Item>
+        Already have an account? <Link to="/Login">Login</Link>
+      </Form.Item>
     </Form>
+    </div>
   );
 };
 
