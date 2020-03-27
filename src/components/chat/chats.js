@@ -5,6 +5,8 @@ import { Input } from 'antd';
 import Report from '../../assets/Report.svg';
 import { ChatFeed, Message } from 'react-chat-ui'
 import './chat.css';
+import Nav from '../nav';
+
 
 const { Search } = Input;
 class Chat extends React.Component{
@@ -76,6 +78,7 @@ class Chat extends React.Component{
             
             </div>
             {/* <Messages /> */}
+            <Nav />
             </div>
         );
     }
