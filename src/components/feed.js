@@ -13,9 +13,6 @@ import Nav from './nav';
 
 
 class Feed extends React.Component {
-    state = {
-        requests: [ ]
-    }
     constructor(props){
         super(props);
         this.state = {
