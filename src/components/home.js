@@ -1,10 +1,13 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import logo from '../assets/group_5.png';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 
 
-const Home = () =>{
+const Home = (props) =>{
+    useEffect(() => {
+            props.history.push("/feed")
+      });
     return(
         <div>
             <div className="hestia-logo">    

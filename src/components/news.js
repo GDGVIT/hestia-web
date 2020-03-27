@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Row, Col } from 'antd';
 import profile from '../assets/profile.png';
 import Profile from '../components/profile/profile';
+import Nav from './nav';
 
 class News extends React.Component {
     constructor(props){
@@ -13,7 +14,13 @@ class News extends React.Component {
     gotoProfile=()=>{
         this.props.history.push("/profile");
     }
-
+    componentDidMount(){
+        if(localStorage.getItem("token")){
+         console.log("someone's logged in")
+        }else{
+            this.props.history.push("/login");
+        }
+     }
     render(){
             return(
             <div>
@@ -135,6 +142,7 @@ class News extends React.Component {
                         </Row>
                     </Card>
                 </div>
+                <Nav />
           </div>
         );
     }
