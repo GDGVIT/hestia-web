@@ -25,19 +25,13 @@ class Myreqs extends React.Component{
             return(
                 <Profile />
             );
-        }else if(this.state.goto === "chat"){
-           return( 
-        //    <Chat />
-        <div>
-        </div>
-             );
         }else if(this.state.goto === "myreqs"){
             return(
-            <div>
+            <div className="myreqs">
                 <div className="main-title">    
                 <Row>
                     <Col span={18}>
-                        <h1>Requests</h1>
+                        <h1>My Requests</h1>
                     </Col>
                     <Col span={6}>
                     <img onClick={this.gotoProfile} src={profile} alt="Profile logo"></img>
@@ -45,6 +39,7 @@ class Myreqs extends React.Component{
                 </Row>
  
                 </div>
+
                 <div className="main-content">
                     <Card>
                         <Row>

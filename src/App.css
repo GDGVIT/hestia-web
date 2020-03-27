@@ -1,17 +1,26 @@
+#root{
+    background-color: #fafafa;
+}
 .App{
     width: 100vw;
-    height: 100vh;
-    text-align: center;
+    height: auto;
+    text-align: left;
     background-color: #fafafa;
+}
+
+
+.eqimargin{
+    margin-top: 25%;
 }
 
 /* Home page css */
 
 .hestia-logo{
-    margin-top: 30vh;
+padding-top: 30vw;
+margin-left: 12.5%;
 }
 .hestia-logo img{
-    width: 80%;
+    width: 70%;
     height: auto;
 }
 .home-but{
@@ -47,12 +56,16 @@
 
 
 /* login page css */
+.loginpage{
+    margin-top: 25%;
+}
 .login-form{
     margin-top: 60px;
+    text-align: center;
 }
 .ant-input{
     width: 75%;
-    border: 1px solid #00d2d2;
+    border: 2px solid #00d2d2;
     border-radius: 6px;
     height: 60px;
 }   
@@ -64,6 +77,7 @@
     border-radius: 6px;
     font-size: 14px;
     margin-right: 20px;
+    box-shadow: 0px 0px 4px lightgray;
 }
 .oauth{
     width: 30vw;
@@ -71,20 +85,30 @@
     border: none;
     border-radius: 6px;
     font-size: 14px;
-    box-shadow: 0px 0px 3px lightgray
+    box-shadow: 0px 0px 4px lightgray;
+}
+.oauth img{
+    width: 20px;
+    height: auto;
+    padding-left: 4px;
+    padding-bottom: 4px;
 }
 
 /* reg page css */
+
 .hestia-logo-reg{
-    margin-top: 20vh;
+margin-left: 12.5%;
 }
 .hestia-logo-reg img{
-    width: 80%;
+    width: 70%;
     height: auto;
+}
+.already{
+    color: #00d2d2;
 }
 
 /* Nav css */
-.ant-tabs-bottom .ant-tabs-bottom-bar{
+.ant-menu{
     position: fixed;
     left: 0;
     bottom: 0;
@@ -92,16 +116,26 @@
     box-shadow: 0px -2px 8px lightgray;
     background-color: white;
     opacity: 1;
+    width: 100%;
 }
-.ant-tabs-bottom .ant-tabs-bottom-bar div{
+.ant-menu-item{
+    border-bottom: none !important;
+    width: 50%;
     height: 100%;
+    text-align: center;
 }
-.textz{
+.ant-menu-item a{
     position: relative;
-    top: 25%;
+    top: 18%;
 }
-.ant-tabs-nav .ant-tabs-tab-active{
+.ant-menu-horizontal > .ant-menu-item > a:hover{
     color: #00d2d2;
+}
+.ant-menu-horizontal > .ant-menu-item-selected > a{
+    color: #00d2d2;
+}
+.ant-btn-primary:hover, .ant-btn-primary:focus{
+    background-color: #00d2d2;
 }
 
 .addReq{
@@ -112,6 +146,7 @@
     width: 40px;
     height: 40px;
     border-radius: 20px;
+    text-align: center;
 }
 .addReq img{
     padding-top: 10px;
@@ -134,7 +169,7 @@
     margin: auto auto;
     margin-bottom: 20px;
     border-radius: 6px;
-    box-shadow: 0px 0px 2px lightgray;
+    box-shadow: 0px 0px 3px lightgray;
 }
 .ant-card-body{
     padding: 20px
@@ -147,6 +182,7 @@
     width: 30px;
     height: 30px;
     margin-right: 4px;
+    margin-top: 7px;
 }
 .imgback img{
     padding-top: 4px;
@@ -156,6 +192,7 @@
 }
 .main-content{
     margin-bottom: 150px;
+    text-align: center;
 }
 .feed-card-header{
     width: 100%;
@@ -221,4 +258,35 @@
     text-align: left;
 }
 
+/* my Requests css */
+.myreqs .imgback{
+    background-color: #d95071;
+}
 
+
+
+/* my chats css */
+.ant-radio-group{
+    margin-bottom: 20px;
+    margin-left: 10%;
+}
+.ant-radio-button-wrapper{
+    border-radius: 6px !important;
+    font-weight: bold;
+}
+.ant-radio-button-wrapper-checked:not([class*=' ant-radio-button-wrapper-disabled']).ant-radio-button-wrapper:first-child {
+    border: none;
+}
+.ant-radio-button-wrapper-checked{
+    background: #00d2d2;
+}
+.ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover{
+    background: #00d2d2;
+    border: none;
+}
+.ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled){
+    background: #00d2d2;
+}
+.ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled){
+    background: #00d2d2;
+}

@@ -7,25 +7,14 @@ class News extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            goto: this.props.new
+            isEmptyState: true
         }
     }
-    gotoProfile = () =>{
-        this.setState({
-            goto: "profile"
-        });
+    gotoProfile=()=>{
+        this.props.history.push("/profile");
     }
-    componentWillReceiveProps(){
-        this.setState({
-            goto: "news"
-        });
-    }
+
     render(){
-        if(this.state.goto === "profile"){
-            return(
-                <Profile />
-            );
-        }else if(this.state.goto === "news"){
             return(
             <div>
                 <div className="main-title">    
@@ -148,7 +137,6 @@ class News extends React.Component {
                 </div>
           </div>
         );
-        }
     }
 }
 

@@ -2,6 +2,7 @@ import React from 'react'
 import { Form, Input, InputNumber, Button } from 'antd';
 import logo from '../assets/group_5.png';
 import {Link} from 'react-router-dom';
+import google from '../assets/group.png';
 
 const layout = {
   labelCol: {
@@ -24,7 +25,7 @@ const Register = () => {
   };
 
   return (
-      <div>
+      <div className="eqimargin">
       <div className="hestia-logo-reg">
           <img src={logo} alt="Hestialogo"></img>
       </div>
@@ -85,13 +86,13 @@ const Register = () => {
       </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit">
-          Submit
+          Register
         </Button>
         <Button type="dashed" className="oauth">
-                Login with G 
+                Register with <img src={google} alt="login with google"></img>
         </Button>
       </Form.Item>
-      <Form.Item>
+      <Form.Item className="already">
         Already have an account? <Link to="/Login">Login</Link>
       </Form.Item>
     </Form>

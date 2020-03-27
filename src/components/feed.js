@@ -12,33 +12,16 @@ class Feed extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            goto: this.props.new
+            isEmptyState: true
         }
     }
-    gotoProfile = () =>{
-        this.setState({
-            goto: "profile"
-        });
+    gotoProfile=()=>{
+        this.props.history.push("/profile");
     }
-    componentWillReceiveProps(){
-        this.setState({
-            goto: "feed"
-        });
-    }
-    
-    gotoChat = () =>{
-        this.setState({
-            goto: "chat"
-        });
+    gotoChat=()=>{
+        this.props.history.push("/chat");
     }
     render(){
-        if(this.state.goto === "profile"){
-            return(
-                <Profile />
-            );
-        }else if(this.state.goto === "chat"){
-           return( <Chat /> );
-        }else if(this.state.goto === "feed"){
             return(
             <div>
                 <div className="main-title">    
@@ -173,7 +156,6 @@ class Feed extends React.Component {
                 </div>
           </div>
         );
-        }
     }
 }
 

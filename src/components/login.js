@@ -2,17 +2,18 @@ import React from 'react'
  
 import { Form, Input, Button, Checkbox } from 'antd';
 import {Link} from 'react-router-dom';
-
+import google from '../assets/group.png';
 import logo from '../assets/group_5.png';
 
 
-const Login = () => {
+const Login = (props) => {
   const onFinish = values => {
     console.log('Received values of form: ', values);
+    props.history.push("/feed");
   };
 
   return (
-    <div>
+    <div className="loginpage">
     <div className="hestia-logo">
         <img src={logo} alt="Hestialogo"></img>
     </div>
@@ -51,16 +52,15 @@ const Login = () => {
       </Form.Item>
 
       <Form.Item>
-            <Link to="/home">
-            <Button type="primary" htmlType="submit" className="login-form-button">
-                Log in
-            </Button>
-            </Link>
+
+                <Button type="primary" htmlType="submit" className="login-form-button">
+                    Log in
+                </Button>
             <Button type="dashed" className="oauth">
-                Login with G 
+                Login with <img src={google} alt="login with google"></img>
             </Button>
         </Form.Item>
-        <Form.Item>
+        <Form.Item className="already">
         Dont have an account? <Link to="/register">Register!</Link>
         </Form.Item>
 

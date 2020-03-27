@@ -3,7 +3,7 @@ import profile from '../../assets/profile.png';
 import { Card, Row, Col } from 'antd';
 import Profile from './profile';
 import deletez from '../../assets/delete.png';
-
+import { Radio } from 'antd';
 
 
 class Mychat extends React.Component{
@@ -26,7 +26,7 @@ class Mychat extends React.Component{
             );
         }else if(this.state.goto === "mychats"){
            return( 
-            <div>
+            <div className="mychats">
                 <div className="main-title">    
                 <Row>
                     <Col span={18}>
@@ -38,6 +38,10 @@ class Mychat extends React.Component{
                 </Row>
  
                 </div>
+                <Radio.Group defaultValue="mr" buttonStyle="solid">
+                    <Radio.Button value="mr">My Requests</Radio.Button>
+                    <Radio.Button value="or">Other Requests</Radio.Button>
+                </Radio.Group>
                 <div className="main-content">
                     <Card>
                         <Row>
