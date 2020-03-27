@@ -35,7 +35,13 @@ class Chat extends React.Component{
         }
     }
 
-
+    componentDidMount(){
+      if(localStorage.getItem("token")){
+       console.log("someone's logged in")
+      }else{
+          this.props.history.push("/login");
+      }
+   }
     render(){
         return(
             <div>
