@@ -74,13 +74,13 @@ class Chat extends React.Component{
                  }
                }
              /> */}
-               <Card style={{ width: "80%", backgroundColor: "#00d2d2", float:"left" }}>
-                <h4>Name</h4>
+               <Card style={{ width: "80%", backgroundColor: "#00d2d2", float:"left", color:"white"}}>
+                <p style={{fontWeight:700}}>Name</p>
                 <p>This is a long message. Maybe two to three lines.</p>
                 <p><i>Date and Time</i></p>
               </Card>
               <Card style={{ width: "65%", backgroundColor: "#fff", float:"right" }}>
-                <h4>Your name</h4>
+                <p style={{fontWeight:700}}>Your name</p>
                 <p>This is the reply</p>
                 <p><i>Date and Time</i></p>
               </Card>
