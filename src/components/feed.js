@@ -13,9 +13,7 @@ import Nav from './nav';
 
 
 class Feed extends React.Component {
-    state = {
-        requests: [ ]
-    }
+
     constructor(props){
         super(props);
         this.state = {
@@ -61,12 +59,16 @@ class Feed extends React.Component {
             'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiJhYmNkZWdoaWprZjEyMzQifQ.GqnmZCcGjtCN_bTznL5LbA_Wdt_BsBN5IpSAHmdDeu8'
             })
             })
-            .then(res => {
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
             this.setState({
-                requests: res.Request
-            })
+                requests: data.Request
+            });
             console.log(this.state)
             })
+            .catch(error => console.error(error))
+    
         }
     
     render(){
