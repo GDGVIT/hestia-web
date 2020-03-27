@@ -63,7 +63,7 @@ margin-left: 12.5%;
     margin-top: 60px;
     text-align: center;
 }
-.ant-input{
+.ant-input, .ant-input-number{
     width: 75%;
     border: 2px solid #00d2d2;
     border-radius: 6px;
@@ -289,4 +289,20 @@ margin-left: 12.5%;
 }
 .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled){
     background: #00d2d2;
+}
+
+/* modal css */
+.butn{
+    width: 40%;
+    float: left;
+    max-width: 190px;
+}
+.butn button{
+    width: 90%;
+}
+.ant-modal-content{
+    height: 260px;
+}
+.ant-modal-header{
+    display: none;
 }

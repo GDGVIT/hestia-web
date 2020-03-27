@@ -6,13 +6,15 @@ import check from '../assets/check.png';
 import Profile from './profile/profile';
 import plus from '../assets/plus.png';
 import Chat from '../components/chat/chats';
+import { Modal, Button } from 'antd';
+import { Form, Input, InputNumber} from 'antd';
 
 
 class Feed extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            isEmptyState: true
+            visible: false
         }
     }
     gotoProfile=()=>{
@@ -21,6 +23,27 @@ class Feed extends React.Component {
     gotoChat=()=>{
         this.props.history.push("/chat");
     }
+    handleAdd=()=>{
+        this.setState({
+            visible: true
+        })
+    }
+    handleOk = e => {
+        console.log(e);
+        this.setState({
+          visible: false,
+        });
+      };
+    onFinish = values => {
+        console.log(values);
+      };
+      handleCancel = e => {
+        console.log(e);
+        this.setState({
+          visible: false,
+        });
+      };
+    
     render(){
             return(
             <div>
@@ -151,9 +174,40 @@ class Feed extends React.Component {
                         </Row>
                     </Card>
                 </div>
-                <div className="addReq">
+                <div className="addReq" onClick={this.handleAdd}>
                         <img src={plus} alt="add req"></img>
                 </div>
+                <Modal
+                    title="Add a request"
+                    visible={this.state.visible}    
+                    footer={null}
+                    closable={false}
+                    >
+                    <Form onFinish={this.onFinish}>
+                    <Form.Item name="name">
+                        <Input 
+                            placeholder="Name of thing"
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        name="quantity"
+                    >
+                        <InputNumber 
+                            placeholder="Quantity"
+                        />
+                    </Form.Item>
+                    <Form.Item className="butn">
+                        <Button type="primary" htmlType="submit">
+                            Done 
+                        </Button>
+                    </Form.Item>
+                    <Form.Item className="butn">
+                        <Button type="primary" onClick={this.handleCancel}>
+                            Cancel <strong> X </strong>
+                        </Button>
+                    </Form.Item>
+                    </Form>
+                </Modal>
           </div>
         );
     }
