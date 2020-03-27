@@ -4,7 +4,7 @@ import deletez from '../../assets/delete.png';
 import { Card, Row, Col } from 'antd';
 import Profile from './profile';
 import plus from '../../assets/plus.png';
-
+import Nav from '../nav';
 
 class Myreqs extends React.Component{
     constructor(props){
@@ -19,6 +19,13 @@ class Myreqs extends React.Component{
             goto: "profile"
         });
     }
+    componentDidMount(){
+        if(localStorage.getItem("token")){
+         console.log("someone's logged in")
+        }else{
+            this.props.history.push("/login");
+        }
+     }
 
     render(){
         if(this.state.goto === "profile"){
@@ -85,6 +92,7 @@ class Myreqs extends React.Component{
                 <div className="addReq">
                         <img src={plus} alt="add req"></img>
                 </div>
+                <Nav />
             </div>              
         );
         }

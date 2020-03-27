@@ -16,12 +16,19 @@ class App extends React.Component {
     super(props);
     this.state = {
       currentUser: null,
+      showNav: false
     }
     console.log(props)
   }
-  
+  componentDidMount(){
+    if(localStorage.getItem("token")){
+      this.setState({
+        showNav: false
+      })
+  }
+  }
   showNav(){
-    if(this.props.location.pathname !== "/" && this.props.location.pathname !== "/login" && this.props.location.pathname !== "/register"){
+    if(this.state.showNav){
       return(<Nav />);
     }else{
       return(null);

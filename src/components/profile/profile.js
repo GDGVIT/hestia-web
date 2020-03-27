@@ -3,6 +3,8 @@ import profile from '../../assets/profile.png';
 import { Card, Row, Col } from 'antd';
 import Myreqs from './myreqs';
 import Mychat from './mychats'
+import Nav from '../nav';
+
 
 
 class Profile extends React.Component{
@@ -24,6 +26,17 @@ class Profile extends React.Component{
         this.setState({
             goto: "mychat"
         })
+    }
+    componentDidMount(){
+       if(localStorage.getItem("token")){
+        console.log("someone's logged in")
+       }else{
+           this.props.history.push("/login");
+       }
+    }
+    logoutsar=()=>{
+        localStorage.removeItem("token");
+        this.props.history.push("/login");
     }
     render(){
         if(this.state.goto === "myreqs"){
@@ -63,7 +76,13 @@ class Profile extends React.Component{
                         My chats | 3
                     </div>
                 </Card>
+                <Card key="logout" onClick={this.logoutsar}>
+                    <div className="prof-card-title">
+                        LOG OUT (TEMP)
+                    </div>
+                </Card>
                 </div>
+                <Nav />
             </div>
         );
         }

@@ -4,6 +4,7 @@ import { Card, Row, Col } from 'antd';
 import Profile from './profile';
 import deletez from '../../assets/delete.png';
 import { Radio } from 'antd';
+import Nav from '../nav';
 
 
 class Mychat extends React.Component{
@@ -18,6 +19,13 @@ class Mychat extends React.Component{
             goto: "profile"
         });
     }
+    componentDidMount(){
+        if(localStorage.getItem("token")){
+         console.log("someone's logged in")
+        }else{
+            this.props.history.push("/login");
+        }
+     }
 
     render(){
         if(this.state.goto === "profile"){
@@ -84,6 +92,7 @@ class Mychat extends React.Component{
                         </Row>
                     </Card>
                 </div>
+                <Nav />
             </div>              
         );
         }

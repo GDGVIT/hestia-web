@@ -8,6 +8,8 @@ import plus from '../assets/plus.png';
 import Chat from '../components/chat/chats';
 import { Modal, Button } from 'antd';
 import { Form, Input, InputNumber} from 'antd';
+import Nav from './nav';
+
 
 
 class Feed extends React.Component {
@@ -43,6 +45,13 @@ class Feed extends React.Component {
           visible: false,
         });
       };
+      componentDidMount(){
+        if(localStorage.getItem("token")){
+         console.log("someone's logged in")
+        }else{
+            this.props.history.push("/login");
+        }
+     }
     
     render(){
             return(
@@ -208,6 +217,7 @@ class Feed extends React.Component {
                     </Form.Item>
                     </Form>
                 </Modal>
+                <Nav />
           </div>
         );
     }

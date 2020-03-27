@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { Form, Input, InputNumber, Button } from 'antd';
 import logo from '../assets/group_5.png';
 import {Link} from 'react-router-dom';
@@ -19,11 +19,32 @@ const validateMessages = {
   },
 };
 
-const Register = () => {
+const Register = (props) => {
   const onFinish = values => {
-    console.log(values);
-  };
+    return fetch("https://hestia-auth.herokuapp.com/api/user/register", {
+        method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
+        body: JSON.stringify(values.user), // Coordinate the body type with 'Content-Type'
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        }),
+      })
+      .then(response => response.json())
+      .then(data => {
+          console.log(data)
+          window.localStorage.setItem("token", data);
+          props.history.push("/feed");
+        })
+       .catch(error => console.error(error)
+       );
+    };
+    useEffect(() => {
+        if(localStorage.getItem("token")){
+            props.history.push("/feed")
+        }
+      });
 
+
+    
   return (
       <div className="eqimargin">
       <div className="hestia-logo-reg">
@@ -57,7 +78,7 @@ const Register = () => {
         />
       </Form.Item>
       <Form.Item
-        name="password"
+        name={['user', 'password']}
         placeholder="Password"
         rules={[
           {
@@ -72,7 +93,7 @@ const Register = () => {
         />
       </Form.Item>
       <Form.Item
-        name={['user', 'num']}
+        name={['user', 'phone']}
         rules={[
           {
             required: true,

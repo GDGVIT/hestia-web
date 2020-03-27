@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
  
 import { Form, Input, Button, Checkbox } from 'antd';
 import {Link} from 'react-router-dom';
@@ -8,9 +8,28 @@ import logo from '../assets/group_5.png';
 
 const Login = (props) => {
   const onFinish = values => {
-    console.log('Received values of form: ', values);
-    props.history.push("/feed");
-  };
+    console.log('Received values of form: ', values)
+    return fetch("https://hestia-auth.herokuapp.com/api/user/login", {
+        method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
+        body: JSON.stringify(values.user), // Coordinate the body type with 'Content-Type'
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        }),
+      })
+      .then(response => response.json())
+      .then(data => {
+          window.localStorage.setItem("token", data);
+          props.history.push("/feed");
+        })
+       .catch(error => console.error(error)
+       );
+    };
+
+    useEffect(() => {
+        if(localStorage.getItem("token")){
+            props.history.push("/feed")
+        }
+      });
 
   return (
     <div className="loginpage">
@@ -26,18 +45,19 @@ const Login = (props) => {
       onFinish={onFinish}
     >
       <Form.Item
-        name="username"
+        name={['user', 'email']}
         rules={[
           {
+            type: 'email',  
             required: true,
-            message: 'Please input your Username!',
+            message: 'Please input your Email!',
           },
         ]}
       >
-        <Input placeholder="Username" />
+        <Input placeholder="Email" />
       </Form.Item>
       <Form.Item
-        name="password"
+        name={['user', 'password']}
         rules={[
           {
             required: true,
@@ -52,14 +72,13 @@ const Login = (props) => {
       </Form.Item>
 
       <Form.Item>
-
-                <Button type="primary" htmlType="submit" className="login-form-button">
-                    Log in
-                </Button>
+            <Button type="primary" htmlType="submit" className="login-form-button">
+                Log in
+            </Button>
             <Button type="dashed" className="oauth">
                 Login with <img src={google} alt="login with google"></img>
             </Button>
-        </Form.Item>
+       </Form.Item>
         <Form.Item className="already">
         Dont have an account? <Link to="/register">Register!</Link>
         </Form.Item>
@@ -68,6 +87,6 @@ const Login = (props) => {
     </div>
 
   );
-};
+}
 
 export default Login;
