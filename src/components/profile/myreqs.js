@@ -10,7 +10,8 @@ class Myreqs extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            goto: "myreqs"
+            goto: "myreqs",
+            Requests: []
         }
     }
     
@@ -18,13 +19,50 @@ class Myreqs extends React.Component{
         this.setState({
             goto: "profile"
         });
+        
+    }
+
+    deleterequest = (id) => {
+        console.log("nirmit")
+        console.log(id)
+
+        
+
+
+
+        let newarr = this.state.Requests.filter( request =>{
+            return request.id !==id
+        })
+        this.setState({
+            Requests: newarr
+        })
+
+
     }
     componentDidMount(){
         if(localStorage.getItem("token")){
-         console.log("someone's logged in")
+        //  console.log("someone's logged in")
         }else{
             this.props.history.push("/login");
         }
+
+        fetch('https://hestia-requests.herokuapp.com/app/my_requests/', {
+            headers: new Headers({
+            'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiJhYmNkZWdoaWprZjEyMzQifQ.GqnmZCcGjtCN_bTznL5LbA_Wdt_BsBN5IpSAHmdDeu8'
+            })
+            })
+            .then(res => res.json())
+            .then(data => {
+                 console.log(data)
+            this.setState({
+                Requests: data.Requests
+                
+            });
+            console.log(this.state)
+            })
+            .catch(error => console.error(error))
+
+
      }
 
     render(){
@@ -33,6 +71,40 @@ class Myreqs extends React.Component{
                 <Profile />
             );
         }else if(this.state.goto === "myreqs"){
+
+
+        const { Requests } = this.state;
+        
+        const reqlist = Requests.length ? (
+            Requests.map(
+                request =>{
+                    return(
+                        <Card key={request.id}>
+                        <Row>
+                            <Col span={17}>
+                                <div className="feed-card-header">
+                                    <span>
+                                    <strong>{request.item_name}</strong>
+                                    </span>
+                                        <p>{request.quantity}</p>
+                                </div>
+                                <div className="feed-card-date">
+                                        <p>{request.date_time_created.slice(0,10)}</p>
+                                </div>
+                            </Col>
+                            <Col span={7} className="iconz">
+                                <div className="imgback">
+                                    <img onClick={()=>{this.deleterequest(request.id)}} src={deletez} alt="location"></img>
+                                </div>
+                            </Col>
+                        </Row>
+                    </Card>
+                    )
+                }
+            )
+        ) : (
+            <div>You have not made any request</div>
+        )
             return(
             <div className="myreqs">
                 <div className="main-title">    
@@ -48,50 +120,11 @@ class Myreqs extends React.Component{
                 </div>
 
                 <div className="main-content">
-                    <Card>
-                        <Row>
-                            <Col span={17}>
-                                <div className="feed-card-header">
-                                    <span>
-                                        <strong>Heading of card</strong>
-                                    </span>
-                                    <p>4</p>
-                                </div>
-                                <div className="feed-card-date">
-                                    <p>Date and time</p>
-                                </div>
-                            </Col>
-                            <Col span={7} className="iconz">
-                                <div className="imgback">
-                                    <img src={deletez} alt="location"></img>
-                                </div>
-                            </Col>
-                        </Row>
-                    </Card>
-                    <Card>
-                        <Row>
-                            <Col span={17}>
-                                <div className="feed-card-header">
-                                    <span>
-                                        <strong>Heading of card</strong>
-                                    </span>
-                                    <p>4</p>
-                                </div>
-                                <div className="feed-card-date">
-                                    <p>Date and time</p>
-                                </div>
-                            </Col>
-                            <Col span={7} className="iconz">
-                                <div className="imgback">
-                                    <img src={deletez} alt="location"></img>
-                                </div>
-                            </Col>
-                        </Row>
-                    </Card>
+                    {reqlist}
                 </div>
-                <div className="addReq">
+                {/* <div className="addReq">
                         <img src={plus} alt="add req"></img>
-                </div>
+                </div> */}
                 <Nav />
             </div>              
         );
