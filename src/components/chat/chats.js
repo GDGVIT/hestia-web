@@ -49,7 +49,9 @@ class Chat extends React.Component{
             <div>    
                 <Row style={{marginTop:20}}>
                     <Col span={4}>
-                       <img src={backbutton} alt = "Back-button" style = {{ width: "15vw",height: "8vh", marginLeft:"10px"}}></img>
+                      <div className="imgback">
+                        <img src={backbutton} alt = "Back-button" style = {{height: "3vh", marginLeft:"10px"}}></img>
+                      </div>
                     </Col>
                     <Col span={16}>
                         <h1 style = {{fontSize:14, textAlign:"center"}}>Person Name</h1>
