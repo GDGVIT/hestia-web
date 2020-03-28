@@ -4,14 +4,12 @@ import { Card, Row, Col } from 'antd';
 import Myreqs from './myreqs';
 import Mychat from './mychats'
 import Nav from '../nav';
-
-
-
 class Profile extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            goto: "profile"
+            goto: "profile",
+            Requests: [ ]
         }
     }
     redirectTo = (e) =>{
@@ -33,12 +31,33 @@ class Profile extends React.Component{
        }else{
            this.props.history.push("/login");
        }
+
+       fetch('https://hestia-requests.herokuapp.com/app/my_requests/', {
+            headers: new Headers({
+            'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiJhYmNkZWdoaWprZjEyMzQifQ.GqnmZCcGjtCN_bTznL5LbA_Wdt_BsBN5IpSAHmdDeu8'
+            })
+            })
+            .then(res => res.json())
+            .then(data => {
+                 console.log(data)
+            this.setState({
+                Requests: data.Requests
+                
+            });
+            console.log(this.state)
+            })
+            .catch(error => console.error(error))
+
     }
     logoutsar=()=>{
         localStorage.removeItem("token");
         this.props.history.push("/login");
     }
     render(){
+        const { Requests } = this.state;
+        
+        const reqlist = Requests.length
+        // console.log(reqlist)
         if(this.state.goto === "myreqs"){
             return(
                 <Myreqs />
@@ -68,7 +87,7 @@ class Profile extends React.Component{
                 </Card>
                 <Card key="reqs" onClick={this.redirectToreqs}>
                     <div className="prof-card-title">
-                        My requests | 4
+                        My requests | {reqlist}
                     </div>
                 </Card>
                 <Card key="chat" onClick={this.redirectTochats}>
