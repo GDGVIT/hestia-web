@@ -21,22 +21,66 @@ class News extends React.Component {
         }else{
             this.props.history.push("/login");
         }
-        fetch('https://hestia-info.herokuapp.com/node', {
-            })
-            // .then(res => res.json())
-            .then(res => console.log(res))
-            
-            .then(data => {
-             console.log(data)
-            // this.setState({
-            //     news: data.items[0],
-            // });
-            // console.log(this.state.news)
-            // console.log(this.state)
-            // console.log(data.items)
-            })
+
+
+            fetch('https://hestia-info.herokuapp.com/node')
+                .then(response => response.json())
+                .then(data => {
+                console.log(data)
+                this.setState({
+                    news: data.items,
+                    
+                });
+                console.log(this.state)
+                })
+                .catch(error => console.error(error))
      }
     render(){
+
+        const { news } = this.state;
+        // console.log(requests)
+        const newslist = news.length ? (
+            news.map(
+                request =>{
+                    return(
+                        <Card key={request.isoDate}>
+                        <Row>
+                            <Col span={24}>
+                                <div className="news-card-header">
+                                    <span>
+                                        {request.title.slice(0,30)}
+                                    </span>
+                                    <p>WHO</p>
+                                </div>
+                                <div className="news-card-content">
+                                    <p>{request.contentSnippet.slice(0,130)}....</p>
+                                </div>
+                            </Col>
+                            <Col span={24} className="news-bottom-select">
+                                <p>
+                                    {request.isoDate.slice(0,10)}
+                                </p>
+                                <a href={request.link}> Read full story </a>
+                            </Col>
+                        </Row>
+                    </Card>
+                    )
+                }
+            )
+
+
+
+
+        ) : (
+            <div>No news for now</div>
+        )
+
+
+
+
+
+
+
             return(
             <div>
                 <div className="main-title">    
@@ -51,111 +95,7 @@ class News extends React.Component {
  
                 </div>
                 <div className="main-content">
-                    <Card>
-                        <Row>
-                            <Col span={24}>
-                                <div className="news-card-header">
-                                    <span>
-                                        Heading of card
-                                    </span>
-                                    <p>4</p>
-                                </div>
-                                <div className="news-card-content">
-                                    <p>This is the description of the news we can show upto 60 words here and then if they want they can click on the link below and visit it. Makes sense eh?</p>
-                                </div>
-                            </Col>
-                            <Col span={24} className="news-bottom-select">
-                                <p>
-                                    Date and Time
-                                </p>
-                                <a href="#"> Read full story </a>
-                            </Col>
-                        </Row>
-                    </Card>
-                    <Card>
-                        <Row>
-                            <Col span={24}>
-                                <div className="news-card-header">
-                                    <span>
-                                        Heading of card
-                                    </span>
-                                    <p>4</p>
-                                </div>
-                                <div className="news-card-content">
-                                    <p>This is the description of the news we can show upto 60 words here and then if they want they can click on the link below and visit it. Makes sense eh?</p>
-                                </div>
-                            </Col>
-                            <Col span={24} className="news-bottom-select">
-                                <p>
-                                    Date and Time
-                                </p>
-                                <a href="#"> Read full story </a>
-                            </Col>
-                        </Row>
-                    </Card>
-                    <Card>
-                        <Row>
-                            <Col span={24}>
-                                <div className="news-card-header">
-                                    <span>
-                                        Heading of card
-                                    </span>
-                                    <p>4</p>
-                                </div>
-                                <div className="news-card-content">
-                                    <p>This is the description of the news we can show upto 60 words here and then if they want they can click on the link below and visit it. Makes sense eh?</p>
-                                </div>
-                            </Col>
-                            <Col span={24} className="news-bottom-select">
-                                <p>
-                                    Date and Time
-                                </p>
-                                <a href="#"> Read full story </a>
-                            </Col>
-                        </Row>
-                    </Card>
-                    <Card>
-                        <Row>
-                            <Col span={24}>
-                                <div className="news-card-header">
-                                    <span>
-                                        Heading of card
-                                    </span>
-                                    <p>4</p>
-                                </div>
-                                <div className="news-card-content">
-                                    <p>This is the description of the news we can show upto 60 words here and then if they want they can click on the link below and visit it. Makes sense eh?</p>
-                                </div>
-                            </Col>
-                            <Col span={24} className="news-bottom-select">
-                                <p>
-                                    Date and Time
-                                </p>
-                                <a href="#"> Read full story </a>
-                            </Col>
-                        </Row>
-                    </Card>
-                    <Card>
-                        <Row>
-                            <Col span={24}>
-                                <div className="news-card-header">
-                                    <span>
-                                        Heading of card
-                                    </span>
-                                    <p>4</p>
-                                </div>
-                                <div className="news-card-content">
-                                    <p>This is the description of the news we can show upto 60 words here and then if they want they can click on the link below and visit it. Makes sense eh?</p>
-                                </div>
-                            </Col>
-                            <Col span={24} className="news-bottom-select">
-                                <p>
-                                    Date and Time
-                                </p>
-                                <a href="#"> Read full story </a>
-                            </Col>
-                        </Row>
-                    </Card>
+                    {newslist}
                 </div>
                 <Nav />
           </div>
