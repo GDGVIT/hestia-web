@@ -8,7 +8,8 @@ class News extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            isEmptyState: true
+            isEmptyState: true,
+            news:[ ]
         }
     }
     gotoProfile=()=>{
@@ -16,10 +17,24 @@ class News extends React.Component {
     }
     componentDidMount(){
         if(localStorage.getItem("token")){
-         console.log("someone's logged in")
+        //  console.log("someone's logged in")
         }else{
             this.props.history.push("/login");
         }
+        fetch('https://hestia-info.herokuapp.com/node', {
+            })
+            // .then(res => res.json())
+            .then(res => console.log(res))
+            
+            .then(data => {
+             console.log(data)
+            // this.setState({
+            //     news: data.items[0],
+            // });
+            // console.log(this.state.news)
+            // console.log(this.state)
+            // console.log(data.items)
+            })
      }
     render(){
             return(
