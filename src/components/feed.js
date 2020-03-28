@@ -60,6 +60,7 @@ class Feed extends React.Component {
                     method: 'POST', // or 'PUT'
                     body: JSON.stringify(object),  // a FormData will automatically set the 'Content-Type'
                     headers: new Headers({
+                        "Content-Type": "application/json",
                         'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiJhYmNkZWdoaWprZjEyMzQifQ.GqnmZCcGjtCN_bTznL5LbA_Wdt_BsBN5IpSAHmdDeu8'
                       })
                 })
