@@ -1,38 +1,18 @@
 import React from 'react'
 import Messages from './messages';
 import { Card, Row, Col } from 'antd';
-import { Input } from 'antd';
 import Report from '../../assets/Report.svg';
 import backbutton from '../../assets/backbutton.png';
-import { ChatFeed, Message } from 'react-chat-ui'
 import './chat.css';
 import Nav from '../nav';
 
 
-const { Search } = Input;
+// const { Search } = Input;
 class Chat extends React.Component{
     constructor(props){
         super(props);
         this.state={
             currentUser: null,
-            messages: [
-                new Message({
-                  id: 1,
-                  message: "This is a long message maybe three lines long ",
-                  senderName:"Name"
-                }), // Gray bubble
-                new Message({ id: 0,
-                     message: "This is a short message!",
-                    senderName:"Another Name" }), // Blue bubble
-                new Message({
-                       id: 1,
-                       message: "This is a long message maybe three lines long ",
-                       senderName:"Name"
-                     }), // Gray bubble
-                new Message({ id: 0,
-                         message: "This is a short message!",
-                        senderName:"Another Name" }) ,               
-              ],
         }
     }
 
@@ -62,26 +42,6 @@ class Chat extends React.Component{
                     </Col>
                 </Row>
             </div>
-            {/* <ChatFeed
-               messages={this.state.messages} // Boolean: list of message objects
-               isTyping={this.state.is_typing} // Boolean: is the recipient typing
-               hasInputField={false} // Boolean: use our input, or use your own
-               showSenderName // show the name of the user who sent the message
-               bubblesCentered={false} //Boolean should the bubbles be centered in the feed?
-               // JSON: Custom bubble styles
-               bubbleStyles={
-                 {
-                   text: {
-                     fontSize: 12
-                   },
-                   chatbubble: {
-                     borderRadius: 10,
-                     padding: 20,
-                    //  backgroundColor: "#00d2d2"
-                   },
-                 }
-               }
-             /> */}
                <Card style={{ width: "80%", backgroundColor: "#00d2d2", float:"left", color:"white"}}>
                 <p style={{fontWeight:700}}>Name</p>
                 <p>This is a long message. Maybe two to three lines.</p>
@@ -93,10 +53,9 @@ class Chat extends React.Component{
                 <p><i>Date and Time</i></p>
               </Card>
             <div>
-            <Input placeholder="Enter your message" className = "Send" suffix="Send" />         
-            
+            {/* <Input placeholder="Enter your message" className = "Send" suffix="Send" />          */}
+            <Messages />
             </div>
-            {/* <Messages /> */}
             <Nav />
             </div>
         );
