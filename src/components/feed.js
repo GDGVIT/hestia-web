@@ -17,7 +17,8 @@ class Feed extends React.Component {
         super(props);
         this.state = {
             visible: false,
-            requests: null
+            requests: [ ],
+            loading: true
         }
     }
     gotoProfile=()=>{
@@ -46,7 +47,7 @@ class Feed extends React.Component {
           visible: false,
         });
       };
-      componentDidMount(){
+      componentDidMount(){  
         // if(localStorage.getItem("token")){
         //  console.log("someone's logged in")
         // }else{
@@ -62,49 +63,55 @@ class Feed extends React.Component {
             .then(data => {
                 console.log(data)
             this.setState({
-                requests: data.Request
+                requests: data.Request,
+                loading: false
             });
             console.log(this.state)
             })
             .catch(error => console.error(error))
-    
         }
     
     render(){
         const { requests } = this.state;
-        // const reqlist = requests.length ? (
-        //     requests.map(
-        //         request =>{
-        //             return(
-        //                 <Card>
-        //                     <Row>
-        //                         <Col span={17}>
-        //                             <div className="feed-card-header">
-        //                                 <span>
-        //                                     <strong>Heading of card</strong>
-        //                                 </span>
-        //                                 <p>4</p>
-        //                             </div>
-        //                             <div className="feed-card-date">
-        //                                 <p>Date and time</p>
-        //                             </div>
-        //                         </Col>
-        //                         <Col span={7} className="iconz">
-        //                             <div className="imgback">
-        //                                 <img src={store} alt="location"></img>
-        //                             </div>
-        //                             <div className="imgback">
-        //                                 <img onClick={this.gotoChat} src={check} alt="location"></img>
-        //                             </div>
-        //                         </Col>
-        //                     </Row>
-        //                 </Card>
-        //             )
-        //         }
-        //     )
-        // ) : (
-        //     <div>NO requests in your area</div>
-        // )
+        // console.log(requests)
+        const reqlist = requests.length ? (
+            requests.map(
+                request =>{
+                    console.log(request)
+                    return(
+                        <Card key={request.id}>
+                            <Row>
+                                <Col span={17}>
+                                    <div className="feed-card-header">
+                                        <span>
+                                            <strong>{request.item_name}</strong>
+                                        </span>
+                                        <p>{request.quantity}</p>
+                                    </div>
+                                    <div className="feed-card-date">
+                    <p>{request.date_time_created.slice(0,10)}</p>
+                                    </div>
+                                </Col>
+                                <Col span={7} className="iconz">
+                                    <div className="imgback">
+                                        <img src={store} alt="location"></img>
+                                    </div>
+                                    <div className="imgback">
+                                        <img onClick={this.gotoChat} src={check} alt="location"></img>
+                                    </div>
+                                </Col>
+                            </Row>
+                        </Card>
+                    )
+                }
+            )
+
+
+
+
+        ) : (
+            <div>No requests in your area</div>
+        )
         
             return(
                 <div>
@@ -120,7 +127,7 @@ class Feed extends React.Component {
      
                     </div>
                     <div className="main-content">
-                        {/* {reqlist} */}
+                        {reqlist}
                     </div>
                     <div className="addReq" onClick={this.handleAdd}>
                             <img src={plus} alt="add req"></img>
