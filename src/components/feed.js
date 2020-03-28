@@ -7,7 +7,7 @@ import Profile from './profile/profile';
 import plus from '../assets/plus.png';
 import Chat from '../components/chat/chats';
 import { Modal, Button } from 'antd';
-import { Form, Input, InputNumber} from 'antd';
+import { Form, Input,} from 'antd';
 import Nav from './nav';
 
 
@@ -18,7 +18,9 @@ class Feed extends React.Component {
         this.state = {
             visible: false,
             requests: [ ],
-            loading: true
+            city: 'surat',
+            item_name: null,
+            quantity: ''
         }
     }
     gotoProfile=()=>{
@@ -40,6 +42,29 @@ class Feed extends React.Component {
       };
     onFinish = values => {
         console.log(values);
+        this.setState(values)
+        console.log(this.state)
+        postForm('https://hestia-requests.herokuapp.com/app/item_requests/',this.state.item_name,this.state.quantity,this.state.city)
+                .then(data => console.log(data))
+                .catch(error => console.error(error))
+
+                function postForm(url,name,quantity,city) {
+                    var object ={};
+                    object["item_name"] = name;
+                    object["quantity"] = quantity;
+                    object["location"] = city;
+                    console.log(object)
+                
+
+                return fetch(url, {
+                    method: 'POST', // or 'PUT'
+                    body: JSON.stringify(object),  // a FormData will automatically set the 'Content-Type'
+                    headers: new Headers({
+                        'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiJhYmNkZWdoaWprZjEyMzQifQ.GqnmZCcGjtCN_bTznL5LbA_Wdt_BsBN5IpSAHmdDeu8'
+                      })
+                })
+                .then(response => response.json())
+                }
       };
       handleCancel = e => {
         console.log(e);
@@ -48,11 +73,11 @@ class Feed extends React.Component {
         });
       };
       componentDidMount(){  
-        // if(localStorage.getItem("token")){
+        if(localStorage.getItem("token")){
         //  console.log("someone's logged in")
-        // }else{
-        //     this.props.history.push("/login");
-        // }
+        }else{
+            this.props.history.push("/login");
+        }
         // console.log("i am here");
         fetch('https://hestia-requests.herokuapp.com/app/view_all_item_requests/?location=surat', {
             headers: new Headers({
@@ -61,14 +86,17 @@ class Feed extends React.Component {
             })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
             this.setState({
                 requests: data.Request,
-                loading: false
+                
             });
-            console.log(this.state)
+            // console.log(this.state)
             })
             .catch(error => console.error(error))
+
+            
+
         }
     
     render(){
@@ -77,7 +105,7 @@ class Feed extends React.Component {
         const reqlist = requests.length ? (
             requests.map(
                 request =>{
-                    console.log(request)
+                    // console.log(request)
                     return(
                         <Card key={request.id}>
                             <Row>
@@ -139,7 +167,7 @@ class Feed extends React.Component {
                         closable={false}
                         >
                         <Form onFinish={this.onFinish}>
-                        <Form.Item name="name">
+                        <Form.Item name="item_name">
                             <Input 
                                 placeholder="Name of thing"
                             />
@@ -147,7 +175,7 @@ class Feed extends React.Component {
                         <Form.Item
                             name="quantity"
                         >
-                            <InputNumber 
+                            <Input 
                                 placeholder="Quantity"
                             />
                         </Form.Item>
