@@ -7,8 +7,9 @@ import Profile from './profile/profile';
 import plus from '../assets/plus.png';
 import Chat from '../components/chat/chats';
 import { Modal, Button } from 'antd';
-import { Form, Input,} from 'antd';
+import { Form, Input, Checkbox} from 'antd';
 import Nav from './nav';
+import '../App.css';
 
 
 
@@ -17,6 +18,8 @@ class Feed extends React.Component {
         super(props);
         this.state = {
             visible: false,
+            visible1:false,
+            visible2:false,
             requests: [ ],
             city: 'surat',
             item_name: null,
@@ -34,10 +37,22 @@ class Feed extends React.Component {
             visible: true
         })
     }
+    handleStore=()=>{
+        this.setState({
+            visible1: true
+        })
+    }
+    handleChat=()=>{
+        this.setState({
+            visible2: true
+        })
+    }
     handleOk = e => {
         console.log(e);
         this.setState({
           visible: false,
+          visible1:false,
+          visible2:false
         });
       };
     onFinish = values => {
@@ -71,8 +86,13 @@ class Feed extends React.Component {
         console.log(e);
         this.setState({
           visible: false,
+          visible1:false,
+          visible2:false
         });
       };
+      onChange(e) {
+        console.log(`checked = ${e.target.checked}`);
+      }
       componentDidMount(){  
         if(localStorage.getItem("token")){
         //  console.log("someone's logged in")
@@ -123,11 +143,11 @@ class Feed extends React.Component {
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    <div className="imgback">
+                                    <div className="imgback" onClick = {this.handleStore}>
                                         <img src={store} alt="location"></img>
                                     </div>
                                     <div className="imgback">
-                                        <img onClick={this.gotoChat} src={check} alt="location"></img>
+                                        <img onClick={this.handleChat} src={check} alt="location"></img>
                                     </div>
                                 </Col>
                             </Row>
@@ -140,7 +160,7 @@ class Feed extends React.Component {
 
 
         ) : (
-            <div>No requests in your area</div>
+            <div>Loading request..</div>
         )
         
             return(
@@ -162,6 +182,7 @@ class Feed extends React.Component {
                     <div className="addReq" onClick={this.handleAdd}>
                             <img src={plus} alt="add req"></img>
                     </div>
+                    {/* Add item modal */}
                     <Modal
                         title="Add a request"
                         visible={this.state.visible}    
@@ -193,6 +214,64 @@ class Feed extends React.Component {
                         </Form.Item>
                         </Form>
                     </Modal>
+
+                    {/* Suggest a Shop modal */}
+                    <Modal
+                      title="Suggest shop"
+                      visible={this.state.visible1}
+                      onOk={this.handleOk}
+                      footer={null}
+                      onCancel={this.handleCancel}
+                    > 
+                        <Row>
+                            <Col span={24}>
+                            <div className="imgModal">
+                                <img src={store} alt="location"></img>
+                            </div>
+                            </Col>
+                        </Row>
+                      <h2 style={{marginTop:"20px", textAlign:"center"}}>Suggest a Shop?</h2>
+                      <div style={{textAlign:"center"}}>
+                        <Button type="primary" htmlType="submit" onClick={this.gotoChat}>
+                            Yes <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
+                        </Button>
+                        <Button type="primary" onClick={this.handleCancel} style={{backgroundColor:"#fff",color:"#000"}}>
+                            No <strong> X </strong>
+                        </Button>
+                    </div>
+                    <div style={{textAlign:"center"}}>
+                            <Checkbox onChange={this.onChange} style={{marginTop:"40px"}}>Remember choice</Checkbox>
+                    </div>                    
+                    </Modal>
+                    {/* You have this item? modal*/}
+                    <Modal
+                      title="You have this item?"
+                      visible={this.state.visible2}
+                      onOk={this.handleOk}
+                      footer={null}
+                      onCancel={this.handleCancel}
+                    > 
+                     <Row>
+                        <Col span={24}>
+                        <div className="imgModal">
+                            <img src={store} alt="location"></img>
+                        </div>
+                        </Col>
+                        </Row>
+                      <h2 style={{marginTop:"20px", textAlign:"center"}}>You have this item?</h2>
+                        <div style={{textAlign:"center"}}>
+                            <Button type="primary" htmlType="submit" onClick={this.gotoChat}>
+                                Yes <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
+                            </Button>
+                            <Button type="primary" onClick={this.handleCancel} style={{backgroundColor:"#fff",color:"#000"}}>
+                                No <strong> X </strong>
+                            </Button>
+                        </div>
+                        <div style={{textAlign:"center"}}>
+                            <Checkbox onChange={this.onChange} style={{marginTop:"40px"}}>Remember choice</Checkbox>
+                        </div>
+                    </Modal>
+
                     <Nav />
               </div>
             );
