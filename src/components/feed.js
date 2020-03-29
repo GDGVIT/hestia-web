@@ -38,17 +38,17 @@ class Feed extends React.Component {
             visible: true
         })
     }
-    handleStore=(r)=>{
-        this.setState({
-            visible1: true,
-        })
-        window.localStorage.setItem("receiver_id", r);
-    }
-    handleChat=()=>{
-        this.setState({
-            visible2: true
-        })
-    }
+    // handleStore=(r)=>{
+    //     this.setState({
+    //         visible1: true,
+    //     })
+    //     window.localStorage.setItem("receiver_id", r);
+    // }
+    // handleChat=()=>{
+    //     this.setState({
+    //         visible2: true
+    //     })
+    // }
     handleOk = e => {
         console.log(e);
         this.setState({
@@ -109,7 +109,7 @@ class Feed extends React.Component {
         //     token: localStorage.getItem("token")
         // })
         // console.log(this.state);
-        fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location=surat', {
+        fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+this.state.city, {
             headers: new Headers({
             'Authorization': localStorage.getItem("token")
             })
@@ -125,21 +125,23 @@ class Feed extends React.Component {
             })
             .catch(error => console.error(error))
 
-            // let latitude;
-            // let longitude;
-            // function getLocation() {
-            //     if (navigator.geolocation) {
-            //         navigator.geolocation.getCurrentPosition(showPosition);
-            //             } 
-            //         }
-            // function showPosition(position) {
-            //     latitude = position.coords.latitude;
-            //     longitude = position.coords.longitude;
-            //     console.log(latitude)
-            //     console.log(longitude)
-            //     }
-            //     getLocation();
-
+            let latitude;
+            let longitude;
+            function getLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                        } 
+                    }
+            function showPosition(position) {
+                latitude = position.coords.latitude;
+                longitude = position.coords.longitude;
+                
+                }
+                getLocation();
+                this.setState({
+                    lat: latitude,
+                    long: longitude
+                })
 
 
 
@@ -211,9 +213,9 @@ class Feed extends React.Component {
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    <div className="imgback"  onClick = {this.handleStore(`${request.request_made_by}`)}>
+                                    {/* <div className="imgback"  onClick = {this.handleStore(`${request.request_made_by}`)}>
                                         <img src={store} alt="location"></img>
-                                    </div>
+                                    </div> */}
                                     <div className="imgback">
                                         <img onClick={this.handleChat} src={check} alt="location"></img>
                                     </div>
