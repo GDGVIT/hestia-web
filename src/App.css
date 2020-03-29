@@ -299,7 +299,7 @@ margin-left: 12.5%;
     width: 100%;
 }
 .news-card-header span {
-    width: 60%;
+    width: 100%;     
     float: left;
     text-align: left;
     font-size: 14px;
@@ -307,7 +307,7 @@ margin-left: 12.5%;
     letter-spacing: 0.5px;
 }
 .news-card-header p{
-    width: 40%;
+    width: 100%;
     float: left;
     text-align: left;
     margin: 0px;

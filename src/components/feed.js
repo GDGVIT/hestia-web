@@ -24,7 +24,6 @@ class Feed extends React.Component {
             item_name: null,
             quantity: '',
             token: '',
-            receiver_id : ''
         }
     }
     gotoProfile=()=>{
@@ -38,19 +37,22 @@ class Feed extends React.Component {
             visible: true
         })
     }
-    // handleStore=(r)=>{
-    //     this.setState({
-    //         visible1: true,
-    //     })
-    //     window.localStorage.setItem("receiver_id", r);
-    // }
-    // handleChat=()=>{
-    //     this.setState({
-    //         visible2: true
-    //     })
-    // }
+    handleStore = (r,i) => () => {
+        this.setState({
+            visible1: true,
+        })
+        window.localStorage.setItem("receiver_id", r);
+        window.localStorage.setItem("item",i);
+    }
+    handleChat= (r,i) => () =>{
+        this.setState({
+            visible2: true
+        })
+        window.localStorage.setItem("receiver_id", r);
+        window.localStorage.setItem("item",i);
+    }
     handleOk = e => {
-        console.log(e);
+        // console.log(e);
         this.setState({
           visible: false,
           visible1:false,
@@ -58,7 +60,7 @@ class Feed extends React.Component {
         });
       };
     onFinish = values => {
-        console.log(values);
+        // console.log(values);
         this.setState(values)
         console.log(this.state)
         postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.city)
@@ -70,7 +72,7 @@ class Feed extends React.Component {
                     object["item_name"] = name;
                     object["quantity"] = quantity;
                     object["location"] = city;
-                    console.log(object)
+                    // console.log(object)
                 
                     
                 return fetch(url, {
@@ -85,8 +87,31 @@ class Feed extends React.Component {
                 .then(response => response.json())
                 }
       };
+
+      createChat = () => {
+          var obj ={}
+          obj["receiver"] = parseInt(localStorage.getItem("receiver_id"))
+          obj["sender"] = parseInt(localStorage.getItem("user_id"))
+          obj["title"] = localStorage.getItem("item")
+
+          fetch('https://hestia-chat.herokuapp.com/api/v1/createChat',{
+              method:"POST",
+              headers: new Headers({
+                'Authorization': localStorage.getItem("token")
+              }),
+              body: JSON.stringify(obj)
+          })
+          .then(res => res.json())
+          .then(res => {
+              console.log(res)
+              if(res.code == 200){
+                this.props.history.push("/chat");
+              }
+          })
+          .catch(err => console.log(err))
+      }
       handleCancel = e => {
-        console.log(e);
+        // console.log(e);
         this.setState({
           visible: false,
           visible1:false,
@@ -95,7 +120,7 @@ class Feed extends React.Component {
       };
       onChange(e) {
         window.localStorage.setItem("acceptcheck", `${e.target.checked}`);
-        console.log(localStorage.getItem("acceptcheck"))
+        // console.log(localStorage.getItem("acceptcheck"))
       }
       componentDidMount(){  
         if(localStorage.getItem("token")){
@@ -104,7 +129,6 @@ class Feed extends React.Component {
             this.props.history.push("/login");
         }
         let token =localStorage.getItem("token");
-        console.log(token);
         // this.setState({
         //     token: localStorage.getItem("token")
         // })
@@ -213,11 +237,11 @@ class Feed extends React.Component {
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    {/* <div className="imgback"  onClick = {this.handleStore(`${request.request_made_by}`)}>
+                                    <div className="imgback"  onClick = {this.handleStore(`${request.request_made_by}`, `${request.item_name}`)}>
                                         <img src={store} alt="location"></img>
                                     </div> */}
                                     <div className="imgback">
-                                        <img onClick={this.handleChat} src={check} alt="location"></img>
+                                        <img onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`)} src={check} alt="location"></img>
                                     </div>
                                 </Col>
                             </Row>
@@ -283,8 +307,8 @@ class Feed extends React.Component {
                         </Form.Item>
                         </Form>
                     </Modal>
-                                       {/* Suggest a Shop modal */}
-                                       <Modal
+                {/* Suggest a Shop modal */}
+                <Modal
                       title="Suggest shop"
                       visible={this.state.visible1}
                       onOk={this.handleOk}
@@ -300,7 +324,7 @@ class Feed extends React.Component {
                         </Row>
                       <h2 style={{marginTop:"20px", textAlign:"center"}}>Suggest a Shop?</h2>
                       <div style={{textAlign:"center"}}>
-                        <Button type="primary" htmlType="submit" onClick={this.gotoChat}>
+                        <Button type="primary" htmlType="submit" onClick={this.createChat}>
                             Yes <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
                         </Button>
                         <Button type="primary" onClick={this.handleCancel} style={{backgroundColor:"#fff",color:"#000"}}>
@@ -328,7 +352,7 @@ class Feed extends React.Component {
                         </Row>
                       <h2 style={{marginTop:"20px", textAlign:"center"}}>You have this item?</h2>
                         <div style={{textAlign:"center"}}>
-                            <Button type="primary" htmlType="submit" onClick={this.gotoChat}>
+                            <Button type="primary" htmlType="submit" onClick={this.createChat}>
                                 Yes <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
                             </Button>
                             <Button type="primary" onClick={this.handleCancel} style={{backgroundColor:"#fff",color:"#000"}}>

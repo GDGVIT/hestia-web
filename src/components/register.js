@@ -25,7 +25,7 @@ const Register = (props) => {
   const alert = useAlert()
   let authcheck = false;
   const onFinish = values => {
-    return fetch("https://hestia-auth.herokuapp.com/api/user/register", {
+    fetch("https://hestia-auth.herokuapp.com/api/user/register", {
         method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
         body: JSON.stringify(values.user), // Coordinate the body type with 'Content-Type'
         headers: new Headers({
@@ -133,9 +133,9 @@ const Register = (props) => {
         <Button type="primary" htmlType="submit">
           Register
         </Button>
-        <Button type="dashed" className="oauth">
+        {/* <Button type="dashed" className="oauth">
                 Register with <img src={google} alt="login with google"></img>
-        </Button>
+        </Button> */}
       </Form.Item>
       <Form.Item className="already">
         <Link to="/Login">Already have an account? Login</Link>
