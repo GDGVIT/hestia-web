@@ -239,7 +239,7 @@ class Feed extends React.Component {
                                 <Col span={7} className="iconz">
                                     <div className="imgback"  onClick = {this.handleStore(`${request.request_made_by}`, `${request.item_name}`)}>
                                         <img src={store} alt="location"></img>
-                                    </div> */}
+                                    </div> 
                                     <div className="imgback">
                                         <img onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`)} src={check} alt="location"></img>
                                     </div>
