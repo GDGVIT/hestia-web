@@ -15,6 +15,9 @@ class Chat extends React.Component{
             currentUser: null,
         }
     }
+    gotoReport=()=>{
+      this.props.history.push("/report");
+    }
 
     componentDidMount(){
       if(localStorage.getItem("token")){
@@ -38,7 +41,7 @@ class Chat extends React.Component{
                         <h2 style = {{fontSize:14, textAlign:"center"}}>Item Name</h2>
                     </Col>
                     <Col span={4}>
-                    <img src={Report} alt="Report logo" style ={{ marginTop: "10px"}}></img>
+                    <img src={Report} alt="Report logo" style ={{ marginTop: "10px"}} onClick={this.gotoReport}></img>
                     </Col>
                 </Row>
             </div>

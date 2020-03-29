@@ -10,6 +10,7 @@ import Chat from "./components/chat/chats";
 import Profile from "./components/profile/profile";
 import Feed from "./components/feed";
 import News from "./components/news";
+import Report from './components/report';
 
 class App extends React.Component {
   constructor(props){
@@ -45,6 +46,8 @@ class App extends React.Component {
           <Route exact path='/profile' component={Profile}/>
           <Route exact path='/feed' component={Feed}/>
           <Route exact path='/news' component={News}/>
+          <Route exact path='/report' component={Report}/>
+
           {this.showNav()}
         </div>
       </BrowserRouter>
