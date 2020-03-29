@@ -8,16 +8,19 @@ import Nav from '../nav';
 
 
 // const { Search } = Input;
+
+let url = 'ws://hestia-chat.herokuapp.com/api/v1/ws?chat='
+
 class Chat extends React.Component{
     constructor(props){
         super(props);
         this.state={
             currentUser: null,
             messages: [],
+            receiver_id : parseInt(localStorage.getItem("receiver_id"))
         }
     }
-
-    ws = new WebSocket('ws://hestia-chat.herokuapp.com/api/v1/ws?chat=1')
+    ws = new WebSocket(url+`{this.state.receiver_id}`)
     gotoReport=()=>{
       this.props.history.push("/report");
     }
@@ -28,9 +31,27 @@ class Chat extends React.Component{
     componentDidMount(){
       if(localStorage.getItem("token")){
        console.log("someone's logged in")
+      //  this.setState({receiver_id : localStorage.getItem("receiver_id")})
       }else{
           this.props.history.push("/login");
       }
+      console.log(this.state)
+      //request to get messages
+
+      var ob = {}
+      ob["receiver"] = parseInt(localStorage.getItem("receiver_id"))
+      ob["sender"] = parseInt(localStorage.getItem("user_id"))
+
+      fetch('https://hestia-chat.herokuapp.com/api/v1/getMessages',{
+        method:"POST",
+        headers:  new Headers({
+          'Authorization': localStorage.getItem("token")
+        }),
+        body:JSON.stringify(ob)
+      })
+      .then(res => res.json())
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
 
       this.ws.onopen = () => {
       // on connecting, do nothing but log it to the console
@@ -59,8 +80,8 @@ class Chat extends React.Component{
     // on submitting the ChatInput form, send the message, add it to the list and reset the input
       console.log(messageString);
       var obj ={}
-      obj["receiver"] = 4;
-      obj["from"] = 5;
+      obj["receiver"] = parseInt(localStorage.getItem("receiver_id"));
+      obj["from"] = parseInt(localStorage.getItem("user_id"));
       obj["text"] = messageString;
 
       fetch("https://hestia-chat.herokuapp.com/api/v1/sendMessage",{

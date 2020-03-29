@@ -7,6 +7,7 @@ import { Radio } from 'antd';
 import Nav from '../nav';
 import front from '../../assets/front.png';
 import back from '../../assets/back.png';
+import { withRouter } from 'react-router';
 
 class Mychat extends React.Component{
     constructor(props){
@@ -20,6 +21,9 @@ class Mychat extends React.Component{
         this.setState({
             goto: "profile"
         });
+    }
+    gotoChat=()=>{
+        this.props.history.push("/chat");
     }
     componentDidMount(){
         if(localStorage.getItem("token")){
@@ -73,7 +77,7 @@ class Mychat extends React.Component{
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    <div className="imgback">
+                                    <div className="imgback" onClick={this.gotoChat}>
                                         <img src={front} alt="location"></img>
                                     </div>
                                 </Col>
