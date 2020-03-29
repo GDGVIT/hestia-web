@@ -17,6 +17,31 @@ const Login = (props) => {
     }
     let authcheck = false;
     console.log('Received values of form: ', values)
+    let cm = {
+      "email": values.user.email
+    }
+    
+    fetch("https://hestia-auth.herokuapp.com/api/user/getuserdetail", {
+      method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
+      body: JSON.stringify(cm), // Coordinate the body type with 'Content-Type'
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+    })
+    .then(response => {
+      if(response.status === 200 || response.status===201 || response.status===202){
+        return response.json();
+      }else{
+        alert.show(response.statusText)
+      }
+      })
+      .then(data => {
+        window.localStorage.setItem("user_id", data.id);
+        window.localStorage.setItem("email", data.email);
+      })
+      .catch(error => console.error(error)
+      );
+
     return fetch("https://hestia-auth.herokuapp.com/api/user/login", {
         method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
         body: JSON.stringify(values.user), // Coordinate the body type with 'Content-Type'
@@ -44,7 +69,7 @@ const Login = (props) => {
        );
     };
 
-    useEffect(() => {
+    useEffect(() => { 
         if(localStorage.getItem("token")){
             props.history.push("/feed")
         }
