@@ -20,7 +20,7 @@ const Login = (props) => {
     let cm = {
       "email": values.user.email
     }
-    
+
     fetch("https://hestia-auth.herokuapp.com/api/user/getuserdetail", {
       method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
       body: JSON.stringify(cm), // Coordinate the body type with 'Content-Type'
@@ -42,7 +42,7 @@ const Login = (props) => {
       .catch(error => console.error(error)
       );
 
-    return fetch("https://hestia-auth.herokuapp.com/api/user/login", {
+    fetch("https://hestia-auth.herokuapp.com/api/user/login", {
         method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
         body: JSON.stringify(values.user), // Coordinate the body type with 'Content-Type'
         headers: new Headers({
@@ -143,9 +143,9 @@ const Login = (props) => {
             <Button type="primary" htmlType="submit" className="login-form-button">
                 Log in
             </Button>
-            <Button type="dashed" className="oauth">
+            {/* <Button type="dashed" className="oauth">
                 Login with <img src={google} alt="login with google"></img>
-            </Button>
+            </Button> */}
        </Form.Item>
        <Form.Item className="already">
         <a onClick={() => changeV(true)}>Forgot password?</a>

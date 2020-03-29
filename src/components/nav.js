@@ -23,14 +23,14 @@ class Nav extends React.Component {
     render(){
         return(
             <div>
-        <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal">
-            <Menu.Item key="feed">
-            <NavLink to="/feed">Feed</NavLink>
-            </Menu.Item>
-            <Menu.Item key="news">
-            <NavLink to="/news">News</NavLink>
-            </Menu.Item>
-        </Menu>        
+                <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal">
+                    <Menu.Item key="feed">
+                    <NavLink to="/feed">Feed</NavLink>
+                    </Menu.Item>
+                    <Menu.Item key="news">
+                    <NavLink to="/news">News</NavLink>
+                    </Menu.Item>
+                </Menu>        
             </div>
         );
     }   

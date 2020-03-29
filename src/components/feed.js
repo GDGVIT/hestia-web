@@ -48,7 +48,7 @@ class Feed extends React.Component {
         })
     }
     handleOk = e => {
-        console.log(e);
+        // console.log(e);
         this.setState({
           visible: false,
           visible1:false,
@@ -56,9 +56,9 @@ class Feed extends React.Component {
         });
       };
     onFinish = values => {
-        console.log(values);
+        // console.log(values);
         this.setState(values)
-        console.log(this.state)
+        // console.log(this.state)
         postForm('https://hestia-requests.herokuapp.com/app/item_requests/',this.state.item_name,this.state.quantity,this.state.city)
                 .then(data => this.props.alert.show("Request added"))
                 .catch(error => console.error(error))
@@ -68,7 +68,7 @@ class Feed extends React.Component {
                     object["item_name"] = name;
                     object["quantity"] = quantity;
                     object["location"] = city;
-                    console.log(object)
+                    // console.log(object)
                 
                     
                 return fetch(url, {
@@ -84,7 +84,7 @@ class Feed extends React.Component {
                 }
       };
       handleCancel = e => {
-        console.log(e);
+        // console.log(e);
         this.setState({
           visible: false,
           visible1:false,
@@ -93,7 +93,7 @@ class Feed extends React.Component {
       };
       onChange(e) {
         window.localStorage.setItem("acceptcheck", `${e.target.checked}`);
-        console.log(localStorage.getItem("acceptcheck"))
+        // console.log(localStorage.getItem("acceptcheck"))
       }
       componentDidMount(){  
         if(localStorage.getItem("token")){
@@ -102,7 +102,6 @@ class Feed extends React.Component {
             this.props.history.push("/login");
         }
         let token =localStorage.getItem("token");
-        console.log(token);
         // this.setState({
         //     token: localStorage.getItem("token")
         // })

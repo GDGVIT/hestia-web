@@ -152,7 +152,7 @@ class Edit extends React.Component{
                     />
                 </Form.Item>
                 <Form.Item>
-                <Button type="primary" onClick={this.changePass}>
+                <Button type="primary" onClick={this.changePass} style={{width: "150px"}}>
                     Change Password
                 </Button>
                 </Form.Item>
