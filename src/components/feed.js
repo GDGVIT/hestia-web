@@ -9,8 +9,10 @@ import Chat from '../components/chat/chats';
 import { Modal, Button } from 'antd';
 import { Form, Input, Checkbox} from 'antd';
 import Nav from './nav';
+import { useAlert } from 'react-alert';
 
 
+const alert = useAlert();
 
 class Feed extends React.Component {
     constructor(props){
@@ -92,7 +94,8 @@ class Feed extends React.Component {
         });
       };
       onChange(e) {
-        console.log(`checked = ${e.target.checked}`);
+        window.localStorage.setItem("acceptcheck", `${e.target.checked}`);
+        console.log(localStorage.getItem("acceptcheck"))
       }
       componentDidMount(){  
         if(localStorage.getItem("token")){
@@ -102,12 +105,11 @@ class Feed extends React.Component {
         }
         let token =localStorage.getItem("token");
         console.log(token);
-        this.setState({
-            token: localStorage.getItem("token")
-        })
-        console.log(this.state);
+        // this.setState({
+        //     token: localStorage.getItem("token")
+        // })
+        // console.log(this.state);
         fetch('https://hestia-requests.herokuapp.com/app/view_all_item_requests/?location=surat', {
-            
             headers: new Headers({
             'Authorization': localStorage.getItem("token")
             })
@@ -122,9 +124,6 @@ class Feed extends React.Component {
             // console.log(this.state)
             })
             .catch(error => console.error(error))
-
-            
-
         }
     
     render(){
@@ -209,7 +208,7 @@ class Feed extends React.Component {
                         </Form.Item>
                         <Form.Item className="butn">
                             <Button type="primary" htmlType="submit">
-                                Done 
+                                Done <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
                             </Button>
                         </Form.Item>
                         <Form.Item className="butn">

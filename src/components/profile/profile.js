@@ -8,6 +8,11 @@ import front from '../../assets/front.png';
 import back from '../../assets/back.png';
 import Edit from './edit';
 
+
+const overflowcheck = {
+    'overflow': 'scroll'
+}
+
 class Profile extends React.Component{
     constructor(props){
         super(props);

@@ -20,6 +20,31 @@ class Edit extends React.Component{
     }
     onFinish = (values) => {
         console.log(values)
+        this.setState(values)
+        console.log(this.state)
+        // postForm('https://hestia-requests.herokuapp.com/app/item_requests/',this.state.item_name,this.state.quantity,this.state.city)
+        //         .then(data => console.log(data))
+        //         .catch(error => console.error(error))
+
+        //         function postForm(url,name,quantity,city) {
+        //             var object ={};
+        //             object["item_name"] = name;
+        //             object["quantity"] = quantity;
+        //             object["location"] = city;
+        //             console.log(object)
+                
+                    
+        //         return fetch(url, {
+        //             method: 'POST', // or 'PUT'
+        //             body: JSON.stringify(object),  // a FormData will automatically set the 'Content-Type'
+        //             headers: new Headers({
+        //                 "Content-Type": "application/json",
+        //                 'Authorization': localStorage.getItem("token")
+                        
+        //               })
+        //         })
+        //         .then(response => response.json())
+        //         }
     }
     gotoProfile = () => {
         this.setState({
@@ -48,7 +73,19 @@ class Edit extends React.Component{
             </div>
             <div>
             <Form name="nest-messages" onFinish={this.onFinish} validateMessages={this.validateMessages} className="login-form">
-
+                <Form.Item
+                    name={['user', 'name']}
+                    rules={[
+                    {
+                        type: 'name',
+                        message: 'Please input a valid email!'
+                    },
+                    ]}
+                >
+                    <Input 
+                    placeholder="Name"
+                    />
+                </Form.Item>
                 <Form.Item
                     name={['user', 'email']}
                     rules={[
@@ -78,15 +115,7 @@ class Edit extends React.Component{
                     placeholder="Password"
                     />
                 </Form.Item>
-                <Form.Item
-                    name={['user', 'password2']}
-                    placeholder="Password"
-                >
-                    <Input
-                    type="password"
-                    placeholder="Password"
-                    />
-                </Form.Item>
+                
                 <Form.Item>
                     <Button type="primary" htmlType="submit">
                     Done <img src={check} alt="Submit form"></img>
