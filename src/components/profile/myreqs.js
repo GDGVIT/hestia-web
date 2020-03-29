@@ -25,55 +25,7 @@ class Myreqs extends React.Component{
     }
 
     deleterequest = (id) => {
-        console.log("nirmit")
         console.log(id)
-
-        // postRequest('https://hestia-requests.herokuapp.com/app/item_requests/'+id+'/')
-        //     .then(data => console.log(data)) 
-        //     .catch(error => console.error(error))
-        //     function postRequest(url) {
-        //     return fetch(url, {
-        //         method: 'POST', 
-        //         // body: JSON.stringify(data),
-        //         headers: new Headers({
-        //         'Content-Type': 'application/json',
-        //         'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiJhYmNkZWdoaWprZjEyMzQifQ.GqnmZCcGjtCN_bTznL5LbA_Wdt_BsBN5IpSAHmdDeu8'
-        //         }),
-        //     })
-        //     .then(response => response.json())
-        //     }
-            // postForm('https://hestia-requests.herokuapp.com/app/item_requests/'+id+'/')
-            // // postForm('https://hestia-requests.herokuapp.com/app/item_requests/1/')
-            //     .then(data => console.log(data))
-            //     .catch(error => console.error(error))
-
-            //     function postForm(url) {
-
-            //     return fetch(url, {
-            //         method: 'POST', // or 'PUT'
-            //         headers: new Headers({
-            //             'Content-Type': 'application/json',
-            //             'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiJhYmNkZWdoaWprZjEyMzQifQ.GqnmZCcGjtCN_bTznL5LbA_Wdt_BsBN5IpSAHmdDeu8'
-            //             }),
-            //     })
-            //     .then(response => response.json())
-            //     }
-            // fetch('https://hestia-requests.herokuapp.com/app/item_requests/'+id+'/', {
-            //     headers: new Headers({
-            //                     'Content-Type': 'application/json',
-            //                     'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiJhYmNkZWdoaWprZjEyMzQifQ.GqnmZCcGjtCN_bTznL5LbA_Wdt_BsBN5IpSAHmdDeu8'
-            //                     }),
-            //     })
-            //     .then(response => response.json())
-            //     .then(data => {
-            //     console.log(data)
-            //     })
-            //     .catch(error => console.error(error))
-
-
-
-
-
                 postForm('https://hestia-requests.herokuapp.com/app/item_requests/'+id+'/')
                     .then(data => console.log(data))
                     .catch(error => console.error(error))
@@ -85,7 +37,7 @@ class Myreqs extends React.Component{
                         method: 'DELETE', // or 'PUT'
                         headers: new Headers({
                             'Content-Type': 'application/json',
-                            'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiJhYmNkZWdoaWprZjEyMzQifQ.GqnmZCcGjtCN_bTznL5LbA_Wdt_BsBN5IpSAHmdDeu8'
+                            'Authorization': localStorage.getItem("token")
                             }),
                         
                     })
@@ -111,7 +63,7 @@ class Myreqs extends React.Component{
 
         fetch('https://hestia-requests.herokuapp.com/app/my_requests/', {
             headers: new Headers({
-            'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiJhYmNkZWdoaWprZjEyMzQifQ.GqnmZCcGjtCN_bTznL5LbA_Wdt_BsBN5IpSAHmdDeu8'
+            'Authorization': localStorage.getItem("token")
             })
             })
             .then(res => res.json())
