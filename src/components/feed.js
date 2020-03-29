@@ -23,7 +23,8 @@ class Feed extends React.Component {
             city: 'surat',
             item_name: null,
             quantity: '',
-            token: ''
+            token: '',
+            receiver_id : ''
         }
     }
     gotoProfile=()=>{
@@ -37,10 +38,11 @@ class Feed extends React.Component {
             visible: true
         })
     }
-    handleStore=()=>{
+    handleStore=(r)=>{
         this.setState({
-            visible1: true
+            visible1: true,
         })
+        window.localStorage.setItem("receiver_id", r);
     }
     handleChat=()=>{
         this.setState({
@@ -59,7 +61,7 @@ class Feed extends React.Component {
         console.log(values);
         this.setState(values)
         console.log(this.state)
-        postForm('https://hestia-requests.herokuapp.com/app/item_requests/',this.state.item_name,this.state.quantity,this.state.city)
+        postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.city)
                 .then(data => this.props.alert.show("Request added"))
                 .catch(error => console.error(error))
 
@@ -107,7 +109,7 @@ class Feed extends React.Component {
         //     token: localStorage.getItem("token")
         // })
         // console.log(this.state);
-        fetch('https://hestia-requests.herokuapp.com/app/view_all_item_requests/?location=surat', {
+        fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location=surat', {
             headers: new Headers({
             'Authorization': localStorage.getItem("token")
             })
@@ -119,7 +121,7 @@ class Feed extends React.Component {
                 requests: data.Request,
                 
             });
-            // console.log(this.state)
+            console.log(this.state)
             })
             .catch(error => console.error(error))
         }
@@ -146,7 +148,7 @@ class Feed extends React.Component {
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    <div className="imgback"  onClick = {this.handleStore}>
+                                    <div className="imgback"  onClick = {this.handleStore(`${request.request_made_by}`)}>
                                         <img src={store} alt="location"></img>
                                     </div>
                                     <div className="imgback">
