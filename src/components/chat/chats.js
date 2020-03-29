@@ -13,11 +13,17 @@ class Chat extends React.Component{
         super(props);
         this.state={
             currentUser: null,
+            messages: [],
         }
     }
+
+    ws = new WebSocket('ws://hestia-chat.herokuapp.com/api/v1/ws?chat=1')
     gotoReport=()=>{
       this.props.history.push("/report");
     }
+    gotoProfile=()=>{
+      this.props.history.push("/profile");
+  }
 
     componentDidMount(){
       if(localStorage.getItem("token")){
@@ -25,14 +31,62 @@ class Chat extends React.Component{
       }else{
           this.props.history.push("/login");
       }
+
+      this.ws.onopen = () => {
+      // on connecting, do nothing but log it to the console
+        console.log('connected')
+      }
+
+      this.ws.onmessage = evt => {
+        // on receiving a message, add it to the list of messages
+        const message = JSON.parse(evt.data)
+        this.addMessage(message)
+      }
+
+      this.ws.onclose = () => {
+        console.log('disconnected')
+        // automatically try to reconnect on connection loss
+        this.setState({
+          ws: new WebSocket(URL),
+        })
+      }
    }
+
+   addMessage = message =>
+   this.setState(state => ({ messages: [message, ...state.messages] }))
+
+   submitMessage = messageString => {
+    // on submitting the ChatInput form, send the message, add it to the list and reset the input
+      console.log(messageString);
+      var obj ={}
+      obj["receiver"] = 4;
+      obj["from"] = 5;
+      obj["text"] = messageString;
+
+      fetch("https://hestia-chat.herokuapp.com/api/v1/sendMessage",{
+        method:"POST",
+        headers: new Headers({
+          // "Content-Type": "application/json",
+          'Authorization': localStorage.getItem("token")
+        }),
+        body:JSON.stringify(obj)
+      })
+      .then(response=> response.json())
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+
+    // const message = { name: this.state.name, message: messageString }
+
+    // this.addMessage(message)
+  }
+
     render(){
         return(
             <div>
             <div>    
                 <Row style={{marginTop:20}}>
                     <Col span={4}>
-                      <div className="imgback">
+                      <div className="imgback" onClick={this.gotoProfile}>
                         <img src={backbutton} alt = "Back-button" style = {{height: "3vh", marginLeft:"10px"}}></img>
                       </div>
                     </Col>
@@ -56,8 +110,8 @@ class Chat extends React.Component{
                 <p><i>Date and Time</i></p>
               </Card>
             <div>
-            {/* <Input placeholder="Enter your message" className = "Send" suffix="Send" />          */}
-            <Messages />
+
+            <Messages onSubmitMessage={messageString => this.submitMessage(messageString)}/>
             </div>
             <Nav />
             </div>

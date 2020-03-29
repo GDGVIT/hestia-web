@@ -12,7 +12,8 @@ class Mychat extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            goto: "mychats"
+            goto: "mychats",
+            mychats: []
         }
     }
     gotoProfile = () => {
@@ -26,14 +27,67 @@ class Mychat extends React.Component{
         }else{
             this.props.history.push("/login");
         }
+        var obj = {"user_id" : parseInt(localStorage.getItem("user_id"))}
+        fetch('https://hestia-chat.herokuapp.com/api/v1/getChats',{
+            method:"POST",
+            headers: new Headers({
+                'Authorization': localStorage.getItem("token")
+            }),
+            body: JSON.stringify(obj)
+        })
+        .then(response => response.json())
+        .then(data => {
+        console.log(data)
+        this.setState({
+            mychats: data.chats,
+            
+        });
+        console.log(this.state)
+        })
+        .catch(error => console.error(error))
      }
 
     render(){
+        const { mychats } = this.state;
         if(this.state.goto === "profile"){
             return(
                 <Profile p={this.props}/>
             );
         }else if(this.state.goto === "mychats"){
+
+            const mychatslist = mychats.length ? (
+                mychats.map(
+                    data => {
+                        return (
+                            <Card key = {data.receiver}>
+                            <Row>
+                                <Col span={17}>
+                                    <div className="feed-card-header">
+                                        <span>
+                                            <strong>{data.title}</strong>
+                                        </span>
+                                
+                                    </div>
+                                    <div className="feed-card-date">
+                                        <p>{data.receiver}</p>
+                                    </div>
+                                </Col>
+                                <Col span={7} className="iconz">
+                                    <div className="imgback">
+                                        <img src={front} alt="location"></img>
+                                    </div>
+                                </Col>
+                            </Row>
+                        </Card>
+                        )
+
+                    }
+                )
+            ) : (
+                <div>You don't have any chats as yet</div>
+            )
+        
+            
            return( 
             <div className="mychats">
                 <div className="main-title">    
@@ -55,46 +109,7 @@ class Mychat extends React.Component{
                     <Radio.Button value="or">Other Requests</Radio.Button>
                 </Radio.Group>
                 <div className="main-content">
-                    <Card>
-                        <Row>
-                            <Col span={17}>
-                                <div className="feed-card-header">
-                                    <span>
-                                        <strong>Heading of card</strong>
-                                    </span>
-                            
-                                </div>
-                                <div className="feed-card-date">
-                                    <p>Date and time</p>
-                                </div>
-                            </Col>
-                            <Col span={7} className="iconz">
-                                <div className="imgback">
-                                    <img src={front} alt="location"></img>
-                                </div>
-                            </Col>
-                        </Row>
-                    </Card>
-                    <Card>
-                        <Row>
-                            <Col span={17}>
-                                <div className="feed-card-header">
-                                    <span>
-                                        <strong>Heading of card</strong>
-                                    </span>
-                            
-                                </div>
-                                <div className="feed-card-date">
-                                    <p>Date and time</p>
-                                </div>
-                            </Col>
-                            <Col span={7} className="iconz">
-                                <div className="imgback">
-                                    <img src={front} alt="location"></img>
-                                </div>
-                            </Col>
-                        </Row>
-                    </Card>
+                    {mychatslist}
                 </div>
                 <Nav />
             </div>              
