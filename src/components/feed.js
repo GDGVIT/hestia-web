@@ -88,7 +88,41 @@ class Feed extends React.Component {
                 }
       };
 
+
+      acceptrequest = (id) =>{
+        console.log(id)
+        postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: id,location:this.state.city})
+                .then(data => console.log(data)) // Result from the `response.json()` call
+                .catch(error => console.error(error))
+
+                function postRequest(url, data) {
+                return fetch(url, {
+                    credentials: 'same-origin', // 'include', default: 'omit'
+                    method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
+                    body: JSON.stringify(data), // Coordinate the body type with 'Content-Type'
+                    headers: new Headers({
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.getItem("token")
+                    }),
+                })
+                .then(response => response.json())
+                }
+
+
+      }
+
+
+
       createChat = () => {
+
+
+
+
+
+
+
+
+
           var obj ={}
           obj["receiver"] = parseInt(localStorage.getItem("receiver_id"))
           obj["sender"] = parseInt(localStorage.getItem("user_id"))
@@ -128,7 +162,19 @@ class Feed extends React.Component {
         }else{
             this.props.history.push("/login");
         }
+
         let token =localStorage.getItem("token");
+
+        navigator.geolocation.getCurrentPosition(
+            position => this.setState({ 
+              latitude: position.coords.latitude, 
+              longitude: position.coords.longitude
+            }), 
+            err => console.log(err)
+          );
+          
+
+
         // this.setState({
         //     token: localStorage.getItem("token")
         // })
@@ -149,62 +195,39 @@ class Feed extends React.Component {
             })
             .catch(error => console.error(error))
 
-            let latitude;
-            let longitude;
-            function getLocation() {
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(showPosition);
-                        } 
-                    }
-            function showPosition(position) {
-                latitude = position.coords.latitude;
-                longitude = position.coords.longitude;
+            // let latitude;
+            // let longitude;
+            // function getLocation() {
+            //     if (navigator.geolocation) {
+            //         navigator.geolocation.getCurrentPosition(showPosition);
+            //             } 
+            //         }
+            // function showPosition(position) {
+            //     latitude = position.coords.latitude;
+            //     longitude = position.coords.longitude;
                 
-                }
-                getLocation();
-                this.setState({
-                    lat: latitude,
-                    long: longitude
-                })
+            //     }
+                
+
+
+            //     this.setState({
+            //         lat: latitude,
+            //         long: longitude
+            //     })
 
 
 
-
-                // function initMap() {
-                //     var map = new google.maps.Map(document.getElementById('map'), {
-                //       zoom: 8,
-                //       center: {lat: 40.731, lng: -73.997}
-                //     });
-                //     var geocoder = new google.maps.Geocoder;
-                //     var infowindow = new google.maps.InfoWindow;
-                  
-                //     document.getElementById('submit').addEventListener('click', function() {
-                //       geocodeLatLng(geocoder, map, infowindow);
-                //     });
+                // position = async () => {
+                //     await navigator.geolocation.getCurrentPosition(
+                //       position => this.setState({ 
+                //         latitude: position.coords.latitude, 
+                //         longitude: position.coords.longitude
+                //       }), 
+                //       err => console.log(err)
+                //     );
+                //     console.log(this.state.latitude)
                 //   }
-                  
-                //   function geocodeLatLng(geocoder, map, infowindow) {
-                //     var input = document.getElementById('latlng').value;
-                //     var latlngStr = input.split(',', 2);
-                //     var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
-                //     geocoder.geocode({'location': latlng}, function(results, status) {
-                //       if (status === 'OK') {
-                //         if (results[0]) {
-                //           map.setZoom(11);
-                //           var marker = new google.maps.Marker({
-                //             position: latlng,
-                //             map: map
-                //           });
-                //           infowindow.setContent(results[0].formatted_address);
-                //           infowindow.open(map, marker);
-                //         } else {
-                //           window.alert('No results found');
-                //         }
-                //       } else {
-                //         window.alert('Geocoder failed due to: ' + status);
-                //       }
-                //     });
-                //   }
+                
 
 
 
@@ -241,7 +264,7 @@ class Feed extends React.Component {
                                         <img src={store} alt="location"></img>
                                     </div> 
                                     <div className="imgback">
-                                        <img onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`)} src={check} alt="location"></img>
+                                        <img onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`)} src={check} alt="location" onClick={()=>{this.acceptrequest(request.id)}}></img>
                                     </div>
                                 </Col>
                             </Row>
@@ -265,7 +288,7 @@ class Feed extends React.Component {
                             <h1>Requests</h1>
                         </Col>
                         <Col span={6}>
-                        <img onClick={this.gotoProfile} src={profile} alt="Profile logo"></img>
+                        <img onClick={this.gotoProfile} src={profile} alt="Profile logo" ></img>
                         </Col>
                     </Row>
      
@@ -324,7 +347,7 @@ class Feed extends React.Component {
                         </Row>
                       <h2 style={{marginTop:"20px", textAlign:"center"}}>Suggest a Shop?</h2>
                       <div style={{textAlign:"center"}}>
-                        <Button type="primary" htmlType="submit" onClick={this.createChat}>
+                        <Button type="primary" htmlType="submit" onClick={this.createChat} >
                             Yes <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
                         </Button>
                         <Button type="primary" onClick={this.handleCancel} style={{backgroundColor:"#fff",color:"#000"}}>
@@ -352,7 +375,7 @@ class Feed extends React.Component {
                         </Row>
                       <h2 style={{marginTop:"20px", textAlign:"center"}}>You have this item?</h2>
                         <div style={{textAlign:"center"}}>
-                            <Button type="primary" htmlType="submit" onClick={this.createChat}>
+                            <Button type="primary" htmlType="submit" onClick={this.createChat} >
                                 Yes <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
                             </Button>
                             <Button type="primary" onClick={this.handleCancel} style={{backgroundColor:"#fff",color:"#000"}}>
