@@ -18,7 +18,8 @@ class Profile extends React.Component{
         super(props);
         this.state={
             goto: "profile",
-            Requests: [ ]
+            Requests: [],
+            mychats: []
         }
     }
     goBack = () =>{
@@ -65,7 +66,26 @@ class Profile extends React.Component{
             .then(data => {
                  console.log(data)
             this.setState({
-                Requests: data.Requests
+                Requests: data.Request
+                
+            });
+            console.log(this.state)
+            })
+            .catch(error => console.error(error))
+
+        var obj = {"user_id" : parseInt(localStorage.getItem("user_id"))}
+        fetch('https://hestia-chat.herokuapp.com/api/v1/getChats',{
+                method:"POST",
+                headers: new Headers({
+                    'Authorization': localStorage.getItem("token")
+                }),
+                body: JSON.stringify(obj)
+            })
+            .then(response => response.json())
+            .then(data => {
+            console.log(data)
+            this.setState({
+                mychats: data.chats,
                 
             });
             console.log(this.state)
@@ -84,10 +104,11 @@ class Profile extends React.Component{
     }
 
     render(){
-        const Requests  = this.state;
-        
+        const {Requests}  = this.state;
+        const {mychats} = this.state;
+
+        const mychatslist = mychats.length;        
         const reqlist = Requests.length;
-        // console.log(reqlist)
         if(this.state.goto === "myreqs"){
             return(
                 <Myreqs g={this.props}/>
@@ -133,7 +154,7 @@ class Profile extends React.Component{
                 </Card>
                 <Card key="chat" className="profcard">
                     <div className="prof-card-title">
-                        My chats | 3
+                        My chats | {mychatslist}
                     </div>
                     <div className="imgback lil" onClick={this.redirectTochats}>
                             <img src={front} alt="back to feed"></img>

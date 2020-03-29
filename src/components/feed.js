@@ -23,7 +23,7 @@ class Feed extends React.Component {
             city: 'surat',
             item_name: null,
             quantity: '',
-            token: ''
+            token: '',
         }
     }
     gotoProfile=()=>{
@@ -37,15 +37,19 @@ class Feed extends React.Component {
             visible: true
         })
     }
-    handleStore=()=>{
+    handleStore = (r,i) => () => {
         this.setState({
-            visible1: true
+            visible1: true,
         })
+        window.localStorage.setItem("receiver_id", r);
+        window.localStorage.setItem("item",i);
     }
-    handleChat=()=>{
+    handleChat= (r,i) => () =>{
         this.setState({
             visible2: true
         })
+        window.localStorage.setItem("receiver_id", r);
+        window.localStorage.setItem("item",i);
     }
     handleOk = e => {
         // console.log(e);
@@ -58,8 +62,8 @@ class Feed extends React.Component {
     onFinish = values => {
         // console.log(values);
         this.setState(values)
-        // console.log(this.state)
-        postForm('https://hestia-requests.herokuapp.com/app/item_requests/',this.state.item_name,this.state.quantity,this.state.city)
+        console.log(this.state)
+        postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.city)
                 .then(data => this.props.alert.show("Request added"))
                 .catch(error => console.error(error))
 
@@ -83,6 +87,29 @@ class Feed extends React.Component {
                 .then(response => response.json())
                 }
       };
+
+      createChat = () => {
+          var obj ={}
+          obj["receiver"] = parseInt(localStorage.getItem("receiver_id"))
+          obj["sender"] = parseInt(localStorage.getItem("user_id"))
+          obj["title"] = localStorage.getItem("item")
+
+          fetch('https://hestia-chat.herokuapp.com/api/v1/createChat',{
+              method:"POST",
+              headers: new Headers({
+                'Authorization': localStorage.getItem("token")
+              }),
+              body: JSON.stringify(obj)
+          })
+          .then(res => res.json())
+          .then(res => {
+              console.log(res)
+              if(res.code == 200){
+                this.props.history.push("/chat");
+              }
+          })
+          .catch(err => console.log(err))
+      }
       handleCancel = e => {
         // console.log(e);
         this.setState({
@@ -106,7 +133,7 @@ class Feed extends React.Component {
         //     token: localStorage.getItem("token")
         // })
         // console.log(this.state);
-        fetch('https://hestia-requests.herokuapp.com/app/view_all_item_requests/?location=surat', {
+        fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location=surat', {
             headers: new Headers({
             'Authorization': localStorage.getItem("token")
             })
@@ -118,7 +145,7 @@ class Feed extends React.Component {
                 requests: data.Request,
                 
             });
-            // console.log(this.state)
+            console.log(this.state)
             })
             .catch(error => console.error(error))
         }
@@ -145,11 +172,11 @@ class Feed extends React.Component {
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    <div className="imgback"  onClick = {this.handleStore}>
+                                    <div className="imgback"  onClick = {this.handleStore(`${request.request_made_by}`, `${request.item_name}`)}>
                                         <img src={store} alt="location"></img>
                                     </div>
                                     <div className="imgback">
-                                        <img onClick={this.handleChat} src={check} alt="location"></img>
+                                        <img onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`)} src={check} alt="location"></img>
                                     </div>
                                 </Col>
                             </Row>
@@ -215,8 +242,8 @@ class Feed extends React.Component {
                         </Form.Item>
                         </Form>
                     </Modal>
-                                       {/* Suggest a Shop modal */}
-                                       <Modal
+                {/* Suggest a Shop modal */}
+                <Modal
                       title="Suggest shop"
                       visible={this.state.visible1}
                       onOk={this.handleOk}
@@ -232,7 +259,7 @@ class Feed extends React.Component {
                         </Row>
                       <h2 style={{marginTop:"20px", textAlign:"center"}}>Suggest a Shop?</h2>
                       <div style={{textAlign:"center"}}>
-                        <Button type="primary" htmlType="submit" onClick={this.gotoChat}>
+                        <Button type="primary" htmlType="submit" onClick={this.createChat}>
                             Yes <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
                         </Button>
                         <Button type="primary" onClick={this.handleCancel} style={{backgroundColor:"#fff",color:"#000"}}>
@@ -260,7 +287,7 @@ class Feed extends React.Component {
                         </Row>
                       <h2 style={{marginTop:"20px", textAlign:"center"}}>You have this item?</h2>
                         <div style={{textAlign:"center"}}>
-                            <Button type="primary" htmlType="submit" onClick={this.gotoChat}>
+                            <Button type="primary" htmlType="submit" onClick={this.createChat}>
                                 Yes <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
                             </Button>
                             <Button type="primary" onClick={this.handleCancel} style={{backgroundColor:"#fff",color:"#000"}}>

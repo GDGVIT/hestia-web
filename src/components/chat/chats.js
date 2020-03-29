@@ -8,31 +8,106 @@ import Nav from '../nav';
 
 
 // const { Search } = Input;
+
+let url = 'ws://hestia-chat.herokuapp.com/api/v1/ws?chat='
+
 class Chat extends React.Component{
     constructor(props){
         super(props);
         this.state={
             currentUser: null,
+            messages: [],
+            receiver_id : parseInt(localStorage.getItem("receiver_id"))
         }
     }
+    ws = new WebSocket(url+`{this.state.receiver_id}`)
     gotoReport=()=>{
       this.props.history.push("/report");
     }
+    gotoProfile=()=>{
+      this.props.history.push("/profile");
+  }
 
     componentDidMount(){
       if(localStorage.getItem("token")){
        console.log("someone's logged in")
+      //  this.setState({receiver_id : localStorage.getItem("receiver_id")})
       }else{
           this.props.history.push("/login");
       }
+      console.log(this.state)
+      //request to get messages
+
+      var ob = {}
+      ob["receiver"] = parseInt(localStorage.getItem("receiver_id"))
+      ob["sender"] = parseInt(localStorage.getItem("user_id"))
+
+      fetch('https://hestia-chat.herokuapp.com/api/v1/getMessages',{
+        method:"POST",
+        headers:  new Headers({
+          'Authorization': localStorage.getItem("token")
+        }),
+        body:JSON.stringify(ob)
+      })
+      .then(res => res.json())
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+
+      this.ws.onopen = () => {
+      // on connecting, do nothing but log it to the console
+        console.log('connected')
+      }
+
+      this.ws.onmessage = evt => {
+        // on receiving a message, add it to the list of messages
+        const message = JSON.parse(evt.data)
+        this.addMessage(message)
+      }
+
+      this.ws.onclose = () => {
+        console.log('disconnected')
+        // automatically try to reconnect on connection loss
+        this.setState({
+          ws: new WebSocket(URL),
+        })
+      }
    }
+
+   addMessage = message =>
+   this.setState(state => ({ messages: [message, ...state.messages] }))
+
+   submitMessage = messageString => {
+    // on submitting the ChatInput form, send the message, add it to the list and reset the input
+      console.log(messageString);
+      var obj ={}
+      obj["receiver"] = parseInt(localStorage.getItem("receiver_id"));
+      obj["from"] = parseInt(localStorage.getItem("user_id"));
+      obj["text"] = messageString;
+
+      fetch("https://hestia-chat.herokuapp.com/api/v1/sendMessage",{
+        method:"POST",
+        headers: new Headers({
+          // "Content-Type": "application/json",
+          'Authorization': localStorage.getItem("token")
+        }),
+        body:JSON.stringify(obj)
+      })
+      .then(response=> response.json())
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+
+    // const message = { name: this.state.name, message: messageString }
+
+    // this.addMessage(message)
+  }
+
     render(){
         return(
             <div>
             <div>    
                 <Row style={{marginTop:20}}>
                     <Col span={4}>
-                      <div className="imgback">
+                      <div className="imgback" onClick={this.gotoProfile}>
                         <img src={backbutton} alt = "Back-button" style = {{height: "3vh", marginLeft:"10px"}}></img>
                       </div>
                     </Col>
@@ -56,8 +131,8 @@ class Chat extends React.Component{
                 <p><i>Date and Time</i></p>
               </Card>
             <div>
-            {/* <Input placeholder="Enter your message" className = "Send" suffix="Send" />          */}
-            <Messages />
+
+            <Messages onSubmitMessage={messageString => this.submitMessage(messageString)}/>
             </div>
             <Nav />
             </div>
