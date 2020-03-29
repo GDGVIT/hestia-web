@@ -139,7 +139,7 @@ class Feed extends React.Component {
 
 
         ) : (
-            <div>No requests in your area</div>
+            <div>Loading request..</div>
         )
         
             return(
