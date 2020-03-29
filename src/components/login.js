@@ -20,6 +20,7 @@ const Login = (props) => {
       .then(data => {
         console.log(data)
           window.localStorage.setItem("token", data.Token);
+          console.log(localStorage.getItem("token"))
           // props.history.push("/feed");
         })
        .catch(error => console.error(error)

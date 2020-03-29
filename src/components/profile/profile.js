@@ -53,7 +53,7 @@ class Profile extends React.Component{
 
        fetch('https://hestia-requests.herokuapp.com/app/my_requests/', {
             headers: new Headers({
-            'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiJhYmNkZWdoaWprZjEyMzQifQ.GqnmZCcGjtCN_bTznL5LbA_Wdt_BsBN5IpSAHmdDeu8'
+            'Authorization': localStorage.getItem("token")
             })
             })
             .then(res => res.json())
