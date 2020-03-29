@@ -11,10 +11,28 @@ class Report extends React.Component{
     state = {
         value: '',
       };
+      gotoProfile=()=>{
+        this.props.history.push("/profile");
+        }
       onChange = ({ target: { value } }) => {
         this.setState({ value });
       };
-
+      onSubmit = () =>{
+          console.log("Submitting");
+        fetch('https://hestia-report.herokuapp.com/user/report/',{
+            method:"POST",
+            headers: new Headers({
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem("token")
+            }),
+            body: {
+                "reported_by": 1,
+                "reason": this.state.value
+            }
+        })
+        .then(response => console.log(response))
+        .catch(err => console.log(err))
+    }
       
     componentDidMount(){
         if(localStorage.getItem("token")){
@@ -23,6 +41,7 @@ class Report extends React.Component{
             this.props.history.push("/login");
         }
      }
+
 
      render(){
         const { value } = this.state;
@@ -51,7 +70,7 @@ class Report extends React.Component{
 
                 <Form.Item>
                     <div style = {{marginTop:"30px", transform: "translateX(12%)"}}>
-                        <Button type="primary" htmlType="submit" style={{backgroundColor:"#d95071"}}>
+                        <Button type="primary" htmlType="submit" style={{backgroundColor:"#d95071"}} onClick={this.onSubmit}>
                         Report <img src={check} alt="Submit form"></img>
                         </Button>
                         <Button type="primary" onClick={this.gotoProfile} style={{backgroundColor:"#fff", color:"#000"}}>
