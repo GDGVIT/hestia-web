@@ -12,7 +12,8 @@ class Mychat extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            goto: "mychats"
+            goto: "mychats",
+            mychats: []
         }
     }
     gotoProfile = () => {
@@ -26,6 +27,24 @@ class Mychat extends React.Component{
         }else{
             this.props.history.push("/login");
         }
+        var obj = {"user_id" : 4}
+        fetch('https://hestia-chat.herokuapp.com/api/v1/getChats',{
+            method:"POST",
+            headers: new Headers({
+                'Authorization': localStorage.getItem("token")
+            }),
+            body: JSON.stringify(obj)
+        })
+        .then(response => response.json())
+        .then(data => {
+        console.log(data)
+        this.setState({
+            mychats: data.chats,
+            
+        });
+        console.log(this.state)
+        })
+        .catch(error => console.error(error))
      }
 
     render(){
