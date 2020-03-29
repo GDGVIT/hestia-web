@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react'
- 
+import React, {useEffect} from 'react';
+import { useAlert } from 'react-alert';
 import { Form, Input, Button, Checkbox } from 'antd';
 import {Link} from 'react-router-dom';
 import google from '../assets/group.png';
@@ -7,7 +7,9 @@ import logo from '../assets/group_5.png';
 
 
 const Login = (props) => {
+  const alert = useAlert()
   const onFinish = values => {
+    let authcheck = false;
     console.log('Received values of form: ', values)
     return fetch("https://hestia-auth.herokuapp.com/api/user/login", {
         method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
@@ -16,11 +18,20 @@ const Login = (props) => {
           'Content-Type': 'application/json'
         }),
       })
-      .then(response => response.json())
+      .then(response => {
+        if(response.status === 200 || response.status===201 || response.status===202){
+          authcheck = true;
+        return response.json();
+        }else{
+          // console.log(response)
+          alert.show(response.statusText)
+        }
+        })
       .then(data => {
-        console.log(data)
+          if(authcheck){
           window.localStorage.setItem("token", data);
           props.history.push("/feed");
+          }
         })
        .catch(error => console.error(error)
        );

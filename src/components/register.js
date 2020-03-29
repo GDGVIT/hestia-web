@@ -1,8 +1,10 @@
 import React, {useEffect} from 'react'
-import { Form, Input, InputNumber, Button } from 'antd';
+import { Form, Input, Button } from 'antd';
 import logo from '../assets/group_5.png';
 import {Link} from 'react-router-dom';
 import google from '../assets/group.png';
+import { useAlert } from 'react-alert';
+
 
 const layout = {
   labelCol: {
@@ -20,6 +22,8 @@ const validateMessages = {
 };
 
 const Register = (props) => {
+  const alert = useAlert()
+  let authcheck = false;
   const onFinish = values => {
     return fetch("https://hestia-auth.herokuapp.com/api/user/register", {
         method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
@@ -28,9 +32,20 @@ const Register = (props) => {
           'Content-Type': 'application/json'
         }),
       })
-      .then(response => response.json())
+      .then(response => {
+        if(response.status === 200 || response.status===201 || response.status===202){
+          authcheck = true;
+        return response.json();
+        }else{
+          alert.show(response.statusText)
+        }
+        })
       .then(data => {
-          console.log(data)
+        console.log(data)
+        if(authcheck){
+          // console.log("check your email for conformation!")
+          alert.show("Please confirm your email")
+        }
           // window.localStorage.setItem("token", data);
           // props.history.push("/feed");
         })
@@ -85,6 +100,10 @@ const Register = (props) => {
             required: true,
             message: 'Please input your Password!',
           },
+          {
+            min: 8,
+            message: "Password has to be atleast 8 characters!"
+          }
         ]}
       >
         <Input
@@ -99,6 +118,11 @@ const Register = (props) => {
             required: true,
             message: 'Please input your Number!',
           },
+          {
+            min: 10,
+            max: 10,
+            message: "Phone number has to be 10 digits!"
+          }
         ]}
       >
         <Input

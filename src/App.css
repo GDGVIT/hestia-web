@@ -400,3 +400,11 @@ margin-left: 12.5%;
 .ant-modal-header{
     display: none;
 }
+
+#__react-alert__>div>div>div{
+    background-color: #d95071 !important;
+    border-radius: 7px !important;
+}
+#__react-alert__>div>div>div>svg{
+    display: none;
+}
