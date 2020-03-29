@@ -240,7 +240,7 @@ class Feed extends React.Component {
                         </Button>
                     </div>
                     <div style={{textAlign:"center"}}>
-                            <Checkbox onChange={this.onChange} style={{marginTop:"40px"}}>Remember choice</Checkbox>
+                            <Checkbox onChange={this.onChange} style={{marginTop:"40px"}}>Do not show this again.</Checkbox>
                     </div>                    
                     </Modal>
                     {/* You have this item? modal*/}
@@ -268,7 +268,7 @@ class Feed extends React.Component {
                             </Button>
                         </div>
                         <div style={{textAlign:"center"}}>
-                            <Checkbox onChange={this.onChange} style={{marginTop:"40px"}}>Remember choice</Checkbox>
+                            <Checkbox onChange={this.onChange} style={{marginTop:"40px"}}>Do not show this again.</Checkbox>
                         </div>
                     </Modal>
                     <Nav />
