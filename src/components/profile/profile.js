@@ -114,7 +114,7 @@ class Profile extends React.Component{
                     </Row>
  
                 </div>
-                <div style={overflowcheck}>
+                <div style={{overflow:"scroll", height:"60vh"}}>
                 <Card key="edit" className="profcard">
                     <div className="prof-card-title">
                         Edit Profile
