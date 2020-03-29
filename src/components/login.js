@@ -1,12 +1,15 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useAlert } from 'react-alert';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Modal } from 'antd';
 import {Link} from 'react-router-dom';
 import google from '../assets/group.png';
 import logo from '../assets/group_5.png';
+import check from '../assets/check.png';
+
 
 
 const Login = (props) => {
+  const [visible, changeV] = useState(false);
   const alert = useAlert()
   const onFinish = values => {
     if(values.user.password.length < 8){
@@ -46,6 +49,30 @@ const Login = (props) => {
             props.history.push("/feed")
         }
       });
+
+      const onFinishPass =(values) =>{
+        console.log(values)
+        return fetch("https://hestia-auth.herokuapp.com/api/user/forgotPassword", {
+        method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
+        body: JSON.stringify(values), // Coordinate the body type with 'Content-Type'
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        }),
+      })
+      .then(response => {
+        if(response.status === 200 || response.status===201 || response.status===202){
+        return response.json();
+        }else{
+          // console.log(response)
+          alert.show(response.statusText)
+        }
+        })
+      .then(data => {
+          alert.show("Check your email")
+        })
+       .catch(error => console.error(error)
+       );
+    }
 
   return (
     <div className="loginpage">
@@ -95,11 +122,41 @@ const Login = (props) => {
                 Login with <img src={google} alt="login with google"></img>
             </Button>
        </Form.Item>
+       <Form.Item className="already">
+        <a onClick={() => changeV(true)}>Forgot password?</a>
+        </Form.Item>
         <Form.Item className="already">
         <Link to="/register">Don't have an account? Register!</Link>
         </Form.Item>
 
     </Form>
+        <Modal
+          title="Enter your email"
+          visible={visible}    
+          footer={null}
+          closable={false}
+          >
+          <Form onFinish={onFinishPass}>
+          <Form.Item name="email"
+              rules={[
+                  {type: 'email', message: 'Not a valid email'}
+              ]}
+          >
+              <Input 
+                  placeholder="abc@example.com"
+              />
+          </Form.Item>
+          <Form.Item className="butn">
+              <Button type="primary" htmlType="submit" onClick={() => changeV(false)}>
+                  Done <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
+              </Button>
+              <Button type="primary" onClick={() => changeV(false)} style={{backgroundColor:"#fff",color:"#000"}}>
+                  No <strong> X </strong>
+              </Button>
+          </Form.Item>
+          
+          </Form>
+      </Modal>
     </div>
 
   );
