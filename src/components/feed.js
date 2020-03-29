@@ -272,7 +272,7 @@ class Feed extends React.Component {
                             </Button>
                         </div>
                         <div style={{textAlign:"center"}}>
-                            <Checkbox onChange={this.onChange} style={{marginTop:"40px"}}>Do not show this again</Checkbox>
+                            <Checkbox onChange={this.onChange} style={{marginTop:"40px"}}>Do not show this again.</Checkbox>
                         </div>
                     </Modal>
                     <Nav />
