@@ -92,7 +92,8 @@ class Feed extends React.Component {
         });
       };
       onChange(e) {
-        console.log(`checked = ${e.target.checked}`);
+        window.localStorage.setItem("acceptcheck", `${e.target.checked}`);
+        console.log(localStorage.getItem("acceptcheck"))
       }
       componentDidMount(){  
         if(localStorage.getItem("token")){
