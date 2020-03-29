@@ -84,9 +84,9 @@ class Profile extends React.Component{
     }
 
     render(){
-        const { Requests } = this.state;
+        const Requests  = this.state;
         
-        const reqlist = Requests.length
+        const reqlist = Requests.length;
         // console.log(reqlist)
         if(this.state.goto === "myreqs"){
             return(

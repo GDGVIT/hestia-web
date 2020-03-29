@@ -9,10 +9,8 @@ import Chat from '../components/chat/chats';
 import { Modal, Button } from 'antd';
 import { Form, Input, Checkbox} from 'antd';
 import Nav from './nav';
-import { useAlert } from 'react-alert';
+import {withAlert} from "react-alert";
 
-
-const alert = useAlert();
 
 class Feed extends React.Component {
     constructor(props){
@@ -62,7 +60,7 @@ class Feed extends React.Component {
         this.setState(values)
         console.log(this.state)
         postForm('https://hestia-requests.herokuapp.com/app/item_requests/',this.state.item_name,this.state.quantity,this.state.city)
-                .then(data => console.log(data))
+                .then(data => this.props.alert.show("Request added"))
                 .catch(error => console.error(error))
 
                 function postForm(url,name,quantity,city) {
@@ -207,7 +205,7 @@ class Feed extends React.Component {
                             />
                         </Form.Item>
                         <Form.Item className="butn">
-                            <Button type="primary" htmlType="submit">
+                            <Button type="primary" htmlType="submit" onClick={this.handleOk}>
                                 Done <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
                             </Button>
                         </Form.Item>
@@ -282,4 +280,4 @@ class Feed extends React.Component {
     }
 }
 
-export default Feed;
+export default withAlert()(Feed);
