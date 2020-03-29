@@ -11,6 +11,7 @@ import Profile from "./components/profile/profile";
 import Feed from "./components/feed";
 import News from "./components/news";
 import Report from './components/report';
+import { loadReCaptcha } from 'react-recaptcha-v3'
 
 class App extends React.Component {
   constructor(props){
@@ -27,6 +28,7 @@ class App extends React.Component {
         showNav: false
       })
   }
+  loadReCaptcha('6LdiB-UUAAAAACYC2AlMS9hrw18fQA4FK7-s0LDw');
   }
   showNav(){
     if(this.state.showNav){
