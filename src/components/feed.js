@@ -100,10 +100,9 @@ class Feed extends React.Component {
             this.props.history.push("/login");
         }
         // console.log("i am here");
-        let tok = localStorage.getItem("token");
         fetch('https://hestia-requests.herokuapp.com/app/view_all_item_requests/?location=surat', {
             headers: new Headers({
-            'Authorization': tok
+            'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiJhYmNkZWdoaWprZjEyMzQifQ.GqnmZCcGjtCN_bTznL5LbA_Wdt_BsBN5IpSAHmdDeu8'
             })
             })
             .then(res => res.json())
