@@ -80,9 +80,10 @@ class Feed extends React.Component {
             this.props.history.push("/login");
         }
         // console.log("i am here");
+        let tok = localStorage.getItem("token");
         fetch('https://hestia-requests.herokuapp.com/app/view_all_item_requests/?location=surat', {
             headers: new Headers({
-            'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiJhYmNkZWdoaWprZjEyMzQifQ.GqnmZCcGjtCN_bTznL5LbA_Wdt_BsBN5IpSAHmdDeu8'
+            'Authorization': tok
             })
             })
             .then(res => res.json())
@@ -118,7 +119,7 @@ class Feed extends React.Component {
                                         <p>{request.quantity}</p>
                                     </div>
                                     <div className="feed-card-date">
-                    <p>{request.date_time_created.slice(0,10)}</p>
+                                        <p>{request.date_time_created.slice(0,10)}</p>
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">

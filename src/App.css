@@ -60,18 +60,19 @@ margin-left: 12.5%;
     margin-top: 25%;
 }
 .login-form{
-    margin-top: 60px;
-    text-align: center;
+    margin: 12.5% 12.5%;
+    text-align: left;
+    
 }
 .ant-input, .ant-input-number{
-    width: 75%;
+    width: 100%;
     border: 2px solid #00d2d2;
     border-radius: 6px;
     height: 60px;
 }   
 .login-form-button, .ant-btn-primary{
     width: 30vw;
-    height: 5vh;
+    height: 44px;
     background-color: #00d2d2;
     border: none;
     border-radius: 6px;
@@ -79,13 +80,23 @@ margin-left: 12.5%;
     margin-right: 20px;
     box-shadow: 0px 0px 4px lightgray;
 }
+.ant-btn-primary img{
+    width: 12px;
+    height: auto;
+     margin-left: 6px;
+}
 .oauth{
     width: 30vw;
-    height: 5vh;
+    height: 44px;
     border: none;
     border-radius: 6px;
     font-size: 14px;
     box-shadow: 0px 0px 4px lightgray;
+}
+@media(max-width: 400px){
+    .login-form-button, .oauth{
+        width: 40vw;
+    }
 }
 .oauth img{
     width: 20px;
@@ -103,7 +114,7 @@ margin-left: 12.5%;
     width: 70%;
     height: auto;
 }
-.already{
+.already a{
     color: #00d2d2;
 }
 
@@ -147,9 +158,12 @@ margin-left: 12.5%;
     height: 40px;
     border-radius: 20px;
     text-align: center;
+    box-shadow: 0px 0px 10px lightgray;
 }
 .addReq img{
-    padding-top: 10px;
+    width: 13px;
+    height: auto;
+    padding-top: 13px;
 }
 /* Main content css */
 .main-title{
@@ -183,12 +197,51 @@ margin-left: 12.5%;
     height: 30px;
     margin-right: 4px;
     margin-top: 7px;
+    box-shadow: 0px 0px 5px lightgray;
+}
+.lil{
+    padding-left: 12px;
+    margin-top: 0px !important;
+}
+.lil img{
+    width: 8px !important;
+    height: auto;
+}
+.imgbacc{
+    background-color: #00d2d2;
+    border: none;
+    border-radius: 14px;
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin-right: 15px;
+    margin-top: 12px;
+    box-shadow: 0px 0px 5px lightgray;
+    text-align: center;
+}
+.imgbacc img{
+    padding-top: 4px;
+    width: 8px;
+    height: auto;;
 }
 .imgback img{
     padding-top: 4px;
+    width: 12px;
+    height: auto;
 }
 .iconz{
     float: right;
+}
+.ant-col-6{
+    text-align: right;
+}
+.ant-col-6 img{
+    width: 40px;
+    margin-top: 6px;
+}
+.ant-col-18 h1{
+    font-size: 24px;
+    padding-top: 8px;
 }
 .main-content{
     margin-bottom: 150px;
@@ -196,21 +249,25 @@ margin-left: 12.5%;
 }
 .feed-card-header{
     width: 100%;
+    text-align: left;
 }
 .feed-card-header span {
     width: 60%;
-    float: left;
     text-align: left;
 }
 .feed-card-header p{
     width: 40%;
-    float: left;
     text-align: left;
     margin: 0px;
 }
 .feed-card-date p{
-    float: left;
     margin: 0px;
+    color: #989898;
+    font-size: 10px;
+}
+.feed-card-date{
+    width: 100%;
+    text-align: left;
 }
 
 .ant-tabs-tabpane{
@@ -223,7 +280,7 @@ margin-left: 12.5%;
     width: 100%;
 }
 .news-card-header span {
-    width: 40%;
+    width: 60%;
     float: left;
     text-align: left;
     font-size: 14px;
@@ -231,7 +288,7 @@ margin-left: 12.5%;
     letter-spacing: 0.5px;
 }
 .news-card-header p{
-    width: 60%;
+    width: 40%;
     float: left;
     text-align: left;
     margin: 0px;
@@ -246,24 +303,42 @@ margin-left: 12.5%;
 .news-bottom-select p{
     float: left;
     margin: 0px;
+    color: #989898;
+    font-size: 10px;
 }
 .news-bottom-select a{
     float: right;
     color: #00d2d2;
+    font-size: 10px;
 }
 .news-bottom-select{
     margin-top: 5px;
 }
 .prof-card-title{
-    text-align: left;
+    float: left;
+    width: 40%;
 }
 
 /* my Requests css */
 .myreqs .imgback{
     background-color: #d95071;
 }
-
-
+.logouthr{
+    color: #fafafa;
+    opacity: 0.3;
+    width: 80%;
+}
+.logoutbtn{
+    background-color:#d95071;
+    text-align: center;
+    margin-top: 20px;
+}
+.logoutbtn .prof-card-title{
+    color: white;
+    text-align: center;
+    width: 100%;
+    font-weight: 600;
+}
 
 /* my chats css */
 .ant-radio-group{

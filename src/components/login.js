@@ -18,8 +18,9 @@ const Login = (props) => {
       })
       .then(response => response.json())
       .then(data => {
-          window.localStorage.setItem("token", data);
-          props.history.push("/feed");
+        console.log(data)
+          // window.localStorage.setItem("token", data);
+          // props.history.push("/feed");
         })
        .catch(error => console.error(error)
        );
@@ -80,7 +81,7 @@ const Login = (props) => {
             </Button>
        </Form.Item>
         <Form.Item className="already">
-        Dont have an account? <Link to="/register">Register!</Link>
+        <Link to="/register">Don't have an account? Register!</Link>
         </Form.Item>
 
     </Form>

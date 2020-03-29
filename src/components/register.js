@@ -31,8 +31,8 @@ const Register = (props) => {
       .then(response => response.json())
       .then(data => {
           console.log(data)
-          window.localStorage.setItem("token", data);
-          props.history.push("/feed");
+          // window.localStorage.setItem("token", data);
+          // props.history.push("/feed");
         })
        .catch(error => console.error(error)
        );
@@ -114,7 +114,7 @@ const Register = (props) => {
         </Button>
       </Form.Item>
       <Form.Item className="already">
-        Already have an account? <Link to="/Login">Login</Link>
+        <Link to="/Login">Already have an account? Login</Link>
       </Form.Item>
     </Form>
     </div>

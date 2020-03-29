@@ -4,6 +4,10 @@ import { Card, Row, Col } from 'antd';
 import Myreqs from './myreqs';
 import Mychat from './mychats'
 import Nav from '../nav';
+import front from '../../assets/front.png';
+import back from '../../assets/back.png';
+import Edit from './edit';
+
 class Profile extends React.Component{
     constructor(props){
         super(props);
@@ -11,6 +15,16 @@ class Profile extends React.Component{
             goto: "profile",
             Requests: [ ]
         }
+    }
+    goBack = () =>{
+        if(this.props.p){
+            this.props.p.g.history.push("/feed");
+            // this.props.p.history.push("/feed");
+        }else{
+            this.props.history.push("/feed");
+        }
+        
+        // this.props.history.push("/feed");
     }
     redirectTo = (e) =>{
         console.log(e)
@@ -23,6 +37,11 @@ class Profile extends React.Component{
     redirectTochats = () =>{
         this.setState({
             goto: "mychat"
+        })
+    }
+    redirectToedit = () =>{
+        this.setState({
+            goto: "edit"
         })
     }
     componentDidMount(){
@@ -51,8 +70,14 @@ class Profile extends React.Component{
     }
     logoutsar=()=>{
         localStorage.removeItem("token");
-        this.props.history.push("/login");
+        if(this.props.p){
+            this.props.p.g.history.push("/login");
+            // this.props.p.history.push("/feed");
+        }else{
+            this.props.history.push("/login");
+        }
     }
+
     render(){
         const { Requests } = this.state;
         
@@ -60,10 +85,12 @@ class Profile extends React.Component{
         // console.log(reqlist)
         if(this.state.goto === "myreqs"){
             return(
-                <Myreqs />
+                <Myreqs g={this.props}/>
             );
         }else if(this.state.goto === "mychat"){
-           return( <Mychat /> );
+           return( <Mychat g={this.props} /> );
+        }else if(this.state.goto === "edit"){
+            return(<Edit g={this.props}/>);
         }else if(this.state.goto === "profile"){
         return(
             
@@ -71,6 +98,9 @@ class Profile extends React.Component{
                 <div className="main-title">    
                     <Row>
                         <Col span={18}>
+                        <div className="imgbacc">
+                            <img src={back} alt="back to feed" onClick={this.goBack}></img>
+                        </div>
                             <h1>Profile</h1>
                         </Col>
                         <Col span={6}>
@@ -80,24 +110,34 @@ class Profile extends React.Component{
  
                 </div>
                 <div>
-                <Card key="edit" onClick={this.redirectTo}>
+                <Card key="edit" className="profcard">
                     <div className="prof-card-title">
                         Edit Profile
                     </div>
+                    <div className="imgback lil" onClick={this.redirectToedit}>
+                            <img src={front} alt="back to feed"></img>
+                    </div>
                 </Card>
-                <Card key="reqs" onClick={this.redirectToreqs}>
+                <Card key="reqs" className="profcard">
                     <div className="prof-card-title">
                         My requests | {reqlist}
                     </div>
+                    <div className="imgback lil" onClick={this.redirectToreqs}>
+                            <img src={front} alt="back to feed"></img>
+                    </div>
                 </Card>
-                <Card key="chat" onClick={this.redirectTochats}>
+                <Card key="chat" className="profcard">
                     <div className="prof-card-title">
                         My chats | 3
                     </div>
+                    <div className="imgback lil" onClick={this.redirectTochats}>
+                            <img src={front} alt="back to feed"></img>
+                    </div>
                 </Card>
-                <Card key="logout" onClick={this.logoutsar}>
+                <hr className="logouthr"></hr>
+                <Card key="logout" onClick={this.logoutsar} className="logoutbtn">
                     <div className="prof-card-title">
-                        LOG OUT (TEMP)
+                        Logout
                     </div>
                 </Card>
                 </div>

@@ -5,7 +5,8 @@ import Profile from './profile';
 import deletez from '../../assets/delete.png';
 import { Radio } from 'antd';
 import Nav from '../nav';
-
+import front from '../../assets/front.png';
+import back from '../../assets/back.png';
 
 class Mychat extends React.Component{
     constructor(props){
@@ -30,7 +31,7 @@ class Mychat extends React.Component{
     render(){
         if(this.state.goto === "profile"){
             return(
-                <Profile />
+                <Profile p={this.props}/>
             );
         }else if(this.state.goto === "mychats"){
            return( 
@@ -38,6 +39,9 @@ class Mychat extends React.Component{
                 <div className="main-title">    
                 <Row>
                     <Col span={18}>
+                    <div className="imgbacc">
+                            <img src={back} alt="back to feed" onClick={this.gotoProfile}></img>
+                        </div>
                         <h1>My chats</h1>
                     </Col>
                     <Col span={6}>
@@ -66,7 +70,7 @@ class Mychat extends React.Component{
                             </Col>
                             <Col span={7} className="iconz">
                                 <div className="imgback">
-                                    <img src={deletez} alt="location"></img>
+                                    <img src={front} alt="location"></img>
                                 </div>
                             </Col>
                         </Row>
@@ -86,7 +90,7 @@ class Mychat extends React.Component{
                             </Col>
                             <Col span={7} className="iconz">
                                 <div className="imgback">
-                                    <img src={deletez} alt="location"></img>
+                                    <img src={front} alt="location"></img>
                                 </div>
                             </Col>
                         </Row>

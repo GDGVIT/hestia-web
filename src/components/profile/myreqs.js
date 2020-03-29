@@ -5,6 +5,8 @@ import { Card, Row, Col } from 'antd';
 import Profile from './profile';
 import plus from '../../assets/plus.png';
 import Nav from '../nav';
+import front from '../../assets/front.png';
+import back from '../../assets/back.png';
 
 class Myreqs extends React.Component{
     constructor(props){
@@ -129,9 +131,10 @@ class Myreqs extends React.Component{
     render(){
         if(this.state.goto === "profile"){
             return(
-                <Profile />
+                <Profile p={this.props}/>
             );
         }else if(this.state.goto === "myreqs"){
+
 
 
         const { Requests } = this.state;
@@ -171,6 +174,9 @@ class Myreqs extends React.Component{
                 <div className="main-title">    
                 <Row>
                     <Col span={18}>
+                    <div className="imgbacc">
+                            <img src={back} alt="back to feed" onClick={this.gotoProfile}></img>
+                        </div>
                         <h1>My Requests</h1>
                     </Col>
                     <Col span={6}>
