@@ -9,6 +9,9 @@ import logo from '../assets/group_5.png';
 const Login = (props) => {
   const alert = useAlert()
   const onFinish = values => {
+    if(values.user.password.length < 8){
+      alert.show("Wrong password")
+    }
     let authcheck = false;
     console.log('Received values of form: ', values)
     return fetch("https://hestia-auth.herokuapp.com/api/user/login", {
@@ -29,9 +32,10 @@ const Login = (props) => {
         })
       .then(data => {
           if(authcheck){
-          window.localStorage.setItem("token", data);
+          window.localStorage.setItem("token", data.Token);
           props.history.push("/feed");
           }
+          // props.history.push("/feed");
         })
        .catch(error => console.error(error)
        );
@@ -62,7 +66,7 @@ const Login = (props) => {
           {
             type: 'email',  
             required: true,
-            message: 'Please input your Email!',
+            message: 'Please input a valid Email!',
           },
         ]}
       >

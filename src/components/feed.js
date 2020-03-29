@@ -9,8 +9,10 @@ import Chat from '../components/chat/chats';
 import { Modal, Button } from 'antd';
 import { Form, Input, Checkbox} from 'antd';
 import Nav from './nav';
+import { useAlert } from 'react-alert';
 
 
+const alert = useAlert();
 
 class Feed extends React.Component {
     constructor(props){
@@ -22,7 +24,8 @@ class Feed extends React.Component {
             requests: [ ],
             city: 'surat',
             item_name: null,
-            quantity: ''
+            quantity: '',
+            token: ''
         }
     }
     gotoProfile=()=>{
@@ -69,13 +72,14 @@ class Feed extends React.Component {
                     object["location"] = city;
                     console.log(object)
                 
-
+                    
                 return fetch(url, {
                     method: 'POST', // or 'PUT'
                     body: JSON.stringify(object),  // a FormData will automatically set the 'Content-Type'
                     headers: new Headers({
                         "Content-Type": "application/json",
-                        'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiJhYmNkZWdoaWprZjEyMzQifQ.GqnmZCcGjtCN_bTznL5LbA_Wdt_BsBN5IpSAHmdDeu8'
+                        'Authorization': localStorage.getItem("token")
+                        
                       })
                 })
                 .then(response => response.json())
@@ -98,10 +102,16 @@ class Feed extends React.Component {
         }else{
             this.props.history.push("/login");
         }
-        // console.log("i am here");
+        let token =localStorage.getItem("token");
+        console.log(token);
+        this.setState({
+            token: localStorage.getItem("token")
+        })
+        console.log(this.state);
         fetch('https://hestia-requests.herokuapp.com/app/view_all_item_requests/?location=surat', {
+            
             headers: new Headers({
-            'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiJhYmNkZWdoaWprZjEyMzQifQ.GqnmZCcGjtCN_bTznL5LbA_Wdt_BsBN5IpSAHmdDeu8'
+            'Authorization': localStorage.getItem("token")
             })
             })
             .then(res => res.json())
@@ -201,7 +211,7 @@ class Feed extends React.Component {
                         </Form.Item>
                         <Form.Item className="butn">
                             <Button type="primary" htmlType="submit">
-                                Done 
+                                Done <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
                             </Button>
                         </Form.Item>
                         <Form.Item className="butn">
@@ -236,7 +246,7 @@ class Feed extends React.Component {
                         </Button>
                     </div>
                     <div style={{textAlign:"center"}}>
-                            <Checkbox onChange={this.onChange} style={{marginTop:"40px"}}>Remember choice</Checkbox>
+                            <Checkbox onChange={this.onChange} style={{marginTop:"40px"}}>Do not show this again.</Checkbox>
                     </div>                    
                     </Modal>
                     {/* You have this item? modal*/}
@@ -264,7 +274,7 @@ class Feed extends React.Component {
                             </Button>
                         </div>
                         <div style={{textAlign:"center"}}>
-                            <Checkbox onChange={this.onChange} style={{marginTop:"40px"}}>Remember choice</Checkbox>
+                            <Checkbox onChange={this.onChange} style={{marginTop:"40px"}}>Do not show this again.</Checkbox>
                         </div>
                     </Modal>
                     <Nav />

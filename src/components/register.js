@@ -41,10 +41,10 @@ const Register = (props) => {
         }
         })
       .then(data => {
-        console.log(data)
+        // console.log(data)
         if(authcheck){
           // console.log("check your email for conformation!")
-          alert.show("Please confirm your email")
+          alert.show(data.Verify)
         }
           // window.localStorage.setItem("token", data);
           // props.history.push("/feed");
