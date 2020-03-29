@@ -19,18 +19,26 @@ class Report extends React.Component{
       };
       onSubmit = () =>{
           console.log("Submitting");
+          var obj ={}
+          obj["reported_by"] = 1
+          obj["reason"] = this.state.value;
+
+          console.log(obj);
+
         fetch('https://hestia-report.herokuapp.com/user/report/',{
             method:"POST",
             headers: new Headers({
                 "Content-Type": "application/json",
                 "Authorization": localStorage.getItem("token")
             }),
-            body: {
-                "reported_by": 1,
-                "reason": this.state.value
-            }
+            body:JSON.stringify(obj)
         })
-        .then(response => console.log(response))
+        .then(response => {
+             console.log(response)
+             if(response.status == 201){
+                this.props.history.push("/profile");
+             }
+        })
         .catch(err => console.log(err))
     }
       
