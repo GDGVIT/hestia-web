@@ -89,7 +89,7 @@ class Myreqs extends React.Component{
 
 
 
-        const { Requests } = this.state;
+        const {Requests} = this.state;
         
         const reqlist = Requests.length ? (
             Requests.map(
