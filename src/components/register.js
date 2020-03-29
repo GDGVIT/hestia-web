@@ -1,6 +1,9 @@
-import React from 'react'
-import { Form, Input, InputNumber, Button } from 'antd';
-import { LockOutlined } from '@ant-design/icons';
+import React, {useEffect} from 'react'
+import { Form, Input, Button } from 'antd';
+import logo from '../assets/group_5.png';
+import {Link} from 'react-router-dom';
+import google from '../assets/group.png';
+import { useAlert } from 'react-alert';
 
 
 const layout = {
@@ -14,77 +17,131 @@ const layout = {
 const validateMessages = {
   required: 'This field is required!',
   types: {
-    email: 'Not a validate email!',
-    number: 'Not a validate number!',
-  },
-  number: {
-    range: 'Must be 10 digits!',
+    email: 'Not a validate email!'
   },
 };
 
-const Register = () => {
+const Register = (props) => {
+  const alert = useAlert()
+  let authcheck = false;
   const onFinish = values => {
-    console.log(values);
-  };
+    return fetch("https://hestia-auth.herokuapp.com/api/user/register", {
+        method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
+        body: JSON.stringify(values.user), // Coordinate the body type with 'Content-Type'
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        }),
+      })
+      .then(response => {
+        if(response.status === 200 || response.status===201 || response.status===202){
+          authcheck = true;
+        return response.json();
+        }else{
+          alert.show(response.statusText)
+        }
+        })
+      .then(data => {
+        // console.log(data)
+        if(authcheck){
+          // console.log("check your email for conformation!")
+          alert.show(data.Verify)
+        }
+          // window.localStorage.setItem("token", data);
+          // props.history.push("/feed");
+        })
+       .catch(error => console.error(error)
+       );
+    };
+    useEffect(() => {
+        if(localStorage.getItem("token")){
+            props.history.push("/feed")
+        }
+      });
 
+
+    
   return (
-    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+      <div className="eqimargin">
+      <div className="hestia-logo-reg">
+          <img src={logo} alt="Hestialogo"></img>
+      </div>
+    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} className="login-form">
       <Form.Item
         name={['user', 'name']}
-        label="Name"
         rules={[
           {
             required: true,
           },
         ]}
       >
-        <Input />
+        <Input 
+        placeholder="Name"
+        />
       </Form.Item>
       <Form.Item
         name={['user', 'email']}
-        label="Email"
         rules={[
           {
+            required: true,
             type: 'email',
+            message: 'Please input a valid email!'
           },
         ]}
       >
-        <Input />
+        <Input 
+        placeholder="Email"
+        />
       </Form.Item>
       <Form.Item
-        name="password"
+        name={['user', 'password']}
+        placeholder="Password"
         rules={[
           {
             required: true,
             message: 'Please input your Password!',
           },
+          {
+            min: 8,
+            message: "Password has to be atleast 8 characters!"
+          }
         ]}
       >
         <Input
-          prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
           placeholder="Password"
         />
       </Form.Item>
       <Form.Item
-        name={['user', 'age']}
-        label="Age"
+        name={['user', 'phone']}
         rules={[
           {
-            type: 'number',
-            min: 1000000000,
-            max: 10000000000,
+            required: true,
+            message: 'Please input your Number!',
           },
+          {
+            min: 10,
+            max: 10,
+            message: "Phone number has to be 10 digits!"
+          }
         ]}
       >
-        <InputNumber />
+        <Input
+        placeholder="Number"
+        />
       </Form.Item>
-      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+      <Form.Item>
         <Button type="primary" htmlType="submit">
-          Submit
+          Register
+        </Button>
+        <Button type="dashed" className="oauth">
+                Register with <img src={google} alt="login with google"></img>
         </Button>
       </Form.Item>
+      <Form.Item className="already">
+        <Link to="/Login">Already have an account? Login</Link>
+      </Form.Item>
     </Form>
+    </div>
   );
 };
 

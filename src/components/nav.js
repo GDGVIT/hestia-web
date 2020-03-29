@@ -1,31 +1,38 @@
 import React from 'react'
-import { Tabs } from 'antd';
-import News from './news';
-import Feed from './feed';
+import { Menu } from 'antd';
+import {NavLink} from 'react-router-dom';
 
-const { TabPane } = Tabs;
 
 
 class Nav extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            selected: "feed"
+            current: "feed"
         }
     }
+    handleClick = (e) => {
+        console.log('click ', e);
+        this.setState({
+          current: e.key,
+        });
+      };
+
+    
+    
     render(){
         return(
             <div>
-                <Tabs tabPosition="bottom">
-                    <TabPane tab="Feed" key="feed">
-                        <News />
-                    </TabPane>
-                    <TabPane tab="News" key="news">
-                        <Feed />
-                    </TabPane>
-                </Tabs>
+        <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal">
+            <Menu.Item key="feed">
+            <NavLink to="/feed">Feed</NavLink>
+            </Menu.Item>
+            <Menu.Item key="news">
+            <NavLink to="/news">News</NavLink>
+            </Menu.Item>
+        </Menu>        
             </div>
-        )
+        );
     }   
 }
 
