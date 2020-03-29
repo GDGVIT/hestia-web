@@ -70,7 +70,7 @@ class Myreqs extends React.Component{
             .then(data => {
                  console.log(data)
             this.setState({
-                Requests: data.Requests
+                Requests: data.Request
                 
             });
             console.log(this.state)
