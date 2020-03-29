@@ -22,7 +22,8 @@ class Feed extends React.Component {
             requests: [ ],
             city: 'surat',
             item_name: null,
-            quantity: ''
+            quantity: '',
+            token: ''
         }
     }
     gotoProfile=()=>{
@@ -69,13 +70,14 @@ class Feed extends React.Component {
                     object["location"] = city;
                     console.log(object)
                 
-
+                    
                 return fetch(url, {
                     method: 'POST', // or 'PUT'
                     body: JSON.stringify(object),  // a FormData will automatically set the 'Content-Type'
                     headers: new Headers({
                         "Content-Type": "application/json",
                         'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiJhYmNkZWdoaWprZjEyMzQifQ.GqnmZCcGjtCN_bTznL5LbA_Wdt_BsBN5IpSAHmdDeu8'
+                        
                       })
                 })
                 .then(response => response.json())
@@ -98,8 +100,14 @@ class Feed extends React.Component {
         }else{
             this.props.history.push("/login");
         }
-        // console.log("i am here");
+        let token =localStorage.getItem("token");
+        console.log(token);
+        this.setState({
+            token: localStorage.getItem("token")
+        })
+        console.log(this.state);
         fetch('https://hestia-requests.herokuapp.com/app/view_all_item_requests/?location=surat', {
+            
             headers: new Headers({
             'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiJhYmNkZWdoaWprZjEyMzQifQ.GqnmZCcGjtCN_bTznL5LbA_Wdt_BsBN5IpSAHmdDeu8'
             })
