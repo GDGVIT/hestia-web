@@ -19,8 +19,8 @@ const Login = (props) => {
       .then(response => response.json())
       .then(data => {
         console.log(data)
-          window.localStorage.setItem("token", data);
-          props.history.push("/feed");
+          window.localStorage.setItem("token", data.Token);
+          // props.history.push("/feed");
         })
        .catch(error => console.error(error)
        );
