@@ -9,7 +9,7 @@ import Nav from '../nav';
 
 // const { Search } = Input;
 let id = parseInt(localStorage.getItem("receiver_id"))
-let url = 'ws://hestia-chat.herokuapp.com/api/v1/ws?chat=20';
+let url = 'ws://hestia-chat.herokuapp.com/api/v1/ws?chat=17';
 console.log(url)
 
 class Chat extends React.Component{
@@ -119,7 +119,7 @@ class Chat extends React.Component{
           }
         )
       ) : (
-        <div> No messages yet </div>
+        <div style={{textAlign:"center", marginTop:"20px"}}> Start typing to initiate conversation </div>
       )
         return(
             <div>
@@ -131,8 +131,8 @@ class Chat extends React.Component{
                       </div>
                     </Col>
                     <Col span={16}>
-                        <h1 style = {{fontSize:14, textAlign:"center"}}>Person Name</h1>
-                        <h2 style = {{fontSize:14, textAlign:"center"}}>Item Name</h2>
+                        <h1 style = {{fontSize:14, textAlign:"center"}}>{localStorage.getItem("receiver_id")}</h1>
+                        <h2 style = {{fontSize:14, textAlign:"center"}}>{localStorage.getItem("item")}</h2>
                     </Col>
                     <Col span={4}>
                     <img src={Report} alt="Report logo" style ={{ marginTop: "10px"}} onClick={this.gotoReport}></img>
