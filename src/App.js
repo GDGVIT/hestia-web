@@ -14,6 +14,8 @@ import Report from './components/report';
 import Mychat from './components/profile/mychats';
 import Myreqs from './components/profile/myreqs';
 import Edit from './components/profile/edit';
+import Sap from './components/sap';
+import Suggestions from './components/profile/suggestions';
 
 import { loadReCaptcha } from 'react-recaptcha-v3';
 
@@ -56,6 +58,8 @@ class App extends React.Component {
           <Route exact path='/mychats' component={Mychat}/>
           <Route exact path='/myreqs' component={Myreqs}/>
           <Route exact path='/edit' component={Edit}/>
+          <Route exact path='/suggestashop' component={Sap}/>
+          <Route exact path='/suggestions' component={Suggestions}/>
 
           {this.showNav()}
         </div>
