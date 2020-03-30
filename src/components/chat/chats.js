@@ -5,6 +5,7 @@ import Report from '../../assets/Report.svg';
 import backbutton from '../../assets/backbutton.png';
 import './chat.css';
 import Nav from '../nav';
+import {withRouter} from 'react-router-dom';
 
 
 // const { Search } = Input;
@@ -155,4 +156,4 @@ class Chat extends React.Component{
         );
     }
 }
-export default Chat;
+export default withRouter(Chat);
