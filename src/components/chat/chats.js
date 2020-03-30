@@ -6,6 +6,8 @@ import backbutton from '../../assets/backbutton.png';
 import './chat.css';
 import Nav from '../nav';
 import {withRouter} from 'react-router-dom';
+import blueback from '../../assets/rectangle.png';
+import whiteback from '../../assets/rectanglew.png';
 
 
 // const { Search } = Input;
@@ -125,7 +127,7 @@ class Chat extends React.Component{
         initialmsg.map(
           msg => {
             return(
-              <Card style={{ width: "80%", backgroundColor: "#00d2d2", float:"left", color:"#fff", marginLeft:"10px"}}>
+              <Card style={{ width: "80%", backgroundImage: `url('${blueback}')` , float:"left", color:"#fff", boxShadow:"none", paddingLeft:"35px"}}>
               <p style={{fontWeight:700}}>Receiver: {msg.receiver}</p>
               <p style={{fontWeight:700}}>Sender: {msg.sender}</p>
               <p>{msg.text}</p>
@@ -143,7 +145,7 @@ class Chat extends React.Component{
         messages.map(
           msg => {
             return(
-              <Card style={{ width: "80%", backgroundColor: "#fff", float:"right", color:"#000", marginRight:"10px"}}>
+              <Card style={{ width: "80%", backgroundImage: `url('${whiteback}')`, float:"right", color:"#000", boxShadow:"none"}}>
               <p style={{fontWeight:700}}>Receiver: {msg.receiver}</p>
               <p style={{fontWeight:700}}>Sender: {msg.sender}</p>
               <p>{msg.text}</p>
