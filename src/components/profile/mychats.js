@@ -28,11 +28,18 @@ class Mychat extends React.Component{
         window.localStorage.setItem("item",i);
         
         if(this.props.history){
-            this.props.history.push("/chat")
+            this.props.history.push({
+                pathname : "/chat", 
+                state:{id: localStorage.getItem("receiver_id")}
+            })
         }else if(this.props.g.p){
-            this.props.g.p.g.history.push("/chat");
+            this.props.g.p.g.history.push({               
+                pathname : "/chat", 
+                state:{id: localStorage.getItem("receiver_id")}});
         }else{
-            this.props.g.history.push("/chat");
+            this.props.g.history.push({                
+                pathname : "/chat", 
+                state:{id: localStorage.getItem("receiver_id")}});
         }
     }
 

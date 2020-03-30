@@ -11,22 +11,23 @@ import whiteback from '../../assets/rectanglew.png';
 
 
 // const { Search } = Input;
-let id = parseInt(localStorage.getItem("receiver_id"))
-let url = 'wss://hestia-chat.herokuapp.com/api/v1/ws?chat='+id;
-console.log(url)
-
+// let id = parseInt(localStorage.getItem("receiver_id"))
+// let url = 'wss://hestia-chat.herokuapp.com/api/v1/ws?chat=' + id;
+// let url;
 class Chat extends React.Component{
     constructor(props){
         super(props);
+        console.log(props, parseInt(props.location.state.id));
         this.state={
+            ws:null,
             currentUser: null,
             messages: [],
             initialmsg: [],
             me: false,
-            receiver_id : parseInt(localStorage.getItem("receiver_id"))
+            // receiver_id : props.location.state.id
         }
     }
-    ws = new WebSocket(url)
+    // url = 'wss://hestia-chat.herokuapp.com/api/v1/ws?chat='+`${this.state.receiver_id}`;
     gotoReport=()=>{
       this.props.history.push("/report");
     }
@@ -45,9 +46,38 @@ class Chat extends React.Component{
       this.messagesEnd.scrollIntoView({ behavior: "smooth" });
     }
 
-    componentDidMount(){
+    connect = () => {
+      let url = 'wss://hestia-chat.herokuapp.com/api/v1/ws?chat='+ parseInt(localStorage.getItem("receiver_id"))
+      var ws = new WebSocket(url)
+      ws.onopen = () => {
+        // on connecting, do nothing but log it to the console
+          console.log('connected');
+          this.setState({ ws: ws });
+          console.log(url)
+        }
+  
+      ws.onmessage = evt => {
+          // on receiving a message, add it to the list of messages
+          const message = JSON.parse(evt.data)
+          console.log(message, message.text)
+          this.addMessage(message)
+          return false;
+        }
+  
+      ws.onclose = () => {
+          console.log('disconnected')
+          // automatically try to reconnect on connection loss
+          this.setState({
+            ws: new WebSocket(url),
+          })
+        }
 
+
+    }
+
+    componentDidMount(){
       this.scrollToBottom();
+      this.connect();
 
       if(localStorage.getItem("token")){
        console.log("someone's logged in")
@@ -79,27 +109,6 @@ class Chat extends React.Component{
         console.log(this.state)
       })
       .catch(err => console.log(err))
-
-      this.ws.onopen = () => {
-      // on connecting, do nothing but log it to the console
-        console.log('connected')
-      }
-
-      this.ws.onmessage = evt => {
-        // on receiving a message, add it to the list of messages
-        const message = JSON.parse(evt.data)
-        console.log(message, message.text)
-        this.addMessage(message)
-        return false;
-      }
-
-      this.ws.onclose = () => {
-        console.log('disconnected')
-        // automatically try to reconnect on connection loss
-        this.setState({
-          ws: new WebSocket(url),
-        })
-      }
    }
 
    componentDidUpdate() {
@@ -125,7 +134,7 @@ class Chat extends React.Component{
         body:JSON.stringify(obj)
       })
       .then(response=> response.json())
-      .then(res => console.log(res))
+      .then(res => console.log(res,this.state))
       .catch(err => console.log(err));
 
     // const message = { name: this.state.name, message: messageString }
