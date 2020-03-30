@@ -9,9 +9,9 @@ import back from '../../assets/back.png';
 import Edit from './edit';
 
 
-const overflowcheck = {
-    'overflow': 'scroll'
-}
+// const overflowcheck = {
+//     'overflow': 'scroll'
+// }
 
 class Profile extends React.Component{
     constructor(props){
@@ -24,14 +24,14 @@ class Profile extends React.Component{
     }
     goBack = () =>{
         console.log(this.props)
-        // if(this.props.p){
-        //     this.props.p.g.history.push("/feed");
-        //     // this.props.p.history.push("/feed");
-        // }else{
-        //     this.props.history.push("/feed");
-        // }
+        if(this.props.p){
+            this.props.p.g.history.push("/feed");
+            // this.props.p.history.push("/feed");
+        }else{
+            this.props.history.push("/feed");
+        }
         
-        // this.props.history.push("/feed");
+        this.props.history.push("/feed");
     }
     redirectTo = (e) =>{
         console.log(e)
