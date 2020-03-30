@@ -6,11 +6,13 @@ import backbutton from '../../assets/backbutton.png';
 import './chat.css';
 import Nav from '../nav';
 import {withRouter} from 'react-router-dom';
+import blueback from '../../assets/rectangle.png';
+import whiteback from '../../assets/rectanglew.png';
 
 
 // const { Search } = Input;
 let id = parseInt(localStorage.getItem("receiver_id"))
-let url = 'ws://hestia-chat.herokuapp.com/api/v1/ws?chat=17';
+let url = 'ws://hestia-chat.herokuapp.com/api/v1/ws?chat='+id;
 console.log(url)
 
 class Chat extends React.Component{
@@ -19,6 +21,7 @@ class Chat extends React.Component{
         this.state={
             currentUser: null,
             messages: [],
+            initialmsg: [],
             receiver_id : parseInt(localStorage.getItem("receiver_id"))
         }
     }
@@ -28,12 +31,23 @@ class Chat extends React.Component{
     }
     gotoProfile=()=>{
       this.props.history.push("/profile");
+      this.setState({
+        initialmsg : []
+      })
   }
   goBack=()=>{
     this.props.history.push("/mychats");
   }
 
+    
+    scrollToBottom = () => {
+      this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+    }
+
     componentDidMount(){
+
+      this.scrollToBottom();
+
       if(localStorage.getItem("token")){
        console.log("someone's logged in")
       //  this.setState({receiver_id : localStorage.getItem("receiver_id")})
@@ -48,6 +62,9 @@ class Chat extends React.Component{
       ob["sender"] = parseInt(localStorage.getItem("user_id"))
 
       console.log("/getMessages", JSON.stringify(ob))
+      this.setState({
+        initialmsg:[]
+      })
       fetch('https://hestia-chat.herokuapp.com/api/v1/getMessages',{
         method:"POST",
         headers:  new Headers({
@@ -56,7 +73,12 @@ class Chat extends React.Component{
         body:JSON.stringify(ob)
       })
       .then(res => res.json())
-      .then(res => console.log(res))
+      .then(res => {
+        this.setState({
+          initialmsg: res.messages
+        })
+        console.log(res)
+      })
       .catch(err => console.log(err))
 
       this.ws.onopen = () => {
@@ -67,7 +89,7 @@ class Chat extends React.Component{
       this.ws.onmessage = evt => {
         // on receiving a message, add it to the list of messages
         const message = JSON.parse(evt.data)
-        console.log(message)
+        console.log(message, message.text)
         this.addMessage(message)
         return false;
       }
@@ -81,6 +103,9 @@ class Chat extends React.Component{
       }
    }
 
+   componentDidUpdate() {
+      this.scrollToBottom();
+    }
    addMessage = message =>
    this.setState(state => ({ messages: [message, ...state.messages] }))
 
@@ -106,26 +131,45 @@ class Chat extends React.Component{
 
     // const message = { name: this.state.name, message: messageString }
 
-    this.addMessage(messageString)
+    // this.addMessage(messageString)
   }
 
     render(){
-      const {messages} = this.state;
-      messages.reverse();
-      const chatslist = messages.length ? (
-        messages.map(
+
+      const {initialmsg} = this.state;
+      const initial = initialmsg.length ? (
+        initialmsg.map(
           msg => {
             return(
-              <Card style={{ width: "80%", backgroundColor: "#fff", float:"right", color:"#000"}}>
-              <p style={{fontWeight:700}}>Name</p>
-              <p>{msg}</p>
-              <p><i>Date and Time</i></p>
+              <Card style={{ width: "80%", backgroundImage: `url('${blueback}')` , float:"left", color:"#fff", boxShadow:"none", paddingLeft:"35px"}}>
+              <p style={{fontWeight:700}}>Receiver: {msg.receiver}</p>
+              <p style={{fontWeight:700}}>Sender: {msg.sender}</p>
+              <p>{msg.text}</p>
+              <p><i>{msg.CreatedAt}</i></p>
             </Card>
             )
           }
         )
       ) : (
         <div style={{textAlign:"center", marginTop:"20px"}}> Start typing to initiate conversation </div>
+      )
+      const {messages} = this.state;
+      messages.reverse();
+      const chatslist = messages.length ? (
+        messages.map(
+          msg => {
+            return(
+              <Card style={{ width: "80%", backgroundImage: `url('${whiteback}')`, float:"right", color:"#000", boxShadow:"none"}}>
+              <p style={{fontWeight:700}}>Receiver: {msg.receiver}</p>
+              <p style={{fontWeight:700}}>Sender: {msg.sender}</p>
+              <p>{msg.text}</p>
+              <p><i>{msg.CreatedAt}</i></p>
+            </Card>
+            )
+          }
+        )
+      ) : (
+      <div style={{textAlign:"center", marginTop:"20px"}}></div>
       )
         return(
             <div>
@@ -148,7 +192,12 @@ class Chat extends React.Component{
               {/* Messages */}
 
               <div style={{height:"65vh", marginTop:"20px", overflow:"scroll"}}>
+                {initial}
                 {chatslist}
+
+                <div style={{ float:"left", clear: "both" }}
+                    ref={(el) => { this.messagesEnd = el; }}>
+                </div>
               </div>  
             <div>
 
