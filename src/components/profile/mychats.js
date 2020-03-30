@@ -129,4 +129,4 @@ class Mychat extends React.Component{
         }
     }
 }
-export default Mychat;
+export default withRouter(Mychat);
