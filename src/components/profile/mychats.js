@@ -16,6 +16,7 @@ class Mychat extends React.Component{
             goto: "mychats",
             mychats: []
         }
+        console.log(this.props)
     }
     gotoProfile = () => {
         this.setState({
@@ -23,13 +24,13 @@ class Mychat extends React.Component{
         });
     }
     gotoChat=()=>{
-        this.props.history.push("/chat");
+        this.props.g.history.push("/chat");
     }
     componentDidMount(){
         if(localStorage.getItem("token")){
          console.log("someone's logged in")
         }else{
-            this.props.history.push("/login");
+            this.props.g.history.push("/login");
         }
         var obj = {"user_id" : parseInt(localStorage.getItem("user_id"))}
         fetch('https://hestia-chat.herokuapp.com/api/v1/getChats',{
