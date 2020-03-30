@@ -94,6 +94,8 @@ class Feed extends React.Component {
           obj["sender"] = parseInt(localStorage.getItem("user_id"))
           obj["title"] = localStorage.getItem("item")
 
+          console.log(JSON.stringify(obj))
+
           fetch('https://hestia-chat.herokuapp.com/api/v1/createChat',{
               method:"POST",
               headers: new Headers({

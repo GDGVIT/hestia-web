@@ -8,8 +8,9 @@ import Nav from '../nav';
 
 
 // const { Search } = Input;
-
-let url = 'ws://hestia-chat.herokuapp.com/api/v1/ws?chat='
+let id = parseInt(localStorage.getItem("receiver_id"))
+let url = 'ws://hestia-chat.herokuapp.com/api/v1/ws?chat=20';
+console.log(url)
 
 class Chat extends React.Component{
     constructor(props){
@@ -20,7 +21,7 @@ class Chat extends React.Component{
             receiver_id : parseInt(localStorage.getItem("receiver_id"))
         }
     }
-    ws = new WebSocket(url+`{this.state.receiver_id}`)
+    ws = new WebSocket(url)
     gotoReport=()=>{
       this.props.history.push("/report");
     }
@@ -68,7 +69,7 @@ class Chat extends React.Component{
         console.log('disconnected')
         // automatically try to reconnect on connection loss
         this.setState({
-          ws: new WebSocket(URL),
+          ws: new WebSocket(url),
         })
       }
    }
@@ -98,7 +99,7 @@ class Chat extends React.Component{
 
     // const message = { name: this.state.name, message: messageString }
 
-    // this.addMessage(message)
+    this.addMessage(messageString)
   }
 
     render(){
@@ -120,16 +121,18 @@ class Chat extends React.Component{
                     </Col>
                 </Row>
             </div>
-               <Card style={{ width: "80%", backgroundColor: "#00d2d2", float:"left", color:"white"}}>
-                <p style={{fontWeight:700}}>Name</p>
-                <p>This is a long message. Maybe two to three lines.</p>
-                <p><i>Date and Time</i></p>
-              </Card>
-              <Card style={{ width: "65%", backgroundColor: "#fff", float:"right" }}>
-                <p style={{fontWeight:700}}>Your name</p>
-                <p>This is the reply</p>
-                <p><i>Date and Time</i></p>
-              </Card>
+              <div style={{height:"65vh", marginTop:"20px", overflow:"scroll"}}>
+                <Card style={{ width: "80%", backgroundColor: "#00d2d2", float:"left", color:"white"}}>
+                  <p style={{fontWeight:700}}>Name</p>
+                  <p>This is a long message. Maybe two to three lines.</p>
+                  <p><i>Date and Time</i></p>
+                </Card>
+                <Card style={{ width: "65%", backgroundColor: "#fff", float:"right" }}>
+                  <p style={{fontWeight:700}}>Your name</p>
+                  <p>This is the reply</p>
+                  <p><i>Date and Time</i></p>
+                </Card>
+              </div>  
             <div>
 
             <Messages onSubmitMessage={messageString => this.submitMessage(messageString)}/>
