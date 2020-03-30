@@ -48,7 +48,7 @@ class News extends React.Component {
                             <Col span={24}>
                                 <div className="news-card-header">
                                     <span>
-                                        {request.title.slice(0,30)}
+                                       <p> {request.title.slice(0,30)}.... </p>
                                     </span>
                                     <p>WHO</p>
                                 </div>
