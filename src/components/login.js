@@ -9,7 +9,7 @@ import check from '../assets/check.png';
 
 
 const Login = (props) => {
-  const [visible, changeV] = useState(false);
+  const [visible, changeV] = useState(false);   
   var chk = true;
   const alert = useAlert()
   const onFinish = values => {
@@ -30,8 +30,9 @@ const Login = (props) => {
       }),
     })
     .then(response => {
-      if(response.status === 400){
-        chk = false;
+      if(response.status === 401){
+        alert.show("Verify your email first");
+        props.history.push("/");
       }else if(response.status === 200 || response.status===201 || response.status===202){
         return response.json();
       }else{
@@ -39,11 +40,11 @@ const Login = (props) => {
       }
       })
       .then(data => {
-        window.localStorage.setItem("email", data.email);
+        console.log(data)
+        // window.localStorage.setItem("email", data.email);
       })
       .catch(error => console.error(error)
       );
-  if(chk === true){
       fetch("https://hestia-auth.herokuapp.com/api/user/login", {
           method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
           body: JSON.stringify(values.user), // Coordinate the body type with 'Content-Type'
@@ -70,7 +71,6 @@ const Login = (props) => {
           })
         .catch(error => console.error(error)
         );
-      }
    }
 
     useEffect(() => { 
