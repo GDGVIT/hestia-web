@@ -12,7 +12,7 @@ import whiteback from '../../assets/rectanglew.png';
 
 // const { Search } = Input;
 let id = parseInt(localStorage.getItem("receiver_id"))
-let url = 'ws://hestia-chat.herokuapp.com/api/v1/ws?chat='+id;
+let url = 'wss://hestia-chat.herokuapp.com/api/v1/ws?chat='+id;
 console.log(url)
 
 class Chat extends React.Component{
