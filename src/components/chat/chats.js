@@ -34,9 +34,15 @@ class Chat extends React.Component{
       this.setState({
         initialmsg : []
       })
-  }
+    }
+    scrollToBottom = () => {
+      this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+    }
 
     componentDidMount(){
+
+      this.scrollToBottom();
+
       if(localStorage.getItem("token")){
        console.log("someone's logged in")
       //  this.setState({receiver_id : localStorage.getItem("receiver_id")})
@@ -92,6 +98,9 @@ class Chat extends React.Component{
       }
    }
 
+   componentDidUpdate() {
+      this.scrollToBottom();
+    }
    addMessage = message =>
    this.setState(state => ({ messages: [message, ...state.messages] }))
 
@@ -180,6 +189,10 @@ class Chat extends React.Component{
               <div style={{height:"65vh", marginTop:"20px", overflow:"scroll"}}>
                 {initial}
                 {chatslist}
+
+                <div style={{ float:"left", clear: "both" }}
+                    ref={(el) => { this.messagesEnd = el; }}>
+                </div>
               </div>  
             <div>
 
