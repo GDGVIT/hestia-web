@@ -61,7 +61,7 @@ class Myreqs extends React.Component{
             this.props.history.push("/login");
         }
 
-        fetch('https://hestia-requests.herokuapp.com/app/my_requests/', {
+        fetch('https://hestia-requests.herokuapp.com/api/requests/my_requests/', {
             headers: new Headers({
             'Authorization': localStorage.getItem("token")
             })

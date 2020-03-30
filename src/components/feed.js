@@ -52,7 +52,7 @@ class Feed extends React.Component {
         window.localStorage.setItem("item",i);
     }
     handleOk = e => {
-        console.log(e);
+        // console.log(e);
         this.setState({
           visible: false,
           visible1:false,
@@ -60,7 +60,7 @@ class Feed extends React.Component {
         });
       };
     onFinish = values => {
-        console.log(values);
+        // console.log(values);
         this.setState(values)
         console.log(this.state)
         postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.city)
@@ -72,7 +72,7 @@ class Feed extends React.Component {
                     object["item_name"] = name;
                     object["quantity"] = quantity;
                     object["location"] = city;
-                    console.log(object)
+                    // console.log(object)
                 
                     
                 return fetch(url, {
@@ -88,7 +88,41 @@ class Feed extends React.Component {
                 }
       };
 
+
+      acceptrequest = (id) =>{
+        console.log(id)
+        postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: id,location:this.state.city})
+                .then(data => console.log(data)) // Result from the `response.json()` call
+                .catch(error => console.error(error))
+
+                function postRequest(url, data) {
+                return fetch(url, {
+                    credentials: 'same-origin', // 'include', default: 'omit'
+                    method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
+                    body: JSON.stringify(data), // Coordinate the body type with 'Content-Type'
+                    headers: new Headers({
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.getItem("token")
+                    }),
+                })
+                .then(response => response.json())
+                }
+
+
+      }
+
+
+
       createChat = () => {
+
+
+
+
+
+
+
+
+
           var obj ={}
           obj["receiver"] = parseInt(localStorage.getItem("receiver_id"))
           obj["sender"] = parseInt(localStorage.getItem("user_id"))
@@ -113,7 +147,7 @@ class Feed extends React.Component {
           .catch(err => console.log(err))
       }
       handleCancel = e => {
-        console.log(e);
+        // console.log(e);
         this.setState({
           visible: false,
           visible1:false,
@@ -122,7 +156,7 @@ class Feed extends React.Component {
       };
       onChange(e) {
         window.localStorage.setItem("acceptcheck", `${e.target.checked}`);
-        console.log(localStorage.getItem("acceptcheck"))
+        // console.log(localStorage.getItem("acceptcheck"))
       }
       componentDidMount(){  
         if(localStorage.getItem("token")){
@@ -130,13 +164,24 @@ class Feed extends React.Component {
         }else{
             this.props.history.push("/login");
         }
+
         let token =localStorage.getItem("token");
-        console.log(token);
+
+        navigator.geolocation.getCurrentPosition(
+            position => this.setState({ 
+              latitude: position.coords.latitude, 
+              longitude: position.coords.longitude
+            }), 
+            err => console.log(err)
+          );
+          
+
+
         // this.setState({
         //     token: localStorage.getItem("token")
         // })
         // console.log(this.state);
-        fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location=surat', {
+        fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+this.state.city, {
             headers: new Headers({
             'Authorization': localStorage.getItem("token")
             })
@@ -151,8 +196,50 @@ class Feed extends React.Component {
             console.log(this.state)
             })
             .catch(error => console.error(error))
+
+            // let latitude;
+            // let longitude;
+            // function getLocation() {
+            //     if (navigator.geolocation) {
+            //         navigator.geolocation.getCurrentPosition(showPosition);
+            //             } 
+            //         }
+            // function showPosition(position) {
+            //     latitude = position.coords.latitude;
+            //     longitude = position.coords.longitude;
+                
+            //     }
+                
+
+
+            //     this.setState({
+            //         lat: latitude,
+            //         long: longitude
+            //     })
+
+
+
+                // position = async () => {
+                //     await navigator.geolocation.getCurrentPosition(
+                //       position => this.setState({ 
+                //         latitude: position.coords.latitude, 
+                //         longitude: position.coords.longitude
+                //       }), 
+                //       err => console.log(err)
+                //     );
+                //     console.log(this.state.latitude)
+                //   }
+                
+
+
+
+
+
+
+
+            
         }
-    
+            
     render(){
         const { requests } = this.state;
         // console.log(requests)
@@ -177,9 +264,9 @@ class Feed extends React.Component {
                                 <Col span={7} className="iconz">
                                     <div className="imgback"  onClick = {this.handleStore(`${request.request_made_by}`, `${request.item_name}`)}>
                                         <img src={store} alt="location"></img>
-                                    </div>
+                                    </div> 
                                     <div className="imgback">
-                                        <img onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`)} src={check} alt="location"></img>
+                                        <img onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`)} src={check} alt="location" onClick={()=>{this.acceptrequest(request.id)}}></img>
                                     </div>
                                 </Col>
                             </Row>
@@ -203,7 +290,7 @@ class Feed extends React.Component {
                             <h1>Requests</h1>
                         </Col>
                         <Col span={6}>
-                        <img onClick={this.gotoProfile} src={profile} alt="Profile logo"></img>
+                        <img onClick={this.gotoProfile} src={profile} alt="Profile logo" ></img>
                         </Col>
                     </Row>
      
@@ -262,7 +349,7 @@ class Feed extends React.Component {
                         </Row>
                       <h2 style={{marginTop:"20px", textAlign:"center"}}>Suggest a Shop?</h2>
                       <div style={{textAlign:"center"}}>
-                        <Button type="primary" htmlType="submit" onClick={this.createChat}>
+                        <Button type="primary" htmlType="submit" onClick={this.createChat} >
                             Yes <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
                         </Button>
                         <Button type="primary" onClick={this.handleCancel} style={{backgroundColor:"#fff",color:"#000"}}>
@@ -290,7 +377,7 @@ class Feed extends React.Component {
                         </Row>
                       <h2 style={{marginTop:"20px", textAlign:"center"}}>You have this item?</h2>
                         <div style={{textAlign:"center"}}>
-                            <Button type="primary" htmlType="submit" onClick={this.createChat}>
+                            <Button type="primary" htmlType="submit" onClick={this.createChat} >
                                 Yes <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
                             </Button>
                             <Button type="primary" onClick={this.handleCancel} style={{backgroundColor:"#fff",color:"#000"}}>

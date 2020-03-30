@@ -4,7 +4,7 @@ import logo from '../assets/group_5.png';
 import {Link} from 'react-router-dom';
 import google from '../assets/group.png';
 import { useAlert } from 'react-alert';
-
+import { ReCaptcha } from 'react-recaptcha-v3';
 
 const layout = {
   labelCol: {
@@ -22,14 +22,21 @@ const validateMessages = {
 };
 
 const Register = (props) => {
+  var ct = null;
+  const verifyCallback = (recaptchaToken) => {
+    // Here you will get the final recaptchaToken!!!  
+    ct = recaptchaToken;
+    console.log(recaptchaToken, "<= your recaptcha token")
+  }
   const alert = useAlert()
   let authcheck = false;
   const onFinish = values => {
-    return fetch("https://hestia-auth.herokuapp.com/api/user/register", {
+    fetch("https://hestia-auth.herokuapp.com/api/user/register", {
         method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
         body: JSON.stringify(values.user), // Coordinate the body type with 'Content-Type'
         headers: new Headers({
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'g-recaptcha-response': ct
         }),
       })
       .then(response => {
@@ -41,7 +48,7 @@ const Register = (props) => {
         }
         })
       .then(data => {
-        // console.log(data)
+        console.log(data)
         if(authcheck){
           // console.log("check your email for conformation!")
           alert.show(data.Verify)
@@ -62,6 +69,11 @@ const Register = (props) => {
     
   return (
       <div className="eqimargin">
+      <ReCaptcha
+            sitekey="6LdiB-UUAAAAACYC2AlMS9hrw18fQA4FK7-s0LDw"
+            action='/register'
+            verifyCallback={verifyCallback}
+        />
       <div className="hestia-logo-reg">
           <img src={logo} alt="Hestialogo"></img>
       </div>
@@ -133,9 +145,9 @@ const Register = (props) => {
         <Button type="primary" htmlType="submit">
           Register
         </Button>
-        <Button type="dashed" className="oauth">
+        {/* <Button type="dashed" className="oauth">
                 Register with <img src={google} alt="login with google"></img>
-        </Button>
+        </Button> */}
       </Form.Item>
       <Form.Item className="already">
         <Link to="/Login">Already have an account? Login</Link>

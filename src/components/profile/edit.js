@@ -67,29 +67,7 @@ class Edit extends React.Component{
         console.log(values)
         this.setState(values)
         console.log(this.state)
-        // postForm('https://hestia-requests.herokuapp.com/app/item_requests/',this.state.item_name,this.state.quantity,this.state.city)
-        //         .then(data => console.log(data))
-        //         .catch(error => console.error(error))
-
-        //         function postForm(url,name,quantity,city) {
-        //             var object ={};
-        //             object["item_name"] = name;
-        //             object["quantity"] = quantity;
-        //             object["location"] = city;
-        //             console.log(object)
-                
-                    
-        //         return fetch(url, {
-        //             method: 'POST', // or 'PUT'
-        //             body: JSON.stringify(object),  // a FormData will automatically set the 'Content-Type'
-        //             headers: new Headers({
-        //                 "Content-Type": "application/json",
-        //                 'Authorization': localStorage.getItem("token")
-                        
-        //               })
-        //         })
-        //         .then(response => response.json())
-        //         }
+        
     }
     gotoProfile = () => {
         this.setState({
@@ -152,7 +130,7 @@ class Edit extends React.Component{
                     />
                 </Form.Item>
                 <Form.Item>
-                <Button type="primary" onClick={this.changePass}>
+                <Button type="primary" onClick={this.changePass} style={{width: "150px"}}>
                     Change Password
                 </Button>
                 </Form.Item>
