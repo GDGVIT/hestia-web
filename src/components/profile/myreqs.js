@@ -12,16 +12,12 @@ class Myreqs extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            goto: "myreqs",
             Requests: []
         }
     }
     
     gotoProfile = () => {
-        this.setState({
-            goto: "profile"
-        });
-        
+        this.props.history.push("/profile")
     }
 
     deleterequest = (id) => {
@@ -81,13 +77,6 @@ class Myreqs extends React.Component{
      }
 
     render(){
-        if(this.state.goto === "profile"){
-            return(
-                <Profile p={this.props}/>
-            );
-        }else if(this.state.goto === "myreqs"){
-
-
 
         const {Requests} = this.state;
         
@@ -148,6 +137,5 @@ class Myreqs extends React.Component{
             </div>              
         );
         }
-    }
 }
 export default Myreqs;

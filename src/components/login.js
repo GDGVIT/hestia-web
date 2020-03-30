@@ -10,6 +10,7 @@ import check from '../assets/check.png';
 
 const Login = (props) => {
   const [visible, changeV] = useState(false);
+  var chk = true;
   const alert = useAlert()
   const onFinish = values => {
     if(values.user.password.length < 8){
@@ -21,7 +22,7 @@ const Login = (props) => {
       "email": values.user.email
     }
 
-    fetch("https://hestia-auth.herokuapp.com/api/user/getuserdetail", {
+    fetch("https://hestia-auth.herokuapp.com/api/user/verifyuser", {
       method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
       body: JSON.stringify(cm), // Coordinate the body type with 'Content-Type'
       headers: new Headers({
@@ -29,45 +30,48 @@ const Login = (props) => {
       }),
     })
     .then(response => {
-      if(response.status === 200 || response.status===201 || response.status===202){
+      if(response.status === 400){
+        chk = false;
+      }else if(response.status === 200 || response.status===201 || response.status===202){
         return response.json();
       }else{
         alert.show(response.statusText)
       }
       })
       .then(data => {
-        window.localStorage.setItem("user_id", data.id);
         window.localStorage.setItem("email", data.email);
       })
       .catch(error => console.error(error)
       );
-
-    fetch("https://hestia-auth.herokuapp.com/api/user/login", {
-        method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
-        body: JSON.stringify(values.user), // Coordinate the body type with 'Content-Type'
-        headers: new Headers({
-          'Content-Type': 'application/json'
-        }),
-      })
-      .then(response => {
-        if(response.status === 200 || response.status===201 || response.status===202){
-          authcheck = true;
-        return response.json();
-        }else{
-          // console.log(response)
-          alert.show(response.statusText)
-        }
+  if(chk === true){
+      fetch("https://hestia-auth.herokuapp.com/api/user/login", {
+          method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
+          body: JSON.stringify(values.user), // Coordinate the body type with 'Content-Type'
+          headers: new Headers({
+            'Content-Type': 'application/json'
+          }),
         })
-      .then(data => {
-          if(authcheck){
-          window.localStorage.setItem("token", data.Token);
-          props.history.push("/feed");
+        .then(response => {
+          if(response.status === 200 || response.status===201 || response.status===202){
+            authcheck = true;
+          return response.json();
+          }else{
+            // console.log(response)
+            alert.show(response.statusText)
           }
-          // props.history.push("/feed");
-        })
-       .catch(error => console.error(error)
-       );
-    };
+          })
+        .then(data => {
+            if(authcheck){
+            window.localStorage.setItem("user_id", data.id);
+            window.localStorage.setItem("token", data.Token);
+            props.history.push("/feed");
+            }
+            // props.history.push("/feed");
+          })
+        .catch(error => console.error(error)
+        );
+      }
+   }
 
     useEffect(() => { 
         if(localStorage.getItem("token")){

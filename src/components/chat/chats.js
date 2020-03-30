@@ -5,11 +5,12 @@ import Report from '../../assets/Report.svg';
 import backbutton from '../../assets/backbutton.png';
 import './chat.css';
 import Nav from '../nav';
+import {withRouter} from 'react-router-dom';
 
 
 // const { Search } = Input;
 let id = parseInt(localStorage.getItem("receiver_id"))
-let url = 'ws://hestia-chat.herokuapp.com/api/v1/ws?chat=20';
+let url = 'ws://hestia-chat.herokuapp.com/api/v1/ws?chat=17';
 console.log(url)
 
 class Chat extends React.Component{
@@ -27,6 +28,9 @@ class Chat extends React.Component{
     }
     gotoProfile=()=>{
       this.props.history.push("/profile");
+  }
+  goBack=()=>{
+    this.props.history.push("/mychats");
   }
 
     componentDidMount(){
@@ -63,7 +67,9 @@ class Chat extends React.Component{
       this.ws.onmessage = evt => {
         // on receiving a message, add it to the list of messages
         const message = JSON.parse(evt.data)
+        console.log(message)
         this.addMessage(message)
+        return false;
       }
 
       this.ws.onclose = () => {
@@ -104,35 +110,45 @@ class Chat extends React.Component{
   }
 
     render(){
+      const {messages} = this.state;
+      messages.reverse();
+      const chatslist = messages.length ? (
+        messages.map(
+          msg => {
+            return(
+              <Card style={{ width: "80%", backgroundColor: "#fff", float:"right", color:"#000"}}>
+              <p style={{fontWeight:700}}>Name</p>
+              <p>{msg}</p>
+              <p><i>Date and Time</i></p>
+            </Card>
+            )
+          }
+        )
+      ) : (
+        <div style={{textAlign:"center", marginTop:"20px"}}> Start typing to initiate conversation </div>
+      )
         return(
             <div>
             <div>    
                 <Row style={{marginTop:20}}>
                     <Col span={4}>
-                      <div className="imgback" onClick={this.gotoProfile}>
+                      <div className="imgback" onClick={this.goBack}>
                         <img src={backbutton} alt = "Back-button" style = {{height: "3vh", marginLeft:"10px"}}></img>
                       </div>
                     </Col>
                     <Col span={16}>
-                        <h1 style = {{fontSize:14, textAlign:"center"}}>Person Name</h1>
-                        <h2 style = {{fontSize:14, textAlign:"center"}}>Item Name</h2>
+                        <h1 style = {{fontSize:14, textAlign:"center"}}>{localStorage.getItem("receiver_id")}</h1>
+                        <h2 style = {{fontSize:14, textAlign:"center"}}>{localStorage.getItem("item")}</h2>
                     </Col>
                     <Col span={4}>
                     <img src={Report} alt="Report logo" style ={{ marginTop: "10px"}} onClick={this.gotoReport}></img>
                     </Col>
                 </Row>
             </div>
+              {/* Messages */}
+
               <div style={{height:"65vh", marginTop:"20px", overflow:"scroll"}}>
-                <Card style={{ width: "80%", backgroundColor: "#00d2d2", float:"left", color:"white"}}>
-                  <p style={{fontWeight:700}}>Name</p>
-                  <p>This is a long message. Maybe two to three lines.</p>
-                  <p><i>Date and Time</i></p>
-                </Card>
-                <Card style={{ width: "65%", backgroundColor: "#fff", float:"right" }}>
-                  <p style={{fontWeight:700}}>Your name</p>
-                  <p>This is the reply</p>
-                  <p><i>Date and Time</i></p>
-                </Card>
+                {chatslist}
               </div>  
             <div>
 
@@ -143,4 +159,4 @@ class Chat extends React.Component{
         );
     }
 }
-export default Chat;
+export default withRouter(Chat);

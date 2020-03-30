@@ -2,7 +2,6 @@ import React from 'react';
 import profile from '../../assets/profile.png';
 import { Card, Row, Col } from 'antd';
 import Profile from './profile';
-import deletez from '../../assets/delete.png';
 import { Radio } from 'antd';
 import Nav from '../nav';
 import front from '../../assets/front.png';
@@ -13,18 +12,19 @@ class Mychat extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            goto: "mychats",
             mychats: []
         }
+        // console.log(this.props)
     }
     gotoProfile = () => {
-        this.setState({
-            goto: "profile"
-        });
+        this.props.history.push("/profile")
     }
-    gotoChat=()=>{
-        this.props.history.push("/chat");
-    }
+    gotoChat = (r,i) => () => {
+        console.log(this.props)
+        window.localStorage.setItem("receiver_id", r);
+        window.localStorage.setItem("item",i);
+        this.props.history.push("/chat")
+}
     componentDidMount(){
         if(localStorage.getItem("token")){
          console.log("someone's logged in")
@@ -43,8 +43,7 @@ class Mychat extends React.Component{
         .then(data => {
         console.log(data)
         this.setState({
-            mychats: data.chats,
-            
+            mychats: data.chats
         });
         console.log(this.state)
         })
@@ -53,11 +52,6 @@ class Mychat extends React.Component{
 
     render(){
         const { mychats } = this.state;
-        if(this.state.goto === "profile"){
-            return(
-                <Profile p={this.props}/>
-            );
-        }else if(this.state.goto === "mychats"){
 
             const mychatslist = mychats.length ? (
                 mychats.map(
@@ -77,7 +71,7 @@ class Mychat extends React.Component{
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    <div className="imgback" onClick={this.gotoChat}>
+                                    <div className="imgback" onClick={this.gotoChat(`${data.receiver}`, `${data.title}`)}>
                                         <img src={front} alt="location"></img>
                                     </div>
                                 </Col>
@@ -118,7 +112,6 @@ class Mychat extends React.Component{
                 <Nav />
             </div>              
         );
-        }
     }
 }
-export default Mychat;
+export default withRouter(Mychat);

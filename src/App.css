@@ -57,7 +57,7 @@ margin-left: 12.5%;
 
 /* login page css */
 .loginpage{
-    margin-top: 25%;
+    margin-top: 10%;
 }
 .login-form{
     margin: 12.5% 12.5%;
@@ -407,4 +407,11 @@ margin-left: 12.5%;
 }
 #__react-alert__>div>div>div>svg{
     display: none;
+}
+
+.Send{
+    border-radius: 10px !important;
+}
+.grecaptcha-badge{
+    display: none !important;
 }

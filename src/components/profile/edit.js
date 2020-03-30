@@ -70,17 +70,9 @@ class Edit extends React.Component{
         
     }
     gotoProfile = () => {
-        this.setState({
-            goto: "profile"
-        });
-        
+        this.props.history.push("/profile")
     }
         render(){
-            if(this.state.goto === "profile"){
-                return(
-                    <Profile p={this.props} />
-                );
-            }else if(this.state.goto === "edit"){
         return(
             <div>
             <div className="main-title">    
@@ -174,7 +166,6 @@ class Edit extends React.Component{
                     </Modal>
         </div>
         );
-    }
     }
 
 }

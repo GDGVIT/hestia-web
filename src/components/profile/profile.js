@@ -8,11 +8,6 @@ import front from '../../assets/front.png';
 import back from '../../assets/back.png';
 import Edit from './edit';
 
-
-const overflowcheck = {
-    'overflow': 'scroll'
-}
-
 class Profile extends React.Component{
     constructor(props){
         super(props);
@@ -23,6 +18,7 @@ class Profile extends React.Component{
         }
     }
     goBack = () =>{
+        console.log(this.props)
         if(this.props.p){
             this.props.p.g.history.push("/feed");
             // this.props.p.history.push("/feed");
@@ -30,25 +26,19 @@ class Profile extends React.Component{
             this.props.history.push("/feed");
         }
         
-        // this.props.history.push("/feed");
+        this.props.history.push("/feed");
     }
     redirectTo = (e) =>{
         console.log(e)
     }
     redirectToreqs = () =>{
-        this.setState({
-          goto: "myreqs"
-        })
+        this.props.history.push("/myreqs")
     }
     redirectTochats = () =>{
-        this.setState({
-            goto: "mychat"
-        })
+        this.props.history.push("/mychats")
     }
     redirectToedit = () =>{
-        this.setState({
-            goto: "edit"
-        })
+        this.props.history.push("/edit")
     }
     componentDidMount(){
        if(localStorage.getItem("token")){
@@ -109,15 +99,6 @@ class Profile extends React.Component{
         const mychatslist = mychats.length;        
         const reqlist = Requests.length;
         console.log(reqlist)
-        if(this.state.goto === "myreqs"){
-            return(
-                <Myreqs g={this.props}/>
-            );
-        }else if(this.state.goto === "mychat"){
-           return( <Mychat g={this.props} /> );
-        }else if(this.state.goto === "edit"){
-            return(<Edit g={this.props}/>);
-        }else if(this.state.goto === "profile"){
         return(
             
             <div>
@@ -170,7 +151,6 @@ class Profile extends React.Component{
                 <Nav />
             </div>
         );
-        }
     }
 }
 export default Profile;
