@@ -104,6 +104,22 @@ class Chat extends React.Component{
   }
 
     render(){
+      const {messages} = this.state;
+      const chatslist = messages.length ? (
+        messages.map(
+          msg => {
+            return(
+              <Card style={{ width: "80%", backgroundColor: "#00d2d2", float:"left", color:"white"}}>
+              <p style={{fontWeight:700}}>Name</p>
+              <p>{msg}</p>
+              <p><i>Date and Time</i></p>
+            </Card>
+            )
+          }
+        )
+      ) : (
+        <div> No messages yet </div>
+      )
         return(
             <div>
             <div>    
@@ -122,17 +138,10 @@ class Chat extends React.Component{
                     </Col>
                 </Row>
             </div>
+              {/* Messages */}
+
               <div style={{height:"65vh", marginTop:"20px", overflow:"scroll"}}>
-                <Card style={{ width: "80%", backgroundColor: "#00d2d2", float:"left", color:"white"}}>
-                  <p style={{fontWeight:700}}>Name</p>
-                  <p>This is a long message. Maybe two to three lines.</p>
-                  <p><i>Date and Time</i></p>
-                </Card>
-                <Card style={{ width: "65%", backgroundColor: "#fff", float:"right" }}>
-                  <p style={{fontWeight:700}}>Your name</p>
-                  <p>This is the reply</p>
-                  <p><i>Date and Time</i></p>
-                </Card>
+                {chatslist}
               </div>  
             <div>
 
