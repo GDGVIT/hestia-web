@@ -29,6 +29,9 @@ class Chat extends React.Component{
     }
     gotoProfile=()=>{
       this.props.history.push("/profile");
+      this.setState({
+        initialmsg : []
+      })
   }
 
     componentDidMount(){
@@ -46,6 +49,9 @@ class Chat extends React.Component{
       ob["sender"] = parseInt(localStorage.getItem("user_id"))
 
       console.log("/getMessages", JSON.stringify(ob))
+      this.setState({
+        initialmsg:[]
+      })
       fetch('https://hestia-chat.herokuapp.com/api/v1/getMessages',{
         method:"POST",
         headers:  new Headers({
@@ -71,7 +77,7 @@ class Chat extends React.Component{
         // on receiving a message, add it to the list of messages
         const message = JSON.parse(evt.data)
         console.log(message, message.text)
-        // this.addMessage(message.text)
+        this.addMessage(message)
         return false;
       }
 
@@ -109,7 +115,7 @@ class Chat extends React.Component{
 
     // const message = { name: this.state.name, message: messageString }
 
-    this.addMessage(messageString)
+    // this.addMessage(messageString)
   }
 
     render(){
@@ -119,8 +125,9 @@ class Chat extends React.Component{
         initialmsg.map(
           msg => {
             return(
-              <Card style={{ width: "80%", backgroundColor: "#00d2d2", float:"left", color:"#fff"}}>
-              <p style={{fontWeight:700}}>Name</p>
+              <Card style={{ width: "80%", backgroundColor: "#00d2d2", float:"left", color:"#fff", marginLeft:"10px"}}>
+              <p style={{fontWeight:700}}>Receiver: {msg.receiver}</p>
+              <p style={{fontWeight:700}}>Sender: {msg.sender}</p>
               <p>{msg.text}</p>
               <p><i>{msg.CreatedAt}</i></p>
             </Card>
@@ -136,16 +143,17 @@ class Chat extends React.Component{
         messages.map(
           msg => {
             return(
-              <Card style={{ width: "80%", backgroundColor: "#fff", float:"right", color:"#000"}}>
-              <p style={{fontWeight:700}}>Name</p>
-              <p>{msg}</p>
-              <p><i>Date and Time</i></p>
+              <Card style={{ width: "80%", backgroundColor: "#fff", float:"right", color:"#000", marginRight:"10px"}}>
+              <p style={{fontWeight:700}}>Receiver: {msg.receiver}</p>
+              <p style={{fontWeight:700}}>Sender: {msg.sender}</p>
+              <p>{msg.text}</p>
+              <p><i>{msg.CreatedAt}</i></p>
             </Card>
             )
           }
         )
       ) : (
-      <div>{initial}</div>
+      <div style={{textAlign:"center", marginTop:"20px"}}></div>
       )
         return(
             <div>
