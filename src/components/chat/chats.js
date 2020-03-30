@@ -43,6 +43,7 @@ class Chat extends React.Component{
       ob["receiver"] = parseInt(localStorage.getItem("receiver_id"))
       ob["sender"] = parseInt(localStorage.getItem("user_id"))
 
+      console.log("/getMessages", JSON.stringify(ob))
       fetch('https://hestia-chat.herokuapp.com/api/v1/getMessages',{
         method:"POST",
         headers:  new Headers({
@@ -84,7 +85,7 @@ class Chat extends React.Component{
       obj["receiver"] = parseInt(localStorage.getItem("receiver_id"));
       obj["from"] = parseInt(localStorage.getItem("user_id"));
       obj["text"] = messageString;
-
+      console.log("/sendMessage", JSON.stringify(obj))
       fetch("https://hestia-chat.herokuapp.com/api/v1/sendMessage",{
         method:"POST",
         headers: new Headers({

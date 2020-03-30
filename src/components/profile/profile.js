@@ -108,6 +108,7 @@ class Profile extends React.Component{
 
         const mychatslist = mychats.length;        
         const reqlist = Requests.length;
+        console.log(reqlist)
         if(this.state.goto === "myreqs"){
             return(
                 <Myreqs g={this.props}/>

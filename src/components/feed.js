@@ -37,19 +37,38 @@ class Feed extends React.Component {
             visible: true
         })
     }
-    handleStore = (r,i) => () => {
+    handleStore = (r,i, ri) => () => {
         this.setState({
             visible1: true,
         })
         window.localStorage.setItem("receiver_id", r);
         window.localStorage.setItem("item",i);
     }
-    handleChat= (r,i) => () =>{
+    handleChat= (r,i,ri ) => () =>{
         this.setState({
             visible2: true
         })
         window.localStorage.setItem("receiver_id", r);
         window.localStorage.setItem("item",i);
+
+        console.log(ri);
+        postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: ri,location:this.state.city})
+        .then(data => console.log(data)) // Result from the `response.json()` call
+        .catch(error => console.error(error))
+
+        function postRequest(url, data) {
+        return fetch(url, {
+            credentials: 'same-origin', // 'include', default: 'omit'
+            method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
+            body: JSON.stringify(data), // Coordinate the body type with 'Content-Type'
+            headers: new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem("token")
+            }),
+        })
+        .then(response => response.json())
+        }
+        
     }
     handleOk = e => {
         // console.log(e);
@@ -89,40 +108,31 @@ class Feed extends React.Component {
       };
 
 
-      acceptrequest = (id) =>{
-        console.log(id)
-        postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: id,location:this.state.city})
-                .then(data => console.log(data)) // Result from the `response.json()` call
-                .catch(error => console.error(error))
+    //   acceptrequest = (id) =>{
+    //     console.log(id)
+    //     postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: id,location:this.state.city})
+    //             .then(data => console.log(data)) // Result from the `response.json()` call
+    //             .catch(error => console.error(error))
 
-                function postRequest(url, data) {
-                return fetch(url, {
-                    credentials: 'same-origin', // 'include', default: 'omit'
-                    method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
-                    body: JSON.stringify(data), // Coordinate the body type with 'Content-Type'
-                    headers: new Headers({
-                    'Content-Type': 'application/json',
-                    'Authorization': localStorage.getItem("token")
-                    }),
-                })
-                .then(response => response.json())
-                }
+    //             function postRequest(url, data) {
+    //             return fetch(url, {
+    //                 credentials: 'same-origin', // 'include', default: 'omit'
+    //                 method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
+    //                 body: JSON.stringify(data), // Coordinate the body type with 'Content-Type'
+    //                 headers: new Headers({
+    //                 'Content-Type': 'application/json',
+    //                 'Authorization': localStorage.getItem("token")
+    //                 }),
+    //             })
+    //             .then(response => response.json())
+    //             }
 
 
-      }
+    //   }
 
 
 
       createChat = () => {
-
-
-
-
-
-
-
-
-
           var obj ={}
           obj["receiver"] = parseInt(localStorage.getItem("receiver_id"))
           obj["sender"] = parseInt(localStorage.getItem("user_id"))
@@ -228,16 +238,7 @@ class Feed extends React.Component {
                 //       err => console.log(err)
                 //     );
                 //     console.log(this.state.latitude)
-                //   }
-                
-
-
-
-
-
-
-
-            
+                //   }   
         }
             
     render(){
@@ -266,7 +267,7 @@ class Feed extends React.Component {
                                         <img src={store} alt="location"></img>
                                     </div> 
                                     <div className="imgback">
-                                        <img onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`)} src={check} alt="location" onClick={()=>{this.acceptrequest(request.id)}}></img>
+                                        <img onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`, `${request.id}`)} src={check} alt="location"></img>
                                     </div>
                                 </Col>
                             </Row>

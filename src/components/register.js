@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import { Form, Input, Button } from 'antd';
-import logo from '../assets/group_5.png';
+import logo from '../assets/logo.png';
 import {Link} from 'react-router-dom';
 import google from '../assets/group.png';
 import { useAlert } from 'react-alert';

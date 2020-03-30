@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import logo from '../assets/group_5.png';
+import logo from '../assets/logo.png';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 
