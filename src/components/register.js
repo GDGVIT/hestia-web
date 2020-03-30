@@ -76,7 +76,8 @@ const Register = (props) => {
       <Form.Item
         name={['user', 'name']}
         rules={[
-          {
+          { 
+            type: 'text',
             required: true,
           },
         ]}
