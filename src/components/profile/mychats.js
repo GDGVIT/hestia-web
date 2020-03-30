@@ -15,7 +15,8 @@ class Mychat extends React.Component{
         this.state={
             goto: "mychats",
             mychats: [],
-            otherchats:[]
+            otherchats:[],
+            value:'mr'
         }
         // console.log(this.props)
     }
@@ -36,7 +37,14 @@ class Mychat extends React.Component{
         }else{
             this.props.g.history.push("/chat");
         }
-}
+    }
+
+    handleClick = (e) => () => {
+        console.log(e)
+        this.setState({
+            value: e
+        })
+    }
     componentDidMount(){
         if(localStorage.getItem("token")){
          console.log("someone's logged in")
@@ -158,6 +166,12 @@ class Mychat extends React.Component{
                 <div>You don't have any chats as yet</div>
             )
             
+            let content;
+            if(this.state.value == 'mr'){
+            content = <div>{mychatslist}</div>
+            } else {
+            content = <div>{otherchatslist}</div>
+            }
            return( 
             <div className="mychats">
                 <div className="main-title">    
@@ -175,12 +189,11 @@ class Mychat extends React.Component{
  
                 </div>
                 <Radio.Group defaultValue="mr" buttonStyle="solid">
-                    <Radio.Button value="mr">My Requests</Radio.Button>
-                    <Radio.Button value="or">Other Requests</Radio.Button>
+                    <Radio.Button value="mr" onClick = {this.handleClick('mr')}>My Requests</Radio.Button>
+                    <Radio.Button value="or" onClick = {this.handleClick('or')}>Other Requests</Radio.Button>
                 </Radio.Group>
                 <div className="main-content">
-                    {mychatslist}
-                    {otherchatslist}
+                    {content}
                 </div>
                 <Nav />
             </div>              
