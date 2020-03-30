@@ -16,18 +16,26 @@ class Mychat extends React.Component{
             goto: "mychats",
             mychats: []
         }
-        console.log(this.props)
+        // console.log(this.props)
     }
     gotoProfile = () => {
         this.setState({
             goto: "profile"
         });
     }
-    gotoChat=(r,i) => () => {
+    gotoChat = (r,i) => () => {
+        console.log(this.props)
         window.localStorage.setItem("receiver_id", r);
         window.localStorage.setItem("item",i);
-        this.props.g.history.push("/chat");
-    }
+        
+        if(this.props.history){
+            this.props.history.push("/chat")
+        }else if(this.props.g.p){
+            this.props.g.p.g.history.push("/chat");
+        }else{
+            this.props.g.history.push("/chat");
+        }
+}
     componentDidMount(){
         if(localStorage.getItem("token")){
          console.log("someone's logged in")

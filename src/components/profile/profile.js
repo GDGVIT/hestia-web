@@ -23,12 +23,13 @@ class Profile extends React.Component{
         }
     }
     goBack = () =>{
-        if(this.props.p){
-            this.props.p.g.history.push("/feed");
-            // this.props.p.history.push("/feed");
-        }else{
-            this.props.history.push("/feed");
-        }
+        console.log(this.props)
+        // if(this.props.p){
+        //     this.props.p.g.history.push("/feed");
+        //     // this.props.p.history.push("/feed");
+        // }else{
+        //     this.props.history.push("/feed");
+        // }
         
         // this.props.history.push("/feed");
     }

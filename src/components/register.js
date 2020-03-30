@@ -69,11 +69,6 @@ const Register = (props) => {
     
   return (
       <div className="eqimargin">
-      <ReCaptcha
-            sitekey="6LdiB-UUAAAAACYC2AlMS9hrw18fQA4FK7-s0LDw"
-            action='/register'
-            verifyCallback={verifyCallback}
-        />
       <div className="hestia-logo-reg">
           <img src={logo} alt="Hestialogo"></img>
       </div>
@@ -151,6 +146,13 @@ const Register = (props) => {
       </Form.Item>
       <Form.Item className="already">
         <Link to="/Login">Already have an account? Login</Link>
+      </Form.Item>
+      <Form.Item>
+      <ReCaptcha
+            sitekey="6LdiB-UUAAAAACYC2AlMS9hrw18fQA4FK7-s0LDw"
+            action='/register'
+            verifyCallback={verifyCallback}
+        />
       </Form.Item>
     </Form>
     </div>
