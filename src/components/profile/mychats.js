@@ -14,7 +14,8 @@ class Mychat extends React.Component{
         super(props);
         this.state={
             goto: "mychats",
-            mychats: []
+            mychats: [],
+            otherchats:[]
         }
         // console.log(this.props)
     }
@@ -43,7 +44,9 @@ class Mychat extends React.Component{
             this.props.g.history.push("/login");
         }
         var obj = {"user_id" : parseInt(localStorage.getItem("user_id"))}
-        fetch('https://hestia-chat.herokuapp.com/api/v1/getChats',{
+
+        // my chats
+        fetch('https://hestia-chat.herokuapp.com/api/v1/getMyChats',{
             method:"POST",
             headers: new Headers({
                 'Authorization': localStorage.getItem("token")
@@ -60,10 +63,31 @@ class Mychat extends React.Component{
         console.log(this.state)
         })
         .catch(error => console.error(error))
+
+        // other chats
+        fetch('https://hestia-chat.herokuapp.com/api/v1/getOtherChats',{
+            method:"POST",
+            headers: new Headers({
+                'Authorization': localStorage.getItem("token")
+            }),
+            body: JSON.stringify(obj)
+        })
+        .then(response => response.json())
+        .then(data => {
+        console.log(data)
+        this.setState({
+            otherchats: data.chats,
+            
+        });
+        console.log(this.state)
+        })
+        .catch(error => console.error(error))
+
      }
 
     render(){
         const { mychats } = this.state;
+        const {otherchats} = this.state;
         if(this.state.goto === "profile"){
             return(
                 <Profile p={this.props}/>
@@ -101,7 +125,38 @@ class Mychat extends React.Component{
             ) : (
                 <div>You don't have any chats as yet</div>
             )
-        
+            
+            const otherchatslist = otherchats.length ? (
+                otherchats.map(
+                    data => {
+                        return (
+                            <Card key = {data.receiver}>
+                            <Row>
+                                <Col span={17}>
+                                    <div className="feed-card-header">
+                                        <span>
+                                            <strong>{data.title}</strong>
+                                        </span>
+                                
+                                    </div>
+                                    <div className="feed-card-date">
+                                        <p>{data.receiver}</p>
+                                    </div>
+                                </Col>
+                                <Col span={7} className="iconz">
+                                    <div className="imgback" onClick={this.gotoChat(`${data.receiver}`, `${data.title}`)}>
+                                        <img src={front} alt="location"></img>
+                                    </div>
+                                </Col>
+                            </Row>
+                        </Card>
+                        )
+
+                    }
+                )
+            ) : (
+                <div>You don't have any chats as yet</div>
+            )
             
            return( 
             <div className="mychats">
@@ -125,6 +180,7 @@ class Mychat extends React.Component{
                 </Radio.Group>
                 <div className="main-content">
                     {mychatslist}
+                    {otherchatslist}
                 </div>
                 <Nav />
             </div>              

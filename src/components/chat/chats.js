@@ -10,7 +10,7 @@ import {withRouter} from 'react-router-dom';
 
 // const { Search } = Input;
 let id = parseInt(localStorage.getItem("receiver_id"))
-let url = 'ws://hestia-chat.herokuapp.com/api/v1/ws?chat=17';
+let url = 'ws://hestia-chat.herokuapp.com/api/v1/ws?chat='+id;
 console.log(url)
 
 class Chat extends React.Component{
@@ -19,6 +19,7 @@ class Chat extends React.Component{
         this.state={
             currentUser: null,
             messages: [],
+            initialmsg: [],
             receiver_id : parseInt(localStorage.getItem("receiver_id"))
         }
     }
@@ -53,7 +54,12 @@ class Chat extends React.Component{
         body:JSON.stringify(ob)
       })
       .then(res => res.json())
-      .then(res => console.log(res))
+      .then(res => {
+        this.setState({
+          initialmsg: res.messages
+        })
+        console.log(res)
+      })
       .catch(err => console.log(err))
 
       this.ws.onopen = () => {
@@ -64,8 +70,8 @@ class Chat extends React.Component{
       this.ws.onmessage = evt => {
         // on receiving a message, add it to the list of messages
         const message = JSON.parse(evt.data)
-        console.log(message)
-        this.addMessage(message)
+        console.log(message, message.text)
+        // this.addMessage(message.text)
         return false;
       }
 
@@ -107,6 +113,23 @@ class Chat extends React.Component{
   }
 
     render(){
+
+      const {initialmsg} = this.state;
+      const initial = initialmsg.length ? (
+        initialmsg.map(
+          msg => {
+            return(
+              <Card style={{ width: "80%", backgroundColor: "#00d2d2", float:"left", color:"#fff"}}>
+              <p style={{fontWeight:700}}>Name</p>
+              <p>{msg.text}</p>
+              <p><i>{msg.CreatedAt}</i></p>
+            </Card>
+            )
+          }
+        )
+      ) : (
+        <div style={{textAlign:"center", marginTop:"20px"}}> Start typing to initiate conversation </div>
+      )
       const {messages} = this.state;
       messages.reverse();
       const chatslist = messages.length ? (
@@ -122,7 +145,7 @@ class Chat extends React.Component{
           }
         )
       ) : (
-        <div style={{textAlign:"center", marginTop:"20px"}}> Start typing to initiate conversation </div>
+      <div>{initial}</div>
       )
         return(
             <div>
@@ -145,6 +168,7 @@ class Chat extends React.Component{
               {/* Messages */}
 
               <div style={{height:"65vh", marginTop:"20px", overflow:"scroll"}}>
+                {initial}
                 {chatslist}
               </div>  
             <div>
