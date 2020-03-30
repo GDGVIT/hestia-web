@@ -20,12 +20,12 @@ class Report extends React.Component{
       onSubmit = () =>{
           console.log("Submitting");
           var obj ={}
-          obj["reported_by"] = parseInt(localStorage.getItem("receiver_id"));
+          obj["user_id"] = parseInt(localStorage.getItem("receiver_id"));
           obj["reason"] = this.state.value;
 
           console.log(obj);
 
-        fetch('https://hestia-report.herokuapp.com/user/report/',{
+        fetch('https://hestia-report.herokuapp.com/api/report/',{
             method:"POST",
             headers: new Headers({
                 "Content-Type": "application/json",

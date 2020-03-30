@@ -23,7 +23,9 @@ class Mychat extends React.Component{
             goto: "profile"
         });
     }
-    gotoChat=()=>{
+    gotoChat=(r,i) => () => {
+        window.localStorage.setItem("receiver_id", r);
+        window.localStorage.setItem("item",i);
         this.props.g.history.push("/chat");
     }
     componentDidMount(){
@@ -78,7 +80,7 @@ class Mychat extends React.Component{
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    <div className="imgback" onClick={this.gotoChat}>
+                                    <div className="imgback" onClick={this.gotoChat(`${data.receiver}`, `${data.title}`)}>
                                         <img src={front} alt="location"></img>
                                     </div>
                                 </Col>

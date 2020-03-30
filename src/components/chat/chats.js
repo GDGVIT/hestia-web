@@ -110,7 +110,7 @@ class Chat extends React.Component{
         messages.map(
           msg => {
             return(
-              <Card style={{ width: "80%", backgroundColor: "#00d2d2", float:"left", color:"white"}}>
+              <Card style={{ width: "80%", backgroundColor: "#fff", float:"right", color:"#000"}}>
               <p style={{fontWeight:700}}>Name</p>
               <p>{msg}</p>
               <p><i>Date and Time</i></p>

@@ -37,7 +37,7 @@ class Feed extends React.Component {
             visible: true
         })
     }
-    handleStore = (r,i, ri) => () => {
+    handleStore = (r,i) => () => {
         this.setState({
             visible1: true,
         })
