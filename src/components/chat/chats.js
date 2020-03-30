@@ -33,12 +33,16 @@ class Chat extends React.Component{
     }
     gotoProfile=()=>{
       this.props.history.push("/profile");
-      this.setState({
-        initialmsg : []
-      })
+      // this.setState({
+      //   initialmsg : []
+      // })
   }
   goBack=()=>{
+    this.setState({
+      initialmsg: []
+    })
     this.props.history.push("/mychats");
+    console.log(this.state)
   }
 
     
@@ -145,6 +149,7 @@ class Chat extends React.Component{
     render(){
 
       const {initialmsg} = this.state;
+      console.log(initialmsg)
       const initial = initialmsg.length ? (
         initialmsg.map(
           msg => {

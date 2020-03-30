@@ -119,11 +119,11 @@ class Mychat extends React.Component{
                                 
                                     </div>
                                     <div className="feed-card-date">
-                                        <p>{data.receiver}</p>
+                                        <p>{data.sender}</p>
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    <div className="imgback" onClick={this.gotoChat(`${data.receiver}`, `${data.title}`)}>
+                                    <div className="imgback" onClick={this.gotoChat(`${data.sender}`, `${data.title}`)}>
                                         <img src={front} alt="location"></img>
                                     </div>
                                 </Col>
