@@ -172,91 +172,13 @@ class Feed extends React.Component {
             }), 
             err => console.log(err)
           );
-
-
-
-
-
-          var latlng;
-          latlng = new google.maps.LatLng(40.730885, -73.997383); // New York, US
-          //latlng = new google.maps.LatLng(37.990849233935194, 23.738339349999933); // Athens, GR
-          //latlng = new google.maps.LatLng(48.8567, 2.3508); // Paris, FR
-          //latlng = new google.maps.LatLng(47.98247572667902, -102.49018710000001); // New Town, US
-          //latlng = new google.maps.LatLng(35.44448406385493, 50.99001635390618); // Parand, Tehran, IR
-          //latlng = new google.maps.LatLng(34.66431108560504, 50.89113940078118); // Saveh, Markazi, IR
           
-          new google.maps.Geocoder().geocode({'latLng' : latlng}, function(results, status) {
-              if (status == google.maps.GeocoderStatus.OK) {
-                  if (results[1]) {
-                      var country = null, countryCode = null, city = null, cityAlt = null;
-                      var c, lc, component;
-                      for (var r = 0, rl = results.length; r < rl; r += 1) {
-                          var result = results[r];
-          
-                          if (!city && result.types[0] === 'locality') {
-                              for (c = 0, lc = result.address_components.length; c < lc; c += 1) {
-                                  component = result.address_components[c];
-          
-                                  if (component.types[0] === 'locality') {
-                                      city = component.long_name;
-                                      break;
-                                  }
-                              }
-                          }
-                          else if (!city && !cityAlt && result.types[0] === 'administrative_area_level_1') {
-                              for (c = 0, lc = result.address_components.length; c < lc; c += 1) {
-                                  component = result.address_components[c];
-          
-                                  if (component.types[0] === 'administrative_area_level_1') {
-                                      cityAlt = component.long_name;
-                                      break;
-                                  }
-                              }
-                          } else if (!country && result.types[0] === 'country') {
-                              country = result.address_components[0].long_name;
-                              countryCode = result.address_components[0].short_name;
-                          }
-          
-                          if (city && country) {
-                              break;
-                          }
-                      }
-          
-                      console.log("City: " + city + ", City2: " + cityAlt + ", Country: " + country + ", Country Code: " + countryCode);
-                  }
-              }
-          });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        // this.setState({
+        //     token: localStorage.getItem("token")
+        // })
+        // console.log(this.state);
         fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+this.state.city, {
             headers: new Headers({
             'Authorization': localStorage.getItem("token")
@@ -272,6 +194,48 @@ class Feed extends React.Component {
             console.log(this.state)
             })
             .catch(error => console.error(error))
+
+            // let latitude;
+            // let longitude;
+            // function getLocation() {
+            //     if (navigator.geolocation) {
+            //         navigator.geolocation.getCurrentPosition(showPosition);
+            //             } 
+            //         }
+            // function showPosition(position) {
+            //     latitude = position.coords.latitude;
+            //     longitude = position.coords.longitude;
+                
+            //     }
+                
+
+
+            //     this.setState({
+            //         lat: latitude,
+            //         long: longitude
+            //     })
+
+
+
+                // position = async () => {
+                //     await navigator.geolocation.getCurrentPosition(
+                //       position => this.setState({ 
+                //         latitude: position.coords.latitude, 
+                //         longitude: position.coords.longitude
+                //       }), 
+                //       err => console.log(err)
+                //     );
+                //     console.log(this.state.latitude)
+                //   }
+                
+
+
+
+
+
+
+
+            
         }
             
     render(){
@@ -300,7 +264,7 @@ class Feed extends React.Component {
                                         <img src={store} alt="location"></img>
                                     </div> 
                                     <div className="imgback">
-                                        <img onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`)} src={check} alt="location" onClick={()=>{this.acceptrequest(request.id)}}></img>
+                                        <img onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`)} src={check} alt="location"></img>
                                     </div>
                                 </Col>
                             </Row>

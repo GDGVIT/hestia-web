@@ -3,7 +3,7 @@ import { useAlert } from 'react-alert';
 import { Form, Input, Button, Modal } from 'antd';
 import {Link} from 'react-router-dom';
 import google from '../assets/group.png';
-import logo from '../assets/group_5.png';
+import logo from '../assets/logo.png';
 import check from '../assets/check.png';
 
 
