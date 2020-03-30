@@ -2,7 +2,6 @@ import React from 'react';
 import profile from '../../assets/profile.png';
 import { Card, Row, Col } from 'antd';
 import Profile from './profile';
-import deletez from '../../assets/delete.png';
 import { Radio } from 'antd';
 import Nav from '../nav';
 import front from '../../assets/front.png';
@@ -13,34 +12,24 @@ class Mychat extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            goto: "mychats",
             mychats: []
         }
         // console.log(this.props)
     }
     gotoProfile = () => {
-        this.setState({
-            goto: "profile"
-        });
+        this.props.history.push("/profile")
     }
     gotoChat = (r,i) => () => {
         console.log(this.props)
         window.localStorage.setItem("receiver_id", r);
         window.localStorage.setItem("item",i);
-        
-        if(this.props.history){
-            this.props.history.push("/chat")
-        }else if(this.props.g.p){
-            this.props.g.p.g.history.push("/chat");
-        }else{
-            this.props.g.history.push("/chat");
-        }
+        this.props.history.push("/chat")
 }
     componentDidMount(){
         if(localStorage.getItem("token")){
          console.log("someone's logged in")
         }else{
-            this.props.g.history.push("/login");
+            this.props.history.push("/login");
         }
         var obj = {"user_id" : parseInt(localStorage.getItem("user_id"))}
         fetch('https://hestia-chat.herokuapp.com/api/v1/getChats',{
@@ -54,8 +43,7 @@ class Mychat extends React.Component{
         .then(data => {
         console.log(data)
         this.setState({
-            mychats: data.chats,
-            
+            mychats: data.chats
         });
         console.log(this.state)
         })
@@ -64,11 +52,6 @@ class Mychat extends React.Component{
 
     render(){
         const { mychats } = this.state;
-        if(this.state.goto === "profile"){
-            return(
-                <Profile p={this.props}/>
-            );
-        }else if(this.state.goto === "mychats"){
 
             const mychatslist = mychats.length ? (
                 mychats.map(
@@ -129,7 +112,6 @@ class Mychat extends React.Component{
                 <Nav />
             </div>              
         );
-        }
     }
 }
 export default withRouter(Mychat);

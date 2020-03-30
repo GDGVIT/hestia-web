@@ -11,7 +11,11 @@ import Profile from "./components/profile/profile";
 import Feed from "./components/feed";
 import News from "./components/news";
 import Report from './components/report';
-import { loadReCaptcha } from 'react-recaptcha-v3'
+import Mychat from './components/profile/mychats';
+import Myreqs from './components/profile/myreqs';
+import Edit from './components/profile/edit';
+
+import { loadReCaptcha } from 'react-recaptcha-v3';
 
 class App extends React.Component {
   constructor(props){
@@ -49,6 +53,9 @@ class App extends React.Component {
           <Route exact path='/feed' component={Feed}/>
           <Route exact path='/news' component={News}/>
           <Route exact path='/report' component={Report}/>
+          <Route exact path='/mychats' component={Mychat}/>
+          <Route exact path='/myreqs' component={Myreqs}/>
+          <Route exact path='/edit' component={Edit}/>
 
           {this.showNav()}
         </div>

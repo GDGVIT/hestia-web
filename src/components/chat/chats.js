@@ -29,6 +29,9 @@ class Chat extends React.Component{
     gotoProfile=()=>{
       this.props.history.push("/profile");
   }
+  goBack=()=>{
+    this.props.history.push("/mychats");
+  }
 
     componentDidMount(){
       if(localStorage.getItem("token")){
@@ -129,7 +132,7 @@ class Chat extends React.Component{
             <div>    
                 <Row style={{marginTop:20}}>
                     <Col span={4}>
-                      <div className="imgback" onClick={this.gotoProfile}>
+                      <div className="imgback" onClick={this.goBack}>
                         <img src={backbutton} alt = "Back-button" style = {{height: "3vh", marginLeft:"10px"}}></img>
                       </div>
                     </Col>
