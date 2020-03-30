@@ -105,6 +105,7 @@ class Chat extends React.Component{
 
     render(){
       const {messages} = this.state;
+      messages.reverse();
       const chatslist = messages.length ? (
         messages.map(
           msg => {
