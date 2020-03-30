@@ -22,6 +22,7 @@ class Chat extends React.Component{
             currentUser: null,
             messages: [],
             initialmsg: [],
+            me: false,
             receiver_id : parseInt(localStorage.getItem("receiver_id"))
         }
     }
@@ -141,7 +142,7 @@ class Chat extends React.Component{
         initialmsg.map(
           msg => {
             return(
-              <Card style={{ width: "80%", backgroundImage: `url('${blueback}')` , float:"left", color:"#fff", boxShadow:"none", paddingLeft:"35px"}}>
+              <Card style={{ width: "80%", backgroundImage: msg.sender == localStorage.getItem("user_id") ? `url('${whiteback}')` : `url('${blueback}')`  , float: msg.sender == localStorage.getItem("user_id") ? "right" : "left", color: msg.sender == localStorage.getItem("user_id") ? "#000" : "#fff", boxShadow:"none", paddingLeft: msg.sender == localStorage.getItem("user_id") ? "none" : "35px"}}>
               <p style={{fontWeight:700}}>Receiver: {msg.receiver}</p>
               <p style={{fontWeight:700}}>Sender: {msg.sender}</p>
               <p>{msg.text}</p>
@@ -159,7 +160,7 @@ class Chat extends React.Component{
         messages.map(
           msg => {
             return(
-              <Card style={{ width: "80%", backgroundImage: `url('${whiteback}')`, float:"right", color:"#000", boxShadow:"none"}}>
+              <Card style={{ width: "80%", backgroundImage: msg.sender == localStorage.getItem("user_id") ? `url('${whiteback}')` : `url('${blueback}')`  , float: msg.sender == localStorage.getItem("user_id") ? "right" : "left", color: msg.sender == localStorage.getItem("user_id") ? "#000" : "#fff", boxShadow:"none", paddingLeft: msg.sender == localStorage.getItem("user_id") ? "none" : "35px"}}>
               <p style={{fontWeight:700}}>Receiver: {msg.receiver}</p>
               <p style={{fontWeight:700}}>Sender: {msg.sender}</p>
               <p>{msg.text}</p>
