@@ -20,7 +20,7 @@ class Feed extends React.Component {
             visible1:false,
             visible2:false,
             requests: [ ],
-            city: '',
+            city: 'surat',
             item_name: null,
             quantity: '',
             token: '',
@@ -155,11 +155,13 @@ class Feed extends React.Component {
           .then(res => {
               console.log(res)
               if(res.code == 200){
-                this.props.history.push("/chat");
+                  window.localStorage.setItem("chat_name", res.chat_room.receiver_name )
+                  window.localStorage.setItem("item", res.chat_room.title)
+                // this.props.history.push("/chat");
               }
               if(res.status == 500){
                 this.props.alert.show("Chatroom exists.");
-                this.props.history.push("/profile");
+                // this.props.history.push("/profile");
               }
           })
           .catch(err => console.log(err))
@@ -176,33 +178,33 @@ class Feed extends React.Component {
         window.localStorage.setItem("acceptcheck", `${e.target.checked}`);
         // console.log(localStorage.getItem("acceptcheck"))
       }
-      componentWillMount(){
-        navigator.geolocation.getCurrentPosition(
-            position => this.setState({ 
-              latitude: position.coords.latitude, 
-              longitude: position.coords.longitude
-            }), 
-            err => console.log(err)
+    //   componentWillMount(){
+    //     navigator.geolocation.getCurrentPosition(
+    //         position => this.setState({ 
+    //           latitude: position.coords.latitude, 
+    //           longitude: position.coords.longitude
+    //         }), 
+    //         err => console.log(err)
             
-          );
-          console.log(this.state.latitude)
-            fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/'+this.state.latitude+','+this.state.longitude+'.json?access_token=pk.eyJ1Ijoibm94MTIiLCJhIjoiY2s4Zm5obnZ0MDFwajNtcDAxanFkeXM1ayJ9.YMGj-nXopQXZfh5NKpLiCg', {
-            })
-            .then(response =>{
-            console.log(response)
-            return response.json()
-            })
-            .then(data => {
-            console.log(data)
-            this.setState({
-                city:data.features[0].place_name
-            })
-            console.log(this.state)
-            })
-            .catch(error => console.error(error))
+    //       );
+    //       console.log(this.state.latitude)
+    //         fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/'+this.state.latitude+','+this.state.longitude+'.json?access_token=pk.eyJ1Ijoibm94MTIiLCJhIjoiY2s4Zm5obnZ0MDFwajNtcDAxanFkeXM1ayJ9.YMGj-nXopQXZfh5NKpLiCg', {
+    //         })
+    //         .then(response =>{
+    //         console.log(response)
+    //         return response.json()
+    //         })
+    //         .then(data => {
+    //         console.log(data)
+    //         this.setState({
+    //             city:data.features[0].place_name
+    //         })
+    //         console.log(this.state)
+    //         })
+    //         .catch(error => console.error(error))
 
 
-      }
+    //   }
       componentDidMount(){  
         if(localStorage.getItem("token")){
         //  console.log("someone's logged in")
@@ -300,12 +302,12 @@ class Feed extends React.Component {
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
+                                <div className="imgback">
+                                        <img onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`)} src={check} alt="location"></img>
+                                    </div>
                                     <div className="imgback"  onClick = {this.handleStore(`${request.request_made_by}`, `${request.item_name}`)}>
                                         <img src={store} alt="location"></img>
                                     </div> 
-                                    <div className="imgback">
-                                        <img onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`)} src={check} alt="location"></img>
-                                    </div>
                                 </Col>
                             </Row>
                         </Card>
