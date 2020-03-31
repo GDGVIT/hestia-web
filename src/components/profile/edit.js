@@ -77,7 +77,7 @@ class Edit extends React.Component{
                 method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
                 body: JSON.stringify(data), // Coordinate the body type with 'Content-Type'
                 headers: new Headers({
-                'Authorization':localStorage.getItem("token")
+                'token':localStorage.getItem("token")
                 }),
             })
             .then(response => response.json())
