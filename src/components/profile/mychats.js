@@ -121,7 +121,7 @@ class Mychat extends React.Component{
         }
         if(data.code == 200){
             this.setState({
-                mychats: data.chats,
+                otherchats: data.chats,
                 
             });
         }
@@ -204,16 +204,6 @@ class Mychat extends React.Component{
                 <div>You don't have any chats as yet</div>
             )
             
-            let content;
-            if(this.state.value == 'mr'){
-            content = <div>{mychatslist}</div>
-            } 
-            if(this.state.value == 'or'){
-                console.log('other chats', {otherchatslist})
-                content = <div>{otherchatslist}</div>
-                console.log(content)
-            }
-            console.log(content)
            return( 
             <div className="mychats">
                 <div className="main-title">    
@@ -235,7 +225,8 @@ class Mychat extends React.Component{
                     <Radio.Button value="or" onClick = {this.handleClick('or')}>Other Requests</Radio.Button>
                 </Radio.Group>
                 <div className="main-content">
-                    {content}
+                    {this.state.value == "mr" && <div>{mychatslist}</div>}
+                    {this.state.value == "or" && <div>{otherchatslist}</div>}
                 </div>
                 <Nav />
             </div>              
