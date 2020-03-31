@@ -68,15 +68,16 @@ class Feed extends React.Component {
         // console.log(values);
         this.setState(values)
         console.log(this.state)
-        postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.city)
+        postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.city,this.state.description)
                 .then(data => this.props.alert.show("Request added"))
                 .catch(error => console.error(error))
 
-                function postForm(url,name,quantity,city) {
+                function postForm(url,name,quantity,city,description) {
                     var object ={};
                     object["item_name"] = name;
                     object["quantity"] = quantity;
                     object["location"] = city;
+                    object["description"] = description;
                     // console.log(object)
                 
                     
@@ -118,15 +119,16 @@ class Feed extends React.Component {
 
 
 
-      createChat = () => {
+      createChat = (id) => {
+
         //   Accept the item
-        postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
+        postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: id,location:this.state.city})
         .then(data => console.log(data)) // Result from the `response.json()` call
         .catch(error => console.error(error))
 
         function postRequest(url, data) {
         return fetch(url, {
-            credentials: 'same-origin', // 'include', default: 'omit'
+
             method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
             body: JSON.stringify(data), // Coordinate the body type with 'Content-Type'
             headers: new Headers({
@@ -178,40 +180,39 @@ class Feed extends React.Component {
         window.localStorage.setItem("acceptcheck", `${e.target.checked}`);
         // console.log(localStorage.getItem("acceptcheck"))
       }
-    //   componentWillMount(){
-    //     navigator.geolocation.getCurrentPosition(
-    //         position => this.setState({ 
-    //           latitude: position.coords.latitude, 
-    //           longitude: position.coords.longitude
-    //         }), 
-    //         err => console.log(err)
+      componentWillMount(){
+        navigator.geolocation.getCurrentPosition(
+            position => this.setState({ 
+              latitude: position.coords.latitude, 
+              longitude: position.coords.longitude
+            }), 
+            err => console.log(err)
             
-    //       );
-    //       console.log(this.state.latitude)
-    //         fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/'+this.state.latitude+','+this.state.longitude+'.json?access_token=pk.eyJ1Ijoibm94MTIiLCJhIjoiY2s4Zm5obnZ0MDFwajNtcDAxanFkeXM1ayJ9.YMGj-nXopQXZfh5NKpLiCg', {
-    //         })
-    //         .then(response =>{
-    //         console.log(response)
-    //         return response.json()
-    //         })
-    //         .then(data => {
-    //         console.log(data)
-    //         this.setState({
-    //             city:data.features[0].place_name
-    //         })
-    //         console.log(this.state)
-    //         })
-    //         .catch(error => console.error(error))
+          );
+          console.log(this.state.latitude)
+            
 
 
-    //   }
+      }
       componentDidMount(){  
         if(localStorage.getItem("token")){
         //  console.log("someone's logged in")
         }else{
             this.props.history.push("/login");
         }
-
+        if ("geolocation" in navigator) {
+            console.log("Available");
+          } else {
+            console.log("Not Available");
+          }
+          navigator.geolocation.getCurrentPosition(function(position) {
+            
+            localStorage.setItem("latitude",position.coords.latitude)
+            localStorage.setItem("longitude",position.coords.longitude)
+            
+            
+          });
+          console.log(localStorage.getItem("latitude"))
         let token =localStorage.getItem("token");
         // this.setState({
         //     token: localStorage.getItem("token")
@@ -219,6 +220,7 @@ class Feed extends React.Component {
         console.log(this.state);
         fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+this.state.city, {
             headers: new Headers({
+                // 'Content-Type': 'application/json',
             'Authorization': localStorage.getItem("token")
             })
             })
@@ -236,27 +238,40 @@ class Feed extends React.Component {
             })
             .catch(error => console.error(error))
 
-            let latitude;
-            let longitude;
-            function getLocation() {
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(showPosition);
-                        } 
-                    }
-            function showPosition(position) {
-                latitude = position.coords.latitude;
-                longitude = position.coords.longitude;
-                }
+            // let latitude;
+            // let longitude;
+            // getLocation =() => {
+            //     if (navigator.geolocation) {
+            //         navigator.geolocation.getCurrentPosition(showPosition);
+            //             } 
+            //         }
+            // function showPosition(position) {
+            //     latitude = position.coords.latitude;
+            //     longitude = position.coords.longitude;
+            //     }
                 
 
 
-                this.setState({
-                    latitude: latitude,
-                    longitude: longitude
-                })
+            //     this.setState({
+            //         latitude: latitude,
+            //         longitude: longitude
+            //     })
 
 
-
+            fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/'+localStorage.getItem("latitude")+','+localStorage.getItem("longitude")+'.json?access_token=pk.eyJ1Ijoibm94MTIiLCJhIjoiY2s4Zm5obnZ0MDFwajNtcDAxanFkeXM1ayJ9.YMGj-nXopQXZfh5NKpLiCg', {
+            })
+            .then(response =>{
+            console.log(response)
+            return response.json()
+            })
+            .then(data => {
+            console.log(data)
+            this.setState({
+                city:data.features[0].place_name
+            })
+            console.log(this.state)
+            })
+            .catch(error => console.error(error))
                 
 
 
@@ -291,7 +306,7 @@ class Feed extends React.Component {
                                 </Col>
                                 <Col span={7} className="iconz">
                                 <div className="imgback">
-                                        <img onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`)} src={check} alt="location"></img>
+                                        <img onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`)} src={check} alt="location" onClick={this.createChat(`${request.id}`)}></img>
                                     </div>
                                     <div className="imgback"  onClick = {this.handleStore(`${request.request_made_by}`, `${request.item_name}`)}>
                                         <img src={store} alt="location"></img>
@@ -346,6 +361,13 @@ class Feed extends React.Component {
                         >
                             <Input 
                                 placeholder="Quantity"
+                            />
+                        </Form.Item>
+                        <Form.Item
+                            name="description"
+                        >
+                            <Input 
+                                placeholder="Description"
                             />
                         </Form.Item>
                         <Form.Item className="butn">
