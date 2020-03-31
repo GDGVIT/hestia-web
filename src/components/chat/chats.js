@@ -63,7 +63,7 @@ class Chat extends React.Component{
       ws.onopen = () => {
         // on connecting, do nothing but log it to the console
           console.log('connected');
-          this.props.alert.show("Online")
+          // this.props.alert.show("Online")
           this.setState({ ws: ws });
           console.log(url)
 
@@ -95,7 +95,7 @@ class Chat extends React.Component{
 
         that.timeout = that.timeout + that.timeout; //increment retry interval
         connectInterval = setTimeout(this.check, Math.min(10000, that.timeout)); //call check function after timeout
-          this.props.alert.show("Disconnected")
+          // this.props.alert.show("Disconnected")
         }
 
         // Onerror listener
@@ -196,12 +196,13 @@ class Chat extends React.Component{
       const initial = initialmsg.length ? (
         initialmsg.map(
           msg => {
+            var date = new Date(msg.CreatedAt)
             return(
               <Card style={{ width: "80%", backgroundImage: msg.sender == localStorage.getItem("user_id") ? `url('${whiteback}')` : `url('${blueback}')`  , backgroundRepeat:"no-repeat", float: msg.sender == localStorage.getItem("user_id") ? "right" : "left", color: msg.sender == localStorage.getItem("user_id") ? "#000" : "#fff", boxShadow:"none", paddingLeft: msg.sender == localStorage.getItem("user_id") ? "none" : "35px"}}>
-              <p style={{fontWeight:700}}>Receiver: {msg.receiver}</p>
-              <p style={{fontWeight:700}}>Sender: {msg.sender}</p>
+              {/* <p style={{fontWeight:700}}>Receiver: {msg.receiver}</p> */}
+              {/* <p style={{fontWeight:700}}>Sender: {msg.sender}</p> */}
               <p>{msg.text}</p>
-              <p><i>{msg.CreatedAt}</i></p>
+              <p><i>{date.toLocaleDateString()} {date.toLocaleTimeString()}</i></p>
             </Card>
             )
           }
@@ -214,12 +215,13 @@ class Chat extends React.Component{
       const chatslist = messages.length ? (
         messages.map(
           msg => {
+            var date = new Date(msg.CreatedAt)
             return(
               <Card style={{ width: "80%", backgroundImage: msg.sender == localStorage.getItem("user_id") ? `url('${whiteback}')` : `url('${blueback}')`, backgroundRepeat:"no-repeat",   float: msg.sender == localStorage.getItem("user_id") ? "right" : "left", color: msg.sender == localStorage.getItem("user_id") ? "#000" : "#fff", boxShadow:"none", paddingLeft: msg.sender == localStorage.getItem("user_id") ? "none" : "35px"}}>
-              <p style={{fontWeight:700}}>Receiver: {msg.receiver}</p>
-              <p style={{fontWeight:700}}>Sender: {msg.sender}</p>
+              {/* <p style={{fontWeight:700}}>Receiver: {msg.receiver}</p> */}
+              {/* <p style={{fontWeight:700}}>Sender: {msg.sender}</p> */}
               <p>{msg.text}</p>
-              <p><i>{msg.CreatedAt}</i></p>
+              <p><i>{date.toLocaleDateString()} {date.toLocaleTimeString()}</i></p>
             </Card>
             )
           }
