@@ -1,0 +1,36 @@
+.container{
+    width: 80%;
+    margin: auto auto;
+    margin-top: 15%;
+    background-color: #fafafa;
+    box-shadow: #19000000;
+}
+.dnav{
+    position: fixed;
+    top: 8%;
+    left: 8%;
+    width: 80%;
+}
+.dnavbar{
+    padding-top: 10px;
+    width: 100%;
+}
+.homeimg{
+    width: 150px;
+    height: auto;
+    margin-right: 10px;
+}
+.menitem{
+    float: right;
+    width: 70px;
+}
+.menitem img{
+    width: 25px;
+    height: auto;
+    padding-top: 5px;
+    cursor: pointer;
+}
+.feedcont, .newscont{
+    width: 50%;
+    float: left;
+}

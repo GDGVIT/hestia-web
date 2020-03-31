@@ -3,12 +3,10 @@ import { Card, Row, Col } from 'antd';
 import profile from '../assets/profile.png';
 import store from '../assets/store.png';
 import check from '../assets/check.png';
-import Profile from './profile/profile';
 import plus from '../assets/plus.png';
-import Chat from '../components/chat/chats';
+// import Chat from '../components/chat/chats';
 import { Modal, Button } from 'antd';
 import { Form, Input, Checkbox} from 'antd';
-import Nav from './nav';
 import {withAlert} from "react-alert";
 
 
@@ -26,11 +24,10 @@ class Feed extends React.Component {
             token: '',
         }
     }
-    gotoProfile=()=>{
-        this.props.history.push("/profile");
-    }
+
     gotoChat=()=>{
-        this.props.history.push("/chat");
+        // this.props.history.push("/chat");
+        console.log("can go to chat")
     }
     handleAdd=()=>{
         this.setState({
@@ -44,17 +41,14 @@ class Feed extends React.Component {
         window.localStorage.setItem("receiver_id", r);
         window.localStorage.setItem("item",i);
     }
-    handleChat= (r,i) => () =>{
+    handleChat= (r,i,ri ) => () =>{
         this.setState({
             visible2: true
         })
         window.localStorage.setItem("receiver_id", r);
         window.localStorage.setItem("item",i);
 
-        // window.localStorage.setItem("accept_id", ri);
-    }
-    suggestShop = () =>{
-        // this.props.history.push('/suggestions');
+        window.localStorage.setItem("accept_id", ri);
     }
     handleOk = e => {
         // console.log(e);
@@ -94,27 +88,27 @@ class Feed extends React.Component {
       };
 
 
-      acceptrequest = (id) =>{
-        console.log(id)
-        postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: id,location:this.state.city})
-                .then(data => console.log(data)) // Result from the `response.json()` call
-                .catch(error => console.error(error))
+    //   acceptrequest = (id) =>{
+    //     console.log(id)
+    //     postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: id,location:this.state.city})
+    //             .then(data => console.log(data)) // Result from the `response.json()` call
+    //             .catch(error => console.error(error))
 
-                function postRequest(url, data) {
-                return fetch(url, {
-                    credentials: 'same-origin', // 'include', default: 'omit'
-                    method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
-                    body: JSON.stringify(data), // Coordinate the body type with 'Content-Type'
-                    headers: new Headers({
-                    'Content-Type': 'application/json',
-                    'Authorization': localStorage.getItem("token")
-                    }),
-                })
-                .then(response => response.json())
-                }
+    //             function postRequest(url, data) {
+    //             return fetch(url, {
+    //                 credentials: 'same-origin', // 'include', default: 'omit'
+    //                 method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
+    //                 body: JSON.stringify(data), // Coordinate the body type with 'Content-Type'
+    //                 headers: new Headers({
+    //                 'Content-Type': 'application/json',
+    //                 'Authorization': localStorage.getItem("token")
+    //                 }),
+    //             })
+    //             .then(response => response.json())
+    //             }
 
 
-      }
+    //   }
 
 
 
@@ -138,11 +132,11 @@ class Feed extends React.Component {
         }
         
           var obj ={}
-          obj["request_sender"] = parseInt(localStorage.getItem("receiver_id"))
-          obj["request_receiver"] = parseInt(localStorage.getItem("user_id"))
           obj["receiver"] = parseInt(localStorage.getItem("receiver_id"))
           obj["sender"] = parseInt(localStorage.getItem("user_id"))
           obj["title"] = localStorage.getItem("item")
+
+          console.log(JSON.stringify(obj))
 
           fetch('https://hestia-chat.herokuapp.com/api/v1/createChat',{
               method:"POST",
@@ -159,7 +153,6 @@ class Feed extends React.Component {
               }
               if(res.status == 500){
                 this.props.alert.show("Chatroom exists.");
-                this.props.history.push("/profile");
               }
           })
           .catch(err => console.log(err))
@@ -180,36 +173,19 @@ class Feed extends React.Component {
         if(localStorage.getItem("token")){
         //  console.log("someone's logged in")
         }else{
-            this.props.history.push("/login");
+            // this.props.history.push("/login");
+            console.log("u not log in :(")
         }
 
         let token =localStorage.getItem("token");
+
         navigator.geolocation.getCurrentPosition(
             position => this.setState({ 
               latitude: position.coords.latitude, 
               longitude: position.coords.longitude
             }), 
             err => console.log(err)
-            
           );
-          console.log(this.state.latitude)
-        fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/'+this.state.latitude+','+this.state.longitude+'.json?access_token=pk.eyJ1Ijoibm94MTIiLCJhIjoiY2s4Zm5obnZ0MDFwajNtcDAxanFkeXM1ayJ9.YMGj-nXopQXZfh5NKpLiCg', {
-            })
-            .then(response =>
-            console.log(response))
-            .then(data => {
-            console.log(data)
-            this.setState({
-                city:data.features[4].text
-            })
-            console.log(this.state)
-            })
-            .catch(error => console.error(error))
-
-
-
-
-        
           
 
 
@@ -264,16 +240,7 @@ class Feed extends React.Component {
                 //       err => console.log(err)
                 //     );
                 //     console.log(this.state.latitude)
-                //   }
-                
-
-
-
-
-
-
-
-            
+                //   }   
         }
             
     render(){
@@ -302,7 +269,7 @@ class Feed extends React.Component {
                                         <img src={store} alt="location"></img>
                                     </div> 
                                     <div className="imgback">
-                                        <img onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`)} src={check} alt="location"></img>
+                                        <img onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`, `${request.id}`)} src={check} alt="location"></img>
                                     </div>
                                 </Col>
                             </Row>
@@ -324,9 +291,6 @@ class Feed extends React.Component {
                     <Row>
                         <Col span={18}>
                             <h1>Requests</h1>
-                        </Col>
-                        <Col span={6}>
-                        <img onClick={this.gotoProfile} src={profile} alt="Profile logo" ></img>
                         </Col>
                     </Row>
      
@@ -385,7 +349,7 @@ class Feed extends React.Component {
                         </Row>
                       <h2 style={{marginTop:"20px", textAlign:"center"}}>Suggest a Shop?</h2>
                       <div style={{textAlign:"center"}}>
-                        <Button type="primary" htmlType="submit" onClick={this.suggestShop} >
+                        <Button type="primary" htmlType="submit" onClick={this.createChat} >
                             Yes <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
                         </Button>
                         <Button type="primary" onClick={this.handleCancel} style={{backgroundColor:"#fff",color:"#000"}}>
@@ -424,7 +388,6 @@ class Feed extends React.Component {
                             <Checkbox onChange={this.onChange} style={{marginTop:"40px"}}>Do not show this again.</Checkbox>
                         </div>
                     </Modal>
-                    <Nav />
               </div>
             );
         // })

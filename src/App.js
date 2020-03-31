@@ -60,7 +60,6 @@ class App extends React.Component {
           <Route exact path='/edit' component={Edit}/>
           <Route exact path='/suggestashop' component={Sap}/>
           <Route exact path='/suggestions' component={Suggestions}/>
-
           {this.showNav()}
         </div>
       </BrowserRouter>

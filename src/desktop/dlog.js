@@ -8,7 +8,7 @@ import check from '../assets/check.png';
 
 
 
-const Login = (props) => {
+const Dlog = (props) => {
   const [visible, changeV] = useState(false);   
   var chk = true;
   const alert = useAlert()
@@ -32,7 +32,7 @@ const Login = (props) => {
     .then(response => {
       if(response.status === 401){
         alert.show("Verify your email first");
-        props.history.push("/");
+            window.location.reload();
       }else if(response.status === 200 || response.status===201 || response.status===202){
         return response.json();
       }else{
@@ -191,4 +191,4 @@ const Login = (props) => {
   );
 }
 
-export default Login;
+export default Dlog;
