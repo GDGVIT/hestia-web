@@ -51,15 +51,24 @@ class Chat extends React.Component{
     scrollToBottom = () => {
       this.messagesEnd.scrollIntoView({ behavior: "smooth" });
     }
+    timeout = 250; 
 
     connect = () => {
       let url = 'wss://hestia-chat.herokuapp.com/api/v1/ws?chat='+ parseInt(localStorage.getItem("receiver_id"))
+
       var ws = new WebSocket(url)
+      let that = this; // cache the this
+      var connectInterval;
+
       ws.onopen = () => {
         // on connecting, do nothing but log it to the console
           console.log('connected');
+          this.props.alert.show("Online")
           this.setState({ ws: ws });
           console.log(url)
+
+          that.timeout = 250; // reset timer to 250 on open of websocket connection 
+          clearTimeout(connectInterval); // clear Interval on on open of websocket connection
         }
   
       ws.onmessage = evt => {
@@ -70,14 +79,36 @@ class Chat extends React.Component{
           return false;
         }
   
-      ws.onclose = () => {
+      ws.onclose = (e) => {
           console.log('disconnected')
           // automatically try to reconnect on connection loss
-          this.setState({
-            ws: new WebSocket(url),
-          })
+          // this.setState({
+          //   ws: new WebSocket(url),
+          // })
+          console.log(
+            `Socket is closed. Reconnect will be attempted in ${Math.min(
+                10000 / 1000,
+                (that.timeout + that.timeout) / 1000
+            )} second.`,
+            e.reason
+        );
+
+        that.timeout = that.timeout + that.timeout; //increment retry interval
+        connectInterval = setTimeout(this.check, Math.min(10000, that.timeout)); //call check function after timeout
           this.props.alert.show("Disconnected")
         }
+
+        // Onerror listener
+        // websocket onerror event listener
+        ws.onerror = err => {
+          console.error(
+              "Socket encountered error: ",
+              err.message,
+              "Closing socket"
+          );
+
+          ws.close();
+      };
 
 
     }
@@ -153,6 +184,10 @@ class Chat extends React.Component{
 
     // this.addMessage(messageString)
   }
+  check = () => {
+    const { ws } = this.state;
+    if (!ws || ws.readyState == WebSocket.CLOSED) this.connect(); //check if websocket instance is closed, if so call `connect` function.
+    };
 
     render(){
 
@@ -162,7 +197,7 @@ class Chat extends React.Component{
         initialmsg.map(
           msg => {
             return(
-              <Card style={{ width: "80%", backgroundImage: msg.sender == localStorage.getItem("user_id") ? `url('${whiteback}')` : `url('${blueback}')`  , float: msg.sender == localStorage.getItem("user_id") ? "right" : "left", color: msg.sender == localStorage.getItem("user_id") ? "#000" : "#fff", boxShadow:"none", paddingLeft: msg.sender == localStorage.getItem("user_id") ? "none" : "35px"}}>
+              <Card style={{ width: "80%", backgroundImage: msg.sender == localStorage.getItem("user_id") ? `url('${whiteback}')` : `url('${blueback}')`  , backgroundRepeat:"no-repeat", float: msg.sender == localStorage.getItem("user_id") ? "right" : "left", color: msg.sender == localStorage.getItem("user_id") ? "#000" : "#fff", boxShadow:"none", paddingLeft: msg.sender == localStorage.getItem("user_id") ? "none" : "35px"}}>
               <p style={{fontWeight:700}}>Receiver: {msg.receiver}</p>
               <p style={{fontWeight:700}}>Sender: {msg.sender}</p>
               <p>{msg.text}</p>
@@ -180,7 +215,7 @@ class Chat extends React.Component{
         messages.map(
           msg => {
             return(
-              <Card style={{ width: "80%", backgroundImage: msg.sender == localStorage.getItem("user_id") ? `url('${whiteback}')` : `url('${blueback}')`  , float: msg.sender == localStorage.getItem("user_id") ? "right" : "left", color: msg.sender == localStorage.getItem("user_id") ? "#000" : "#fff", boxShadow:"none", paddingLeft: msg.sender == localStorage.getItem("user_id") ? "none" : "35px"}}>
+              <Card style={{ width: "80%", backgroundImage: msg.sender == localStorage.getItem("user_id") ? `url('${whiteback}')` : `url('${blueback}')`, backgroundRepeat:"no-repeat",   float: msg.sender == localStorage.getItem("user_id") ? "right" : "left", color: msg.sender == localStorage.getItem("user_id") ? "#000" : "#fff", boxShadow:"none", paddingLeft: msg.sender == localStorage.getItem("user_id") ? "none" : "35px"}}>
               <p style={{fontWeight:700}}>Receiver: {msg.receiver}</p>
               <p style={{fontWeight:700}}>Sender: {msg.sender}</p>
               <p>{msg.text}</p>
