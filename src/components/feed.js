@@ -53,6 +53,9 @@ class Feed extends React.Component {
 
         window.localStorage.setItem("accept_id", ri);
     }
+    suggestShop = () =>{
+        // this.props.history.push('/suggestions');
+    }
     handleOk = e => {
         // console.log(e);
         this.setState({
@@ -354,7 +357,7 @@ class Feed extends React.Component {
                         </Row>
                       <h2 style={{marginTop:"20px", textAlign:"center"}}>Suggest a Shop?</h2>
                       <div style={{textAlign:"center"}}>
-                        <Button type="primary" htmlType="submit" onClick={this.createChat} >
+                        <Button type="primary" htmlType="submit" onClick={this.suggestShop} >
                             Yes <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
                         </Button>
                         <Button type="primary" onClick={this.handleCancel} style={{backgroundColor:"#fff",color:"#000"}}>
