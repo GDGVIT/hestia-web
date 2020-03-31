@@ -3,6 +3,8 @@ import { Card, Row, Col,Form, Input } from 'antd';
 import back from '../../assets/back.png';
 import { Modal, Button } from 'antd';
 import {Checkbox} from 'antd';
+import {withAlert} from 'react-alert';
+
 
 
 class Suggestions extends React.Component{
@@ -34,7 +36,16 @@ class Suggestions extends React.Component{
         this.setState(values)
         console.log(this.state)
         postForm('https://hestia-report.herokuapp.com/api/recommend/',this.state)
-                .then(data => this.props.alert.show("Request added"))
+                .then(data => {
+                    console.log(data)
+                    if(data.status == "success"){
+                        this.props.alert.show(data.message)
+                        this.props.history.push("/mychats")
+                    }
+                    if(data.status == "error"){
+                        this.props.alert.show(data.message)
+                    }
+                })
                 .catch(error => console.error(error))
 
                 function postForm(url,state) {
@@ -120,4 +131,4 @@ class Suggestions extends React.Component{
         )
     }
 }
-export default Suggestions;
+export default withAlert()(Suggestions);
