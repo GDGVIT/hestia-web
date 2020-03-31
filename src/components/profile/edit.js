@@ -113,7 +113,7 @@ class Edit extends React.Component{
                     name={['user', 'name']}
                 >
                     <Input 
-                    placeholder="Name"
+                    placeholder={localStorage.getItem("name")}
                     />
                 </Form.Item>
                 <Form.Item
@@ -126,14 +126,14 @@ class Edit extends React.Component{
                     ]}
                 >
                     <Input 
-                    placeholder="Email"
+                    placeholder={localStorage.getItem("email")}
                     />
                 </Form.Item>
                 <Form.Item
                     name={['user', 'phone']}
                 >
                     <Input
-                    placeholder="Number"
+                    placeholder={localStorage.getItem("phone")}
                     />
                 </Form.Item>
                 <Form.Item>
