@@ -20,7 +20,7 @@ class Feed extends React.Component {
             visible1:false,
             visible2:false,
             requests: [ ],
-            city: 'surat',
+            city: '',
             item_name: null,
             quantity: '',
             token: '',
@@ -176,14 +176,7 @@ class Feed extends React.Component {
         window.localStorage.setItem("acceptcheck", `${e.target.checked}`);
         // console.log(localStorage.getItem("acceptcheck"))
       }
-      componentDidMount(){  
-        if(localStorage.getItem("token")){
-        //  console.log("someone's logged in")
-        }else{
-            this.props.history.push("/login");
-        }
-
-        let token =localStorage.getItem("token");
+      componentWillMount(){
         navigator.geolocation.getCurrentPosition(
             position => this.setState({ 
               latitude: position.coords.latitude, 
@@ -193,25 +186,31 @@ class Feed extends React.Component {
             
           );
           console.log(this.state.latitude)
-        fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/'+this.state.latitude+','+this.state.longitude+'.json?access_token=pk.eyJ1Ijoibm94MTIiLCJhIjoiY2s4Zm5obnZ0MDFwajNtcDAxanFkeXM1ayJ9.YMGj-nXopQXZfh5NKpLiCg', {
+            fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/'+this.state.latitude+','+this.state.longitude+'.json?access_token=pk.eyJ1Ijoibm94MTIiLCJhIjoiY2s4Zm5obnZ0MDFwajNtcDAxanFkeXM1ayJ9.YMGj-nXopQXZfh5NKpLiCg', {
             })
-            .then(response =>
-            console.log(response))
+            .then(response =>{
+            console.log(response)
+            return response.json()
+            })
             .then(data => {
             console.log(data)
             this.setState({
-                city:data.features[4].text
+                city:data.features[0].place_name
             })
             console.log(this.state)
             })
             .catch(error => console.error(error))
 
 
+      }
+      componentDidMount(){  
+        if(localStorage.getItem("token")){
+        //  console.log("someone's logged in")
+        }else{
+            this.props.history.push("/login");
+        }
 
-
-        
-          
-
+        let token =localStorage.getItem("token");
 
         // this.setState({
         //     token: localStorage.getItem("token")
@@ -224,11 +223,14 @@ class Feed extends React.Component {
             })
             .then(res => res.json())
             .then(data => {
-                // console.log(data)
-            this.setState({
-                requests: data.Request,
-                
-            });
+                console.log(data)
+                if(data.message == "Location not provided"){
+                    console.log("No location")
+                } else {
+                    this.setState({
+                        requests: data.Request,
+                    });
+                }
             console.log(this.state)
             })
             .catch(error => console.error(error))
