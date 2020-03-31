@@ -84,12 +84,7 @@ class Profile extends React.Component{
     }
     logoutsar=()=>{
         localStorage.removeItem("token");
-        if(this.props.p){
-            this.props.p.g.history.push("/login");
-            // this.props.p.history.push("/feed");
-        }else{
-            this.props.history.push("/login");
-        }
+        this.props.history.push("/login")
     }
 
     render(){

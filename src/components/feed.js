@@ -50,6 +50,8 @@ class Feed extends React.Component {
         })
         window.localStorage.setItem("receiver_id", r);
         window.localStorage.setItem("item",i);
+
+        // window.localStorage.setItem("accept_id", ri);
     }
     handleOk = e => {
         // console.log(e);
@@ -114,15 +116,24 @@ class Feed extends React.Component {
 
 
       createChat = () => {
+        //   Accept the item
+        postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
+        .then(data => console.log(data)) // Result from the `response.json()` call
+        .catch(error => console.error(error))
 
-
-
-
-
-
-
-
-
+        function postRequest(url, data) {
+        return fetch(url, {
+            credentials: 'same-origin', // 'include', default: 'omit'
+            method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
+            body: JSON.stringify(data), // Coordinate the body type with 'Content-Type'
+            headers: new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem("token")
+            }),
+        })
+        .then(response => response.json())
+        }
+        
           var obj ={}
           obj["receiver"] = parseInt(localStorage.getItem("receiver_id"))
           obj["sender"] = parseInt(localStorage.getItem("user_id"))
@@ -140,6 +151,9 @@ class Feed extends React.Component {
               console.log(res)
               if(res.code == 200){
                 this.props.history.push("/chat");
+              }
+              if(res.status == 500){
+                this.props.alert.show("Chatroom exists.");
               }
           })
           .catch(err => console.log(err))
