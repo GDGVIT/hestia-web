@@ -213,11 +213,10 @@ class Feed extends React.Component {
         }
 
         let token =localStorage.getItem("token");
-
         // this.setState({
         //     token: localStorage.getItem("token")
         // })
-        // console.log(this.state);
+        console.log(this.state);
         fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+this.state.city, {
             headers: new Headers({
             'Authorization': localStorage.getItem("token")
@@ -237,38 +236,27 @@ class Feed extends React.Component {
             })
             .catch(error => console.error(error))
 
-            // let latitude;
-            // let longitude;
-            // function getLocation() {
-            //     if (navigator.geolocation) {
-            //         navigator.geolocation.getCurrentPosition(showPosition);
-            //             } 
-            //         }
-            // function showPosition(position) {
-            //     latitude = position.coords.latitude;
-            //     longitude = position.coords.longitude;
+            let latitude;
+            let longitude;
+            function getLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                        } 
+                    }
+            function showPosition(position) {
+                latitude = position.coords.latitude;
+                longitude = position.coords.longitude;
+                }
                 
-            //     }
-                
 
 
-            //     this.setState({
-            //         lat: latitude,
-            //         long: longitude
-            //     })
+                this.setState({
+                    latitude: latitude,
+                    longitude: longitude
+                })
 
 
 
-                // position = async () => {
-                //     await navigator.geolocation.getCurrentPosition(
-                //       position => this.setState({ 
-                //         latitude: position.coords.latitude, 
-                //         longitude: position.coords.longitude
-                //       }), 
-                //       err => console.log(err)
-                //     );
-                //     console.log(this.state.latitude)
-                //   }
                 
 
 

@@ -136,12 +136,6 @@ class Mychat extends React.Component{
     render(){
         const { mychats } = this.state;
         const {otherchats} = this.state;
-        if(this.state.goto === "profile"){
-            return(
-                <Profile p={this.props}/>
-            );
-        }else if(this.state.goto === "mychats"){
-
             const mychatslist = mychats.length ? (
                 mychats.map(
                     data => {
@@ -233,7 +227,6 @@ class Mychat extends React.Component{
                 <Nav />
             </div>              
         );
-    }
     }
 }
 export default Mychat;
