@@ -28,21 +28,10 @@ class Mychat extends React.Component{
         window.localStorage.setItem("item",i);
         window.localStorage.setItem("sender_id", s);
         window.localStorage.setItem("report", s);
-
-        if(this.props.history){
-            this.props.history.push({
-                pathname : "/chat", 
-                state:{id: localStorage.getItem("receiver_id")}
-            })
-        }else if(this.props.g.p){
-            this.props.g.p.g.history.push({               
-                pathname : "/chat", 
-                state:{id: localStorage.getItem("receiver_id")}});
-        }else{
-            this.props.g.history.push({                
-                pathname : "/chat", 
-                state:{id: localStorage.getItem("receiver_id")}});
-        }
+        this.props.history.push({
+            pathname : "/chat", 
+            state:{id: localStorage.getItem("receiver_id")}
+        });
     }
 
     gotoOtherChat = (r,i,s) => () => {
@@ -51,21 +40,10 @@ class Mychat extends React.Component{
         window.localStorage.setItem("item",i);
         window.localStorage.setItem("sender_id", s);
         window.localStorage.setItem("report", r);
-
-        if(this.props.history){
-            this.props.history.push({
-                pathname : "/chat", 
-                state:{id: localStorage.getItem("receiver_id")}
-            })
-        }else if(this.props.g.p){
-            this.props.g.p.g.history.push({               
-                pathname : "/chat", 
-                state:{id: localStorage.getItem("receiver_id")}});
-        }else{
-            this.props.g.history.push({                
-                pathname : "/chat", 
-                state:{id: localStorage.getItem("receiver_id")}});
-        }
+        this.props.history.push({
+            pathname : "/chat", 
+            state:{id: localStorage.getItem("receiver_id")}
+        })
     }
     handleClick = (e) => () => {
         console.log(e)
@@ -134,12 +112,6 @@ class Mychat extends React.Component{
     render(){
         const { mychats } = this.state;
         const {otherchats} = this.state;
-        if(this.state.goto === "profile"){
-            return(
-                <Profile p={this.props}/>
-            );
-        }else if(this.state.goto === "mychats"){
-
             const mychatslist = mychats.length ? (
                 mychats.map(
                     data => {
@@ -237,7 +209,6 @@ class Mychat extends React.Component{
                 <Nav />
             </div>              
         );
-    }
     }
 }
 export default Mychat;
