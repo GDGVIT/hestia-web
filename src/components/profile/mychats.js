@@ -171,8 +171,11 @@ class Mychat extends React.Component{
             
             let content;
             if(this.state.value == 'mr'){
+                console.log(mychatslist)
             content = <div>{mychatslist}</div>
+            console.log(content)
             } else {
+                console.log(otherchatslist)
             content = <div>{otherchatslist}</div>
             }
            return( 

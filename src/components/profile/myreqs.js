@@ -7,6 +7,8 @@ import plus from '../../assets/plus.png';
 import Nav from '../nav';
 import front from '../../assets/front.png';
 import back from '../../assets/back.png';
+import {withAlert} from "react-alert";
+
 
 class Myreqs extends React.Component{
     constructor(props){
@@ -22,8 +24,11 @@ class Myreqs extends React.Component{
 
     deleterequest = (id) => {
         console.log(id)
-                postForm('https://hestia-requests.herokuapp.com/app/item_requests/'+id+'/')
-                    .then(data => console.log(data))
+                postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/'+id+'/')
+                    .then(data => {
+                        console.log(data)
+                        this.props.alert.show("Item deleted")
+                    })
                     .catch(error => console.error(error))
 
                     function postForm(url) {
@@ -138,4 +143,4 @@ class Myreqs extends React.Component{
         );
         }
 }
-export default Myreqs;
+export default withAlert() (Myreqs);

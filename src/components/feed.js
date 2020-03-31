@@ -154,6 +154,9 @@ class Feed extends React.Component {
               if(res.code == 200){
                 this.props.history.push("/chat");
               }
+              if(res.status == 500){
+                this.props.alert.show("Chatroom exists.");
+              }
           })
           .catch(err => console.log(err))
       }
