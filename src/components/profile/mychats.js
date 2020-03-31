@@ -24,9 +24,9 @@ class Mychat extends React.Component{
     }
     gotoMyChat = (r,i,s) => () => {
         console.log(this.props)
-        window.localStorage.setItem("receiver_id", r);
+        window.localStorage.setItem("receiver_id", s);
         window.localStorage.setItem("item",i);
-        window.localStorage.setItem("sender_id", s);
+        window.localStorage.setItem("sender_id", r);
         window.localStorage.setItem("report", s);
 
         if(this.props.history){
@@ -207,8 +207,11 @@ class Mychat extends React.Component{
             let content;
             if(this.state.value == 'mr'){
             content = <div>{mychatslist}</div>
-            } else {
-            content = <div>{otherchatslist}</div>
+            } 
+            if(this.state.value == 'or'){
+                console.log('other chats', {otherchatslist})
+                content = <div>{otherchatslist}</div>
+                console.log(content)
             }
             console.log(content)
            return( 
