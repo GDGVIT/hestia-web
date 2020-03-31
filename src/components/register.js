@@ -77,7 +77,6 @@ const Register = (props) => {
         name={['user', 'name']}
         rules={[
           { 
-            type: 'text',
             required: true,
           },
         ]}
