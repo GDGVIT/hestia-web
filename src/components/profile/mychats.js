@@ -22,10 +22,11 @@ class Mychat extends React.Component{
     gotoProfile = () => {
         this.props.history.push("/profile")
     }
-    gotoChat = (r,i) => () => {
+    gotoChat = (r,i,s) => () => {
         console.log(this.props)
         window.localStorage.setItem("receiver_id", r);
         window.localStorage.setItem("item",i);
+        window.localStorage.setItem("sender_id", s);
         
         if(this.props.history){
             this.props.history.push({
@@ -123,7 +124,7 @@ class Mychat extends React.Component{
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    <div className="imgback" onClick={this.gotoChat(`${data.sender}`, `${data.title}`)}>
+                                    <div className="imgback" onClick={this.gotoChat(`${data.receiver}`, `${data.title}`, `${data.sender}`)}>
                                         <img src={front} alt="location"></img>
                                     </div>
                                 </Col>
@@ -155,7 +156,7 @@ class Mychat extends React.Component{
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    <div className="imgback" onClick={this.gotoChat(`${data.receiver}`, `${data.title}`)}>
+                                    <div className="imgback" onClick={this.gotoChat(`${data.receiver}`, `${data.title}`, `${data.sender}`)}>
                                         <img src={front} alt="location"></img>
                                     </div>
                                 </Col>
