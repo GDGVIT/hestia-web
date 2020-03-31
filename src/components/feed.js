@@ -155,11 +155,13 @@ class Feed extends React.Component {
           .then(res => {
               console.log(res)
               if(res.code == 200){
-                this.props.history.push("/chat");
+                  window.localStorage.setItem("chat_name", res.chat_room.receiver_name )
+                  window.localStorage.setItem("item", res.chat_room.title)
+                // this.props.history.push("/chat");
               }
               if(res.status == 500){
                 this.props.alert.show("Chatroom exists.");
-                this.props.history.push("/profile");
+                // this.props.history.push("/profile");
               }
           })
           .catch(err => console.log(err))
@@ -176,6 +178,33 @@ class Feed extends React.Component {
         window.localStorage.setItem("acceptcheck", `${e.target.checked}`);
         // console.log(localStorage.getItem("acceptcheck"))
       }
+    //   componentWillMount(){
+    //     navigator.geolocation.getCurrentPosition(
+    //         position => this.setState({ 
+    //           latitude: position.coords.latitude, 
+    //           longitude: position.coords.longitude
+    //         }), 
+    //         err => console.log(err)
+            
+    //       );
+    //       console.log(this.state.latitude)
+    //         fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/'+this.state.latitude+','+this.state.longitude+'.json?access_token=pk.eyJ1Ijoibm94MTIiLCJhIjoiY2s4Zm5obnZ0MDFwajNtcDAxanFkeXM1ayJ9.YMGj-nXopQXZfh5NKpLiCg', {
+    //         })
+    //         .then(response =>{
+    //         console.log(response)
+    //         return response.json()
+    //         })
+    //         .then(data => {
+    //         console.log(data)
+    //         this.setState({
+    //             city:data.features[0].place_name
+    //         })
+    //         console.log(this.state)
+    //         })
+    //         .catch(error => console.error(error))
+
+
+    //   }
       componentDidMount(){  
         if(localStorage.getItem("token")){
         //  console.log("someone's logged in")
@@ -184,52 +213,6 @@ class Feed extends React.Component {
         }
 
         let token =localStorage.getItem("token");
-        // position = async () => {
-        //     await navigator.geolocation.getCurrentPosition(
-        //       position => this.setState({ 
-        //         latitude: position.coords.latitude, 
-        //         longitude: position.coords.longitude
-        //       }), 
-        //       err => console.log(err)
-        //     );
-        //     console.log(this.state.latitude)
-        //   }
-        
-        // navigator.geolocation.getCurrentPosition(
-        //     position => this.setState({ 
-        //       latitude: position.coords.latitude, 
-        //       longitude: position.coords.longitude
-        //     }), 
-        //     // console.log(this.state.latitude),
-        //     err => console.log(err)
-            
-        //   );
-        //   console.log(this.state.latitude)
-            let lat;
-            let long;
-            function getLocation() {
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(showPosition);
-                        } 
-                    }
-            function showPosition(position) {
-                lat = position.coords.latitude;
-                long = position.coords.longitude;
-                console.log(lat)
-                }
-
-        fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/'+lat+','+long+'.json?access_token=pk.eyJ1Ijoibm94MTIiLCJhIjoiY2s4Zm5obnZ0MDFwajNtcDAxanFkeXM1ayJ9.YMGj-nXopQXZfh5NKpLiCg', {
-            })
-            .then(response =>
-            console.log(response))
-            .then(data => {
-            console.log(data)
-            this.setState({
-                city:data.features[4].text
-            })
-            console.log(this.state)
-            })
-            .catch(error => console.error(error))
         // this.setState({
         //     token: localStorage.getItem("token")
         // })
@@ -241,11 +224,14 @@ class Feed extends React.Component {
             })
             .then(res => res.json())
             .then(data => {
-                // console.log(data)
-            this.setState({
-                requests: data.Request,
-                
-            });
+                console.log(data)
+                if(data.message == "Location not provided"){
+                    console.log("No location")
+                } else {
+                    this.setState({
+                        requests: data.Request,
+                    });
+                }
             console.log(this.state)
             })
             .catch(error => console.error(error))
@@ -304,12 +290,12 @@ class Feed extends React.Component {
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
+                                <div className="imgback">
+                                        <img onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`)} src={check} alt="location"></img>
+                                    </div>
                                     <div className="imgback"  onClick = {this.handleStore(`${request.request_made_by}`, `${request.item_name}`)}>
                                         <img src={store} alt="location"></img>
                                     </div> 
-                                    <div className="imgback">
-                                        <img onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`)} src={check} alt="location"></img>
-                                    </div>
                                 </Col>
                             </Row>
                         </Card>

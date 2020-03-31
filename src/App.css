@@ -402,11 +402,20 @@ margin-left: 12.5%;
 }
 
 #__react-alert__>div>div>div{
-    background-color: #d95071 !important;
+    background-color: #fff !important;
+    color: #000;
     border-radius: 7px !important;
+    box-shadow: 0px 0px 4px lightgray;
 }
 #__react-alert__>div>div>div>svg{
     display: none;
+}
+#__react-alert__>div>div>div>span{
+    color: #000;
+    text-align: center;
+}
+#__react-alert__>div>div>div>button>svg{
+    stroke: #000;
 }
 
 .Send{
