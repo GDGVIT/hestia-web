@@ -164,8 +164,8 @@ class Chat extends React.Component{
     // on submitting the ChatInput form, send the message, add it to the list and reset the input
       console.log(messageString);
       var obj ={}
-      obj["receiver"] = parseInt(localStorage.getItem("receiver_id"));
-      obj["sender"] = parseInt(localStorage.getItem("sender_id"));
+      obj["sender"] = parseInt(localStorage.getItem("receiver_id"));
+      obj["receiver"] = parseInt(localStorage.getItem("sender_id"));
       obj["text"] = messageString;
       console.log("/sendMessage", JSON.stringify(obj))
       fetch("https://hestia-chat.herokuapp.com/api/v1/sendMessage",{
