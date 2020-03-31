@@ -63,7 +63,7 @@ class Chat extends React.Component{
       ws.onopen = () => {
         // on connecting, do nothing but log it to the console
           console.log('connected');
-          this.props.alert.show("Online")
+          // this.props.alert.show("Online")
           this.setState({ ws: ws });
           console.log(url)
 
@@ -95,7 +95,7 @@ class Chat extends React.Component{
 
         that.timeout = that.timeout + that.timeout; //increment retry interval
         connectInterval = setTimeout(this.check, Math.min(10000, that.timeout)); //call check function after timeout
-          this.props.alert.show("Disconnected")
+          // this.props.alert.show("Disconnected")
         }
 
         // Onerror listener
