@@ -149,12 +149,12 @@ class Mychat extends React.Component{
                                 <Col span={17}>
                                     <div className="feed-card-header">
                                         <span>
-                                            <strong>{data.title}</strong>
+                                            <strong>{data.sender_name}</strong>
                                         </span>
                                 
                                     </div>
                                     <div className="feed-card-date">
-                                        <p>Sender - {data.sender}</p>
+                                        <p>{data.title}</p>
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
@@ -181,12 +181,12 @@ class Mychat extends React.Component{
                                 <Col span={17}>
                                     <div className="feed-card-header">
                                         <span>
-                                            <strong>{data.title}</strong>
+                                            <strong>{data.receiver_name}</strong>
                                         </span>
                                 
                                     </div>
                                     <div className="feed-card-date">
-                                        <p>Receiver - {data.receiver}</p>
+                                        <p>{data.title}</p>
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
