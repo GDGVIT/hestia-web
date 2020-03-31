@@ -138,6 +138,8 @@ class Feed extends React.Component {
         }
         
           var obj ={}
+          obj["request_sender"] = parseInt(localStorage.getItem("receiver_id"))
+          obj["request_receiver"] = parseInt(localStorage.getItem("user_id"))
           obj["receiver"] = parseInt(localStorage.getItem("receiver_id"))
           obj["sender"] = parseInt(localStorage.getItem("user_id"))
           obj["title"] = localStorage.getItem("item")
