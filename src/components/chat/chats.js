@@ -8,6 +8,8 @@ import Nav from '../nav';
 import {withRouter} from 'react-router-dom';
 import blueback from '../../assets/rectangle.png';
 import whiteback from '../../assets/rectanglew.png';
+import {withAlert} from "react-alert";
+
 
 
 // const { Search } = Input;
@@ -17,7 +19,7 @@ import whiteback from '../../assets/rectanglew.png';
 class Chat extends React.Component{
     constructor(props){
         super(props);
-        console.log(props, parseInt(props.location.state.id));
+        console.log(props);
         this.state={
             ws:null,
             currentUser: null,
@@ -74,6 +76,7 @@ class Chat extends React.Component{
           this.setState({
             ws: new WebSocket(url),
           })
+          this.props.alert.show("Disconnected")
         }
 
 
@@ -94,7 +97,7 @@ class Chat extends React.Component{
 
       var ob = {}
       ob["receiver"] = parseInt(localStorage.getItem("receiver_id"))
-      ob["sender"] = parseInt(localStorage.getItem("user_id"))
+      ob["sender"] = parseInt(localStorage.getItem("sender_id"))
 
       console.log("/getMessages", JSON.stringify(ob))
       fetch('https://hestia-chat.herokuapp.com/api/v1/getMessages',{
@@ -106,9 +109,14 @@ class Chat extends React.Component{
       })
       .then(res => res.json())
       .then(res => {
-        this.setState({
-          initialmsg: res.messages
-        })
+        if(res.code == 200){
+          this.setState({
+            initialmsg: res.messages
+          })
+        }
+        if(res.status == 404){
+            this.props.alert.show("Cannot get messages")
+        }
         console.log(res)
         console.log(this.state)
       })
@@ -126,7 +134,7 @@ class Chat extends React.Component{
       console.log(messageString);
       var obj ={}
       obj["receiver"] = parseInt(localStorage.getItem("receiver_id"));
-      obj["from"] = parseInt(localStorage.getItem("user_id"));
+      obj["sender"] = parseInt(localStorage.getItem("sender_id"));
       obj["text"] = messageString;
       console.log("/sendMessage", JSON.stringify(obj))
       fetch("https://hestia-chat.herokuapp.com/api/v1/sendMessage",{
@@ -164,7 +172,7 @@ class Chat extends React.Component{
           }
         )
       ) : (
-        <div style={{textAlign:"center", marginTop:"20px"}}> Start typing to initiate conversation </div>
+        <div style={{textAlign:"center", marginTop:"20px"}}>  </div>
       )
       const {messages} = this.state;
       messages.reverse();
@@ -194,7 +202,7 @@ class Chat extends React.Component{
                       </div>
                     </Col>
                     <Col span={16}>
-                        <h1 style = {{fontSize:14, textAlign:"center"}}>{localStorage.getItem("receiver_id")}</h1>
+                        <h1 style = {{fontSize:14, textAlign:"center"}}>Sender - {localStorage.getItem("sender_id")}</h1>
                         <h2 style = {{fontSize:14, textAlign:"center"}}>{localStorage.getItem("item")}</h2>
                     </Col>
                     <Col span={4}>
@@ -221,4 +229,4 @@ class Chat extends React.Component{
         );
     }
 }
-export default withRouter(Chat);
+export default withAlert() (Chat);
