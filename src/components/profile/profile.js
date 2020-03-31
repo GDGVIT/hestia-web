@@ -73,10 +73,15 @@ class Profile extends React.Component{
             .then(response => response.json())
             .then(data => {
             console.log(data)
-            this.setState({
-                mychats: data.chats,
-                
-            });
+            if(data.status == 500){
+                console.log("err")
+            }
+            if(data.code == 200){
+                this.setState({
+                    mychats: data.chats,
+                    
+                });
+            }
             console.log(this.state)
             })
             .catch(error => console.error(error))

@@ -22,12 +22,13 @@ class Mychat extends React.Component{
     gotoProfile = () => {
         this.props.history.push("/profile")
     }
-    gotoChat = (r,i,s) => () => {
+    gotoMyChat = (r,i,s) => () => {
         console.log(this.props)
         window.localStorage.setItem("receiver_id", r);
         window.localStorage.setItem("item",i);
         window.localStorage.setItem("sender_id", s);
-        
+        window.localStorage.setItem("report", s);
+
         if(this.props.history){
             this.props.history.push({
                 pathname : "/chat", 
@@ -44,6 +45,28 @@ class Mychat extends React.Component{
         }
     }
 
+    gotoOtherChat = (r,i,s) => () => {
+        console.log(this.props)
+        window.localStorage.setItem("receiver_id", r);
+        window.localStorage.setItem("item",i);
+        window.localStorage.setItem("sender_id", s);
+        window.localStorage.setItem("report", r);
+
+        if(this.props.history){
+            this.props.history.push({
+                pathname : "/chat", 
+                state:{id: localStorage.getItem("receiver_id")}
+            })
+        }else if(this.props.g.p){
+            this.props.g.p.g.history.push({               
+                pathname : "/chat", 
+                state:{id: localStorage.getItem("receiver_id")}});
+        }else{
+            this.props.g.history.push({                
+                pathname : "/chat", 
+                state:{id: localStorage.getItem("receiver_id")}});
+        }
+    }
     handleClick = (e) => () => {
         console.log(e)
         this.setState({
@@ -69,9 +92,15 @@ class Mychat extends React.Component{
         .then(response => response.json())
         .then(data => {
         console.log(data)
-        this.setState({
-            mychats: data.chats
-        });
+        if(data.status == 500){
+            console.log("err")
+        }
+        if(data.code == 200){
+            this.setState({
+                mychats: data.chats,
+                
+            });
+        }
         console.log(this.state)
         })
         .catch(error => console.error(error))
@@ -87,10 +116,15 @@ class Mychat extends React.Component{
         .then(response => response.json())
         .then(data => {
         console.log(data)
-        this.setState({
-            otherchats: data.chats,
-            
-        });
+        if(data.status == 500){
+            console.log("err")
+        }
+        if(data.code == 200){
+            this.setState({
+                mychats: data.chats,
+                
+            });
+        }
         console.log(this.state)
         })
         .catch(error => console.error(error))
@@ -120,11 +154,11 @@ class Mychat extends React.Component{
                                 
                                     </div>
                                     <div className="feed-card-date">
-                                        <p>{data.sender}</p>
+                                        <p>Sender - {data.sender}</p>
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    <div className="imgback" onClick={this.gotoChat(`${data.receiver}`, `${data.title}`, `${data.sender}`)}>
+                                    <div className="imgback" onClick={this.gotoMyChat(`${data.receiver}`, `${data.title}`, `${data.sender}`)}>
                                         <img src={front} alt="location"></img>
                                     </div>
                                 </Col>
@@ -152,11 +186,11 @@ class Mychat extends React.Component{
                                 
                                     </div>
                                     <div className="feed-card-date">
-                                        <p>{data.receiver}</p>
+                                        <p>Receiver - {data.receiver}</p>
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    <div className="imgback" onClick={this.gotoChat(`${data.receiver}`, `${data.title}`, `${data.sender}`)}>
+                                    <div className="imgback" onClick={this.gotoOtherChat(`${data.receiver}`, `${data.title}`, `${data.sender}`)}>
                                         <img src={front} alt="location"></img>
                                     </div>
                                 </Col>
@@ -172,13 +206,11 @@ class Mychat extends React.Component{
             
             let content;
             if(this.state.value == 'mr'){
-                console.log(mychatslist)
             content = <div>{mychatslist}</div>
-            console.log(content)
             } else {
-                console.log(otherchatslist)
             content = <div>{otherchatslist}</div>
             }
+            console.log(content)
            return( 
             <div className="mychats">
                 <div className="main-title">    
