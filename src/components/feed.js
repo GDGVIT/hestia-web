@@ -54,7 +54,7 @@ class Feed extends React.Component {
         // window.localStorage.setItem("accept_id", ri);
     }
     suggestShop = () =>{
-        // this.props.history.push('/suggestions');
+        this.props.history.push('/suggestions');
     }
     handleOk = e => {
         // console.log(e);

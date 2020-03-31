@@ -24,9 +24,9 @@ class Mychat extends React.Component{
     }
     gotoMyChat = (r,i,s) => () => {
         console.log(this.props)
-        window.localStorage.setItem("receiver_id", r);
+        window.localStorage.setItem("receiver_id", s);
         window.localStorage.setItem("item",i);
-        window.localStorage.setItem("sender_id", s);
+        window.localStorage.setItem("sender_id", r);
         window.localStorage.setItem("report", s);
         this.props.history.push({
             pathname : "/chat", 
@@ -99,7 +99,7 @@ class Mychat extends React.Component{
         }
         if(data.code == 200){
             this.setState({
-                mychats: data.chats,
+                otherchats: data.chats,
                 
             });
         }
@@ -121,12 +121,12 @@ class Mychat extends React.Component{
                                 <Col span={17}>
                                     <div className="feed-card-header">
                                         <span>
-                                            <strong>{data.title}</strong>
+                                            <strong>{data.sender_name}</strong>
                                         </span>
                                 
                                     </div>
                                     <div className="feed-card-date">
-                                        <p>Sender - {data.sender}</p>
+                                        <p>{data.title}</p>
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
@@ -153,12 +153,12 @@ class Mychat extends React.Component{
                                 <Col span={17}>
                                     <div className="feed-card-header">
                                         <span>
-                                            <strong>{data.title}</strong>
+                                            <strong>{data.receiver_name}</strong>
                                         </span>
                                 
                                     </div>
                                     <div className="feed-card-date">
-                                        <p>Receiver - {data.receiver}</p>
+                                        <p>{data.title}</p>
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
@@ -176,13 +176,6 @@ class Mychat extends React.Component{
                 <div>You don't have any chats as yet</div>
             )
             
-            let content;
-            if(this.state.value == 'mr'){
-            content = <div>{mychatslist}</div>
-            } else {
-            content = <div>{otherchatslist}</div>
-            }
-            console.log(content)
            return( 
             <div className="mychats">
                 <div className="main-title">    
@@ -204,7 +197,8 @@ class Mychat extends React.Component{
                     <Radio.Button value="or" onClick = {this.handleClick('or')}>Other Requests</Radio.Button>
                 </Radio.Group>
                 <div className="main-content">
-                    {content}
+                    {this.state.value == "mr" && <div>{mychatslist}</div>}
+                    {this.state.value == "or" && <div>{otherchatslist}</div>}
                 </div>
                 <Nav />
             </div>              
