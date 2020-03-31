@@ -159,6 +159,7 @@ class Feed extends React.Component {
               }
               if(res.status == 500){
                 this.props.alert.show("Chatroom exists.");
+                this.props.history.push("/profile");
               }
           })
           .catch(err => console.log(err))
