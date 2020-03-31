@@ -40,7 +40,7 @@ const Login = (props) => {
       }
       })
       .then(data => {
-        console.log(data)
+        // console.log(data)
         // window.localStorage.setItem("email", data.email);
       })
       .catch(error => console.error(error)

@@ -5,6 +5,7 @@ import './index.css';
 import { transitions, positions, Provider as AlertProvider } from 'react-alert'
 import AlertTemplate from 'react-alert-template-basic'
 import App from './App';
+import Dapp from './desktop/Dapp'
 import * as serviceWorker from './serviceWorker';
 
 const options = {
