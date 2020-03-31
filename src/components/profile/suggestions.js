@@ -28,7 +28,7 @@ class Suggestions extends React.Component{
         
         this.props.history.push("/feed");
     }
-    onfinish = values => {
+    onFinish = values => {
 
 
         this.setState(values)
@@ -39,9 +39,9 @@ class Suggestions extends React.Component{
 
                 function postForm(url,state) {
                     var object ={};
-                    object["recommended_for"] = "1";
-                    object["name_of_shop"] = state.name;
-                    object["item"] = state.item;
+                    object["recommended_for"] = localStorage.getItem("receiver_id");
+                    object["name_of_shop"] = state.name_of_shop;
+                    object["item"] = localStorage.getItem("item");
                     object["landmark"] = state.landmark;
                     object["extra_instruction"] = state.extra_instruction;
                     object["description_of_shop"] = state.description_of_shop;
@@ -75,13 +75,6 @@ class Suggestions extends React.Component{
                         <Form.Item name="name_of_shop">
                             <Input 
                                 placeholder="Name of shop"
-                            />
-                        </Form.Item>
-                        <Form.Item
-                            name="item"
-                        >
-                            <Input 
-                                placeholder="Item"
                             />
                         </Form.Item>
                         <Form.Item
