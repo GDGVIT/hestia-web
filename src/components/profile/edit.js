@@ -90,12 +90,6 @@ class Edit extends React.Component{
             <Form name="nest-messages" onFinish={this.onFinish} validateMessages={this.validateMessages} className="login-form">
                 <Form.Item
                     name={['user', 'name']}
-                    rules={[
-                    {
-                        type: 'name',
-                        message: 'Please input a valid email!'
-                    },
-                    ]}
                 >
                     <Input 
                     placeholder="Name"
