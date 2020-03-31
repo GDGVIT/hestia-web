@@ -177,6 +177,17 @@ class Feed extends React.Component {
             this.props.history.push("/login");
         }
 
+        fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/-73.989,40.733.json?access_token=pk.eyJ1Ijoibm94MTIiLCJhIjoiY2s4Zm5obnZ0MDFwajNtcDAxanFkeXM1ayJ9.YMGj-nXopQXZfh5NKpLiCg', {
+            })
+            .then(response => response.json())
+            .then(data => {
+            console.log(data.features[4].text)
+            })
+            .catch(error => console.error(error))
+
+
+
+
         let token =localStorage.getItem("token");
 
         navigator.geolocation.getCurrentPosition(
