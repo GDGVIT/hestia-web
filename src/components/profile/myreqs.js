@@ -88,6 +88,9 @@ class Myreqs extends React.Component{
         const reqlist = Requests.length ? (
             Requests.map(
                 request =>{
+                    if(request.description == null){
+                        request.description = "NA"
+                    }
                     return(
                         <Card key={request.id}>
                         <Row>
@@ -97,6 +100,7 @@ class Myreqs extends React.Component{
                                     <strong>{request.item_name}</strong>
                                     </span>
                                         <p>{request.quantity}</p>
+                                        <p style={{width:"100%"}}><b>Description - </b>{request.description}</p>
                                 </div>
                                 <div className="feed-card-date">
                                         <p>{request.date_time_created.slice(0,10)}</p>

@@ -69,7 +69,14 @@ class Feed extends React.Component {
         this.setState(values)
         console.log(this.state)
         postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.city,this.state.description)
-                .then(data => this.props.alert.show("Request added"))
+                .then(data => {
+                    console.log(data)
+                    if(data.message == "User has already made maximum requests"){
+                        this.props.alert.show("You have reached the request limit")
+                    } else {
+                        this.props.alert.show("Request added")
+                    }
+                })
                 .catch(error => console.error(error))
 
                 function postForm(url,name,quantity,city,description) {
@@ -289,6 +296,9 @@ class Feed extends React.Component {
         const reqlist = requests.length ? (
             requests.map(
                 request =>{
+                    if(request.description == null){
+                        request.description = "NA"
+                    }
                     // console.log(request)
                     return(
                         <Card key={request.id}>
@@ -299,6 +309,7 @@ class Feed extends React.Component {
                                             <strong>{request.item_name}</strong>
                                         </span>
                                         <p>{request.quantity}</p>
+                                        <p style={{width:"100%"}}><b>Description - </b>{request.description}</p>
                                     </div>
                                     <div className="feed-card-date">
                                         <p>{request.date_time_created.slice(0,10)}</p>
