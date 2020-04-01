@@ -1,5 +1,5 @@
 .container{
-    width: 80%;
+    width: 90%;
     margin: auto auto;
     margin-top: 15%;
     background-color: #fafafa;
@@ -10,6 +10,7 @@
     top: 8%;
     left: 8%;
     width: 80%;
+    z-index: 2;
 }
 .dnavbar{
     padding-top: 10px;
@@ -33,4 +34,20 @@
 .feedcont, .newscont{
     width: 50%;
     float: left;
+}
+
+@media(min-width: 600px){
+    .hestia-logo{
+        padding-top: 0px;
+        max-width: 400px;
+        height: auto;
+    }
+    .ant-input{
+        max-width: 500px;
+    }
+    .addReq{
+        left: 27%;
+    }
+    .imgback{
+    }
 }
