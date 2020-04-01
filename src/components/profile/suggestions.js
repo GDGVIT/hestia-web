@@ -66,7 +66,9 @@ class Suggestions extends React.Component{
                         'Authorization': localStorage.getItem("token")
                       })
                 })
-                .then(response => response.json())
+                .then(response => 
+                console.log(response))
+                
                 }
     }
     render(){

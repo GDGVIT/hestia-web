@@ -22,28 +22,52 @@ class Mychat extends React.Component{
     gotoProfile = () => {
         this.props.history.push("/profile")
     }
-    gotoMyChat = (r,i,s) => () => {
+    gotoMyChat = (r,i,s,sn) => () => {
         console.log(this.props)
         window.localStorage.setItem("receiver_id", s);
         window.localStorage.setItem("item",i);
         window.localStorage.setItem("sender_id", r);
         window.localStorage.setItem("report", s);
-        this.props.history.push({
-            pathname : "/chat", 
-            state:{id: localStorage.getItem("receiver_id")}
-        });
+        window.localStorage.setItem("chat_name",sn);
+
+        if(this.props.history){
+            this.props.history.push({
+                pathname : "/chat", 
+                state:{id: localStorage.getItem("receiver_id")}
+            })
+        }else if(this.props.g.p){
+            this.props.g.p.g.history.push({               
+                pathname : "/chat", 
+                state:{id: localStorage.getItem("receiver_id")}});
+        }else{
+            this.props.g.history.push({                
+                pathname : "/chat", 
+                state:{id: localStorage.getItem("receiver_id")}});
+        }
     }
 
-    gotoOtherChat = (r,i,s) => () => {
+    gotoOtherChat = (r,i,s,rn) => () => {
         console.log(this.props)
         window.localStorage.setItem("receiver_id", r);
         window.localStorage.setItem("item",i);
         window.localStorage.setItem("sender_id", s);
         window.localStorage.setItem("report", r);
-        this.props.history.push({
-            pathname : "/chat", 
-            state:{id: localStorage.getItem("receiver_id")}
-        })
+        window.localStorage.setItem("chat_name",rn);
+
+        if(this.props.history){
+            this.props.history.push({
+                pathname : "/chat", 
+                state:{id: localStorage.getItem("receiver_id")}
+            })
+        }else if(this.props.g.p){
+            this.props.g.p.g.history.push({               
+                pathname : "/chat", 
+                state:{id: localStorage.getItem("receiver_id")}});
+        }else{
+            this.props.g.history.push({                
+                pathname : "/chat", 
+                state:{id: localStorage.getItem("receiver_id")}});
+        }
     }
     handleClick = (e) => () => {
         console.log(e)
@@ -130,7 +154,7 @@ class Mychat extends React.Component{
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    <div className="imgback" onClick={this.gotoMyChat(`${data.receiver}`, `${data.title}`, `${data.sender}`)}>
+                                    <div className="imgback" onClick={this.gotoMyChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.sender_name}`)}>
                                         <img src={front} alt="location"></img>
                                     </div>
                                 </Col>
@@ -162,7 +186,7 @@ class Mychat extends React.Component{
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    <div className="imgback" onClick={this.gotoOtherChat(`${data.receiver}`, `${data.title}`, `${data.sender}`)}>
+                                    <div className="imgback" onClick={this.gotoOtherChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.receiver_name}`)}>
                                         <img src={front} alt="location"></img>
                                     </div>
                                 </Col>

@@ -198,7 +198,7 @@ class Chat extends React.Component{
           msg => {
             var date = new Date(msg.CreatedAt)
             return(
-              <Card style={{ width: "80%", backgroundImage: msg.sender == localStorage.getItem("user_id") ? `url('${whiteback}')` : `url('${blueback}')`  , backgroundRepeat:"no-repeat", float: msg.sender == localStorage.getItem("user_id") ? "right" : "left", color: msg.sender == localStorage.getItem("user_id") ? "#000" : "#fff", boxShadow:"none", paddingLeft: msg.sender == localStorage.getItem("user_id") ? "none" : "35px"}}>
+              <Card style={{ width: "80%", backgroundColor: msg.sender == localStorage.getItem("user_id") ? `#fff` : `#00d2d2`  , float: msg.sender == localStorage.getItem("user_id") ? "right" : "left", color: msg.sender == localStorage.getItem("user_id") ? "#000" : "#fff", boxShadow:"none", paddingLeft: msg.sender == localStorage.getItem("user_id") ? "none" : "35px", marginLeft: msg.sender == localStorage.getItem("user_id") ? "none" : "10px"}} >
               {/* <p style={{fontWeight:700}}>Receiver: {msg.receiver}</p> */}
               {/* <p style={{fontWeight:700}}>Sender: {msg.sender}</p> */}
               <p>{msg.text}</p>
@@ -217,7 +217,7 @@ class Chat extends React.Component{
           msg => {
             var date = new Date(msg.CreatedAt)
             return(
-              <Card style={{ width: "80%", backgroundImage: msg.sender == localStorage.getItem("user_id") ? `url('${whiteback}')` : `url('${blueback}')`, backgroundRepeat:"no-repeat",   float: msg.sender == localStorage.getItem("user_id") ? "right" : "left", color: msg.sender == localStorage.getItem("user_id") ? "#000" : "#fff", boxShadow:"none", paddingLeft: msg.sender == localStorage.getItem("user_id") ? "none" : "35px"}}>
+              <Card style={{ width: "80%", backgroundColor: msg.sender == localStorage.getItem("user_id") ? `#fff` : `#00d2d2`, float: msg.sender == localStorage.getItem("user_id") ? "right" : "left", color: msg.sender == localStorage.getItem("user_id") ? "#000" : "#fff", boxShadow:"none", paddingLeft: msg.sender == localStorage.getItem("user_id") ? "none" : "35px", marginLeft: msg.sender == localStorage.getItem("user_id") ? "none" : "10px"}}>
               {/* <p style={{fontWeight:700}}>Receiver: {msg.receiver}</p> */}
               {/* <p style={{fontWeight:700}}>Sender: {msg.sender}</p> */}
               <p>{msg.text}</p>
@@ -232,15 +232,17 @@ class Chat extends React.Component{
         return(
             <div>
             <div>    
-                <Row style={{marginTop:20}}>
+                <Row style={{marginTop:50}}>
                     <Col span={4}>
-                      <div className="imgback" onClick={this.goBack}>
-                        <img src={backbutton} alt = "Back-button" style = {{height: "3vh", marginLeft:"10px"}}></img>
+                      <div className="imgback" onClick={this.goBack} style={{width:"28px",height:"28px"}}>
+                        <img src={backbutton} alt = "Back-button" style = {{ marginLeft:"10px", width:"7px",paddingTop:"0"}}></img>
                       </div>
                     </Col>
                     <Col span={16}>
-                        <h1 style = {{fontSize:14, textAlign:"center"}}>Sender - {localStorage.getItem("sender_id")}</h1>
-                        <h2 style = {{fontSize:14, textAlign:"center"}}>{localStorage.getItem("item")}</h2>
+                      <div style={{marginLeft:"10px"}}>
+                        <h1 style = {{fontSize:15, textAlign:"left", fontWeight:"700"}}>{localStorage.getItem("chat_name")}</h1>
+                        <h2 style = {{fontSize:15, textAlign:"left"}}>{localStorage.getItem("item")}</h2>
+                      </div>
                     </Col>
                     <Col span={4}>
                     <img src={Report} alt="Report logo" style ={{ marginTop: "10px"}} onClick={this.gotoReport}></img>
