@@ -135,7 +135,7 @@ class Profile extends React.Component{
                 </Card>
                 <Card key="chat" className="profcard">
                     <div className="prof-card-title">
-                        My chats | {mychatslist}
+                        Chats and Suggestions | {mychatslist}
                     </div>
                     <div className="imgback lil" onClick={this.redirectTochats}>
                             <img src={front} alt="back to feed"></img>

@@ -6,6 +6,7 @@ import { Radio } from 'antd';
 import Nav from '../nav';
 import front from '../../assets/front.png';
 import back from '../../assets/back.png';
+import Suggest from '../../assets/suggest.png';
 import { withRouter } from 'react-router';
 
 class Mychat extends React.Component{
@@ -21,6 +22,9 @@ class Mychat extends React.Component{
     }
     gotoProfile = () => {
         this.props.history.push("/profile")
+    }
+    gotoShop = () => {
+        this.props.history.push("/suggestashop")
     }
     gotoMyChat = (r,i,s,sn) => () => {
         console.log(this.props)
@@ -204,18 +208,39 @@ class Mychat extends React.Component{
             <div className="mychats">
                 <div className="main-title">    
                 <Row>
-                    <Col span={18}>
+                    <Col span={24}>
                     <div className="imgbacc">
                             <img src={back} alt="back to feed" onClick={this.gotoProfile}></img>
                         </div>
-                        <h1>My chats</h1>
+                        <p style={{fontSize:"24px",fontWeight:"600",marginTop:"7px"}}>Chats And Suggestions</p>
                     </Col>
-                    <Col span={6}>
+                    {/* <Col span={6}>
                     <img onClick={this.gotoProfile} src={profile} alt="Profile logo"></img>
-                    </Col>
+                    </Col> */}
                 </Row>
  
                 </div>
+
+                <Card>
+                    <Row>
+                    <Col span={5} className="iconz">
+                            <div>
+                                <img src={Suggest} alt="suggest"></img>
+                            </div>
+                        </Col>
+                        <Col span={14}>
+                            <div className="feed-card-header" style={{marginTop:"6px", fontSize:"18px"}}>
+                                   Suggestions
+                            </div>
+                        </Col>
+                        <Col span={5} className="iconz">
+                            <div className="imgback">
+                                <img src={front} alt="location" style={{marginLeft:"10px"}} onClick ={this.gotoShop}></img>
+                            </div>
+                        </Col>
+                    </Row>
+                </Card>
+
                 <Radio.Group defaultValue="mr" buttonStyle="solid">
                     <Radio.Button value="mr" onClick = {this.handleClick('mr')}>My Requests</Radio.Button>
                     <Radio.Button value="or" onClick = {this.handleClick('or')}>Other Requests</Radio.Button>
