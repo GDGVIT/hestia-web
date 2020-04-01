@@ -241,7 +241,7 @@ class Feed extends React.Component {
 
 
 
-            fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location='+this.state.city, {
+            fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location=surat', {
             headers: new Headers({
                 'Content-Type': 'application/json',
             'Authorization': localStorage.getItem("token")
