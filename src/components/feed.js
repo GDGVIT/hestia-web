@@ -285,7 +285,7 @@ class Feed extends React.Component {
                                             <strong>{request.item_name}</strong>
                                         </span>
                                         <p>{request.quantity}</p>
-                                        <p style ={{width:"100%"}}>{request.description}</p>
+                                        <p style ={{width:"100%"}}>{request.description.slice(0,80)}...</p>
                                     </div>
                                     <div className="feed-card-date">
                                         <p>{request.date_time_created.slice(0,10)}</p>
