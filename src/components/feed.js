@@ -44,14 +44,14 @@ class Feed extends React.Component {
         window.localStorage.setItem("receiver_id", r);
         window.localStorage.setItem("item",i);
     }
-    handleChat= (r,i) => () =>{
+    handleChat= (r,i,ri) => () =>{
         this.setState({
             visible2: true
         })
         window.localStorage.setItem("receiver_id", r);
         window.localStorage.setItem("item",i);
 
-        // window.localStorage.setItem("accept_id", ri);
+        window.localStorage.setItem("accept_id", ri);
     }
     suggestShop = () =>{
         this.props.history.push('/suggestions');
@@ -95,34 +95,34 @@ class Feed extends React.Component {
       };
 
 
-      acceptrequest = (id) =>{
-        console.log(id)
-        postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: id,location:this.state.city})
-                .then(data => console.log(data)) // Result from the `response.json()` call
-                .catch(error => console.error(error))
+    //   acceptrequest = (id) =>{
+    //     console.log(id)
+    //     postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: id,location:this.state.city})
+    //             .then(data => console.log(data)) // Result from the `response.json()` call
+    //             .catch(error => console.error(error))
 
-                function postRequest(url, data) {
-                return fetch(url, {
-                    credentials: 'same-origin', // 'include', default: 'omit'
-                    method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
-                    body: JSON.stringify(data), // Coordinate the body type with 'Content-Type'
-                    headers: new Headers({
-                    'Content-Type': 'application/json',
-                    'Authorization': localStorage.getItem("token")
-                    }),
-                })
-                .then(response => response.json())
-                }
-
-
-      }
+    //             function postRequest(url, data) {
+    //             return fetch(url, {
+    //                 credentials: 'same-origin', // 'include', default: 'omit'
+    //                 method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
+    //                 body: JSON.stringify(data), // Coordinate the body type with 'Content-Type'
+    //                 headers: new Headers({
+    //                 'Content-Type': 'application/json',
+    //                 'Authorization': localStorage.getItem("token")
+    //                 }),
+    //             })
+    //             .then(response => response.json())
+    //             }
 
 
+    //   }
 
-      createChat = (id) => {
+
+
+      createChat = () => {
 
         //   Accept the item
-        postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: id,location:this.state.city})
+        postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
         .then(data => console.log(data)) // Result from the `response.json()` call
         .catch(error => console.error(error))
 
@@ -159,11 +159,11 @@ class Feed extends React.Component {
               if(res.code == 200){
                   window.localStorage.setItem("chat_name", res.chat_room.receiver_name )
                   window.localStorage.setItem("item", res.chat_room.title)
-                // this.props.history.push("/chat");
+                this.props.history.push("/chat");
               }
               if(res.status == 500){
                 this.props.alert.show("Chatroom exists.");
-                // this.props.history.push("/profile");
+                this.props.history.push("/profile");
               }
           })
           .catch(err => console.log(err))
@@ -306,7 +306,7 @@ class Feed extends React.Component {
                                 </Col>
                                 <Col span={7} className="iconz">
                                 <div className="imgback">
-                                        <img onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`)} src={check} alt="location" onClick={this.createChat(`${request.id}`)}></img>
+                                        <img onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`,`${request.id}`)} src={check} alt="location"></img>
                                     </div>
                                     <div className="imgback"  onClick = {this.handleStore(`${request.request_made_by}`, `${request.item_name}`)}>
                                         <img src={store} alt="location"></img>

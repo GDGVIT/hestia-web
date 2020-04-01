@@ -2,8 +2,6 @@ import React from 'react'
 import { Input } from 'antd';
 import PropTypes from 'prop-types';
 
-
-
 class Messages extends React.Component{
   static propTypes = {
     onSubmitMessage: PropTypes.func.isRequired,

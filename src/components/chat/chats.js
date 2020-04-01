@@ -251,7 +251,7 @@ class Chat extends React.Component{
             </div>
               {/* Messages */}
 
-              <div style={{height:window.innerWidth > 360 ? "60vh":"53vh", marginTop:"20px", overflow:"scroll"}}>
+              <div style={{height:window.innerWidth > 361 ? "60vh":"48vh", marginTop:"20px", overflow:"scroll"}}>
                 {initial}
                 {chatslist}
 
