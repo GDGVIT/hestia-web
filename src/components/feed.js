@@ -275,6 +275,12 @@ class Feed extends React.Component {
         const reqlist = requests.length ? (
             requests.map(
                 request =>{
+                    if(request.description == null){
+                        request.description = "NA"
+                    }
+                    if(request.description.length > 50){
+                        request.description = request.description.slice(0,50)+ "..."
+                    }
                     // console.log(request)
                     return(
                         <Card key={request.id}>
@@ -285,7 +291,7 @@ class Feed extends React.Component {
                                             <strong>{request.item_name}</strong>
                                         </span>
                                         <p>{request.quantity}</p>
-                                        <p style ={{width:"100%"}}>{request.description.slice(0,80)}...</p>
+                                        <p style ={{width:"100%", marginBottom:"10px"}}>{request.description}</p>
                                     </div>
                                     <div className="feed-card-date">
                                         <p>{request.date_time_created.slice(0,10)}</p>
