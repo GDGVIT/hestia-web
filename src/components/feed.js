@@ -242,7 +242,7 @@ class Feed extends React.Component {
 
             fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location='+this.state.city, {
             headers: new Headers({
-                // 'Content-Type': 'application/json',
+                'Content-Type': 'application/json',
             'Authorization': localStorage.getItem("token")
             })
             })
