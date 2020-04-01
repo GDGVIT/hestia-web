@@ -68,15 +68,8 @@ class Feed extends React.Component {
         // console.log(values);
         this.setState(values)
         console.log(this.state)
-        postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.city,this.state.description)
-                .then(data => {
-                    console.log(data)
-                    if(data.message == "User has already made maximum requests"){
-                        this.props.alert.show("You have reached the request limit")
-                    } else {
-                        this.props.alert.show("Request added")
-                    }
-                })
+        postForm('https://akina.ayushpriya.tech/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.city,this.state.description)
+                .then(data => this.props.alert.show("Request added"))
                 .catch(error => console.error(error))
 
                 function postForm(url,name,quantity,city,description) {
@@ -129,7 +122,7 @@ class Feed extends React.Component {
       createChat = () => {
 
         //   Accept the item
-        postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
+        postRequest('https://akina.ayushpriya.tech/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
         .then(data => console.log(data)) // Result from the `response.json()` call
         .catch(error => console.error(error))
 
@@ -153,7 +146,7 @@ class Feed extends React.Component {
           obj["sender"] = parseInt(localStorage.getItem("user_id"))
           obj["title"] = localStorage.getItem("item")
 
-          fetch('https://hestia-chat.herokuapp.com/api/v1/createChat',{
+          fetch('https://akina.ayushpriya.tech/api/v1/createChat',{
               method:"POST",
               headers: new Headers({
                 'Authorization': localStorage.getItem("token")
@@ -227,7 +220,7 @@ class Feed extends React.Component {
         //     token: localStorage.getItem("token")
         // })
         console.log(this.state);
-        fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+this.state.city, {
+        fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location='+this.state.city, {
             headers: new Headers({
                 // 'Content-Type': 'application/json',
             'Authorization': localStorage.getItem("token")
@@ -298,9 +291,6 @@ class Feed extends React.Component {
         const reqlist = requests.length ? (
             requests.map(
                 request =>{
-                    if(request.description == null){
-                        request.description = "NA"
-                    }
                     // console.log(request)
                     return(
                         <Card key={request.id}>
@@ -311,7 +301,6 @@ class Feed extends React.Component {
                                             <strong>{request.item_name}</strong>
                                         </span>
                                         <p>{request.quantity}</p>
-                                        <p style={{width:"100%"}}><b>Description - </b>{request.description}</p>
                                     </div>
                                     <div className="feed-card-date">
                                         <p>{request.date_time_created.slice(0,10)}</p>
