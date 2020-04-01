@@ -260,8 +260,9 @@ class Chat extends React.Component{
                 </div>
               </div>  
             <div style={{    position: 'fixed',
-                            width: '100%',
+                            width: '95%',
                             bottom: '75px',
+                            marginLeft:"10px"
                             }}
             >
 

@@ -6,7 +6,7 @@ import { Radio } from 'antd';
 import Nav from '../nav';
 import front from '../../assets/front.png';
 import back from '../../assets/back.png';
-import Suggest from '../../assets/suggest.png';
+import Suggestpic from '../../assets/suggest.png';
 import { withRouter } from 'react-router';
 
 class Mychat extends React.Component{
@@ -16,6 +16,7 @@ class Mychat extends React.Component{
             goto: "mychats",
             mychats: [],
             otherchats:[],
+            Suggest:[],
             value:'mr'
         }
         // console.log(this.props)
@@ -135,11 +136,32 @@ class Mychat extends React.Component{
         })
         .catch(error => console.error(error))
 
+        //get suggestions number
+        fetch('https://hestia-report.herokuapp.com/api/recommend/',{
+            method: "GET",
+            headers: new Headers({
+                'Authorization': localStorage.getItem("token")
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+            console.log(data)
+            if(data.status == "success"){
+                this.setState({
+                    Suggest: data.payload
+                })
+            }
+            console.log(this.state)
+            })
+            .catch(error => console.error(error))
+
      }
 
     render(){
         const { mychats } = this.state;
         const {otherchats} = this.state;
+        const {Suggest} = this.state;
+        const suggestnumber = Suggest.length;
             const mychatslist = mychats.length ? (
                 mychats.map(
                     data => {
@@ -225,12 +247,12 @@ class Mychat extends React.Component{
                     <Row>
                     <Col span={5} className="iconz">
                             <div>
-                                <img src={Suggest} alt="suggest"></img>
+                                <img src={Suggestpic} alt="suggest"></img>
                             </div>
                         </Col>
                         <Col span={14}>
                             <div className="feed-card-header" style={{marginTop:"6px", fontSize:"18px"}}>
-                                   Suggestions
+                                   Suggestions | {suggestnumber}
                             </div>
                         </Col>
                         <Col span={5} className="iconz">
