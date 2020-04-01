@@ -3,8 +3,72 @@
   "name": "AKINA",
   "icons": [
     {
-      "src": "src/icons/logo.png",
-      "sizes": "96x96",
+      "src": "src/assets/logo.png",
+      "type": "image/png"
+    },
+    {
+      "src": "src/assets/backbutton.png",
+      "type": "image/png"
+    },
+    {
+      "src": "src/assets/cal.png",
+      "type": "image/png"
+    },
+    {
+      "src": "src/assets/check.png",
+      "type": "image/png"
+    },
+    {
+      "src": "src/assets/delete.png",
+      "type": "image/png"
+    },
+    {
+      "src": "src/assets/expolore.png",
+      "type": "image/png"
+    },
+    {
+      "src": "src/assets/front.png",
+      "type": "image/png"
+    },
+    {
+      "src": "src/assets/group_5.png",
+      "type": "image/png"
+    },
+    {
+      "src": "src/assets/group.png",
+      "type": "image/png"
+    },
+    {
+      "src": "src/assets/mychats.png",
+      "type": "image/png"
+    },
+    {
+      "src": "src/assets/myreqs.png",
+      "type": "image/png"
+    },
+    {
+      "src": "src/assets/news.png",
+      "type": "image/png"
+    },
+    {
+      "src": "src/assets/plus.png",
+      "type": "image/png"
+    },
+    {
+      "src": "src/assets/profile.png",
+      "type": "image/png"
+    },
+    {
+      "src": "src/assets/rectangle.png",
+      "type": "image/png"
+    },{
+      "src": "src/assets/rectanglew.png",
+      "type": "image/png"
+    },{
+      "src": "src/assets/store.png",
+      "type": "image/png"
+    },{
+      "src": "src/assets/suggest.png",
       "type": "image/png"
     },
   ],
