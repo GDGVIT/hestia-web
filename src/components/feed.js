@@ -229,10 +229,28 @@ class Feed extends React.Component {
             return response.json()
             })
             .then(data => {
-            console.log(data)
-            this.setState({
-                city:data.features[0].properties.address.state_district
-            })
+            console.log("LOCATIONNNNNNNNNN",data)
+                
+                fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location='+data.features[0].properties.address.city , {
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem("token")
+                })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    if(data.message == "Location not provided"){
+                        console.log("No location")
+                    } else {
+                        this.setState({
+                            requests: data.Request,
+                        });
+                    }
+                console.log(this.state)
+                })
+                .catch(error => console.error(error))
+    
             console.log(this.state)
             })
             .catch(error => console.error(error))
@@ -242,26 +260,7 @@ class Feed extends React.Component {
 
 
 
-            fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location='+this.state.city, {
-            headers: new Headers({
-                'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem("token")
-            })
-            })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                if(data.message == "Location not provided"){
-                    console.log("No location")
-                } else {
-                    this.setState({
-                        requests: data.Request,
-                    });
-                }
-            console.log(this.state)
-            })
-            .catch(error => console.error(error))
-
+   
 
 
 

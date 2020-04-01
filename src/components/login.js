@@ -37,8 +37,9 @@ const Login = (props) => {
         return response.json();
       }else{
         switch(response.status){
-          case 401: 
-              console.log("You have been blocked")
+
+          case 400: 
+              alert.show("Account already exists")
             break;
           case 403:
             alert.show("You have been blocked")
