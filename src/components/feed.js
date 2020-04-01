@@ -258,7 +258,7 @@ class Feed extends React.Component {
             //     })
 
 
-            fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/'+localStorage.getItem("latitude")+','+localStorage.getItem("longitude")+'.json?access_token=pk.eyJ1Ijoibm94MTIiLCJhIjoiY2s4Zm5obnZ0MDFwajNtcDAxanFkeXM1ayJ9.YMGj-nXopQXZfh5NKpLiCg', {
+            fetch('https://nominatim.openstreetmap.org/reverse?format=geojson&lat='+localStorage.getItem("latitude")+'&lon='+localStorage.getItem("longitude"), {
             })
             .then(response =>{
             console.log(response)
@@ -267,7 +267,7 @@ class Feed extends React.Component {
             .then(data => {
             console.log(data)
             this.setState({
-                city:data.features[0].place_name
+                city:data.features[0].properties.address.state_district
             })
             console.log(this.state)
             })
