@@ -159,6 +159,7 @@ class Feed extends React.Component {
               if(res.code == 200){
                   window.localStorage.setItem("chat_name", res.chat_room.receiver_name )
                   window.localStorage.setItem("item", res.chat_room.title)
+                  window.localStorage.setItem("chat_desc", res.chat_room.req_desc)
                 this.props.history.push("/chat");
               }
               if(res.status == 500){
@@ -242,7 +243,7 @@ class Feed extends React.Component {
 
             fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location='+this.state.city, {
             headers: new Headers({
-                // 'Content-Type': 'application/json',
+                'Content-Type': 'application/json',
             'Authorization': localStorage.getItem("token")
             })
             })
@@ -284,6 +285,7 @@ class Feed extends React.Component {
                                             <strong>{request.item_name}</strong>
                                         </span>
                                         <p>{request.quantity}</p>
+                                        <p style ={{width:"100%"}}>{request.description}</p>
                                     </div>
                                     <div className="feed-card-date">
                                         <p>{request.date_time_created.slice(0,10)}</p>

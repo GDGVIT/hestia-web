@@ -28,20 +28,20 @@ class Suggestions extends React.Component{
 
         this.setState(values)
         console.log(this.state)
-        postForm('https://akina.ayushpriya.tech/api/recommend/',this.state)
-                .then(data => {
-                    console.log(data)
-                    if(data.status == "success"){
-                        this.props.alert.show(data.message)
-                        this.props.history.push("/mychats")
-                    }
-                    if(data.status == "error"){
-                        this.props.alert.show(data.message)
-                    }
-                })
-                .catch(error => console.error(error))
+        // postForm('https://akina.ayushpriya.tech/api/recommend/',this.state)
+        //         .then(data => {
+        //             console.log(data)
+        //             if(data.status == "success"){
+        //                 this.props.alert.show(data.message)
+        //                 this.props.history.push("/mychats")
+        //             }
+        //             if(data.status == "error"){
+        //                 this.props.alert.show(data.message)
+        //             }
+        //         })
+        //         .catch(error => console.error(error))
 
-                function postForm(url,state) {
+                // function postForm(url,state) {
                     var object ={};
                     object["recommended_for"] = localStorage.getItem("receiver_id");
                     object["name_of_shop"] = state.name_of_shop;
@@ -51,7 +51,7 @@ class Suggestions extends React.Component{
                     object["description_of_shop"] = state.description_of_shop;
                     object["phone_number"] = state.phone_number;
                     console.log(object)
-                return fetch(url, {
+                fetch("https://akina.ayushpriya.tech/api/recommend/", {
                     method: 'POST', // or 'PUT'
                     body: JSON.stringify(object),  // a FormData will automatically set the 'Content-Type'
                     headers: new Headers({
@@ -61,7 +61,6 @@ class Suggestions extends React.Component{
                 })
                 .then(response => {
                     console.log(response)
-       
                     return response.json();
                 })
                 .then(data=>{
@@ -71,7 +70,7 @@ class Suggestions extends React.Component{
                 .catch(error=>{
                     console.error(error);
                 })
-    }
+            // }
 }
     render(){
         return(
