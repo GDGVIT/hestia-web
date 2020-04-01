@@ -259,7 +259,11 @@ class Chat extends React.Component{
                     ref={(el) => { this.messagesEnd = el; }}>
                 </div>
               </div>  
-            <div>
+            <div style={{    position: 'fixed',
+                            width: '100%',
+                            bottom: '75px',
+                            }}
+            >
 
             <Messages onSubmitMessage={messageString => this.submitMessage(messageString)}/>
             </div>

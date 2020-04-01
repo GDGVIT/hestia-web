@@ -21,8 +21,10 @@ class Edit extends React.Component{
           }
     }
     
-    onFinishPass =(values) =>{
-        console.log(values)
+    onFinishPass =() =>{
+       let values={
+            'email': localStorage.getItem("email")
+        }
         return fetch("https://hestia-auth.herokuapp.com/api/user/forgotPassword", {
         method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
         body: JSON.stringify(values), // Coordinate the body type with 'Content-Type'
@@ -137,7 +139,7 @@ class Edit extends React.Component{
                     />
                 </Form.Item>
                 <Form.Item>
-                <Button type="primary" onClick={this.changePass} style={{width: "150px"}}>
+                <Button type="primary" onClick={this.onFinishPass} style={{width: "150px"}}>
                     Change Password
                 </Button>
                 </Form.Item>
@@ -152,7 +154,7 @@ class Edit extends React.Component{
                 </Form.Item>
                 </Form>
             </div>
-                    <Modal
+                    {/* <Modal
                         title="Enter your email"
                         visible={this.state.visible}    
                         footer={null}
@@ -178,7 +180,7 @@ class Edit extends React.Component{
                         </Form.Item>
                         
                         </Form>
-                    </Modal>
+                    </Modal> */}
         </div>
         );
     }
