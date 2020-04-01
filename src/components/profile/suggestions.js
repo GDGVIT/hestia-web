@@ -61,8 +61,15 @@ class Suggestions extends React.Component{
                 })
                 .then(response => {
                     console.log(response)
+       
+                    return response.json();
+                })
+                .then(data=>{
                     this.props.alert.show("Suggestion successful");
                     this.gotoFeed();
+                })
+                .catch(error=>{
+                    console.error(error);
                 })
     }
 }
