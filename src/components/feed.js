@@ -20,7 +20,7 @@ class Feed extends React.Component {
             visible1:false,
             visible2:false,
             requests: [ ],
-            city: 'surat',
+            city: '',
             item_name: null,
             quantity: '',
             token: '',
@@ -120,7 +120,7 @@ class Feed extends React.Component {
 
 
       createChat = () => {
-
+        console.log(parseInt(localStorage.getItem("accept_id")))
         //   Accept the item
         postRequest('https://akina.ayushpriya.tech/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
         .then(data => console.log(data)) // Result from the `response.json()` call
@@ -159,6 +159,7 @@ class Feed extends React.Component {
               if(res.code == 200){
                   window.localStorage.setItem("chat_name", res.chat_room.receiver_name )
                   window.localStorage.setItem("item", res.chat_room.title)
+                  window.localStorage.setItem("chat_desc", res.chat_room.req_desc)
                 this.props.history.push("/chat");
               }
               if(res.status == 500){
@@ -180,20 +181,20 @@ class Feed extends React.Component {
         window.localStorage.setItem("acceptcheck", `${e.target.checked}`);
         // console.log(localStorage.getItem("acceptcheck"))
       }
-      componentWillMount(){
-        navigator.geolocation.getCurrentPosition(
-            position => this.setState({ 
-              latitude: position.coords.latitude, 
-              longitude: position.coords.longitude
-            }), 
-            err => console.log(err)
+    //   componentWillMount(){
+    //     navigator.geolocation.getCurrentPosition(
+    //         position => this.setState({ 
+    //           latitude: position.coords.latitude, 
+    //           longitude: position.coords.longitude
+    //         }), 
+    //         err => console.log(err)
             
-          );
-          console.log(this.state.latitude)
+    //       );
+    //       console.log(this.state.latitude)
             
 
 
-      }
+    //   }
       componentDidMount(){  
         if(localStorage.getItem("token")){
         //  console.log("someone's logged in")
@@ -220,9 +221,29 @@ class Feed extends React.Component {
         //     token: localStorage.getItem("token")
         // })
         console.log(this.state);
-        fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location='+this.state.city, {
+            fetch('https://nominatim.openstreetmap.org/reverse?format=geojson&lat='+localStorage.getItem("latitude")+'&lon='+localStorage.getItem("longitude"), {
+            })
+            .then(response =>{
+            console.log(response)
+            return response.json()
+            })
+            .then(data => {
+            console.log(data)
+            this.setState({
+                city:data.features[0].properties.address.state_district
+            })
+            console.log(this.state)
+            })
+            .catch(error => console.error(error))
+                
+
+
+
+
+
+            fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location='+this.state.city, {
             headers: new Headers({
-                // 'Content-Type': 'application/json',
+                'Content-Type': 'application/json',
             'Authorization': localStorage.getItem("token")
             })
             })
@@ -240,43 +261,6 @@ class Feed extends React.Component {
             })
             .catch(error => console.error(error))
 
-            // let latitude;
-            // let longitude;
-            // getLocation =() => {
-            //     if (navigator.geolocation) {
-            //         navigator.geolocation.getCurrentPosition(showPosition);
-            //             } 
-            //         }
-            // function showPosition(position) {
-            //     latitude = position.coords.latitude;
-            //     longitude = position.coords.longitude;
-            //     }
-                
-
-
-            //     this.setState({
-            //         latitude: latitude,
-            //         longitude: longitude
-            //     })
-
-
-            fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/'+localStorage.getItem("latitude")+','+localStorage.getItem("longitude")+'.json?access_token=pk.eyJ1Ijoibm94MTIiLCJhIjoiY2s4Zm5obnZ0MDFwajNtcDAxanFkeXM1ayJ9.YMGj-nXopQXZfh5NKpLiCg', {
-            })
-            .then(response =>{
-            console.log(response)
-            return response.json()
-            })
-            .then(data => {
-            console.log(data)
-            this.setState({
-                city:data.features[0].place_name
-            })
-            console.log(this.state)
-            })
-            .catch(error => console.error(error))
-                
-
-
 
 
 
@@ -291,6 +275,12 @@ class Feed extends React.Component {
         const reqlist = requests.length ? (
             requests.map(
                 request =>{
+                    if(request.description == null){
+                        request.description = "NA"
+                    }
+                    if(request.description.length > 50){
+                        request.description = request.description.slice(0,50)+ "..."
+                    }
                     // console.log(request)
                     return(
                         <Card key={request.id}>
@@ -301,6 +291,7 @@ class Feed extends React.Component {
                                             <strong>{request.item_name}</strong>
                                         </span>
                                         <p>{request.quantity}</p>
+                                        <p style ={{width:"100%", marginBottom:"10px"}}>{request.description}</p>
                                     </div>
                                     <div className="feed-card-date">
                                         <p>{request.date_time_created.slice(0,10)}</p>
