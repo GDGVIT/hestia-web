@@ -20,7 +20,7 @@ class Feed extends React.Component {
             visible1:false,
             visible2:false,
             requests: [ ],
-            city: 'surat',
+            city: '',
             item_name: null,
             quantity: '',
             token: '',
@@ -120,7 +120,7 @@ class Feed extends React.Component {
 
 
       createChat = () => {
-
+        console.log(parseInt(localStorage.getItem("accept_id")))
         //   Accept the item
         postRequest('https://akina.ayushpriya.tech/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
         .then(data => console.log(data)) // Result from the `response.json()` call
@@ -180,20 +180,20 @@ class Feed extends React.Component {
         window.localStorage.setItem("acceptcheck", `${e.target.checked}`);
         // console.log(localStorage.getItem("acceptcheck"))
       }
-      componentWillMount(){
-        navigator.geolocation.getCurrentPosition(
-            position => this.setState({ 
-              latitude: position.coords.latitude, 
-              longitude: position.coords.longitude
-            }), 
-            err => console.log(err)
+    //   componentWillMount(){
+    //     navigator.geolocation.getCurrentPosition(
+    //         position => this.setState({ 
+    //           latitude: position.coords.latitude, 
+    //           longitude: position.coords.longitude
+    //         }), 
+    //         err => console.log(err)
             
-          );
-          console.log(this.state.latitude)
+    //       );
+    //       console.log(this.state.latitude)
             
 
 
-      }
+    //   }
       componentDidMount(){  
         if(localStorage.getItem("token")){
         //  console.log("someone's logged in")
@@ -220,7 +220,27 @@ class Feed extends React.Component {
         //     token: localStorage.getItem("token")
         // })
         console.log(this.state);
-        fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location='+this.state.city, {
+            fetch('https://nominatim.openstreetmap.org/reverse?format=geojson&lat='+localStorage.getItem("latitude")+'&lon='+localStorage.getItem("longitude"), {
+            })
+            .then(response =>{
+            console.log(response)
+            return response.json()
+            })
+            .then(data => {
+            console.log(data)
+            this.setState({
+                city:data.features[0].properties.address.state_district
+            })
+            console.log(this.state)
+            })
+            .catch(error => console.error(error))
+                
+
+
+
+
+
+            fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location='+this.state.city, {
             headers: new Headers({
                 // 'Content-Type': 'application/json',
             'Authorization': localStorage.getItem("token")
@@ -239,43 +259,6 @@ class Feed extends React.Component {
             console.log(this.state)
             })
             .catch(error => console.error(error))
-
-            // let latitude;
-            // let longitude;
-            // getLocation =() => {
-            //     if (navigator.geolocation) {
-            //         navigator.geolocation.getCurrentPosition(showPosition);
-            //             } 
-            //         }
-            // function showPosition(position) {
-            //     latitude = position.coords.latitude;
-            //     longitude = position.coords.longitude;
-            //     }
-                
-
-
-            //     this.setState({
-            //         latitude: latitude,
-            //         longitude: longitude
-            //     })
-
-
-            fetch('https://nominatim.openstreetmap.org/reverse?format=geojson&lat='+localStorage.getItem("latitude")+'&lon='+localStorage.getItem("longitude"), {
-            })
-            .then(response =>{
-            console.log(response)
-            return response.json()
-            })
-            .then(data => {
-            console.log(data)
-            this.setState({
-                city:data.features[0].properties.address.state_district
-            })
-            console.log(this.state)
-            })
-            .catch(error => console.error(error))
-                
-
 
 
 
