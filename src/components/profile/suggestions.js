@@ -28,7 +28,7 @@ class Suggestions extends React.Component{
 
         this.setState(values)
         console.log(this.state)
-        postForm('https://hestia-report.herokuapp.com/api/recommend/',this.state)
+        postForm('https://akina.ayushpriya.tech/api/recommend/',this.state)
                 .then(data => {
                     console.log(data)
                     if(data.status == "success"){

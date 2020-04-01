@@ -31,7 +31,7 @@ const Register = (props) => {
   const alert = useAlert()
   let authcheck = false;
   const onFinish = values => {
-    fetch("https://hestia-auth.herokuapp.com/api/user/register", {
+    fetch("https://akina.ayushpriya.tech/api/user/register", {
         method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
         body: JSON.stringify(values.user), // Coordinate the body type with 'Content-Type'
         headers: new Headers({

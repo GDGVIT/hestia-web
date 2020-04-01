@@ -89,7 +89,7 @@ class Mychat extends React.Component{
         var obj = {"user_id" : parseInt(localStorage.getItem("user_id"))}
 
         // my chats
-        fetch('https://hestia-chat.herokuapp.com/api/v1/getMyChats',{
+        fetch('https://akina.ayushpriya.tech/api/v1/getMyChats',{
             method:"POST",
             headers: new Headers({
                 'Authorization': localStorage.getItem("token")
@@ -113,7 +113,7 @@ class Mychat extends React.Component{
         .catch(error => console.error(error))
 
         // other chats
-        fetch('https://hestia-chat.herokuapp.com/api/v1/getOtherChats',{
+        fetch('https://akina.ayushpriya.tech/api/v1/getOtherChats',{
             method:"POST",
             headers: new Headers({
                 'Authorization': localStorage.getItem("token")
@@ -137,7 +137,7 @@ class Mychat extends React.Component{
         .catch(error => console.error(error))
 
         //get suggestions number
-        fetch('https://hestia-report.herokuapp.com/api/recommend/',{
+        fetch('https://akina.ayushpriya.tech/api/recommend/',{
             method: "GET",
             headers: new Headers({
                 'Authorization': localStorage.getItem("token")

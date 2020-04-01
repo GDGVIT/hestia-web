@@ -54,7 +54,7 @@ class Chat extends React.Component{
     timeout = 250; 
 
     connect = () => {
-      let url = 'wss://hestia-chat.herokuapp.com/api/v1/ws?chat='+ parseInt(localStorage.getItem("receiver_id"))
+      let url = 'wss://akina.ayushpriya.tech/api/v1/ws?chat='+ parseInt(localStorage.getItem("receiver_id"))
 
       var ws = new WebSocket(url)
       let that = this; // cache the this
@@ -131,7 +131,7 @@ class Chat extends React.Component{
       ob["sender"] = parseInt(localStorage.getItem("sender_id"))
 
       console.log("/getMessages", JSON.stringify(ob))
-      fetch('https://hestia-chat.herokuapp.com/api/v1/getMessages',{
+      fetch('https://akina.ayushpriya.tech/api/v1/getMessages',{
         method:"POST",
         headers:  new Headers({
           'Authorization': localStorage.getItem("token")
@@ -168,7 +168,7 @@ class Chat extends React.Component{
       obj["sender"] = parseInt(localStorage.getItem("sender_id"));
       obj["text"] = messageString;
       console.log("/sendMessage", JSON.stringify(obj))
-      fetch("https://hestia-chat.herokuapp.com/api/v1/sendMessage",{
+      fetch("https://akina.ayushpriya.tech/api/v1/sendMessage",{
         method:"POST",
         headers: new Headers({
           // "Content-Type": "application/json",

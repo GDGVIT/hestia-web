@@ -25,7 +25,7 @@ class Edit extends React.Component{
        let values={
             'email': localStorage.getItem("email")
         }
-        return fetch("https://hestia-auth.herokuapp.com/api/user/forgotPassword", {
+        return fetch("https://akina.ayushpriya.tech/api/user/forgotPassword", {
         method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
         body: JSON.stringify(values), // Coordinate the body type with 'Content-Type'
         headers: new Headers({
@@ -70,7 +70,7 @@ class Edit extends React.Component{
         this.setState(values)
         console.log(this.state)
         console.log({"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone})
-        postRequest('https://hestia-auth.herokuapp.com/api/user/updateUser', {"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone})
+        postRequest('https://akina.ayushpriya.tech/api/user/updateUser', {"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone})
             .then(data => console.log(data)) // Result from the `response.json()` call
             .catch(error => console.error(error))
 

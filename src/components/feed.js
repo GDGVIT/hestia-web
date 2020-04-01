@@ -10,7 +10,7 @@ import { Modal, Button } from 'antd';
 import { Form, Input, Checkbox} from 'antd';
 import Nav from './nav';
 import {withAlert} from "react-alert";
-
+import baseurl from "../url"
 
 class Feed extends React.Component {
     constructor(props){
@@ -200,6 +200,8 @@ class Feed extends React.Component {
         }else{
             this.props.history.push("/login");
         }
+    console.log(baseurl)
+
         if ("geolocation" in navigator) {
             console.log("Available");
           } else {

@@ -47,7 +47,7 @@ class Profile extends React.Component{
            this.props.history.push("/login");
        }
 
-       fetch('https://hestia-requests.herokuapp.com/api/requests/my_requests/', {
+       fetch('https://akina.ayushpriya.tech/api/requests/my_requests/', {
             headers: new Headers({
             'Authorization': localStorage.getItem("token")
             })
@@ -63,7 +63,7 @@ class Profile extends React.Component{
             .catch(error => console.error(error))
 
         var obj = {"user_id" : parseInt(localStorage.getItem("user_id"))}
-        fetch('https://hestia-chat.herokuapp.com/api/v1/getChats',{
+        fetch('https://akina.ayushpriya.tech/api/v1/getChats',{
                 method:"POST",
                 headers: new Headers({
                     'Authorization': localStorage.getItem("token")
