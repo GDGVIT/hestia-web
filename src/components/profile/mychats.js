@@ -27,13 +27,15 @@ class Mychat extends React.Component{
     gotoShop = () => {
         this.props.history.push("/suggestashop")
     }
-    gotoMyChat = (r,i,s,sn) => () => {
+    gotoMyChat = (r,i,s,sn,cd) => () => {
         console.log(this.props)
         window.localStorage.setItem("receiver_id", s);
         window.localStorage.setItem("item",i);
         window.localStorage.setItem("sender_id", r);
         window.localStorage.setItem("report", s);
         window.localStorage.setItem("chat_name",sn);
+        window.localStorage.setItem("chat_desc", cd);
+
 
         if(this.props.history){
             this.props.history.push({
@@ -51,13 +53,14 @@ class Mychat extends React.Component{
         }
     }
 
-    gotoOtherChat = (r,i,s,rn) => () => {
+    gotoOtherChat = (r,i,s,rn,cd) => () => {
         console.log(this.props)
         window.localStorage.setItem("receiver_id", r);
         window.localStorage.setItem("item",i);
         window.localStorage.setItem("sender_id", s);
         window.localStorage.setItem("report", r);
         window.localStorage.setItem("chat_name",rn);
+        window.localStorage.setItem("chat_desc", cd);
 
         if(this.props.history){
             this.props.history.push({
@@ -177,10 +180,11 @@ class Mychat extends React.Component{
                                     </div>
                                     <div className="feed-card-date">
                                         <p>{data.title}</p>
+                                        <p>{data.req_desc}</p>
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    <div className="imgback" onClick={this.gotoMyChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.sender_name}`)}>
+                                    <div className="imgback" onClick={this.gotoMyChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.sender_name}`, `${data.req_desc}`)}>
                                         <img src={front} alt="location"></img>
                                     </div>
                                 </Col>
@@ -209,10 +213,11 @@ class Mychat extends React.Component{
                                     </div>
                                     <div className="feed-card-date">
                                         <p>{data.title}</p>
+                                        <p>{data.req_desc}</p>
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    <div className="imgback" onClick={this.gotoOtherChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.receiver_name}`)}>
+                                    <div className="imgback" onClick={this.gotoOtherChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.receiver_name}`,`${data.req_desc}`)}>
                                         <img src={front} alt="location"></img>
                                     </div>
                                 </Col>
