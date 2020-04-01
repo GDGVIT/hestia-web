@@ -65,7 +65,7 @@ const Dlog = (props) => {
             if(authcheck){
             window.localStorage.setItem("user_id", data.id);
             window.localStorage.setItem("token", data.Token);
-            props.history.push("/feed");
+            props.history.push("/main");
             }
             // props.history.push("/feed");
           })
@@ -75,7 +75,7 @@ const Dlog = (props) => {
 
     useEffect(() => { 
         if(localStorage.getItem("token")){
-            props.history.push("/feed")
+            props.history.push("/main")
         }
       });
 

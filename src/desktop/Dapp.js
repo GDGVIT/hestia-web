@@ -16,7 +16,7 @@ class Dapp extends React.Component{
         return(
             <BrowserRouter>
                 <div className="Dapp">
-                    <Route exact path='/' component={Dmain}/>
+                    <Route exact path='/main' component={Dmain}/>
                     <Route exact path='/dlogin' component={Dlog}/>
                 </div>
             </BrowserRouter>

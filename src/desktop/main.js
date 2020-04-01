@@ -22,6 +22,11 @@ class Dmain extends React.Component{
         })
         console.log(this.state)
     }
+    componentDidMount(){
+        if(!localStorage.getItem("token")){
+            this.props.history.push("/dlogin")
+        }
+    }
     
     render(){
         return(

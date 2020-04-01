@@ -24,7 +24,7 @@ class Myreqs extends React.Component{
 
     deleterequest = (id) => {
         console.log(id)
-                postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/'+id+'/')
+                postForm('https://akina.ayushpriya.tech/api/requests/item_requests/'+id+'/')
                     .then(data => {
                         console.log(data)
                         this.props.alert.show("Item deleted")
@@ -62,7 +62,7 @@ class Myreqs extends React.Component{
             this.props.history.push("/login");
         }
 
-        fetch('https://hestia-requests.herokuapp.com/api/requests/my_requests/', {
+        fetch('https://akina.ayushpriya.tech/api/requests/my_requests/', {
             headers: new Headers({
             'Authorization': localStorage.getItem("token")
             })
@@ -88,6 +88,9 @@ class Myreqs extends React.Component{
         const reqlist = Requests.length ? (
             Requests.map(
                 request =>{
+                    if(request.description == null){
+                        request.description = "NA"
+                    }
                     return(
                         <Card key={request.id}>
                         <Row>
@@ -97,6 +100,7 @@ class Myreqs extends React.Component{
                                     <strong>{request.item_name}</strong>
                                     </span>
                                         <p>{request.quantity}</p>
+                                        <p style={{width:"100%"}}><b>Description - </b>{request.description}</p>
                                 </div>
                                 <div className="feed-card-date">
                                         <p>{request.date_time_created.slice(0,10)}</p>

@@ -16,7 +16,7 @@
 /* Home page css */
 
 .hestia-logo{
-padding-top: 30vw;
+padding-top: 20vh;
 margin-left: 12.5%;
 }
 .hestia-logo img{
@@ -154,16 +154,16 @@ margin-left: 12.5%;
     position: fixed;
     bottom: 95px;
     left: 48%;
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
+    width: 55px;
+    height: 55px;
+    border-radius: 30px;
     text-align: center;
     box-shadow: 0px 0px 10px lightgray;
 }
 .addReq img{
     width: 13px;
     height: auto;
-    padding-top: 13px;
+    padding-top: 20px;
 }
 /* Main content css */
 .main-title{
@@ -395,7 +395,7 @@ margin-left: 12.5%;
     width: 90%;
 }
 .ant-modal-content{
-    height: 260px;
+    height: 350px
 }
 .ant-modal-header{
     display: none;

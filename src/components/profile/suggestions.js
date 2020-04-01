@@ -14,20 +14,13 @@ class Suggestions extends React.Component{
 
         }
     }
-     validateMessages = {
+ validateMessages = {
+        required: 'This field is required!',
         types: {
-            email: 'Not a validate email!',
-
-        }
-    }
+          email: 'Not a validate email!'
+        },
+      };
     gotoFeed = () => {
-        if(this.props.p){
-            this.props.p.g.history.push("/feed");
-            // this.props.p.history.push("/feed");
-        }else{
-            this.props.history.push("/feed");
-        }
-        
         this.props.history.push("/feed");
     }
     onFinish = values => {
@@ -35,7 +28,7 @@ class Suggestions extends React.Component{
 
         this.setState(values)
         console.log(this.state)
-        postForm('https://hestia-report.herokuapp.com/api/recommend/',this.state)
+        postForm('https://akina.ayushpriya.tech/api/recommend/',this.state)
                 .then(data => {
                     console.log(data)
                     if(data.status == "success"){
@@ -66,11 +59,20 @@ class Suggestions extends React.Component{
                         'Authorization': localStorage.getItem("token")
                       })
                 })
-                .then(response => 
-                console.log(response))
-                
-                }
+                .then(response => {
+                    console.log(response)
+       
+                    return response.json();
+                })
+                .then(data=>{
+                    this.props.alert.show("Suggestion successful");
+                    this.gotoFeed();
+                })
+                .catch(error=>{
+                    console.error(error);
+                })
     }
+}
     render(){
         return(
             <div>
@@ -85,13 +87,16 @@ class Suggestions extends React.Component{
                 </Row>
                 </div>
                 <Form name="nest-messages" validateMessages={this.validateMessages} className="login-form" onFinish={this.onFinish}>
-                        <Form.Item name="name_of_shop">
+                        <Form.Item name="name_of_shop"
+                            rules={[{ required: true, message: 'Name is required' }]}
+                        >
                             <Input 
                                 placeholder="Name of shop"
                             />
                         </Form.Item>
                         <Form.Item
                             name="landmark"
+                            rules ={[{required: true, message: 'landmark is required'}]}
                         >
                             <Input 
                                 placeholder="Landmark"
@@ -106,6 +111,7 @@ class Suggestions extends React.Component{
                         </Form.Item>
                         <Form.Item
                             name="description_of_shop"
+                            rules={[{required: true, message: 'Some description is required'}]}
                         >
                             <Input 
                                 placeholder="Description"
@@ -124,7 +130,7 @@ class Suggestions extends React.Component{
                             </Button>
                         </Form.Item>
                         <Form.Item className="butn">
-                            <Button type="primary" >
+                            <Button type="primary" onClick={this.gotoFeed}>
                                 Cancel <strong> X </strong>
                             </Button>
                         </Form.Item>

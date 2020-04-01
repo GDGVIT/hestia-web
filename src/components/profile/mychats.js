@@ -6,6 +6,7 @@ import { Radio } from 'antd';
 import Nav from '../nav';
 import front from '../../assets/front.png';
 import back from '../../assets/back.png';
+import Suggestpic from '../../assets/suggest.png';
 import { withRouter } from 'react-router';
 
 class Mychat extends React.Component{
@@ -15,12 +16,16 @@ class Mychat extends React.Component{
             goto: "mychats",
             mychats: [],
             otherchats:[],
+            Suggest:[],
             value:'mr'
         }
         // console.log(this.props)
     }
     gotoProfile = () => {
         this.props.history.push("/profile")
+    }
+    gotoShop = () => {
+        this.props.history.push("/suggestashop")
     }
     gotoMyChat = (r,i,s,sn) => () => {
         console.log(this.props)
@@ -84,7 +89,7 @@ class Mychat extends React.Component{
         var obj = {"user_id" : parseInt(localStorage.getItem("user_id"))}
 
         // my chats
-        fetch('https://hestia-chat.herokuapp.com/api/v1/getMyChats',{
+        fetch('https://akina.ayushpriya.tech/api/v1/getMyChats',{
             method:"POST",
             headers: new Headers({
                 'Authorization': localStorage.getItem("token")
@@ -108,7 +113,7 @@ class Mychat extends React.Component{
         .catch(error => console.error(error))
 
         // other chats
-        fetch('https://hestia-chat.herokuapp.com/api/v1/getOtherChats',{
+        fetch('https://akina.ayushpriya.tech/api/v1/getOtherChats',{
             method:"POST",
             headers: new Headers({
                 'Authorization': localStorage.getItem("token")
@@ -131,11 +136,32 @@ class Mychat extends React.Component{
         })
         .catch(error => console.error(error))
 
+        //get suggestions number
+        fetch('https://akina.ayushpriya.tech/api/recommend/',{
+            method: "GET",
+            headers: new Headers({
+                'Authorization': localStorage.getItem("token")
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+            console.log(data)
+            if(data.status == "success"){
+                this.setState({
+                    Suggest: data.payload
+                })
+            }
+            console.log(this.state)
+            })
+            .catch(error => console.error(error))
+
      }
 
     render(){
         const { mychats } = this.state;
         const {otherchats} = this.state;
+        const {Suggest} = this.state;
+        const suggestnumber = Suggest.length;
             const mychatslist = mychats.length ? (
                 mychats.map(
                     data => {
@@ -204,18 +230,39 @@ class Mychat extends React.Component{
             <div className="mychats">
                 <div className="main-title">    
                 <Row>
-                    <Col span={18}>
+                    <Col span={24}>
                     <div className="imgbacc">
                             <img src={back} alt="back to feed" onClick={this.gotoProfile}></img>
                         </div>
-                        <h1>My chats</h1>
+                        <p style={{fontSize:"24px",fontWeight:"600"}}>Chats And Suggestions</p>
                     </Col>
-                    <Col span={6}>
+                    {/* <Col span={6}>
                     <img onClick={this.gotoProfile} src={profile} alt="Profile logo"></img>
-                    </Col>
+                    </Col> */}
                 </Row>
  
                 </div>
+
+                <Card>
+                    <Row>
+                    <Col span={5} className="iconz">
+                            <div>
+                                <img src={Suggestpic} alt="suggest"></img>
+                            </div>
+                        </Col>
+                        <Col span={14}>
+                            <div className="feed-card-header" style={{marginTop:"6px", fontSize:"18px"}}>
+                                   Suggestions | {suggestnumber}
+                            </div>
+                        </Col>
+                        <Col span={5} className="iconz">
+                            <div className="imgback">
+                                <img src={front} alt="location" style={{marginLeft:"10px"}} onClick ={this.gotoShop}></img>
+                            </div>
+                        </Col>
+                    </Row>
+                </Card>
+
                 <Radio.Group defaultValue="mr" buttonStyle="solid">
                     <Radio.Button value="mr" onClick = {this.handleClick('mr')}>My Requests</Radio.Button>
                     <Radio.Button value="or" onClick = {this.handleClick('or')}>Other Requests</Radio.Button>

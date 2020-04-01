@@ -23,7 +23,7 @@ class News extends React.Component {
         }
 
 
-            fetch('https://hestia-info.herokuapp.com/node')
+            fetch('https://akina.ayushpriya.tech/node')
                 .then(response => response.json())
                 .then(data => {
                 console.log(data)

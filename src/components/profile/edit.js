@@ -21,9 +21,11 @@ class Edit extends React.Component{
           }
     }
     
-    onFinishPass =(values) =>{
-        console.log(values)
-        return fetch("https://hestia-auth.herokuapp.com/api/user/forgotPassword", {
+    onFinishPass =() =>{
+       let values={
+            'email': localStorage.getItem("email")
+        }
+        return fetch("https://akina.ayushpriya.tech/api/user/forgotPassword", {
         method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
         body: JSON.stringify(values), // Coordinate the body type with 'Content-Type'
         headers: new Headers({
@@ -68,7 +70,7 @@ class Edit extends React.Component{
         this.setState(values)
         console.log(this.state)
         console.log({"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone})
-        postRequest('https://hestia-auth.herokuapp.com/api/user/updateUser', {"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone})
+        postRequest('https://akina.ayushpriya.tech/api/user/updateUser', {"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone})
             .then(data => console.log(data)) // Result from the `response.json()` call
             .catch(error => console.error(error))
 
@@ -137,7 +139,7 @@ class Edit extends React.Component{
                     />
                 </Form.Item>
                 <Form.Item>
-                <Button type="primary" onClick={this.changePass} style={{width: "150px"}}>
+                <Button type="primary" onClick={this.onFinishPass} style={{width: "150px"}}>
                     Change Password
                 </Button>
                 </Form.Item>
@@ -152,7 +154,7 @@ class Edit extends React.Component{
                 </Form.Item>
                 </Form>
             </div>
-                    <Modal
+                    {/* <Modal
                         title="Enter your email"
                         visible={this.state.visible}    
                         footer={null}
@@ -178,7 +180,7 @@ class Edit extends React.Component{
                         </Form.Item>
                         
                         </Form>
-                    </Modal>
+                    </Modal> */}
         </div>
         );
     }
