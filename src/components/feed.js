@@ -11,6 +11,7 @@ import { Form, Input, Checkbox} from 'antd';
 import Nav from './nav';
 import {withAlert} from "react-alert";
 import baseurl from "../url"
+import cancel from "../assets/cancel.svg";
 
 class Feed extends React.Component {
     constructor(props){
@@ -374,12 +375,12 @@ class Feed extends React.Component {
                         </Form.Item>
                         <Form.Item className="butn">
                             <Button type="primary" htmlType="submit" onClick={this.handleOk}>
-                                Done <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
+                                Done <img src={check} alt="Check" style={{marginLeft:"10px"}}></img>
                             </Button>
                         </Form.Item>
                         <Form.Item className="butn">
-                            <Button type="primary" onClick={this.handleCancel}>
-                                Cancel <strong> X </strong>
+                            <Button type="primary" onClick={this.handleCancel} style={{backgroundColor:"#fff",color:"#000"}}>
+                                Cancel <img src={cancel} alt="Check" style={{marginLeft:"10px"}}></img>
                             </Button>
                         </Form.Item>
                         </Form>
@@ -402,10 +403,10 @@ class Feed extends React.Component {
                       <h2 style={{marginTop:"20px", textAlign:"center"}}>Suggest a Shop?</h2>
                       <div style={{textAlign:"center"}}>
                         <Button type="primary" htmlType="submit" onClick={this.suggestShop} >
-                            Yes <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
+                            Yes <img src={check} alt="Check" style={{marginLeft:"10px"}}></img>
                         </Button>
                         <Button type="primary" onClick={this.handleCancel} style={{backgroundColor:"#fff",color:"#000"}}>
-                            No <strong> X </strong>
+                            No <img src={cancel} alt="Check" style={{marginLeft:"10px"}}></img>
                         </Button>
                     </div>
                     <div style={{textAlign:"center"}}>
@@ -430,10 +431,10 @@ class Feed extends React.Component {
                       <h2 style={{marginTop:"20px", textAlign:"center"}}>You have this item?</h2>
                         <div style={{textAlign:"center"}}>
                             <Button type="primary" htmlType="submit" onClick={this.createChat} >
-                                Yes <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
+                                Yes <img src={check} alt="Check" style={{marginLeft:"10px"}}></img>
                             </Button>
                             <Button type="primary" onClick={this.handleCancel} style={{backgroundColor:"#fff",color:"#000"}}>
-                                No <strong> X </strong>
+                                No <img src={cancel} alt="Check" style={{marginLeft:"10px"}}></img>
                             </Button>
                         </div>
                         <div style={{textAlign:"center"}}>

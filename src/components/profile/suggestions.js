@@ -4,8 +4,7 @@ import back from '../../assets/back.png';
 import { Modal, Button } from 'antd';
 import {Checkbox} from 'antd';
 import {withAlert} from 'react-alert';
-
-
+import cancel from '../../assets/cancel.svg';
 
 class Suggestions extends React.Component{
     constructor(props){
@@ -129,8 +128,8 @@ class Suggestions extends React.Component{
                             </Button>
                         </Form.Item>
                         <Form.Item className="butn">
-                            <Button type="primary" onClick={this.gotoFeed}>
-                                Cancel <strong> X </strong>
+                            <Button type="primary" onClick={this.gotoFeed} style={{backgroundColor:"#fff",color:"#000"}}>
+                                Cancel <img src={cancel} alt="Check" style={{marginLeft:"10px"}}></img>
                             </Button>
                         </Form.Item>
                         </Form>
