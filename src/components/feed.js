@@ -351,13 +351,18 @@ class Feed extends React.Component {
                         closable={false}
                         >
                         <Form onFinish={this.onFinish}>
-                        <Form.Item name="item_name">
+                        <Form.Item name="item_name" rules={[{
+                            max: 250, message:"Max 250 characters"
+                        }]}>
                             <Input 
                                 placeholder="Name of thing"
                             />
                         </Form.Item>
                         <Form.Item
                             name="quantity"
+                            rules={[{
+                            max: 250, message:"Max 250 characters"
+                        }]}
                         >
                             <Input 
                                 placeholder="Quantity"
@@ -365,6 +370,9 @@ class Feed extends React.Component {
                         </Form.Item>
                         <Form.Item
                             name="description"
+                            rules={[{
+                            max: 250, message:"Max 250 characters"
+                        }]}
                         >
                             <Input 
                                 placeholder="Description"
