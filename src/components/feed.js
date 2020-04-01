@@ -157,11 +157,11 @@ class Feed extends React.Component {
               if(res.code == 200){
                   window.localStorage.setItem("chat_name", res.chat_room.receiver_name )
                   window.localStorage.setItem("item", res.chat_room.title)
-                // this.props.history.push("/chat");
+                this.props.history.push("/chat");
               }
               if(res.status == 500){
                 this.props.alert.show("Chatroom exists.");
-                // this.props.history.push("/profile");
+                this.props.history.push("/profile");
               }
           })
           .catch(err => console.log(err))
