@@ -251,7 +251,7 @@ class Chat extends React.Component{
             </div>
               {/* Messages */}
 
-              <div style={{height:window.innerWidth > 360 ? "60vh":"53vh", marginTop:"20px", overflow:"scroll"}}>
+              <div style={{height:window.innerWidth > 361 ? "60vh":"48vh", marginTop:"20px", overflow:"scroll"}}>
                 {initial}
                 {chatslist}
 
@@ -259,7 +259,7 @@ class Chat extends React.Component{
                     ref={(el) => { this.messagesEnd = el; }}>
                 </div>
               </div>  
-            <div>
+            <div style={{position: "fixed", width: "100%" , bottom :  "70px"}}>
 
             <Messages onSubmitMessage={messageString => this.submitMessage(messageString)}/>
             </div>
