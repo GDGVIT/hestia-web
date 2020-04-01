@@ -24,13 +24,14 @@ const validateMessages = {
 const Register = (props) => {
   var ct = null;
   const verifyCallback = (recaptchaToken) => {
-    // Here you will get the final recaptchaToken!!!  
-    ct = recaptchaToken;
-    console.log(recaptchaToken, "<= your recaptcha token")
+      ct = recaptchaToken;
+      console.log(recaptchaToken, "<= your recaptcha token")
   }
-  const alert = useAlert()
+  const alert = useAlert()  
   let authcheck = false;
+
   const onFinish = values => {
+    console.log(values.user)
     fetch("https://akina.ayushpriya.tech/api/user/register", {
         method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
         body: JSON.stringify(values.user), // Coordinate the body type with 'Content-Type'
@@ -44,7 +45,19 @@ const Register = (props) => {
           authcheck = true;
         return response.json();
         }else{
-          alert.show(response.statusText)
+          switch(response.status){
+            case 400: 
+                alert.show("Account already exists")
+              break;
+            case 403:
+              alert.show("You have been blocked")
+              break;
+            case 404:
+              alert.show("No user exists with that email")
+              break;
+            default:  
+              alert.show("Seems like something's wrong on our end. Please contact the developers")
+          }
         }
         })
       .then(data => {

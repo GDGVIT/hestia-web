@@ -47,7 +47,6 @@ class Chat extends React.Component{
     console.log(this.state)
   }
 
-    
     scrollToBottom = () => {
       this.messagesEnd.scrollIntoView({ behavior: "smooth" });
     }
