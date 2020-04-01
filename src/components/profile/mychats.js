@@ -234,7 +234,7 @@ class Mychat extends React.Component{
                     <div className="imgbacc">
                             <img src={back} alt="back to feed" onClick={this.gotoProfile}></img>
                         </div>
-                        <p style={{fontSize:"24px",fontWeight:"600",marginTop:"7px"}}>Chats And Suggestions</p>
+                        <p style={{fontSize:"24px",fontWeight:"600"}}>Chats And Suggestions</p>
                     </Col>
                     {/* <Col span={6}>
                     <img onClick={this.gotoProfile} src={profile} alt="Profile logo"></img>
