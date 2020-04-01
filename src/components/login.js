@@ -36,7 +36,19 @@ const Login = (props) => {
       }else if(response.status === 200 || response.status===201 || response.status===202){
         return response.json();
       }else{
-        alert.show(response.statusText)
+        switch(response.status){
+          case 401: 
+              console.log("You have been blocked")
+            break;
+          case 403:
+            alert.show("You have been blocked")
+            break;
+          case 404:
+            alert.show("No user exists with that email")
+            break;
+          default:  
+            alert.show("Seems like something's wrong on our end. Please contact the developers")
+        }
       }
       })
       .then(data => {
@@ -57,11 +69,23 @@ const Login = (props) => {
             authcheck = true;
           return response.json();
           }else{
-            // console.log(response)
-            alert.show(response.statusText)
+            switch(response.status){
+              case 401: 
+                alert.show("incorrect credentials")
+                break;
+              case 403:
+                alert.show("incorrect credentials")
+                break;
+              case 404:
+                console.log("incorrect email")
+                break;
+              default:  
+                alert.show("Seems like something's wrong on our end. Please contact the developers")
+            }
           }
           })
         .then(data => {
+            // console.log(data)
             if(authcheck){
             window.localStorage.setItem("user_id", data.id);
             window.localStorage.setItem("token", data.Token);
@@ -95,8 +119,8 @@ const Login = (props) => {
         if(response.status === 200 || response.status===201 || response.status===202){
         return response.json();
         }else{
+          
           // console.log(response)
-          alert.show(response.statusText)
         }
         })
       .then(data => {

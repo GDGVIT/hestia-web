@@ -154,16 +154,16 @@ margin-left: 12.5%;
     position: fixed;
     bottom: 95px;
     left: 48%;
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
+    width: 55px;
+    height: 55px;
+    border-radius: 30px;
     text-align: center;
     box-shadow: 0px 0px 10px lightgray;
 }
 .addReq img{
     width: 13px;
     height: auto;
-    padding-top: 13px;
+    padding-top: 20px;
 }
 /* Main content css */
 .main-title{
