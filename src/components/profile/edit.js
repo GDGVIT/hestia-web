@@ -67,8 +67,8 @@ class Edit extends React.Component{
         console.log(values)
         this.setState(values)
         console.log(this.state)
-
-        postRequest('https://hestia-auth.herokuapp.com/api/user/updateUser', {name: this.state.user.name,email: this.state.user.email,phone:this.state.user.phone})
+        console.log({"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone})
+        postRequest('https://hestia-auth.herokuapp.com/api/user/updateUser', {"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone})
             .then(data => console.log(data)) // Result from the `response.json()` call
             .catch(error => console.error(error))
 
@@ -77,6 +77,7 @@ class Edit extends React.Component{
                 method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
                 body: JSON.stringify(data), // Coordinate the body type with 'Content-Type'
                 headers: new Headers({
+                    'Content-Type': 'application/json',
                 'token':localStorage.getItem("token")
                 }),
             })
@@ -112,7 +113,7 @@ class Edit extends React.Component{
                     name={['user', 'name']}
                 >
                     <Input 
-                    placeholder="Name"
+                    placeholder={localStorage.getItem("name")}
                     />
                 </Form.Item>
                 <Form.Item
@@ -125,14 +126,14 @@ class Edit extends React.Component{
                     ]}
                 >
                     <Input 
-                    placeholder="Email"
+                    placeholder={localStorage.getItem("email")}
                     />
                 </Form.Item>
                 <Form.Item
                     name={['user', 'phone']}
                 >
                     <Input
-                    placeholder="Number"
+                    placeholder={localStorage.getItem("phone")}
                     />
                 </Form.Item>
                 <Form.Item>

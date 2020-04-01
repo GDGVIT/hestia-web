@@ -65,6 +65,9 @@ const Login = (props) => {
             if(authcheck){
             window.localStorage.setItem("user_id", data.id);
             window.localStorage.setItem("token", data.Token);
+            window.localStorage.setItem("name", data.name);
+            window.localStorage.setItem("email", data.email);
+            window.localStorage.setItem("phone", data.phone);
             props.history.push("/feed");
             }
             // props.history.push("/feed");
