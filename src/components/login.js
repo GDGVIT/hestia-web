@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import ReactDOM from 'react'
 import { useAlert } from 'react-alert';
 import { Form, Input, Button, Modal } from 'antd';
 import {Link} from 'react-router-dom';
@@ -9,6 +10,7 @@ import check from '../assets/check.png';
 
 
 const Login = (props) => {
+  
   const [visible, changeV] = useState(false);   
   var chk = true;
   const alert = useAlert()
@@ -111,6 +113,15 @@ const Login = (props) => {
       // }
 
       const onFinishPass =(values) =>{
+        
+        // this.useRefs.loading.style.display = "block";
+        // this.refs.login.style.display = "none";
+        let element = document.getElementById('loading-spinner')
+        ReactDOM.findDOMNode(element).style.display = "block"
+        let element1 = document.getElementById('login-form')
+        ReactDOM.findDOMNode(element1).style.display = "none"
+
+
         console.log(values)
         return fetch("https://akina.ayushpriya.tech/api/user/forgotPassword", {
         method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
@@ -133,8 +144,8 @@ const Login = (props) => {
        .catch(error => console.error(error));
 
        
-        documentgetElementById("loading-spinner").style.display="block"
-        documentgetElementById("login-form").style.display="none"
+      
+        
       
 
 
