@@ -105,6 +105,10 @@ const Login = (props) => {
             props.history.push("/feed")
         }
       });
+      // loader = () =>{
+      //   documentgetElementById("loading-spinner").style.display="block"
+      //   documentgetElementById("login-form").style.display="none"
+      // }
 
       const onFinishPass =(values) =>{
         console.log(values)
@@ -126,8 +130,14 @@ const Login = (props) => {
       .then(data => {
           alert.show("Check your email")
         })
-       .catch(error => console.error(error)
-       );
+       .catch(error => console.error(error));
+
+       
+        documentgetElementById("loading-spinner").style.display="block"
+        documentgetElementById("login-form").style.display="none"
+      
+
+
     }
 
   return (
@@ -135,9 +145,13 @@ const Login = (props) => {
     <div className="hestia-logo">
         <img src={logo} alt="Hestialogo"></img>
     </div>
+      <div id="loading-spinner">
+        <div class="spin-icon"></div>
+      </div>
     <Form
       name="normal_login"
       className="login-form"
+      id="login-form"
       initialValues={{
         remember: true,
       }}
