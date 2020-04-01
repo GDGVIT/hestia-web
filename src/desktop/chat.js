@@ -28,7 +28,8 @@ class Chat extends React.Component{
     }
     // url = 'wss://hestia-chat.herokuapp.com/api/v1/ws?chat='+`${this.state.receiver_id}`;
     gotoReport=()=>{
-      this.props.history.push("/report");
+    //   this.props.history.push("/report");
+    console.log(gotoreport)
     }
     gotoProfile=()=>{
       this.props.history.push("/profile");

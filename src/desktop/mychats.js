@@ -3,7 +3,7 @@ import { Card, Row, Col, Drawer } from 'antd';
 import { Radio } from 'antd';
 import front from '../assets/front.png';
 import Suggestpic from '../assets/suggest.png';
-
+// import Chat from 'chat'
 
 
 class Mychat extends React.Component{
@@ -244,7 +244,27 @@ class Mychat extends React.Component{
                     {this.state.value == "mr" && <div>{mychatslist}</div>}
                     {this.state.value == "or" && <div>{otherchatslist}</div>}
                 </div>
-
+                <Drawer
+                title="My Chats"
+                placement="right"
+                closable={true}
+                onClose={this.onClose}
+                visible={this.state.mychats}
+                width="400px"
+            >
+                {/* <Chat /> */}
+                </Drawer>
+                
+                <Drawer
+                title="My Chats"
+                placement="right"
+                closable={true}
+                onClose={this.onClose}
+                visible={this.state.mychats}
+                width="400px"
+            >
+                <Mychat />
+                </Drawer>
             </div>              
         );
     }

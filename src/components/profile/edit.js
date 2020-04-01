@@ -83,13 +83,19 @@ class Edit extends React.Component{
                 'token':localStorage.getItem("token")
                 }),
             })
-            .then(response => response.json())
+            .then(response => {
+                if(response.status === 200 || response.status===201 || response.status===202){
+                    return response.json();
+                    }else{
+                        this.props.alert.show("Something went wrong")
+                    }
+            }).then(data=>{
+                if(data){
+                     this.props.alert.show("Profile succesfully edited")
+                }
+            })
+            
             }
-
-
-
-
-
         
     }
     gotoProfile = () => {
