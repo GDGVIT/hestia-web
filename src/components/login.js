@@ -106,6 +106,12 @@ const Login = (props) => {
         if(localStorage.getItem("token")){
             props.history.push("/feed")
         }
+        
+        else{
+          alert.show("Please allow location permission")
+          console.log("Please allow location permission")
+        }
+        console.log("nj")
       });
       // loader = () =>{
       //   documentgetElementById("loading-spinner").style.display="block"
@@ -146,9 +152,7 @@ const Login = (props) => {
        
         // documentgetElementById("loading-spinner").style.display="block"
         // documentgetElementById("login-form").style.display="none"
-        if(!localStorage.getItem("chat_name")){
-          alert.show("Please allow location permission")
-        }
+        
         
 
     }
