@@ -109,9 +109,9 @@ const Login = (props) => {
         
         else{
           alert.show("Please allow location permission")
-          console.log("Please allow location permission")
+          
         }
-        console.log("nj")
+        console.log("Nox is here")
       });
       // loader = () =>{
       //   documentgetElementById("loading-spinner").style.display="block"
