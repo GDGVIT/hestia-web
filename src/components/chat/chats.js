@@ -53,7 +53,7 @@ class Chat extends React.Component{
     timeout = 250; 
 
     connect = () => {
-      let url = 'wss://akina.ayushpriya.tech/api/v1/ws?chat='+ parseInt(localStorage.getItem("receiver_id"))
+      let url = 'wss://akina.ayushpriya.tech/api/v1/ws?sender='+ parseInt(localStorage.getItem("sender_id")) + "&receiver=" + parseInt(localStorage.getItem("receiver_id"))
 
       var ws = new WebSocket(url)
       let that = this; // cache the this
