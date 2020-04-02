@@ -51,7 +51,11 @@
     .addReq{
         left: 27%;
     }
-    .imgback{
+    .dreglog .login-form{
+        margin: 5% 12.5%;
+    }
+    .ant-btn{
+        max-width: 200px;
     }
 }
 .addReqD{

@@ -13,7 +13,10 @@ class Edit extends React.Component{
         super(props);
         this.state={
             goto: "edit",
-            visible: false
+            visible: false,
+            name: localStorage.getItem("name"),
+            email: localStorage.getItem("email"),
+            phone: localStorage.getItem("phone")
         }
     }
     validateMessages = {
@@ -68,12 +71,28 @@ class Edit extends React.Component{
       };
 
     onFinish = (values) => {
-        console.log(values)
-        this.setState(values)
-        console.log(this.state)
+        if(values.user.name){
+            this.setState({
+                name: values.user.name
+            })
+        }   
+        if(values.user.email){
+            this.setState({
+                email: values.user.email
+            })
+        }   
+        if(values.user.phone){
+            this.setState({
+                phone: values.user.phone
+            })
+        }
         console.log({"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone})
         postRequest('https://akina.ayushpriya.tech/api/user/updateUser', {"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone}, this.props)
-            .then(data => console.log(data)) // Result from the `response.json()` call
+            .then(data => {
+                if(data){
+                    this.props.alert.show("Profile succesfully edited")
+               }
+            }) // Result from the `response.json()` call
             .catch(error => console.error(error))
 
             function postRequest(url, data, tempprop) {
@@ -91,10 +110,6 @@ class Edit extends React.Component{
                     }else{
                         tempprop.alert.show("Something went wrong")
                     }
-            }).then(data=>{
-                if(data){
-                     tempprop.alert.show("Profile succesfully edited")
-                }
             })
             
             }

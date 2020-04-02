@@ -4,6 +4,7 @@ import { Route, BrowserRouter, Redirect, withRouter} from 'react-router-dom';
 import './dapp.css';
 import Dlog from './dlog';
 import Dmain from './main';
+import Register from './dregister'
 
 class Dapp extends React.Component{
     constructor(props){
@@ -18,6 +19,7 @@ class Dapp extends React.Component{
                 <div className="Dapp">
                     <Route exact path='/main' component={Dmain}/>
                     <Route exact path='/dlogin' component={Dlog}/>
+                    <Route exact path='/dregister' component={Register}/>
                 </div>
             </BrowserRouter>
         );

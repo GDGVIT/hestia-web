@@ -32,13 +32,13 @@ const Dlog = (props) => {
     .then(response => {
       if(response.status === 401){
         alert.show("Verify your email first");
-        props.history.push("/");
+        props.history.push("/dregister");
       }else if(response.status === 200 || response.status===201 || response.status===202){
         return response.json();
       }else{
         switch(response.status){
-          case 401: 
-              console.log("You have been blocked")
+          case 400: 
+            alert.show("Account already exists")
             break;
           case 403:
             alert.show("You have been blocked")
@@ -131,7 +131,7 @@ const Dlog = (props) => {
     }
 
   return (
-    <div className="loginpage">
+    <div className="loginpage dreglog">
     <div className="hestia-logo">
         <img src={logo} alt="Hestialogo"></img>
     </div>

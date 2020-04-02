@@ -10,7 +10,10 @@ class Edit extends React.Component{
         super(props);
         this.state={
             goto: "edit",
-            visible: false
+            visible: false,
+            name: localStorage.getItem("name"),
+            email: localStorage.getItem("email"),
+            phone: localStorage.getItem("phone")
         }
     }
     validateMessages = {
@@ -65,15 +68,31 @@ class Edit extends React.Component{
       };
 
     onFinish = (values) => {
-        console.log(values)
-        this.setState(values)
-        console.log(this.state)
+        if(values.user.name){
+            this.setState({
+                name: values.user.name
+            })
+        }   
+        if(values.user.email){
+            this.setState({
+                email: values.user.email
+            })
+        }   
+        if(values.user.phone){
+            this.setState({
+                phone: values.user.phone
+            })
+        }
         console.log({"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone})
-        postRequest('https://akina.ayushpriya.tech/api/user/updateUser', {"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone})
-            .then(data => console.log(data)) // Result from the `response.json()` call
+        postRequest('https://akina.ayushpriya.tech/api/user/updateUser', {"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone}, this.props)
+            .then(data => {
+                if(data){
+                    this.props.alert.show("Profile succesfully edited")
+               }
+            }) // Result from the `response.json()` call
             .catch(error => console.error(error))
 
-            function postRequest(url, data) {
+            function postRequest(url, data, tempprop) {
             return fetch(url, {
                 method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
                 body: JSON.stringify(data), // Coordinate the body type with 'Content-Type'
@@ -82,7 +101,13 @@ class Edit extends React.Component{
                 'token':localStorage.getItem("token")
                 }),
             })
-            .then(response => response.json())
+            .then(response => {
+                if(response.status === 200 || response.status===201 || response.status===202){
+                    return response.json();
+                    }else{
+                        tempprop.alert.show("Something went wrong")
+                    }
+            })
             }
 
 
@@ -111,7 +136,7 @@ class Edit extends React.Component{
                     name={['user', 'name']}
                 >
                     <Input 
-                    placeholder={localStorage.getItem("name")}
+                    defaultValue={localStorage.getItem("name")}
                     />
                 </Form.Item>
                 <Form.Item
@@ -124,14 +149,14 @@ class Edit extends React.Component{
                     ]}
                 >
                     <Input 
-                    placeholder={localStorage.getItem("email")}
+                    defaultValue={localStorage.getItem("email")}
                     />
                 </Form.Item>
                 <Form.Item
                     name={['user', 'phone']}
                 >
                     <Input
-                    placeholder={localStorage.getItem("phone")}
+                    defaultValue={localStorage.getItem("phone")}
                     />
                 </Form.Item>
                 <Form.Item>
