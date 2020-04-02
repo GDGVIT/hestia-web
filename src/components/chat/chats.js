@@ -29,6 +29,7 @@ class Chat extends React.Component{
             // receiver_id : props.location.state.id
         }
     }
+    controller = new AbortController();
     // url = 'wss://hestia-chat.herokuapp.com/api/v1/ws?chat='+`${this.state.receiver_id}`;
     gotoReport=()=>{
       this.props.history.push("/report");
@@ -169,6 +170,7 @@ class Chat extends React.Component{
     try {
       setInterval(async () => { 
       const fetchResponse = await fetch('https://akina.ayushpriya.tech/api/v1/getMessages',{
+      signal: this.controller.signal,
       method:"POST",
       headers:  new Headers({
         'Authorization': localStorage.getItem("token")
@@ -219,6 +221,9 @@ class Chat extends React.Component{
   //   if (!ws || ws.readyState == WebSocket.CLOSED) this.connect(); //check if websocket instance is closed, if so call `connect` function.
   //   };
 
+    componentWillUnmount(){
+      this.controller.abort();
+    }
     render(){
 
       const {initialmsg} = this.state;
