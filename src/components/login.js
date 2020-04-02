@@ -146,10 +146,13 @@ const Login = (props) => {
        
         // documentgetElementById("loading-spinner").style.display="block"
         // documentgetElementById("login-form").style.display="none"
-      
-
+        if(!localStorage.getItem("chat_name")){
+          alert.show("Please allow location permission")
+        }
+        
 
     }
+    
 
   return (
     <div className="loginpage">
