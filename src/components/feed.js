@@ -245,11 +245,14 @@ class Feed extends React.Component {
             .then(data => {
                 console.log(data)
                 console.log(data.localityInfo.administrative[1].name)
-                this.setState({
-                    city:data.localityInfo.administrative[1].name
+                let str = data.localityInfo.administrative[1].name
+                let s = str.split(/(?<=^\S+)\s/)
+                    console.log(s[0])
+                this.setState({         //do not remove setState
+                    city:s[0]
                 })
                     
-                fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+data.localityInfo.administrative[1].name
+                fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+s[0]
                 
                  , {
                 headers: new Headers({
