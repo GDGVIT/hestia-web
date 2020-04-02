@@ -157,7 +157,7 @@ const Login = (props) => {
         <img src={logo} alt="Hestialogo"></img>
     </div>
       <div id="loading-spinner">
-        <div class="spin-icon"></div>
+        <div className="spin-icon"></div>
       </div>
     <Form
       name="normal_login"
