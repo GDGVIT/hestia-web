@@ -52,69 +52,69 @@ class Chat extends React.Component{
     }
     timeout = 250; 
 
-    connect = () => {
-      let url = 'wss://akina.ayushpriya.tech/api/v1/ws?sender='+ parseInt(localStorage.getItem("sender_id")) + "&receiver=" + parseInt(localStorage.getItem("receiver_id"))
+    // connect = () => {
+    //   let url = 'wss://akina.ayushpriya.tech/api/v1/ws?sender='+ parseInt(localStorage.getItem("sender_id")) + "&receiver=" + parseInt(localStorage.getItem("receiver_id"))
 
-      var ws = new WebSocket(url)
-      let that = this; // cache the this
-      var connectInterval;
+    //   var ws = new WebSocket(url)
+    //   let that = this; // cache the this
+    //   var connectInterval;
 
-      ws.onopen = () => {
-        // on connecting, do nothing but log it to the console
-          console.log('connected');
-          // this.props.alert.show("Online")
-          this.setState({ ws: ws });
-          console.log(url)
+    //   ws.onopen = () => {
+    //     // on connecting, do nothing but log it to the console
+    //       console.log('connected');
+    //       // this.props.alert.show("Online")
+    //       this.setState({ ws: ws });
+    //       console.log(url)
 
-          that.timeout = 250; // reset timer to 250 on open of websocket connection 
-          clearTimeout(connectInterval); // clear Interval on on open of websocket connection
-        }
+    //       that.timeout = 50; // reset timer to 250 on open of websocket connection 
+    //       clearTimeout(connectInterval); // clear Interval on on open of websocket connection
+    //     }
   
-      ws.onmessage = evt => {
-          // on receiving a message, add it to the list of messages
-          const message = JSON.parse(evt.data)
-          console.log(message, message.text)
-          this.addMessage(message)
-          return false;
-        }
+    //   ws.onmessage = evt => {
+    //       // on receiving a message, add it to the list of messages
+    //       const message = JSON.parse(evt.data)
+    //       console.log(message, message.text)
+    //       this.addMessage(message)
+    //       return false;
+    //     }
   
-      ws.onclose = (e) => {
-          console.log('disconnected')
-          // automatically try to reconnect on connection loss
-          // this.setState({
-          //   ws: new WebSocket(url),
-          // })
-          console.log(
-            `Socket is closed. Reconnect will be attempted in ${Math.min(
-                10000 / 1000,
-                (that.timeout + that.timeout) / 1000
-            )} second.`,
-            e.reason
-        );
+    //   ws.onclose = (e) => {
+    //       console.log('disconnected')
+    //       // automatically try to reconnect on connection loss
+    //       // this.setState({
+    //       //   ws: new WebSocket(url),
+    //       // })
+    //       console.log(
+    //         `Socket is closed. Reconnect will be attempted in ${Math.min(
+    //             10000 / 1000,
+    //             (that.timeout + that.timeout) / 1000
+    //         )} second.`,
+    //         e.reason
+    //     );
 
-        that.timeout = that.timeout + that.timeout; //increment retry interval
-        connectInterval = setTimeout(this.check, Math.min(10000, that.timeout)); //call check function after timeout
-          // this.props.alert.show("Disconnected")
-        }
+    //     that.timeout = that.timeout + that.timeout; //increment retry interval
+    //     connectInterval = setTimeout(this.check, Math.min(10000, that.timeout)); //call check function after timeout
+    //       // this.props.alert.show("Disconnected")
+    //     }
 
-        // Onerror listener
-        // websocket onerror event listener
-        ws.onerror = err => {
-          console.error(
-              "Socket encountered error: ",
-              err.message,
-              "Closing socket"
-          );
+    //     // Onerror listener
+    //     // websocket onerror event listener
+    //     ws.onerror = err => {
+    //       console.error(
+    //           "Socket encountered error: ",
+    //           err.message,
+    //           "Closing socket"
+    //       );
 
-          ws.close();
-      };
+    //       ws.close();
+    //   };
 
 
-    }
+    // }
 
-    componentDidMount(){
+     componentDidMount(){
       this.scrollToBottom();
-      this.connect();
+      // this.connect();
 
       if(localStorage.getItem("token")){
        console.log("someone's logged in")
@@ -130,13 +130,14 @@ class Chat extends React.Component{
       ob["sender"] = parseInt(localStorage.getItem("sender_id"))
 
       console.log("/getMessages", JSON.stringify(ob))
+
       fetch('https://akina.ayushpriya.tech/api/v1/getMessages',{
         method:"POST",
         headers:  new Headers({
           'Authorization': localStorage.getItem("token")
         }),
         body:JSON.stringify(ob)
-      })
+        })
       .then(res => res.json())
       .then(res => {
         if(res.code == 200){
@@ -155,10 +156,36 @@ class Chat extends React.Component{
 
    componentDidUpdate() {
       this.scrollToBottom();
-    }
+  }
    addMessage = message =>
    this.setState(state => ({ messages: [message, ...state.messages] }))
 
+   getMessages = async() => {
+    var ob = {}
+    ob["receiver"] = parseInt(localStorage.getItem("receiver_id"))
+    ob["sender"] = parseInt(localStorage.getItem("sender_id"))
+
+    console.log("/getMessages pseudo websocket", JSON.stringify(ob))
+    try {
+      setInterval(async () => { 
+      const fetchResponse = await fetch('https://akina.ayushpriya.tech/api/v1/getMessages',{
+      method:"POST",
+      headers:  new Headers({
+        'Authorization': localStorage.getItem("token")
+      }),
+      body:JSON.stringify(ob)
+      })
+        const data = await fetchResponse.json()
+        console.log(data);
+        this.setState({
+          initialmsg: data.messages
+        })
+      },2000);
+    } catch(e) {
+      console.log(e);
+    }
+
+  }
    submitMessage = messageString => {
     // on submitting the ChatInput form, send the message, add it to the list and reset the input
       console.log(messageString);
@@ -179,14 +206,18 @@ class Chat extends React.Component{
       .then(res => console.log(res,this.state))
       .catch(err => console.log(err));
 
-    // const message = { name: this.state.name, message: messageString }
+      (async () => {
+        await this.getMessages();
+      })();
+      // const message = { name: this.state.name, message: messageString }
 
     // this.addMessage(messageString)
   }
-  check = () => {
-    const { ws } = this.state;
-    if (!ws || ws.readyState == WebSocket.CLOSED) this.connect(); //check if websocket instance is closed, if so call `connect` function.
-    };
+
+  // check = () => {
+  //   const { ws } = this.state;
+  //   if (!ws || ws.readyState == WebSocket.CLOSED) this.connect(); //check if websocket instance is closed, if so call `connect` function.
+  //   };
 
     render(){
 
