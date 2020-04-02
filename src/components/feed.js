@@ -235,7 +235,8 @@ class Feed extends React.Component {
         let token =localStorage.getItem("token");
         
         console.log(this.state);
-            fetch('https://nominatim.openstreetmap.org/reverse?format=geojson&lat='+localStorage.getItem("latitude")+'&lon='+localStorage.getItem("longitude"), {
+        fetch('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+localStorage.getItem("latitude")+'&longitude='+localStorage.getItem("longitude")+'&localityLanguage=en', {
+            
             })
             .then(response =>{
             console.log(response)
@@ -243,12 +244,12 @@ class Feed extends React.Component {
             })
             .then(data => {
                 console.log(data)
-                console.log(data.features[0].properties.address.city)
+                console.log(data.localityInfo.administrative[1].name)
                 this.setState({
-                    city:data.features[0].properties.address.city
+                    city:data.localityInfo.administrative[1].name
                 })
                     
-                fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+data.features[0].properties.address.city
+                fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+data.localityInfo.administrative[1].name
                 
                  , {
                 headers: new Headers({
