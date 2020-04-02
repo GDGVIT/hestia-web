@@ -60,7 +60,6 @@ class Feed extends React.Component {
     handleOk = e => {
         // console.log(e);
         this.setState({
-          visible: false,
           visible1:false,
           visible2:false
         });
@@ -69,11 +68,19 @@ class Feed extends React.Component {
         // console.log(values);
         this.setState(values)
         console.log(this.state)
-        postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.city,this.state.description)
-                .then(data => this.props.alert.show("Request added"))
+        postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.city,this.state.description, this.props)
+                .then(data => {
+                    // console.log(data)
+                    if(data){
+                        this.props.alert.show("Request added")
+                        this.setState({
+                            visible: false
+                        })
+                    }
+                })
                 .catch(error => console.error(error))
 
-                function postForm(url,name,quantity,city,description) {
+                function postForm(url,name,quantity,city,description, tempprops) {
                     var object ={};
                     object["item_name"] = name;
                     object["quantity"] = quantity;
@@ -91,7 +98,13 @@ class Feed extends React.Component {
                         
                       })
                 })
-                .then(response => response.json())
+                .then(response => {
+                    if(response.status === 400){
+                        tempprops.alert.show("invalid request")
+                    }else{
+                        return response.json();
+                    }
+                })
                 }
       };
 
@@ -123,7 +136,7 @@ class Feed extends React.Component {
       createChat = () => {
         console.log(parseInt(localStorage.getItem("accept_id")))
         //   Accept the item
-        postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:'Surat'})
+        postRequest('https://akina.ayushpriya.tech/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:'Surat'})
         .then(data => console.log(data)) // Result from the `response.json()` call
         .catch(error => console.error(error))
 
@@ -226,12 +239,12 @@ class Feed extends React.Component {
             })
             .then(data => {
                 console.log(data)
-                console.log(data.features[0].properties.address.state_district)
-            // this.setState({
-            //     city:data.features[0].properties.address.city
-            // })
-                
-                fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+data.features[0].properties.address.state_district
+                console.log(data.features[0].properties.address.city)
+                this.setState({
+                    city:data.features[0].properties.address.city
+                })
+                    
+                fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+data.features[0].properties.address.city
                 
                  , {
                 headers: new Headers({
@@ -365,13 +378,13 @@ class Feed extends React.Component {
                             />
                         </Form.Item>
                         <Form.Item className="butn">
-                            <Button type="primary" htmlType="submit" onClick={this.handleOk}>
+                            <Button type="primary" htmlType="submit">
                                 Done <img src={check} alt="Check" style={{marginLeft:"10px"}}></img>
                             </Button>
                         </Form.Item>
                         <Form.Item className="butn">
                             <Button type="primary" onClick={this.handleCancel} style={{backgroundColor:"#fff",color:"#000"}}>
-                                Cancel <img src={cancel} alt="Check" style={{marginLeft:"10px"}}></img>
+                                Close <img src={cancel} alt="Check" style={{marginLeft:"10px"}}></img>
                             </Button>
                         </Form.Item>
                         </Form>
