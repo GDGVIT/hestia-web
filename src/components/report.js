@@ -4,7 +4,7 @@ import back from '../assets/back.png';
 import check from'../assets/check.png';
 import { Input,Form,Button } from 'antd';
 import cancel from '../assets/cancel.svg';
-
+import {withAlert} from 'react-alert';
 
 const { TextArea } = Input;
 
@@ -38,7 +38,12 @@ class Report extends React.Component{
         .then(response => {
              console.log(response)
              if(response.status == 201){
+                this.props.alert.show("User reported")
                 this.props.history.push("/profile");
+             }else if(response.status === 409){
+                 this.props.alert.show("You've already reported this user")
+             }else{
+                this.props.alert.show("Something went wrong. Please try again")
              }
         })
         .catch(err => console.log(err))
@@ -94,4 +99,4 @@ class Report extends React.Component{
     
     }
 }
-export default Report;
+export default withAlert()(Report);

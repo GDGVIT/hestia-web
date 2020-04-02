@@ -39,8 +39,6 @@ class Suggestions extends React.Component{
         //             }
         //         })
         //         .catch(error => console.error(error))
-
-                function postForm(url,state) {
                     var object ={};
                     object["recommended_for"] = localStorage.getItem("receiver_id");
                     object["name_of_shop"] = this.state.name_of_shop;
@@ -59,17 +57,21 @@ class Suggestions extends React.Component{
                       })
                 })
                 .then(response => {
-                    console.log(response)
-                    return response.json();
+                    if(response.status === 200 || response.status===201 || response.status===202){
+                        return response.json();
+                        }else{
+                            this.props.alert.show("Something went wrong. Try again.")
+                        }
                 })
                 .then(data=>{
-                    this.props.alert.show("Suggestion successful");
-                    this.gotoFeed();
+                    if(data){
+                        this.props.alert.show("Suggestion successful");
+                        this.gotoFeed();
+                    }
                 })
                 .catch(error=>{
                     console.error(error);
                 })
-            }
             };
     render(){
         return(

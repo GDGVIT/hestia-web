@@ -314,6 +314,11 @@ margin-left: 12.5%;
 .iconz{
     float: right;
 }
+.iconz .imgback img{
+    width: 9px;
+    height: auto;
+    padding-left: 2px;
+}
 .ant-col-6{
     text-align: right;
 }

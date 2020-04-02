@@ -352,6 +352,7 @@ class Feed extends React.Component {
                         closable={false}
                         className="addrequest"
                         centered
+                        width="350px"
                         >
                         <Form onFinish={this.onFinish}>
                         <Form.Item name="item_name" rules={[{
@@ -402,6 +403,7 @@ class Feed extends React.Component {
                       onCancel={this.handleCancel}
                       className="suggestshop"
                       centered
+                      width="350px"
                     > 
                         <Row>
                             <Col span={24}>
@@ -432,6 +434,7 @@ class Feed extends React.Component {
                       onCancel={this.handleCancel}
                       className="itemconfirm"
                       centered
+                      width="350px"
                     > 
                      <Row>
                         <Col span={24}>
