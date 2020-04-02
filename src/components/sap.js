@@ -20,7 +20,7 @@ class Sap extends React.Component{
             this.props.history.push("/login");
         }
 
-            fetch('https://hestia-report.herokuapp.com/api/recommend/',{
+            fetch('https://hestia-report-do.herokuapp.com/api/recommend/',{
                 method: "GET",
                 headers: new Headers({
                     'Authorization': localStorage.getItem("token")

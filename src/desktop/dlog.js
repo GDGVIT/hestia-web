@@ -22,7 +22,7 @@ const Dlog = (props) => {
       "email": values.user.email
     }
 
-    fetch("https://hestia-auth.herokuapp.com/api/user/verifyuser", {
+    fetch("https://akina.ayushpriya.tech/api/user/verifyuser", {
       method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
       body: JSON.stringify(cm), // Coordinate the body type with 'Content-Type'
       headers: new Headers({
@@ -32,11 +32,23 @@ const Dlog = (props) => {
     .then(response => {
       if(response.status === 401){
         alert.show("Verify your email first");
-            window.location.reload();
+        props.history.push("/");
       }else if(response.status === 200 || response.status===201 || response.status===202){
         return response.json();
       }else{
-        alert.show(response.statusText)
+        switch(response.status){
+          case 401: 
+              console.log("You have been blocked")
+            break;
+          case 403:
+            alert.show("You have been blocked")
+            break;
+          case 404:
+            alert.show("No user exists with that email")
+            break;
+          default:  
+            alert.show("Seems like something's wrong on our end. Please contact the developers")
+        }
       }
       })
       .then(data => {
@@ -45,7 +57,7 @@ const Dlog = (props) => {
       })
       .catch(error => console.error(error)
       );
-      fetch("https://hestia-auth.herokuapp.com/api/user/login", {
+      fetch("https://akina.ayushpriya.tech/api/user/login", {
           method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
           body: JSON.stringify(values.user), // Coordinate the body type with 'Content-Type'
           headers: new Headers({
@@ -57,14 +69,29 @@ const Dlog = (props) => {
             authcheck = true;
           return response.json();
           }else{
-            // console.log(response)
-            alert.show(response.statusText)
+            switch(response.status){
+              case 401: 
+                alert.show("incorrect credentials")
+                break;
+              case 403:
+                alert.show("incorrect credentials")
+                break;
+              case 404:
+                console.log("incorrect email")
+                break;
+              default:  
+                alert.show("Seems like something's wrong on our end. Please contact the developers")
+            }
           }
           })
         .then(data => {
+            // console.log(data)
             if(authcheck){
             window.localStorage.setItem("user_id", data.id);
             window.localStorage.setItem("token", data.Token);
+            window.localStorage.setItem("name", data.name);
+            window.localStorage.setItem("email", data.email);
+            window.localStorage.setItem("phone", data.phone);
             props.history.push("/main");
             }
             // props.history.push("/feed");
@@ -81,7 +108,7 @@ const Dlog = (props) => {
 
       const onFinishPass =(values) =>{
         console.log(values)
-        return fetch("https://hestia-auth.herokuapp.com/api/user/forgotPassword", {
+        return fetch("https://akina.ayushpriya.tech/api/user/forgotPassword", {
         method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
         body: JSON.stringify(values), // Coordinate the body type with 'Content-Type'
         headers: new Headers({
@@ -92,8 +119,8 @@ const Dlog = (props) => {
         if(response.status === 200 || response.status===201 || response.status===202){
         return response.json();
         }else{
+          
           // console.log(response)
-          alert.show(response.statusText)
         }
         })
       .then(data => {

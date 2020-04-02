@@ -4,6 +4,8 @@ import check from'../../assets/check.png';
 import Profile from './profile';
 import {Row, Col, Form, Input, Button, Modal} from 'antd';
 import {withAlert} from 'react-alert';
+import cancel from '../../assets/cancel.svg';
+
 
 class Edit extends React.Component{
 
@@ -25,7 +27,7 @@ class Edit extends React.Component{
        let values={
             'email': localStorage.getItem("email")
         }
-        return fetch("https://hestia-auth.herokuapp.com/api/user/forgotPassword", {
+        return fetch("https://akina.ayushpriya.tech/api/user/forgotPassword", {
         method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
         body: JSON.stringify(values), // Coordinate the body type with 'Content-Type'
         headers: new Headers({
@@ -70,7 +72,7 @@ class Edit extends React.Component{
         this.setState(values)
         console.log(this.state)
         console.log({"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone})
-        postRequest('https://hestia-auth.herokuapp.com/api/user/updateUser', {"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone})
+        postRequest('https://akina.ayushpriya.tech/api/user/updateUser', {"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone})
             .then(data => console.log(data)) // Result from the `response.json()` call
             .catch(error => console.error(error))
 
@@ -83,13 +85,19 @@ class Edit extends React.Component{
                 'token':localStorage.getItem("token")
                 }),
             })
-            .then(response => response.json())
+            .then(response => {
+                if(response.status === 200 || response.status===201 || response.status===202){
+                    return response.json();
+                    }else{
+                        this.props.alert.show("Something went wrong")
+                    }
+            }).then(data=>{
+                if(data){
+                     this.props.alert.show("Profile succesfully edited")
+                }
+            })
+            
             }
-
-
-
-
-
         
     }
     gotoProfile = () => {
@@ -115,7 +123,7 @@ class Edit extends React.Component{
                     name={['user', 'name']}
                 >
                     <Input 
-                    placeholder={localStorage.getItem("name")}
+                    defaultValue={localStorage.getItem("name")}
                     />
                 </Form.Item>
                 <Form.Item
@@ -128,14 +136,14 @@ class Edit extends React.Component{
                     ]}
                 >
                     <Input 
-                    placeholder={localStorage.getItem("email")}
+                    defaultValue={localStorage.getItem("email")}
                     />
                 </Form.Item>
                 <Form.Item
                     name={['user', 'phone']}
                 >
                     <Input
-                    placeholder={localStorage.getItem("phone")}
+                    defaultValue={localStorage.getItem("phone")}
                     />
                 </Form.Item>
                 <Form.Item>
@@ -148,8 +156,8 @@ class Edit extends React.Component{
                     <Button type="primary" htmlType="submit">
                     Done <img src={check} alt="Submit form"></img>
                     </Button>
-                    <Button type="primary" onClick={this.gotoProfile}>
-                            Cancel <strong> X </strong>
+                    <Button type="primary" onClick={this.gotoProfile} style={{backgroundColor:"#fff", color:"#000"}}>
+                            Cancel <img src={cancel} alt="Check" style={{marginLeft:"10px"}}></img>
                     </Button>
                 </Form.Item>
                 </Form>

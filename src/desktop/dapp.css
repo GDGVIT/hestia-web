@@ -35,6 +35,9 @@
     width: 50%;
     float: left;
 }
+.feedcont{
+    border-right: 1px solid rgba(180,180,180, 0.3)
+}
 
 @media(min-width: 600px){
     .hestia-logo{
@@ -50,4 +53,18 @@
     }
     .imgback{
     }
+}
+.addReqD{
+    margin-top: 13px;
+    background-color: #00d2d2;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0px 0px 10px lightgray;
+}
+.addReqD img{
+    width: 13px;
+    height: auto;
+    padding-top: 7px;
 }

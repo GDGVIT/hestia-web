@@ -8,6 +8,8 @@ import front from '../../assets/front.png';
 import back from '../../assets/back.png';
 import Suggestpic from '../../assets/suggest.png';
 import { withRouter } from 'react-router';
+import Bold from '../../assets/Manrope-ExtraBold.otf';
+
 
 class Mychat extends React.Component{
     constructor(props){
@@ -35,7 +37,10 @@ class Mychat extends React.Component{
         window.localStorage.setItem("report", s);
         window.localStorage.setItem("chat_name",sn);
         window.localStorage.setItem("chat_desc", cd);
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 
         if(this.props.history){
             this.props.history.push({
@@ -92,7 +97,7 @@ class Mychat extends React.Component{
         var obj = {"user_id" : parseInt(localStorage.getItem("user_id"))}
 
         // my chats
-        fetch('https://hestia-chat.herokuapp.com/api/v1/getMyChats',{
+        fetch('https://akina.ayushpriya.tech/api/v1/getMyChats',{
             method:"POST",
             headers: new Headers({
                 'Authorization': localStorage.getItem("token")
@@ -116,7 +121,7 @@ class Mychat extends React.Component{
         .catch(error => console.error(error))
 
         // other chats
-        fetch('https://hestia-chat.herokuapp.com/api/v1/getOtherChats',{
+        fetch('https://akina.ayushpriya.tech/api/v1/getOtherChats',{
             method:"POST",
             headers: new Headers({
                 'Authorization': localStorage.getItem("token")
@@ -140,7 +145,7 @@ class Mychat extends React.Component{
         .catch(error => console.error(error))
 
         //get suggestions number
-        fetch('https://hestia-report.herokuapp.com/api/recommend/',{
+        fetch('https://hestia-report-do.herokuapp.com/api/recommend/',{
             method: "GET",
             headers: new Headers({
                 'Authorization': localStorage.getItem("token")
@@ -174,7 +179,7 @@ class Mychat extends React.Component{
                                 <Col span={17}>
                                     <div className="feed-card-header">
                                         <span>
-                                            <strong>{data.sender_name}</strong>
+                                            <strong>{data.receiver_name}</strong>
                                         </span>
                                 
                                     </div>
@@ -184,7 +189,11 @@ class Mychat extends React.Component{
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
+<<<<<<< HEAD
                                     <div className="imgback" onClick={this.gotoMyChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.sender_name}`, `${data.req_desc}`)}>
+=======
+                                    <div className="imgback" onClick={this.gotoMyChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.receiver_name}`,`${data.req_desc}`)}>
+>>>>>>> master
                                         <img src={front} alt="location"></img>
                                     </div>
                                 </Col>
@@ -207,7 +216,7 @@ class Mychat extends React.Component{
                                 <Col span={17}>
                                     <div className="feed-card-header">
                                         <span>
-                                            <strong>{data.receiver_name}</strong>
+                                            <strong>{data.sender_name}</strong>
                                         </span>
                                 
                                     </div>
@@ -217,7 +226,11 @@ class Mychat extends React.Component{
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
+<<<<<<< HEAD
                                     <div className="imgback" onClick={this.gotoOtherChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.receiver_name}`,`${data.req_desc}`)}>
+=======
+                                    <div className="imgback" onClick={this.gotoOtherChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.sender_name}`,`${data.req_desc}`)}>
+>>>>>>> master
                                         <img src={front} alt="location"></img>
                                     </div>
                                 </Col>
@@ -239,7 +252,7 @@ class Mychat extends React.Component{
                     <div className="imgbacc">
                             <img src={back} alt="back to feed" onClick={this.gotoProfile}></img>
                         </div>
-                        <p style={{fontSize:"24px",fontWeight:"600"}}>Chats And Suggestions</p>
+                        <h1>Chats And Suggestions</h1>
                     </Col>
                     {/* <Col span={6}>
                     <img onClick={this.gotoProfile} src={profile} alt="Profile logo"></img>
