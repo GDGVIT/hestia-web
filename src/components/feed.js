@@ -231,7 +231,8 @@ class Feed extends React.Component {
             .then(data => {
             console.log("LOCATIONNNNNNNNNN",data)
                 
-                fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location='+data.features[0].properties.address.city , {
+                fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location='+data.features[0].properties.address.city
+                 , {
                 headers: new Headers({
                     'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem("token")
@@ -342,6 +343,8 @@ class Feed extends React.Component {
                         visible={this.state.visible}    
                         footer={null}
                         closable={false}
+                        className="addrequest"
+                        centered
                         >
                         <Form onFinish={this.onFinish}>
                         <Form.Item name="item_name" rules={[{
@@ -390,6 +393,8 @@ class Feed extends React.Component {
                       onOk={this.handleOk}
                       footer={null}
                       onCancel={this.handleCancel}
+                      className="suggestshop"
+                      centered
                     > 
                         <Row>
                             <Col span={24}>
@@ -418,6 +423,8 @@ class Feed extends React.Component {
                       onOk={this.handleOk}
                       footer={null}
                       onCancel={this.handleCancel}
+                      className="itemconfirm"
+                      centered
                     > 
                      <Row>
                         <Col span={24}>

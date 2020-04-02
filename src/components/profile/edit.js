@@ -4,6 +4,8 @@ import check from'../../assets/check.png';
 import Profile from './profile';
 import {Row, Col, Form, Input, Button, Modal} from 'antd';
 import {withAlert} from 'react-alert';
+import cancel from '../../assets/cancel.svg';
+
 
 class Edit extends React.Component{
 
@@ -148,8 +150,8 @@ class Edit extends React.Component{
                     <Button type="primary" htmlType="submit">
                     Done <img src={check} alt="Submit form"></img>
                     </Button>
-                    <Button type="primary" onClick={this.gotoProfile}>
-                            Cancel <strong> X </strong>
+                    <Button type="primary" onClick={this.gotoProfile} style={{backgroundColor:"#fff", color:"#000"}}>
+                            Cancel <img src={cancel} alt="Check" style={{marginLeft:"10px"}}></img>
                     </Button>
                 </Form.Item>
                 </Form>
