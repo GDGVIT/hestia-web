@@ -72,6 +72,7 @@ class Feed extends React.Component {
                 .then(data => {
                     // console.log(data)
                     if(data){
+                        console.log(data)
                         this.props.alert.show("Request added")
                         this.setState({
                             visible: false
