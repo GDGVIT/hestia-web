@@ -135,8 +135,11 @@ class Feed extends React.Component {
 
       createChat = () => {
         console.log(parseInt(localStorage.getItem("accept_id")))
+        postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
+        .then(data => console.log(data)) // Result from the `response.json()` call
+        .catch(error => console.error(error))
         //   Accept the item
-        postRequest('https://akina.ayushpriya.tech/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:'Surat'})
+        postRequest('https://akina.ayushpriya.tech/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
         .then(data => console.log(data)) // Result from the `response.json()` call
         .catch(error => console.error(error))
 

@@ -72,11 +72,11 @@ class Edit extends React.Component{
         this.setState(values)
         console.log(this.state)
         console.log({"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone})
-        postRequest('https://akina.ayushpriya.tech/api/user/updateUser', {"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone})
+        postRequest('https://akina.ayushpriya.tech/api/user/updateUser', {"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone}, this.props)
             .then(data => console.log(data)) // Result from the `response.json()` call
             .catch(error => console.error(error))
 
-            function postRequest(url, data) {
+            function postRequest(url, data, tempprop) {
             return fetch(url, {
                 method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
                 body: JSON.stringify(data), // Coordinate the body type with 'Content-Type'
@@ -89,11 +89,11 @@ class Edit extends React.Component{
                 if(response.status === 200 || response.status===201 || response.status===202){
                     return response.json();
                     }else{
-                        this.props.alert.show("Something went wrong")
+                        tempprop.alert.show("Something went wrong")
                     }
             }).then(data=>{
                 if(data){
-                     this.props.alert.show("Profile succesfully edited")
+                     tempprop.alert.show("Profile succesfully edited")
                 }
             })
             
