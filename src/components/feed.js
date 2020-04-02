@@ -70,6 +70,7 @@ class Feed extends React.Component {
         this.setState(values)
         console.log(this.state)
         postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.city,this.state.description)
+                .then(res =>console.log(res))
                 .then(data => this.props.alert.show("Request added"))
                 .catch(error => console.error(error))
 
@@ -227,9 +228,9 @@ class Feed extends React.Component {
             .then(data => {
                 console.log(data)
                 console.log(data.features[0].properties.address.state_district)
-            // this.setState({
-            //     city:data.features[0].properties.address.city
-            // })
+            this.setState({
+                city:data.features[0].properties.address.state_district
+            })
                 
                 fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+data.features[0].properties.address.state_district
                 
