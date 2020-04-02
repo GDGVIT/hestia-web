@@ -69,7 +69,7 @@ class Feed extends React.Component {
         // console.log(values);
         this.setState(values)
         console.log(this.state)
-        postForm('https://akina.ayushpriya.tech/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.city,this.state.description)
+        postForm('https://akina.ayushpriya.tech/api/requests/item_requests/',this.state.item_name,this.state.quantity,'kolata',this.state.description)
                 .then(data => this.props.alert.show("Request added"))
                 .catch(error => console.error(error))
 
@@ -123,7 +123,7 @@ class Feed extends React.Component {
       createChat = () => {
         console.log(parseInt(localStorage.getItem("accept_id")))
         //   Accept the item
-        postRequest('https://akina.ayushpriya.tech/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
+        postRequest('https://akina.ayushpriya.tech/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:'kolkata'})
         .then(data => console.log(data)) // Result from the `response.json()` call
         .catch(error => console.error(error))
 
