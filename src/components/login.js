@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import ReactDOM from 'react'
 import { useAlert } from 'react-alert';
 import { Form, Input, Button, Modal } from 'antd';
 import {Link} from 'react-router-dom';
@@ -116,10 +115,10 @@ const Login = (props) => {
         
         // this.useRefs.loading.style.display = "block";
         // this.refs.login.style.display = "none";
-        let element = document.getElementById('loading-spinner')
-        ReactDOM.findDOMNode(element).style.display = "block"
-        let element1 = document.getElementById('login-form')
-        ReactDOM.findDOMNode(element1).style.display = "none"
+        // let element = document.getElementById('loading-spinner')
+        // ReactDOM.findDOMNode(element).style.display = "block"
+        // let element1 = document.getElementById('login-form')
+        // ReactDOM.findDOMNode(element1).style.display = "none"
 
 
         console.log(values)

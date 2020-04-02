@@ -20,7 +20,7 @@ class Feed extends React.Component {
             visible1:false,
             visible2:false,
             requests: [ ],
-            city: '',
+            city: 'Kolkata',
             item_name: null,
             quantity: '',
             token: '',
@@ -76,7 +76,7 @@ class Feed extends React.Component {
                     var object ={};
                     object["item_name"] = name;
                     object["quantity"] = quantity;
-                    object["location"] = city;
+                    object["location"] = "Kolkata";
                     object["description"] = description;
                     // console.log(object)
                 
@@ -241,7 +241,7 @@ class Feed extends React.Component {
 
 
 
-            fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location='+this.state.city, {
+            fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location=Kolkata', {
             headers: new Headers({
                 'Content-Type': 'application/json',
             'Authorization': localStorage.getItem("token")

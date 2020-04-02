@@ -41,7 +41,7 @@ class Suggestions extends React.Component{
         //         })
         //         .catch(error => console.error(error))
 
-                // function postForm(url,state) {
+                function postForm(url,state) {
                     var object ={};
                     object["recommended_for"] = localStorage.getItem("receiver_id");
                     object["name_of_shop"] = state.name_of_shop;
@@ -70,8 +70,8 @@ class Suggestions extends React.Component{
                 .catch(error=>{
                     console.error(error);
                 })
-            // }
-}
+            }
+            };
     render(){
         return(
             <div>
