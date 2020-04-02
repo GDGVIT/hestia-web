@@ -202,7 +202,6 @@ class Feed extends React.Component {
         }else{
             this.props.history.push("/login");
         }
-    console.log(baseurl)
 
         if ("geolocation" in navigator) {
             console.log("Available");
@@ -216,11 +215,8 @@ class Feed extends React.Component {
             
             
           });
-          console.log(localStorage.getItem("latitude"))
         let token =localStorage.getItem("token");
-        // this.setState({
-        //     token: localStorage.getItem("token")
-        // })
+        
         console.log(this.state);
             fetch('https://nominatim.openstreetmap.org/reverse?format=geojson&lat='+localStorage.getItem("latitude")+'&lon='+localStorage.getItem("longitude"), {
             })
@@ -229,10 +225,14 @@ class Feed extends React.Component {
             return response.json()
             })
             .then(data => {
-            console.log("LOCATIONNNNNNNNNN",data)
+                console.log(data)
+                console.log(data.features[0].properties.address.state_district)
+            // this.setState({
+            //     city:data.features[0].properties.address.city
+            // })
                 
-                fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location='+this.state.city
-                // +data.features[0].properties.address.city
+                fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location='+data.features[0].properties.address.state_district
+                
                  , {
                 headers: new Headers({
                     'Content-Type': 'application/json',
