@@ -69,7 +69,7 @@ class Feed extends React.Component {
         // console.log(values);
         this.setState(values)
         console.log(this.state)
-        postForm('https://akina.ayushpriya.tech/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.city,this.state.description)
+        postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.city,this.state.description)
                 .then(data => this.props.alert.show("Request added"))
                 .catch(error => console.error(error))
 
@@ -123,7 +123,7 @@ class Feed extends React.Component {
       createChat = () => {
         console.log(parseInt(localStorage.getItem("accept_id")))
         //   Accept the item
-        postRequest('https://akina.ayushpriya.tech/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:'Surat'})
+        postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:'Surat'})
         .then(data => console.log(data)) // Result from the `response.json()` call
         .catch(error => console.error(error))
 
@@ -231,7 +231,7 @@ class Feed extends React.Component {
             //     city:data.features[0].properties.address.city
             // })
                 
-                fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location='+data.features[0].properties.address.state_district
+                fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+data.features[0].properties.address.state_district
                 
                  , {
                 headers: new Headers({

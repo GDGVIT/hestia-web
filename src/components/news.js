@@ -23,7 +23,7 @@ class News extends React.Component {
         }
 
 
-            fetch('https://akina.ayushpriya.tech/node',{
+            fetch('https://hestia-info.herokuapp.com/node',{
                 method: "GET",
                 crossDomain: true
             })
