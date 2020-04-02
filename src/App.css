@@ -463,13 +463,10 @@ margin-left: 12.5%;
 }
 .addrequest>div{
     height: 360px;
-    /* top: 50%; */
-    /* transform: translateY(22%); */
 }
-.suggestshop>div, .confirmitem>div{
+.suggestshop>div, 
+.itemconfirm>div{
     height: 300px;
-    /* top: 50%; */
-    /* transform: translateY(22%); */
 }
 .ant-modal-header{
     display: none;

@@ -27,7 +27,7 @@ class Report extends React.Component{
 
           console.log(obj);
 
-        fetch('https://akina.ayushpriya.tech/api/report/',{
+        fetch('https://hestia-report-do.herokuapp.com/api/report/',{
             method:"POST",
             headers: new Headers({
                 "Content-Type": "application/json",

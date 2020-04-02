@@ -231,7 +231,8 @@ class Feed extends React.Component {
             .then(data => {
             console.log("LOCATIONNNNNNNNNN",data)
                 
-                fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location='+data.features[0].properties.address.city
+                fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location='
+                +data.features[0].properties.address.city
                  , {
                 headers: new Headers({
                     'Content-Type': 'application/json',
