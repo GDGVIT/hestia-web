@@ -284,7 +284,8 @@ margin-left: 12.5%;
 .imgbacc img{
     padding-top: 4px;
     width: 8px;
-    height: auto;;
+    height: auto;
+    margin-right: 2px;
 }
 .imgModal{
     background-color: #00d2d2;
@@ -457,7 +458,15 @@ margin-left: 12.5%;
     width: 90%;
 }
 .ant-modal-content{
-    height: 350px
+    height: 360px;
+
+}
+.addrequest>div{
+    height: 360px;
+}
+.suggestshop>div, 
+.itemconfirm>div{
+    height: 300px;
 }
 .ant-modal-header{
     display: none;

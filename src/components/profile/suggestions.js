@@ -4,8 +4,7 @@ import back from '../../assets/back.png';
 import { Modal, Button } from 'antd';
 import {Checkbox} from 'antd';
 import {withAlert} from 'react-alert';
-
-
+import cancel from '../../assets/cancel.svg';
 
 class Suggestions extends React.Component{
     constructor(props){
@@ -44,14 +43,14 @@ class Suggestions extends React.Component{
                 function postForm(url,state) {
                     var object ={};
                     object["recommended_for"] = localStorage.getItem("receiver_id");
-                    object["name_of_shop"] = state.name_of_shop;
+                    object["name_of_shop"] = this.state.name_of_shop;
                     object["item"] = localStorage.getItem("item");
-                    object["landmark"] = state.landmark;
-                    object["extra_instruction"] = state.extra_instruction;
-                    object["description_of_shop"] = state.description_of_shop;
-                    object["phone_number"] = state.phone_number;
+                    object["landmark"] = this.state.landmark;
+                    object["extra_instruction"] = this.state.extra_instruction;
+                    object["description_of_shop"] = this.state.description_of_shop;
+                    object["phone_number"] = this.state.phone_number;
                     console.log(object)
-                fetch("https://akina.ayushpriya.tech/api/recommend/", {
+                fetch("https://hestia-report-do.herokuapp.com/api/recommend/", {
                     method: 'POST', // or 'PUT'
                     body: JSON.stringify(object),  // a FormData will automatically set the 'Content-Type'
                     headers: new Headers({
@@ -129,8 +128,8 @@ class Suggestions extends React.Component{
                             </Button>
                         </Form.Item>
                         <Form.Item className="butn">
-                            <Button type="primary" onClick={this.gotoFeed}>
-                                Cancel <strong> X </strong>
+                            <Button type="primary" onClick={this.gotoFeed} style={{backgroundColor:"#fff",color:"#000"}}>
+                                Cancel <img src={cancel} alt="Check" style={{marginLeft:"10px"}}></img>
                             </Button>
                         </Form.Item>
                         </Form>

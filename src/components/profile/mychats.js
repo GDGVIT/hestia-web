@@ -8,6 +8,8 @@ import front from '../../assets/front.png';
 import back from '../../assets/back.png';
 import Suggestpic from '../../assets/suggest.png';
 import { withRouter } from 'react-router';
+import Bold from '../../assets/Manrope-ExtraBold.otf';
+
 
 class Mychat extends React.Component{
     constructor(props){
@@ -139,7 +141,7 @@ class Mychat extends React.Component{
         .catch(error => console.error(error))
 
         //get suggestions number
-        fetch('https://akina.ayushpriya.tech/api/recommend/',{
+        fetch('https://hestia-report-do.herokuapp.com/api/recommend/',{
             method: "GET",
             headers: new Headers({
                 'Authorization': localStorage.getItem("token")
@@ -173,7 +175,7 @@ class Mychat extends React.Component{
                                 <Col span={17}>
                                     <div className="feed-card-header">
                                         <span>
-                                            <strong>{data.sender_name}</strong>
+                                            <strong>{data.receiver_name}</strong>
                                         </span>
                                 
                                     </div>
@@ -182,7 +184,7 @@ class Mychat extends React.Component{
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    <div className="imgback" onClick={this.gotoMyChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.sender_name}`,`${data.req_desc}`)}>
+                                    <div className="imgback" onClick={this.gotoMyChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.receiver_name}`,`${data.req_desc}`)}>
                                         <img src={front} alt="location"></img>
                                     </div>
                                 </Col>
@@ -205,7 +207,7 @@ class Mychat extends React.Component{
                                 <Col span={17}>
                                     <div className="feed-card-header">
                                         <span>
-                                            <strong>{data.receiver_name}</strong>
+                                            <strong>{data.sender_name}</strong>
                                         </span>
                                 
                                     </div>
@@ -214,7 +216,7 @@ class Mychat extends React.Component{
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    <div className="imgback" onClick={this.gotoOtherChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.receiver_name}`,`${data.req_desc}`)}>
+                                    <div className="imgback" onClick={this.gotoOtherChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.sender_name}`,`${data.req_desc}`)}>
                                         <img src={front} alt="location"></img>
                                     </div>
                                 </Col>
@@ -236,7 +238,7 @@ class Mychat extends React.Component{
                     <div className="imgbacc">
                             <img src={back} alt="back to feed" onClick={this.gotoProfile}></img>
                         </div>
-                        <p style={{fontSize:"24px",fontWeight:"600"}}>Chats And Suggestions</p>
+                        <h1>Chats And Suggestions</h1>
                     </Col>
                     {/* <Col span={6}>
                     <img onClick={this.gotoProfile} src={profile} alt="Profile logo"></img>

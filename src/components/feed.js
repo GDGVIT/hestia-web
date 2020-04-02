@@ -11,6 +11,7 @@ import { Form, Input, Checkbox} from 'antd';
 import Nav from './nav';
 import {withAlert} from "react-alert";
 import baseurl from "../url"
+import cancel from "../assets/cancel.svg";
 
 class Feed extends React.Component {
     constructor(props){
@@ -20,7 +21,7 @@ class Feed extends React.Component {
             visible1:false,
             visible2:false,
             requests: [ ],
-            city: 'Kolkata',
+            city: '',
             item_name: null,
             quantity: '',
             token: '',
@@ -76,7 +77,7 @@ class Feed extends React.Component {
                     var object ={};
                     object["item_name"] = name;
                     object["quantity"] = quantity;
-                    object["location"] = "Kolkata";
+                    object["location"] = city;
                     object["description"] = description;
                     // console.log(object)
                 
@@ -122,7 +123,7 @@ class Feed extends React.Component {
       createChat = () => {
         console.log(parseInt(localStorage.getItem("accept_id")))
         //   Accept the item
-        postRequest('https://akina.ayushpriya.tech/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
+        postRequest('https://akina.ayushpriya.tech/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:'Surat'})
         .then(data => console.log(data)) // Result from the `response.json()` call
         .catch(error => console.error(error))
 
@@ -228,44 +229,34 @@ class Feed extends React.Component {
             return response.json()
             })
             .then(data => {
-            console.log(data)
-            this.setState({
-                city:data.features[0].properties.address.state_district
-            })
+            console.log("LOCATIONNNNNNNNNN",data)
+                
+                fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location='+this.state.city
+                // +data.features[0].properties.address.city
+                 , {
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem("token")
+                })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    if(data.message == "Location not provided"){
+                        console.log("No location")
+                    } else {
+                        this.setState({
+                            requests: data.Request,
+                        });
+                    }
+                console.log(this.state)
+                })
+                .catch(error => console.error(error))
+    
             console.log(this.state)
             })
             .catch(error => console.error(error))
                 
-
-
-
-
-
-            fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location=Kolkata', {
-            headers: new Headers({
-                'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem("token")
-            })
-            })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                if(data.message == "Location not provided"){
-                    console.log("No location")
-                } else {
-                    this.setState({
-                        requests: data.Request,
-                    });
-                }
-            console.log(this.state)
-            })
-            .catch(error => console.error(error))
-
-
-
-
-
-
             
         }
             
@@ -275,6 +266,12 @@ class Feed extends React.Component {
         const reqlist = requests.length ? (
             requests.map(
                 request =>{
+                    if(request.description == null){
+                        request.description = "NA"
+                    }
+                    if(request.description.length > 50){
+                        request.description = request.description.slice(0,50)+ "..."
+                    }
                     // console.log(request)
                     return(
                         <Card key={request.id}>
@@ -285,7 +282,7 @@ class Feed extends React.Component {
                                             <strong>{request.item_name}</strong>
                                         </span>
                                         <p>{request.quantity}</p>
-                                        <p style ={{width:"100%"}}>{request.description}</p>
+                                        <p style ={{width:"100%", marginBottom:"10px"}}>{request.description}</p>
                                     </div>
                                     <div className="feed-card-date">
                                         <p>{request.date_time_created.slice(0,10)}</p>
@@ -336,6 +333,8 @@ class Feed extends React.Component {
                         visible={this.state.visible}    
                         footer={null}
                         closable={false}
+                        className="addrequest"
+                        centered
                         >
                         <Form onFinish={this.onFinish}>
                         <Form.Item name="item_name" rules={[{
@@ -367,12 +366,12 @@ class Feed extends React.Component {
                         </Form.Item>
                         <Form.Item className="butn">
                             <Button type="primary" htmlType="submit" onClick={this.handleOk}>
-                                Done <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
+                                Done <img src={check} alt="Check" style={{marginLeft:"10px"}}></img>
                             </Button>
                         </Form.Item>
                         <Form.Item className="butn">
-                            <Button type="primary" onClick={this.handleCancel}>
-                                Cancel <strong> X </strong>
+                            <Button type="primary" onClick={this.handleCancel} style={{backgroundColor:"#fff",color:"#000"}}>
+                                Cancel <img src={cancel} alt="Check" style={{marginLeft:"10px"}}></img>
                             </Button>
                         </Form.Item>
                         </Form>
@@ -384,6 +383,8 @@ class Feed extends React.Component {
                       onOk={this.handleOk}
                       footer={null}
                       onCancel={this.handleCancel}
+                      className="suggestshop"
+                      centered
                     > 
                         <Row>
                             <Col span={24}>
@@ -395,10 +396,10 @@ class Feed extends React.Component {
                       <h2 style={{marginTop:"20px", textAlign:"center"}}>Suggest a Shop?</h2>
                       <div style={{textAlign:"center"}}>
                         <Button type="primary" htmlType="submit" onClick={this.suggestShop} >
-                            Yes <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
+                            Yes <img src={check} alt="Check" style={{marginLeft:"10px"}}></img>
                         </Button>
                         <Button type="primary" onClick={this.handleCancel} style={{backgroundColor:"#fff",color:"#000"}}>
-                            No <strong> X </strong>
+                            No <img src={cancel} alt="Check" style={{marginLeft:"10px"}}></img>
                         </Button>
                     </div>
                     <div style={{textAlign:"center"}}>
@@ -412,6 +413,8 @@ class Feed extends React.Component {
                       onOk={this.handleOk}
                       footer={null}
                       onCancel={this.handleCancel}
+                      className="itemconfirm"
+                      centered
                     > 
                      <Row>
                         <Col span={24}>
@@ -423,10 +426,10 @@ class Feed extends React.Component {
                       <h2 style={{marginTop:"20px", textAlign:"center"}}>You have this item?</h2>
                         <div style={{textAlign:"center"}}>
                             <Button type="primary" htmlType="submit" onClick={this.createChat} >
-                                Yes <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
+                                Yes <img src={check} alt="Check" style={{marginLeft:"10px"}}></img>
                             </Button>
                             <Button type="primary" onClick={this.handleCancel} style={{backgroundColor:"#fff",color:"#000"}}>
-                                No <strong> X </strong>
+                                No <img src={cancel} alt="Check" style={{marginLeft:"10px"}}></img>
                             </Button>
                         </div>
                         <div style={{textAlign:"center"}}>

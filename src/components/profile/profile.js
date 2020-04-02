@@ -88,6 +88,7 @@ class Profile extends React.Component{
 
     }
     logoutsar=()=>{
+        localStorage.clear();
         localStorage.removeItem("token");
         this.props.history.push("/login")
     }

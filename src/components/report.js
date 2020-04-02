@@ -3,6 +3,8 @@ import { Card, Row, Col } from 'antd';
 import back from '../assets/back.png';
 import check from'../assets/check.png';
 import { Input,Form,Button } from 'antd';
+import cancel from '../assets/cancel.svg';
+
 
 const { TextArea } = Input;
 
@@ -25,7 +27,7 @@ class Report extends React.Component{
 
           console.log(obj);
 
-        fetch('https://akina.ayushpriya.tech/api/report/',{
+        fetch('https://hestia-report-do.herokuapp.com/api/report/',{
             method:"POST",
             headers: new Headers({
                 "Content-Type": "application/json",
@@ -82,7 +84,7 @@ class Report extends React.Component{
                         Report <img src={check} alt="Submit form"></img>
                         </Button>
                         <Button type="primary" onClick={this.gotoProfile} style={{backgroundColor:"#fff", color:"#000"}}>
-                                Cancel <strong> X </strong>
+                                Cancel <img src={cancel} alt="Check" style={{marginLeft:"10px"}}></img>
                         </Button>
                     </div>
                 </Form.Item>

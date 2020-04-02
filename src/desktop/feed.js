@@ -292,15 +292,16 @@ class Feed extends React.Component {
                         <Col span={18}>
                             <h1>Requests</h1>
                         </Col>
+                        <Col className="addReqD" onClick={this.handleAdd}>
+                            <img src={plus} alt="add req"></img>
+                        </Col>
                     </Row>
      
                     </div>
                     <div className="main-content">
                         {reqlist}
                     </div>
-                    <div className="addReq" onClick={this.handleAdd}>
-                            <img src={plus} alt="add req"></img>
-                    </div>
+ 
                     <Modal
                         title="Add a request"
                         visible={this.state.visible}    
