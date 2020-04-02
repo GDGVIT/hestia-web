@@ -37,10 +37,6 @@ class Mychat extends React.Component{
         window.localStorage.setItem("report", s);
         window.localStorage.setItem("chat_name",sn);
         window.localStorage.setItem("chat_desc", cd);
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 
         if(this.props.history){
             this.props.history.push({
@@ -189,11 +185,7 @@ class Mychat extends React.Component{
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-<<<<<<< HEAD
-                                    <div className="imgback" onClick={this.gotoMyChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.sender_name}`, `${data.req_desc}`)}>
-=======
                                     <div className="imgback" onClick={this.gotoMyChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.receiver_name}`,`${data.req_desc}`)}>
->>>>>>> master
                                         <img src={front} alt="location"></img>
                                     </div>
                                 </Col>
@@ -226,11 +218,7 @@ class Mychat extends React.Component{
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-<<<<<<< HEAD
-                                    <div className="imgback" onClick={this.gotoOtherChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.receiver_name}`,`${data.req_desc}`)}>
-=======
                                     <div className="imgback" onClick={this.gotoOtherChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.sender_name}`,`${data.req_desc}`)}>
->>>>>>> master
                                         <img src={front} alt="location"></img>
                                     </div>
                                 </Col>
