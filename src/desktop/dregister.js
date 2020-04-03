@@ -156,7 +156,7 @@ const Register = (props) => {
         </Button> */}
       </Form.Item>
       <Form.Item className="already">
-        <Link to="/Login">Already have an account? Login</Link>
+        <Link to="/dlogin">Already have an account? Login</Link>
       </Form.Item>
       <Form.Item>
       <ReCaptcha
