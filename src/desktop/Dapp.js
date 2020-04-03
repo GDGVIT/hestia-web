@@ -6,6 +6,7 @@ import Dlog from './dlog';
 import Dmain from './main';
 import Register from './dregister';
 import Aboutus from './aboutus';
+import Orgs from '../orgs'
 
 class Dapp extends React.Component{
     constructor(props){
@@ -26,6 +27,7 @@ class Dapp extends React.Component{
                         <Route exact path='/main' component={Dmain}/>
                         <Route exact path='/dlogin' component={Dlog}/>
                         <Route exact path='/dregister' component={Register}/>
+                        <Route exact path='/organisations' component={Orgs}/>
                         <Route component={this.page404}/>
                     </Switch>
                 </div>
