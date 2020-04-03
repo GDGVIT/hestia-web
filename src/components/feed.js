@@ -39,20 +39,27 @@ class Feed extends React.Component {
         })
     }
     handleStore = (r,i) => () => {
-        this.setState({
-            visible1: true,
-        })
         window.localStorage.setItem("receiver_id", r);
         window.localStorage.setItem("item",i);
+        if(localStorage.getItem("Sugcheck")){
+            this.suggestShop();
+        }else{
+            this.setState({
+                visible1: true
+            })
+        }
     }
     handleChat= (r,i,ri) => () =>{
-        this.setState({
-            visible2: true
-        })
         window.localStorage.setItem("receiver_id", r);
         window.localStorage.setItem("item",i);
-
         window.localStorage.setItem("accept_id", ri);
+        if(localStorage.getItem("acceptcheck")){
+            this.createChat();
+        }else{
+            this.setState({
+                visible2: true
+            })
+        }
     }
     suggestShop = () =>{
         this.props.history.push('/suggestions');
@@ -197,6 +204,10 @@ class Feed extends React.Component {
       };
       onChange(e) {
         window.localStorage.setItem("acceptcheck", `${e.target.checked}`);
+        // console.log(localStorage.getItem("acceptcheck"))
+      }
+      onChangeSug(e) {
+        window.localStorage.setItem("Sugcheck", `${e.target.checked}`);
         // console.log(localStorage.getItem("acceptcheck"))
       }
     //   componentWillMount(){
@@ -426,7 +437,7 @@ class Feed extends React.Component {
                         </Button>
                     </div>
                     <div style={{textAlign:"center"}}>
-                            <Checkbox onChange={this.onChange} style={{marginTop:"40px"}}>Do not show this again.</Checkbox>
+                            <Checkbox onChange={this.onChangeSug} style={{marginTop:"40px"}}>Do not show this again.</Checkbox>
                     </div>                    
                     </Modal>
                     {/* You have this item? modal*/}

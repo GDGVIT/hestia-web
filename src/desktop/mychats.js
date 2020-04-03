@@ -235,8 +235,8 @@ class Mychat extends React.Component{
                             </div>
                         </Col>
                         <Col span={5} className="iconz">
-                            <div className="imgback">
-                                <img src={front} alt="location" style={{marginLeft:"10px"}} onClick ={this.gotoShop}></img>
+                            <div className="imgback" onClick ={this.gotoShop}>
+                                <img src={front} alt="location"></img>
                             </div>
                         </Col>
                     </Row>
@@ -251,7 +251,7 @@ class Mychat extends React.Component{
                     {this.state.value == "or" && <div>{otherchatslist}</div>}
                 </div>
                 <Drawer
-                placement="left"
+                placement="right"
                 closable={true}
                 onClose={this.onClose}
                 visible={this.state.visiblechat}
@@ -262,7 +262,7 @@ class Mychat extends React.Component{
                 </Drawer>
                 
                 <Drawer
-                placement='left'
+                placement='right'
                 closable={true}
                 onClose={this.onClose}
                 visible={this.state.visiblesug}
