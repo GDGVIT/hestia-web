@@ -16,6 +16,8 @@ import Myreqs from './components/profile/myreqs';
 import Edit from './components/profile/edit';
 import Sap from './components/sap';
 import Suggestions from './components/profile/suggestions';
+import Aboutus from './aboutus';
+
 
 import { loadReCaptcha } from 'react-recaptcha-v3';
 
@@ -47,7 +49,7 @@ class App extends React.Component {
     return(
       <BrowserRouter> 
         <div className="App">
-          <Route exact path='/' component={Home}/>
+          <Route exact path='/' component={Aboutus}/>
           <Route exact path='/login' component={Login}/>
           <Route exact path='/register' component={Register}/>
           <Route exact path='/chat' component={Chat}/>

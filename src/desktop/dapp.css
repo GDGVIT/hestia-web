@@ -72,3 +72,231 @@
     height: auto;
     padding-top: 7px;
 }
+.parent{
+    /* text-align: center; */
+    /* align-items: center; */
+    /* border-color: yellowgreen; */
+    /* border-style: solid; */
+    font-family:sans-serif;
+}
+.logo{
+    /* border-color: yellowgreen; */
+    /* border-style: solid; */
+    text-align: center;
+    margin:70px;
+}
+.logo > img{
+    height:45px;
+    width:180px;
+}
+.what{
+    /* border-color: yellowgreen; */
+    /* border-style: solid; */
+    text-align: center;
+    
+    width:40vw;
+    margin:0px auto;
+    
+}
+.what > h1{
+    color:#00d2d2;
+    
+}
+.features > h1{
+    color:#00d2d2;
+    
+    padding-top:50px;
+    padding-bottom: 45px;
+    text-align: center;
+}
+.what > h4{
+    color:#989898;
+    font-size:large;
+    text-align:center;
+    font-weight: 100;
+    letter-spacing: 1.6px;
+}
+.circle{
+    width:50px;
+    height:50px;
+    border-radius: 100%;
+    background-color: #ff0168;
+    display:inline-block;
+    text-align: center;
+}
+.circle > img{
+    height:17px;
+    width:22px;
+    margin-top:16px;
+    
+}
+.circle2{
+    width:50px;
+    height:50px;
+    border-radius: 100%;
+    background-color: #02dcdc;
+    display:inline-block;
+    text-align: center;
+}
+.circle2 > img{
+    height:22px;
+    width:22px;
+    margin-top:14px;
+    
+}
+
+.text{
+    display: inline-block;
+}
+.text > h3{
+    padding-left:10px;
+}
+.feed{
+    /* border-color: yellowgreen; */
+    /* border-style: solid; */
+    width:40vw;
+    margin:0px auto;
+    padding:50px;
+
+}
+.feed2{
+    /* border-color: yellowgreen; */
+    /* border-style: solid; */
+    width:40vw;
+    margin:0px auto;
+    padding:50px;
+    padding-top:-40px;
+}
+
+.content{
+    
+    color:#989898;
+    /* width:30vw; */
+    /* float:right */
+    
+}
+.border{
+    color:#989898;
+    border-style: solid;
+    border-left-style: hidden;
+    border-right-style: hidden;
+    border-bottom-style:hidden;
+    width:30vw;
+    float:right;
+    border-top-width:0.5px;
+    margin-top:-30px;
+}
+.border2{
+    color:#989898;
+    border-style: solid;
+    border-left-style: hidden;
+    border-right-style: hidden;
+    border-bottom-style:hidden;
+    width:30vw;
+    border-top-width:0.5px;
+    margin-top:-30px;
+}
+.border3{
+    color:#989898;
+    border-style: solid;
+    border-left-style: hidden;
+    border-right-style: hidden;
+    border-bottom-style:hidden;
+    width:27vw;
+    float:right;
+    border-top-width:0.5px;
+    margin-top:-30px;
+}
+.content > h3{
+    padding-top:40px;
+    font-weight: 100;
+    /* font-size:initial; */
+}
+.content1{
+    padding-top:40px;
+    font-weight: 100;
+    text-align: right;
+}
+.feedlogo{
+    /* border-color: yellowgreen; */
+    /* border-style: solid; */
+    background-color: #fafafa;
+    width:17vw;
+    margin-top:-48px;
+    
+    
+}
+.feedlogo1{
+    /* border-color: yellowgreen; */
+    /* border-style: solid; */
+    background-color: #fafafa;
+    width:10.35vw;
+    padding-left: 25px;
+    float:right;
+    margin-top:-58px;
+}
+.circle1{
+    width:50px;
+    height:50px;
+    border-radius: 100%;
+    background-color: #02dcdc;
+    display:inline-block;
+    text-align: center;
+    background-color: #ffb600;
+}
+.circle1 > img{
+    height:22px;
+    width:22px;
+    margin-top:14px;
+    
+}
+.buttons{
+    margin:30px;
+    text-align: center;
+}
+.button1{
+    display:inline-block;
+    margin:8px;
+}
+.button2{
+    display:inline-block;
+    margin:8px;
+}
+.button1 > button{
+    width:170px;
+    height:55px;
+    font-size: large;
+    font-weight: 550;
+    color:white;
+    background-color:#00d2d2;
+    border-style: solid;
+    border-color: #00d2d2;
+    border-radius: 5px;
+
+}
+.button2 > button{
+    width:170px;
+    height:55px;
+    font-size:large;
+    font-weight:550;
+    border-style: solid;
+    border-radius: 5px;
+    box-shadow: #989898;
+}
+@media screen and (max-width: 700px){
+    .what{
+        width:95vw;
+    }
+    .feed{
+        width:73vw;
+    }
+    .feed2{
+        width:73vw;
+    }
+    .feedlogo{
+        width:50vw;
+    }
+    .feedlogo1{
+        width:30vw;
+    }
+}

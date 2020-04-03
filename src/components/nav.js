@@ -5,7 +5,7 @@ import CalB from '../assets/Cal_B.svg';
 import CalL from '../assets/Cal_L.svg';
 import NewL from '../assets/New_L.svg';
 import NewB from '../assets/New_B.svg';
-
+import {withRouter} from 'react-router-dom';
 
 
 class Nav extends React.Component {
@@ -22,7 +22,17 @@ class Nav extends React.Component {
         });
       };
 
-    
+    componentDidMount() {
+        if(this.props.location.pathname === '/news'){
+            this.setState({
+                current: 'news'
+            })
+        }else if(this.props.location.pathname === '/feed'){
+            this.setState({
+                current: 'feed'
+            })
+    }
+    }    
     
     render(){
         let cal;
@@ -50,4 +60,4 @@ class Nav extends React.Component {
     }   
 }
 
-export default Nav;
+export default withRouter(Nav);
