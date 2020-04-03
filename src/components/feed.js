@@ -320,7 +320,7 @@ class Feed extends React.Component {
                                         <p>{request.date_time_created.slice(0,10)}</p>
                                     </div>
                                 </Col>
-                                <Col span={7} className="iconz">
+                                <Col span={7} className="iconz tru">
                                 <div className="imgback">
                                         <img onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`,`${request.id}`)} src={check} alt="location"></img>
                                     </div>
