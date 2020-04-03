@@ -182,7 +182,7 @@ const Dlog = (props) => {
         <a onClick={() => changeV(true)}>Forgot password?</a>
         </Form.Item>
         <Form.Item className="already">
-        <Link to="/register">Don't have an account? Register!</Link>
+        <Link to="/dregister">Don't have an account? Register!</Link>
         </Form.Item>
 
     </Form>
