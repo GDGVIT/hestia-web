@@ -156,7 +156,7 @@ class Mychat extends React.Component{
                                 <Col span={17}>
                                     <div className="feed-card-header">
                                         <span>
-                                            <strong>{data.sender_name}</strong>
+                                            <strong>{data.receiver_name}</strong>
                                         </span>
                                 
                                     </div>
@@ -165,7 +165,7 @@ class Mychat extends React.Component{
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    <div className="imgback" onClick={this.gotoMyChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.sender_name}`)}>
+                                    <div className="imgback" onClick={this.gotoMyChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.receiver_name}`,`${data.req_desc}`)}>
                                         <img src={front} alt="location"></img>
                                     </div>
                                 </Col>
@@ -188,7 +188,7 @@ class Mychat extends React.Component{
                                 <Col span={17}>
                                     <div className="feed-card-header">
                                         <span>
-                                            <strong>{data.receiver_name}</strong>
+                                            <strong>{data.sender_name}</strong>
                                         </span>
                                 
                                     </div>
@@ -197,7 +197,7 @@ class Mychat extends React.Component{
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    <div className="imgback" onClick={this.gotoOtherChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.receiver_name}`)}>
+                                    <div className="imgback" onClick={this.gotoOtherChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.sender_name}`, `${data.req_desc}`)}>
                                         <img src={front} alt="location"></img>
                                     </div>
                                 </Col>
