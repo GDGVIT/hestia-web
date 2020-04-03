@@ -1,6 +1,6 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { Route, BrowserRouter, Redirect, withRouter} from 'react-router-dom';
+import { Route, BrowserRouter, Redirect, withRouter, Switch} from 'react-router-dom';
 import './App.css';
 import Login from "./components/login";
 import Register from "./components/register";
@@ -38,6 +38,9 @@ class App extends React.Component {
   }
   loadReCaptcha('6LdiB-UUAAAAACYC2AlMS9hrw18fQA4FK7-s0LDw');
   }
+  page404 = () =>{
+    return(<div>This page does not exist</div>)
+  }
   showNav(){
     if(this.state.showNav){
       return(<Nav />);
@@ -49,6 +52,7 @@ class App extends React.Component {
     return(
       <BrowserRouter> 
         <div className="App">
+        <Switch>
           <Route exact path='/' component={Aboutus}/>
           <Route exact path='/login' component={Login}/>
           <Route exact path='/register' component={Register}/>
@@ -62,6 +66,8 @@ class App extends React.Component {
           <Route exact path='/edit' component={Edit}/>
           <Route exact path='/suggestashop' component={Sap}/>
           <Route exact path='/suggestions' component={Suggestions}/>
+          <Route component={this.page404}/>
+          </Switch>
           {this.showNav()}
         </div>
       </BrowserRouter>

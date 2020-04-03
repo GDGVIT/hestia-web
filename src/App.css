@@ -319,6 +319,11 @@ margin-left: 12.5%;
     height: auto;
     padding-left: 2px;
 }
+.tru .imgback img{
+    width: 12px !important;
+    height: auto;
+    padding-left: 0px;
+}
 .ant-col-6{
     text-align: right;
 }

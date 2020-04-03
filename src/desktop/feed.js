@@ -45,20 +45,27 @@ class Feed extends React.Component {
         })
     }
     handleStore = (r,i) => () => {
-        this.setState({
-            visible1: true,
-        })
         window.localStorage.setItem("receiver_id", r);
         window.localStorage.setItem("item",i);
+        if(localStorage.getItem("Sugcheck")){
+            this.suggestShop();
+        }else{
+            this.setState({
+                visible1: true
+            })
+        }
     }
     handleChat= (r,i,ri) => () =>{
-        this.setState({
-            visible2: true
-        })
         window.localStorage.setItem("receiver_id", r);
         window.localStorage.setItem("item",i);
-
         window.localStorage.setItem("accept_id", ri);
+        if(localStorage.getItem("acceptcheck")){
+            this.createChat();
+        }else{
+            this.setState({
+                visible2: true
+            })
+        }
     }
     suggestShop = () =>{
         this.setState({
@@ -209,6 +216,10 @@ class Feed extends React.Component {
         window.localStorage.setItem("acceptcheck", `${e.target.checked}`);
         // console.log(localStorage.getItem("acceptcheck"))
       }
+      onChangeSug(e) {
+        window.localStorage.setItem("Sugcheck", `${e.target.checked}`);
+        // console.log(localStorage.getItem("acceptcheck"))
+      }
     //   componentWillMount(){
     //     navigator.geolocation.getCurrentPosition(
     //         position => this.setState({ 
@@ -319,7 +330,7 @@ class Feed extends React.Component {
                                         <p>{request.date_time_created.slice(0,10)}</p>
                                     </div>
                                 </Col>
-                                <Col span={7} className="iconz">
+                                <Col span={7} className="iconz tru">
                                 <div className="imgback" onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`,`${request.id}`)}>
                                         <img  src={check} alt="location"></img>
                                     </div>
@@ -434,7 +445,7 @@ class Feed extends React.Component {
                         </Button>
                     </div>
                     <div style={{textAlign:"center"}}>
-                            <Checkbox onChange={this.onChange} style={{marginTop:"40px"}}>Do not show this again.</Checkbox>
+                            <Checkbox onChange={this.onChangeSug} style={{marginTop:"40px"}}>Do not show this again.</Checkbox>
                     </div>                    
                     </Modal>
                     {/* You have this item? modal*/}

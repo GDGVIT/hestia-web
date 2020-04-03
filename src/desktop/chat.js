@@ -1,11 +1,11 @@
 import React from 'react'
 import Messages from './messages';
-import { Card, Row, Col } from 'antd';
-import Report from '../assets/Report.svg';
+import { Card, Row, Col, Drawer } from 'antd';
+import report from '../assets/Report.svg';
 import backbutton from '../assets/backbutton.png';
 import './chat.css';
 import {withAlert} from "react-alert";
-
+import Report from './report'
 
 
 // const { Search } = Input;
@@ -22,14 +22,17 @@ class Chat extends React.Component{
             messages: [],
             initialmsg: [],
             me: false,
+            visreport: false
             // receiver_id : props.location.state.id
         }
     }
     controller = new AbortController();
     // url = 'wss://hestia-chat.herokuapp.com/api/v1/ws?chat='+`${this.state.receiver_id}`;
     gotoReport=()=>{
-      // this.props.history.push("/report");
-      this.props.alert.show("alerting will be available soon")
+      this.setState({
+        visreport: true
+      })
+      // this.props.alert.show("alerting will be available soon")
     }
   componentWillUnmount(){
     this.setState({
@@ -41,7 +44,11 @@ class Chat extends React.Component{
       this.messagesEnd.scrollIntoView({ behavior: "smooth" });
     }
     timeout = 250; 
-
+onClose=()=>{
+  this.setState({
+    visreport: false
+  })
+}
     // connect = () => {
     //   let url = 'wss://akina.ayushpriya.tech/api/v1/ws?sender='+ parseInt(localStorage.getItem("sender_id")) + "&receiver=" + parseInt(localStorage.getItem("receiver_id"))
 
@@ -270,7 +277,7 @@ class Chat extends React.Component{
                       </div>
                     </Col>
                     <Col span={4}>
-                    <img src={Report} alt="Report logo" style ={{ marginTop: "10px"}} onClick={this.gotoReport}></img>
+                    <img src={report} alt="Report logo" style ={{ marginTop: "10px"}} onClick={this.gotoReport}></img>
                     </Col>
                 </Row>
             </div>
@@ -293,6 +300,16 @@ class Chat extends React.Component{
 
             <Messages onSubmitMessage={messageString => this.submitMessage(messageString)}/>
             </div>
+            <Drawer
+                placement='right'
+                closable={true}
+                onClose={this.onClose}
+                visible={this.state.visreport}
+                width="400px"
+                zIndex="3000"
+            >
+                <Report />
+                </Drawer>
             </div>
         );
     }
