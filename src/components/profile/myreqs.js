@@ -107,8 +107,8 @@ class Myreqs extends React.Component{
                                 </div>
                             </Col>
                             <Col span={7} className="iconz">
-                                <div className="imgback">
-                                    <img onClick={()=>{this.deleterequest(request.id)}} src={deletez} alt="location"></img>
+                                <div className="imgback" onClick={()=>{this.deleterequest(request.id)}}>
+                                    <img src={deletez} alt="location"></img>
                                 </div>
                             </Col>
                         </Row>
