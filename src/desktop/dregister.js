@@ -21,10 +21,10 @@ const validateMessages = {
 };
 
 const Register = (props) => {
-  var ct = null;
+  var ct;
   const verifyCallback = (recaptchaToken) => {
       ct = recaptchaToken;
-      console.log(recaptchaToken, "<= your recaptcha token")
+      console.log(ct, "<= your recaptcha token")
   }
   const alert = useAlert()  
   let authcheck = false;
@@ -52,7 +52,7 @@ const Register = (props) => {
               alert.show("You have been blocked")
               break;
             case 404:
-              alert.show("No user exists with that email")
+              alert.show("Recaptcha not verified. Reload and try again")
               break;
             default:  
               alert.show("Seems like something's wrong on our end. Please contact the developers")

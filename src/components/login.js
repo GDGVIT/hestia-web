@@ -82,7 +82,7 @@ const Login = (props) => {
                 console.log("incorrect email")
                 break;
               default:  
-                alert.show("Seems like something's wrong on our end. Please contact the developers")
+                alert.show("Something went wrong. Please try again later")
             }
           }
           })
@@ -98,7 +98,9 @@ const Login = (props) => {
             }
             // props.history.push("/feed");
           })
-        .catch(error => console.error(error)
+        .catch(error => {
+          alert.show("Something went wrong. Please try again later")
+        }
         );
    }
 

@@ -47,7 +47,7 @@ const Dlog = (props) => {
             alert.show("No user exists with that email")
             break;
           default:  
-            alert.show("Seems like something's wrong on our end. Please contact the developers")
+            alert.show("Something went wrong. Please try again later.")
         }
       }
       })
@@ -71,16 +71,16 @@ const Dlog = (props) => {
           }else{
             switch(response.status){
               case 401: 
-                alert.show("incorrect credentials")
+                alert.show("Incorrect credentials")
                 break;
               case 403:
-                alert.show("incorrect credentials")
+                alert.show("Incorrect credentials")
                 break;
               case 404:
-                console.log("incorrect email")
+                console.log("Incorrect email")
                 break;
               default:  
-                alert.show("Seems like something's wrong on our end. Please contact the developers")
+                alert.show("Something went wrong. Please try again later.")
             }
           }
           })
