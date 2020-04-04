@@ -163,7 +163,7 @@ const Register = (props) => {
       <Form.Item>
       <ReCaptcha
             sitekey="6LdiB-UUAAAAACYC2AlMS9hrw18fQA4FK7-s0LDw"
-            action='/register'
+            action='/dregister'
             verifyCallback={verifyCallback}
         />
       </Form.Item>

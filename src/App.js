@@ -40,6 +40,7 @@ class App extends React.Component {
   loadReCaptcha('6LdiB-UUAAAAACYC2AlMS9hrw18fQA4FK7-s0LDw');
   }
   page404 = () =>{
+    // this.props.history.push("/")
     return(<div>This page does not exist</div>)
   }
   showNav(){
