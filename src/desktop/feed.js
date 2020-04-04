@@ -24,7 +24,7 @@ class Feed extends React.Component {
             quantity: '',
             token: '',
             visiblechat1:false,
-            visiblesug: false
+            visiblesug: false,
         }
     }
     onClose=()=>{
@@ -243,19 +243,24 @@ class Feed extends React.Component {
         }else{
             this.props.history.push("/login");
         }
-
         if ("geolocation" in navigator) {
             console.log("Available");
           } else {
             console.log("Not Available");
           }
           navigator.geolocation.getCurrentPosition(function(position) {
+            //   console.log('hap')
+            // console.log("latitude",position.coords.latitude)
+            // console.log("longitude",position.coords.longitude)
+            window.localStorage.setItem("latitude",position.coords.latitude);
+            window.localStorage.setItem("longitude",position.coords.longitude);
             
-            localStorage.setItem("latitude",position.coords.latitude)
-            localStorage.setItem("longitude",position.coords.longitude)
-            
-            
-          });
+          }, function(err){
+              if(err){
+                alert("Location permission denied. You will not be able to use the full features of this app without providing location access")
+              }
+                // console.log(err)
+        });
         let token =localStorage.getItem("token");
         
         console.log(this.state);
@@ -263,17 +268,20 @@ class Feed extends React.Component {
             
             })
             .then(response =>{
-            console.log(response)
+            // console.log(response)
             return response.json()
             })
             .then(data => {
                 console.log(data)
+                if(data.status===400){
+                    this.props.alert.show("location not provided")
+                }
                 console.log(data.localityInfo.administrative[1].name)
                 let str = data.localityInfo.administrative[1].name
-                let s = str.split(/(?<=^\S+)\s/)
-                    console.log(s[0])
+                let s = str.split(" ")[0];
+                    console.log(s)
                 this.setState({         //do not remove setState
-                    city:s[0]
+                    city:s
                 })
                     
                 fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+s[0]

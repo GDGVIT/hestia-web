@@ -1,9 +1,9 @@
 import React from 'react'
-import { Card, Row, Col } from 'antd';
-import back from '../assets/back.png';
+import { Row, Col } from 'antd';
+// import back from '../assets/back.png';
 import check from'../assets/check.png';
 import { Input,Form,Button } from 'antd';
-import cancel from '../assets/cancel.svg';
+// import cancel from '../assets/cancel.svg';
 import {withAlert} from 'react-alert';
 
 const { TextArea } = Input;

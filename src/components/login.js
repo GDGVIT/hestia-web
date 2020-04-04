@@ -181,7 +181,7 @@ const Login = (props) => {
         name={['user', 'email']}
         rules={[
           {
-            type: 'email',  
+            // type: 'email',  
             required: true,
             message: 'Please input a valid Email!',
           },
@@ -228,9 +228,9 @@ const Login = (props) => {
           >
           <Form onFinish={onFinishPass}>
           <Form.Item name="email"
-              rules={[
-                  {type: 'email', message: 'Not a valid email'}
-              ]}
+              // rules={[
+              //     {type: 'email', message: 'Not a valid email'}
+              // ]}
           >
               <Input 
                   placeholder="abc@example.com"

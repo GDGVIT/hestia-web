@@ -41,7 +41,7 @@ class News extends React.Component {
             news.map(
                 request =>{
                     return(
-                        <Card key={request.isoDate}>
+                        <Card key={request.guid}>
                         <Row>
                             <Col span={24}>
                                 <div className="news-card-header">

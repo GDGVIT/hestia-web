@@ -8,6 +8,7 @@ import Register from './dregister';
 import Aboutus from './aboutus';
 import Orgs from '../orgs'
 import { loadReCaptcha } from 'react-recaptcha-v3';
+import POrgs from '../page404'
 
 
 class Dapp extends React.Component{
@@ -34,7 +35,7 @@ class Dapp extends React.Component{
                         <Route exact path='/dlogin' component={Dlog}/>
                         <Route exact path='/dregister' component={Register}/>
                         <Route exact path='/organisations' component={Orgs}/>
-                        <Route component={this.page404}/>
+                        <Route component={POrgs}/>
                     </Switch>
                 </div>
             </BrowserRouter>

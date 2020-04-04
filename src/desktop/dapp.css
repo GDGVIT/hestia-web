@@ -11,7 +11,6 @@
     left: 8%;
     width: 80%;
     z-index: 900;
-    /* box-shadow: 0px 0px 5px #f4f4f4; */
     background-color: #fafafa;
 }
 @media(max-width:540px){
@@ -80,16 +79,10 @@
     height: auto;
     padding-top: 7px;
 }
-.parent{
-    /* text-align: center; */
-    /* align-items: center; */
-    /* border-color: yellowgreen; */
-    /* border-style: solid; */
-    font-family:sans-serif;
-}
+/* about us page css */
+
 .logo{
-    /* border-color: yellowgreen; */
-    /* border-style: solid; */
+
     text-align: center;
     margin:70px;
 }
@@ -98,11 +91,10 @@
     width:180px;
 }
 .what{
-    /* border-color: yellowgreen; */
-    /* border-style: solid; */
+
     text-align: center;
     
-    width:40vw;
+    width:60vw;
     margin:0px auto;
     
 }
@@ -160,27 +152,24 @@
     padding-left:10px;
 }
 .feed{
-    /* border-color: yellowgreen; */
-    /* border-style: solid; */
-    width:40vw;
+
+    width:60vw;
     margin:0px auto;
     padding:50px;
 
 }
 .feed2{
-    /* border-color: yellowgreen; */
-    /* border-style: solid; */
-    width:40vw;
+   
+    width:60vw;
     margin:0px auto;
     padding:50px;
     padding-top:-40px;
 }
 
-.content{
+.content *{
     
     color:#989898;
-    /* width:30vw; */
-    /* float:right */
+
     
 }
 .border{
@@ -218,7 +207,6 @@
 .content > h3{
     padding-top:40px;
     font-weight: 100;
-    /* font-size:initial; */
 }
 .content1{
     padding-top:40px;
@@ -226,8 +214,7 @@
     text-align: right;
 }
 .feedlogo{
-    /* border-color: yellowgreen; */
-    /* border-style: solid; */
+
     background-color: #fafafa;
     width:17vw;
     margin-top:-48px;
@@ -235,8 +222,7 @@
     
 }
 .feedlogo1{
-    /* border-color: yellowgreen; */
-    /* border-style: solid; */
+
     background-color: #fafafa;
     width:10.35vw;
     padding-left: 25px;
@@ -257,6 +243,9 @@
     width:22px;
     margin-top:14px;
     
+}
+.parent1{
+    margin-top: 20px;
 }
 .buttons{
     margin:30px;
@@ -308,15 +297,13 @@
         width:30vw;
     }
 }
-/* for number */
-/* Chrome, Safari, Edge, Opera */
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
 }

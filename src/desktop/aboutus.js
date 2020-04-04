@@ -15,6 +15,15 @@ const Aboutus = (props) =>{
         <h1>What is Akina?</h1><br/>
         <h4>The way the world is right now, everyone needs help. Amidst all the chaos, we wanted to bring everyone some positivity with Akina, a platform we built to deal with various issues people are facing right now. Akina is your one-stop to get the latest updates from the World Health Organisations, to request for anything that you need and let the community help you. Akina aims to aid people by bringing them a platform to elevate individuals to become a community.</h4>
     </div>
+       
+    <div className="buttons">
+                <div className="button1">
+                    <button onClick={()=>{props.history.push("/dlogin")}}>Visit Website</button>
+                </div>
+                <div className="button2">
+                    <button>Download App</button>
+                </div>
+            </div>
     <div className="features">
         <h1>Features</h1>
     </div>

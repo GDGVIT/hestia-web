@@ -18,6 +18,7 @@ import Sap from './components/sap';
 import Suggestions from './components/profile/suggestions';
 import Aboutus from './aboutus';
 import Orgs from './orgs'
+import POrgs from './page404'
 
 
 import { loadReCaptcha } from 'react-recaptcha-v3';
@@ -69,7 +70,7 @@ class App extends React.Component {
           <Route exact path='/suggestashop' component={Sap}/>
           <Route exact path='/suggestions' component={Suggestions}/>
           <Route exact path='/organisations' component={Orgs}/>
-          <Route component={this.page404}/>
+          <Route component={POrgs}/>
           </Switch>
           {this.showNav()}
         </div>
