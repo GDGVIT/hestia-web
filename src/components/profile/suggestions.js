@@ -41,11 +41,11 @@ class Suggestions extends React.Component{
         //         .catch(error => console.error(error))
                     var object ={};
                     object["recommended_for"] = localStorage.getItem("receiver_id");
-                    object["name_of_shop"] = this.state.name_of_shop;
+                    object["name_of_shop"] = this.state.name_of_shop.trim();
                     object["item"] = localStorage.getItem("item");
-                    object["landmark"] = this.state.landmark;
-                    object["extra_instruction"] = this.state.extra_instruction;
-                    object["description_of_shop"] = this.state.description_of_shop;
+                    object["landmark"] = this.state.landmark.trim();
+                    object["extra_instruction"] = this.state.extra_instruction.trim();
+                    object["description_of_shop"] = this.state.description_of_shop.trim();
                     object["phone_number"] = this.state.phone_number;
                     console.log(object)
                 fetch("https://hestia-report-do.herokuapp.com/api/recommend/", {
@@ -119,9 +119,21 @@ class Suggestions extends React.Component{
                         </Form.Item>
                         <Form.Item
                             name="phone_number"
+                            rules={[
+                              {
+                                required: true,
+                                message: 'Please input your Number!',
+                              },
+                              {
+                                min: 10,
+                                max: 10,
+                                message: "Phone number has to be 10 digits!"
+                              }
+                            ]}
                         >
                             <Input 
                                 placeholder="Phone Number"
+                                type="number"
                             />
                         </Form.Item>
                         <Form.Item className="butn">

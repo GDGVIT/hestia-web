@@ -73,6 +73,9 @@ class Feed extends React.Component {
       };
     onFinish = values => {
         // console.log(values);
+        this.state.item_name.trim();
+        this.state.quantity.trim();
+        this.state.description.trim();
         this.setState(values)
         console.log(this.state)
         postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,'noida',this.state.description, this.props)

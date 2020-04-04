@@ -73,7 +73,7 @@ class Edit extends React.Component{
     onFinish = (values) => {
         if(values.user.name){
             this.setState({
-                name: values.user.name
+                name: values.user.name.trim()
             })
         }   
         if(values.user.email){

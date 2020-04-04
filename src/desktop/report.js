@@ -23,7 +23,7 @@ class Report extends React.Component{
           console.log("Submitting");
           var obj ={}
           obj["user_id"] = parseInt(localStorage.getItem("report"));
-          obj["reason"] = this.state.value;
+          obj["reason"] = this.state.value.trim();
 
           console.log(obj);
 
