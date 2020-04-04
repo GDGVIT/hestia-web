@@ -224,6 +224,15 @@
 .feedlogo1{
 
     background-color: #fafafa;
+    width:11vw;
+    padding-left: 25px;
+    float:right;
+    margin-top:-58px;
+}
+.feedlogo3{
+    /* border-color: yellowgreen; */
+    /* border-style: solid; */
+    background-color: #fafafa;
     width:10.35vw;
     padding-left: 25px;
     float:right;
@@ -288,13 +297,16 @@
         width:73vw;
     }
     .feed2{
-        width:73vw;
+        width:80vw;
     }
     .feedlogo{
         width:50vw;
     }
     .feedlogo1{
         width:30vw;
+    }
+    .feedlogo3{
+        width:36vw;
     }
 }
 
