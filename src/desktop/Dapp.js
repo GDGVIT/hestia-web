@@ -7,6 +7,8 @@ import Dmain from './main';
 import Register from './dregister';
 import Aboutus from './aboutus';
 import Orgs from '../orgs'
+import { loadReCaptcha } from 'react-recaptcha-v3';
+
 
 class Dapp extends React.Component{
     constructor(props){
@@ -15,6 +17,10 @@ class Dapp extends React.Component{
 
         }
     }
+    componentDidMount() {
+        loadReCaptcha('6LdiB-UUAAAAACYC2AlMS9hrw18fQA4FK7-s0LDw');
+    }
+    
     page404 = () =>{
         return(<div>This page does not exist</div>)
       }
