@@ -164,8 +164,7 @@
     /* border-style: solid; */
     width:40vw;
     margin:0px auto;
-    padding-top:50px;
-    padding-bottom: 50px;
+    padding:50px;
 
 }
 .feed2{
@@ -239,7 +238,7 @@
     /* border-color: yellowgreen; */
     /* border-style: solid; */
     background-color: #fafafa;
-    width:10.35vw;
+    width:11vw;
     padding-left: 25px;
     float:right;
     margin-top:-58px;
@@ -306,7 +305,7 @@
         width:95vw;
     }
     .feed{
-        width:90vw;
+        width:73vw;
     }
     .feed2{
         width:80vw;
@@ -315,10 +314,10 @@
         width:50vw;
     }
     .feedlogo1{
-        width:33vw;
+        width:30vw;
     }
     .feedlogo3{
-        width:40vw;
+        width:36vw;
     }
 }
 /* for number */
