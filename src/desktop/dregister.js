@@ -16,7 +16,7 @@ const layout = {
 const validateMessages = {
   required: 'This field is required!',
   types: {
-    email: 'Not a validate email!'
+    email: 'Not a valid email!'
   },
 };
 
@@ -145,6 +145,7 @@ const Register = (props) => {
       >
         <Input
         placeholder="Number"
+        type = "number"
         />
       </Form.Item>
       <Form.Item>

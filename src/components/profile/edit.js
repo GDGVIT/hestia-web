@@ -159,6 +159,7 @@ class Edit extends React.Component{
                 >
                     <Input
                     defaultValue={localStorage.getItem("phone")}
+                    type = "number"
                     />
                 </Form.Item>
                 <Form.Item>
