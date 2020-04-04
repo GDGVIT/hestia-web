@@ -70,7 +70,7 @@ class Edit extends React.Component{
     onFinish = (values) => {
         if(values.user.name){
             this.setState({
-                name: values.user.name
+                name: values.user.name.trim()
             })
         }   
         if(values.user.email){
@@ -157,6 +157,7 @@ class Edit extends React.Component{
                 >
                     <Input
                     defaultValue={localStorage.getItem("phone")}
+                    type = "number"
                     />
                 </Form.Item>
                 <Form.Item>

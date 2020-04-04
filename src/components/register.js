@@ -17,7 +17,7 @@ const layout = {
 const validateMessages = {
   required: 'This field is required!',
   types: {
-    email: 'Not a validate email!'
+    email: 'Not a valid email!'
   },
 };
 
@@ -31,6 +31,7 @@ const Register = (props) => {
   let authcheck = false;
 
   const onFinish = values => {
+    values.user.name = values.user.name.trim();
     console.log(values.user)
     fetch("https://akina.ayushpriya.tech/api/user/register", {
         method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
@@ -147,6 +148,7 @@ const Register = (props) => {
       >
         <Input
         placeholder="Number"
+        type = "number"
         />
       </Form.Item>
       <Form.Item>

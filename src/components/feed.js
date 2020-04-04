@@ -21,7 +21,7 @@ class Feed extends React.Component {
             visible1:false,
             visible2:false,
             requests: [ ],
-            city: '',
+            city: 'noida',
             item_name: null,
             quantity: '',
             token: '',
@@ -73,9 +73,12 @@ class Feed extends React.Component {
       };
     onFinish = values => {
         // console.log(values);
+        this.state.item_name.trim();
+        this.state.quantity.trim();
+        this.state.description.trim();
         this.setState(values)
         console.log(this.state)
-        postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.city,this.state.description, this.props)
+        postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,'noida',this.state.description, this.props)
                 .then(data => {
                     // console.log(data)
                     if(data){
@@ -143,11 +146,11 @@ class Feed extends React.Component {
 
       createChat = () => {
         console.log(parseInt(localStorage.getItem("accept_id")))
-        postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
+        postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:'noida'})
         .then(data => console.log(data)) // Result from the `response.json()` call
         .catch(error => console.error(error))
         //   Accept the item
-        postRequest('https://akina.ayushpriya.tech/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
+        postRequest('https://akina.ayushpriya.tech/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:'noida'})
         .then(data => console.log(data)) // Result from the `response.json()` call
         .catch(error => console.error(error))
 
