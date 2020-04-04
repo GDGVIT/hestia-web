@@ -90,14 +90,7 @@ const Aboutus = (props) =>{
                 
     
     
-            <div className="buttons">
-                <div className="button1">
-                    <button onClick={()=>{props.history.push("/login")}}>Visit Website</button>
-                </div>
-                <div className="button2">
-                    <button>Download App</button>
-                </div>
-            </div>
+            
     
     
         </div>
