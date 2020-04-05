@@ -26,14 +26,14 @@ const Register = (props) => {
   var ct = null;
   const verifyCallback = (recaptchaToken) => {
       ct = recaptchaToken;
-      console.log(recaptchaToken, "<= your recaptcha token")
+      // console.log(recaptchaToken, "<= your recaptcha token")
   }
   const alert = useAlert()  
   let authcheck = false;
 
   const onFinish = values => {
     disablez(true);
-    console.log(values.user)
+    // console.log(values.user)
     fetch("https://akina.ayushpriya.tech/api/user/register", {
         method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
         body: JSON.stringify(values.user), // Coordinate the body type with 'Content-Type'
@@ -63,7 +63,7 @@ const Register = (props) => {
         }
         })
       .then(data => {
-        console.log(data)
+        // console.log(data)
         if(authcheck){
           // console.log("check your email for conformation!")
           alert.show(data.Verify)

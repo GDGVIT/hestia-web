@@ -26,7 +26,7 @@ const Register = (props) => {
   var ct;
   const verifyCallback = (recaptchaToken) => {
       ct = recaptchaToken;
-      console.log(ct, "<= your recaptcha token")
+      // console.log(ct, "<= your recaptcha token")
   }
   const alert = useAlert()  
   let authcheck = false;
@@ -45,7 +45,7 @@ const Register = (props) => {
   const onFinish = values => {
     disablez(true);
     values.user.name = values.user.name.trim();
-    console.log(values.user)
+    // console.log(values.user)
     fetch("https://akina.ayushpriya.tech/api/user/register", {
         method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
         body: JSON.stringify(values.user), // Coordinate the body type with 'Content-Type'
@@ -75,7 +75,7 @@ const Register = (props) => {
         }
         })
       .then(data => {
-        console.log(data)
+        // console.log(data)
         if(authcheck){
           alert.show(data.Verify)
           props.history.push("/dlogin")

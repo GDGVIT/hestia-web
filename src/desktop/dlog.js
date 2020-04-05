@@ -17,7 +17,7 @@ const Dlog = (props) => {
       alert.show("Wrong password")
     }
     let authcheck = false;
-    console.log('Received values of form: ', values)
+    // console.log('Received values of form: ', values)
     let cm = {
       "email": values.user.email
     }
@@ -108,7 +108,7 @@ const Dlog = (props) => {
       });
 
       const onFinishPass =(values) =>{
-        console.log(values)
+        // console.log(values)
         return fetch("https://akina.ayushpriya.tech/api/user/forgotPassword", {
         method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
         body: JSON.stringify(values), // Coordinate the body type with 'Content-Type'

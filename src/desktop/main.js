@@ -65,7 +65,7 @@ class Dmain extends React.Component{
                         break;
             default: console.log('weird request')
         }
-        console.log(this.state)
+        // console.log(this.state)
     }
     componentDidMount(){
         if(!localStorage.getItem("token")){

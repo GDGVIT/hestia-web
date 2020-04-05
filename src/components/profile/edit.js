@@ -64,7 +64,7 @@ class Edit extends React.Component{
     }
 
     handleOk = e => {
-        console.log(e);
+        // console.log(e);
         this.setState({
           visible: false
         });
@@ -86,7 +86,7 @@ class Edit extends React.Component{
                 phone: values.user.phone
             })
         }
-        console.log({"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone})
+        // console.log({"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone})
         postRequest('https://akina.ayushpriya.tech/api/user/updateUser', {"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone}, this.props)
             .then(data => {
                 if(data){

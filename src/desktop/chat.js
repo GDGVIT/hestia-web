@@ -15,7 +15,7 @@ import Report from './report'
 class Chat extends React.Component{
     constructor(props){
         super(props);
-        console.log(props);
+        // console.log(props);
         this.state={
             ws:null,
             currentUser: null,
@@ -115,21 +115,21 @@ onClose=()=>{
       // this.connect();
 
       if(localStorage.getItem("token")){
-       console.log("someone's logged in")
+      //  console.log("someone's logged in")
       //  this.setState({receiver_id : localStorage.getItem("receiver_id")})
       }else{
           while(1==1){
             alert("HACKERMAN ALERT")
           }
       }
-      console.log(this.state)
+      // console.log(this.state)
       //request to get messages
 
       var ob = {}
       ob["receiver"] = parseInt(localStorage.getItem("receiver_id"))
       ob["sender"] = parseInt(localStorage.getItem("sender_id"))
 
-      console.log("/getMessages", JSON.stringify(ob))
+      // console.log("/getMessages", JSON.stringify(ob))
 
       fetch('https://akina.ayushpriya.tech/api/v1/getMessages',{
         method:"POST",
@@ -148,10 +148,10 @@ onClose=()=>{
         if(res.status == 404){
             this.props.alert.show("Cannot get messages")
         }
-        console.log(res)
-        console.log(this.state)
+        // console.log(res)
+        // console.log(this.state)
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log("err"))
    }
 
    componentDidUpdate() {
@@ -165,7 +165,7 @@ onClose=()=>{
     ob["receiver"] = parseInt(localStorage.getItem("receiver_id"))
     ob["sender"] = parseInt(localStorage.getItem("sender_id"))
 
-    console.log("/getMessages pseudo websocket", JSON.stringify(ob))
+    // console.log("/getMessages pseudo websocket", JSON.stringify(ob))
     try {
       setInterval(async () => { 
       const fetchResponse = await fetch('https://akina.ayushpriya.tech/api/v1/getMessages',{
@@ -177,24 +177,24 @@ onClose=()=>{
       body:JSON.stringify(ob)
       })
         const data = await fetchResponse.json()
-        console.log(data);
+        // console.log(data);
         this.setState({
           initialmsg: data.messages
         })
       },2000);
     } catch(e) {
-      console.log(e);
+      console.log("e");
     }
 
   }
    submitMessage = messageString => {
     // on submitting the ChatInput form, send the message, add it to the list and reset the input
-      console.log(messageString);
+      // console.log(messageString);
       var obj ={}
       obj["receiver"] = parseInt(localStorage.getItem("receiver_id"));
       obj["sender"] = parseInt(localStorage.getItem("sender_id"));
       obj["text"] = messageString;
-      console.log("/sendMessage", JSON.stringify(obj))
+      // console.log("/sendMessage", JSON.stringify(obj))
       fetch("https://akina.ayushpriya.tech/api/v1/sendMessage",{
         method:"POST",
         headers: new Headers({
@@ -204,8 +204,8 @@ onClose=()=>{
         body:JSON.stringify(obj)
       })
       .then(response=> response.json())
-      .then(res => console.log(res,this.state))
-      .catch(err => console.log(err));
+      .then(res => console.log("res"))
+      .catch(err => console.log("err"));
 
       (async () => {
         await this.getMessages();
@@ -224,7 +224,7 @@ onClose=()=>{
     render(){
 
       const {initialmsg} = this.state;
-      console.log(initialmsg)
+      // console.log(initialmsg)
       const initial = initialmsg.length ? (
         initialmsg.map(
           msg => {

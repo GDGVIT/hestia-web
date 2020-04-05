@@ -30,7 +30,7 @@ class App extends React.Component {
       currentUser: null,
       showNav: false
     }
-    console.log(props)
+    // console.log(props)
   }
   componentDidMount(){
     if(localStorage.getItem("token")){

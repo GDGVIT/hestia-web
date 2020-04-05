@@ -28,7 +28,7 @@ class Mychat extends React.Component{
         })
     }
     gotoMyChat = (r,i,s,sn,cd) => () => {
-        console.log(this.props)
+        // console.log(this.props)
         window.localStorage.setItem("receiver_id", s);
         window.localStorage.setItem("item",i);
         window.localStorage.setItem("sender_id", r);
@@ -42,7 +42,7 @@ class Mychat extends React.Component{
     }
 
     gotoOtherChat = (r,i,s,rn,cd) => () => {
-        console.log(this.props)
+        // console.log(this.props)
         window.localStorage.setItem("receiver_id", r);
         window.localStorage.setItem("item",i);
         window.localStorage.setItem("sender_id", s);
@@ -55,7 +55,7 @@ class Mychat extends React.Component{
         })
     }
     handleClick = (e) => () => {
-        console.log(e)
+        // console.log(e)
         this.setState({
             value: e
         })
@@ -83,7 +83,7 @@ class Mychat extends React.Component{
         })
         .then(response => response.json())
         .then(data => {
-        console.log(data)
+        // console.log(data)
         if(data.status == 500){
             console.log("err")
         }
@@ -93,7 +93,7 @@ class Mychat extends React.Component{
                 
             });
         }
-        console.log(this.state)
+        // console.log(this.state)
         })
         .catch(error => console.error(error))
 
@@ -107,7 +107,7 @@ class Mychat extends React.Component{
         })
         .then(response => response.json())
         .then(data => {
-        console.log(data)
+        // console.log(data)
         if(data.status == 500){
             console.log("err")
         }
@@ -117,7 +117,7 @@ class Mychat extends React.Component{
                 
             });
         }
-        console.log(this.state)
+        // console.log(this.state)
         })
         .catch(error => console.error(error))
 
@@ -130,13 +130,13 @@ class Mychat extends React.Component{
         })
             .then(response => response.json())
             .then(data => {
-            console.log(data)
+            // console.log(data)
             if(data.status == "success"){
                 this.setState({
                     Suggest: data.payload
                 })
             }
-            console.log(this.state)
+            // console.log(this.state)
             })
             .catch(error => console.error(error))
 
