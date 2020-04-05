@@ -29,7 +29,7 @@ const Aboutus = (props) =>{
     </div>
     <div className="parent1">
     <div className="feed">
-    <div className="feedlogo">
+    <div className="feedlogo" style={{marginTop:"10px"}}>
         <div className="circle">
             <img src={feed}></img>
         </div>
