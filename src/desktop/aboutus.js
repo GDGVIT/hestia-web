@@ -14,7 +14,7 @@ const Aboutus = (props) =>{
     </div>
     <div className="what">
         <h1>Why Akina?</h1><br/>
-        <h4>The way the world is right now, everyone needs help. Amidst all the chaos, we wanted to bring everyone some positivity with Akina, a platform we built to deal with various issues people are facing right now. Akina is your one-stop to get the latest updates from the World Health Organisations, to request for anything that you need and let the community help you. Akina aims to aid people by bringing them a platform to elevate individuals to become a community.</h4>
+        <h4>The way the world is right now, everyone needs help. Amidst all the chaos, we wanted to bring everyone some positivity with Akina, a platform we built to deal with various issues people are facing right now. Akina is your one-stop to get the latest updates from the World Health Organisation, to request for anything that you need and let the community help you. Akina aims to aid people by bringing them a platform to elevate individuals to become a community.</h4>
     </div>
        
     <div className="buttons">
@@ -24,7 +24,7 @@ const Aboutus = (props) =>{
                 </div>
                 <div className="button2">
                     <a className="download" href={Akina} download="Akina">Download App</a>
-                    <p className="covid">Due to covid 19 our app is taking some time to process on the Play Store, meanwhile you can download it from our server.</p>
+                    <p className="covid">Due to Covid-19 our app is taking some time to process on the Play Store, meanwhile you can download it from our server.</p>
                 </div>
             </div>
     <div className="features">
@@ -97,7 +97,7 @@ const Aboutus = (props) =>{
             </div>
             {/* <div className="border2">&nbsp;</div> */}
             <div className="content">
-                <h3 className="content1">We are actively finding sources, apart from W.H.O., for credible information and integrating them into the platform to provide information relevant not just to the global scope but to you as an individual.</h3>
+                <h3 className="content1">We are actively finding sources, apart from W.H.O. For credible information and integrating them into the platform to provide information relevant not just to the global scope but to you as an individual.</h3>
             </div>
             </div>
                 
@@ -112,7 +112,7 @@ const Aboutus = (props) =>{
                 </div>
                 <div className="button2">
                     <a className="download" href={Akina} download="Akina">Download App</a>
-                    <p className="covid">Due to covid 19 our app is taking some time to process on the Play Store, meanwhile you can download it from our server.</p>
+                    <p className="covid">Due to Covid-19 our app is taking some time to process on the Play Store, meanwhile you can download it from our server.</p>
                 </div>
             </div>
         </div>
