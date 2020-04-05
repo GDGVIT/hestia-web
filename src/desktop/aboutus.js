@@ -50,11 +50,12 @@ const Aboutus = (props) =>{
     <div className="feed">
         <div className="feedlogo1">
         <div className="text" style={{paddingRight:"10px"}}>
-                <h3>News</h3>
-            </div>
+                    <h3>News</h3>
+                </div>
             <div className="circle1">
                 <img alt="" src={news}></img>
             </div>
+ ]
         </div>
         {/* <div className="border2"></div> */}
         <div className="content">
@@ -88,8 +89,8 @@ const Aboutus = (props) =>{
         <div className="feed">
             <div className="feedlogo1">
             <div className="text" style={{paddingRight:"10px"}}>
-                    <h3>Updates</h3>
-                </div>
+                        <h3>Updates</h3>
+                    </div>
                 <div className="circle1">
                     <img alt="" src={news}></img>
                 </div>
@@ -101,7 +102,7 @@ const Aboutus = (props) =>{
             </div>
                 
      <div className="what">
-        <h4>We’d also like to mention that our project is completely open-source and we would welcome any Pull Requests that can help us to drive this project forward. You can find all our project repositories here.</h4>
+        <h4>We’d also like to mention that our project is completely open-source and we would welcome any Pull Requests that can help us to drive this project forward. You can find all our project repositories <a href="https://github.com/GDGVIT/akina">here</a>.</h4>
     </div>
     
             <div className="buttons">
