@@ -326,6 +326,11 @@
     color: #989898;
     width: 20vw;
 }
+@media screen and (max-width:1400px){
+    .feedlogo1{
+        width: 25vw;
+    }
+}
 @media screen and (max-width: 700px){
     .what{
         width:95vw;
