@@ -82,7 +82,7 @@ const Aboutus = (props) =>{
         
         </div>
         <div className="feed">
-            <div className="feedlogo3">
+            <div className="feedlogo1">
                 <div className="circle1">
                     <img alt="" src={news}></img>
                 </div>

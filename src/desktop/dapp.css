@@ -120,7 +120,8 @@
     width:50px;
     height:50px;
     border-radius: 100%;
-    background-color: #ff0168;
+    /* background-color: #ff0168; */
+    background-image: linear-gradient(to left,#ff0168,#ffcaca);
     display:inline-block;
     text-align: center;
 }
@@ -134,7 +135,8 @@
     width:50px;
     height:50px;
     border-radius: 100%;
-    background-color: #02dcdc;
+    /* background-color: #02dcdc; */
+    background-image: linear-gradient(to right, #02dcdc, #dbffff);
     display:inline-block;
     text-align: center;
 }
@@ -150,19 +152,22 @@
 }
 .text > h3{
     padding-left:10px;
+    font-weight: 700;
+    font-size: 22px;
 }
 .feed{
 
     width:60vw;
     margin:0px auto;
-    padding:50px;
+    padding-top:50px;
+    padding-bottom:50px;
 
 }
 .feed2{
    
     width:60vw;
     margin:0px auto;
-    padding:50px;
+    padding-bottom:50px;
     padding-top:-40px;
 }
 
@@ -214,7 +219,8 @@
     text-align: right;
 }
 .feedlogo{
-
+    display: flex;
+    align-items: center;
     background-color: #fafafa;
     width:17vw;
     margin-top:-48px;
@@ -222,9 +228,10 @@
     
 }
 .feedlogo1{
-
+    display: flex;
+    align-items: center;
     background-color: #fafafa;
-    width:11vw;
+    width:12vw;
     padding-left: 25px;
     float:right;
     margin-top:-58px;
@@ -232,8 +239,10 @@
 .feedlogo3{
     /* border-color: yellowgreen; */
     /* border-style: solid; */
+    display: flex;
+    align-items: center;
     background-color: #fafafa;
-    width:10.35vw;
+    width:13vw;
     padding-left: 25px;
     float:right;
     margin-top:-58px;
@@ -245,7 +254,8 @@
     background-color: #02dcdc;
     display:inline-block;
     text-align: center;
-    background-color: #ffb600;
+    /* background-color: #ffb600; */
+    background-image: linear-gradient(to bottom,#ffb600, #fff);
 }
 .circle1 > img{
     height:22px;
@@ -258,6 +268,12 @@
 }
 .buttons{
     margin:30px;
+    /* text-align: center; */
+    display: flex;
+    justify-content: center;
+    margin-left: 175px;
+}
+.PWA{
     text-align: center;
 }
 .button1{
@@ -278,35 +294,58 @@
     border-style: solid;
     border-color: #00d2d2;
     border-radius: 5px;
+    cursor: pointer;
+
 
 }
-.button2 > button{
+.button2 > .download{
     width:170px;
     height:55px;
     font-size:large;
     font-weight:550;
-    border-style: solid;
+    /* border-style: solid; */
     border-radius: 5px;
-    box-shadow: #989898;
+    box-shadow:0px 0px 3px #989898;
+    cursor: pointer;
+    display: block;
+    background: #fff;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    color:#242424;
+    font-weight: bold;
+
+}
+.covid{
+    margin-top: 10px;
+    color: #989898;
+    width: 20vw;
 }
 @media screen and (max-width: 700px){
     .what{
         width:95vw;
     }
     .feed{
-        width:73vw;
+        width:90vw;
     }
     .feed2{
-        width:80vw;
+        width:90vw;
     }
     .feedlogo{
         width:50vw;
     }
     .feedlogo1{
-        width:30vw;
+        width:50vw;
     }
     .feedlogo3{
         width:36vw;
+    }
+    .buttons{
+        display: block;
+        margin-left: 30px;
+    }
+    .covid{
+        width: auto;
     }
 }
 
