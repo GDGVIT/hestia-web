@@ -88,7 +88,7 @@ const Aboutus = (props) =>{
                     <img alt="" src={news}></img>
                 </div>
                 <div className="text">
-                    <h3 style={{paddingLeft:"5px"}}>Updates</h3>
+                    <h3 style={{paddingLeft:"0"}}>Updates</h3>
                 </div>
             </div>
             <div className="border2">&nbsp;</div>
