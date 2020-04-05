@@ -34,7 +34,7 @@ const Aboutus = (props) =>{
             <img src={feed}></img>
         </div>
         <div className="text">
-            <h3>FEED</h3>
+            <h3>Feed</h3>
         </div>
     </div>
     <div className="border"></div>
@@ -50,7 +50,7 @@ const Aboutus = (props) =>{
                 <img alt="" src={news}></img>
             </div>
             <div className="text">
-                <h3>NEWS</h3>
+                <h3>News</h3>
             </div>
         </div>
         <div className="border2"></div>
@@ -72,7 +72,7 @@ const Aboutus = (props) =>{
                     <img alt="" src={explore}></img>
                 </div>
                 <div className="text">
-                    <h3>EXPLORE</h3>
+                    <h3>Explore</h3>
                 </div>
             </div>
         <div className="border3">&nbsp;</div>
@@ -88,7 +88,7 @@ const Aboutus = (props) =>{
                     <img alt="" src={news}></img>
                 </div>
                 <div className="text">
-                    <h3>UPDATES</h3>
+                    <h3 style={{paddingLeft:"5px"}}>Updates</h3>
                 </div>
             </div>
             <div className="border2">&nbsp;</div>
