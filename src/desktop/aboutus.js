@@ -112,9 +112,13 @@ const Aboutus = (props) =>{
                     <p className="covid">Due to covid 19 our app is taking some time to process on the Play Store, meanwhile you can download it from our server.</p>
                 </div>
             </div>
-    
-    
         </div>
+    <div className="features">
+        <h1>Contact Us</h1>
+    </div>
+    <div className="what" style={{marginBottom:'50px'}}>
+        <h4>We are all ears for any suggestions and feedback that you might have for us. Please reach out to us on <a href="mailto:akina.dscvit@gmail.com">akina.dscvit@gmail.com</a> for anything you want to say.</h4>
+    </div>
     </div>
 );
 }
