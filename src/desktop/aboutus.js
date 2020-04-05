@@ -49,11 +49,11 @@ const Aboutus = (props) =>{
     </div>
     <div className="feed">
         <div className="feedlogo1">
+        <div className="text" style={{paddingRight:"10px"}}>
+                <h3>News</h3>
+            </div>
             <div className="circle1">
                 <img alt="" src={news}></img>
-            </div>
-            <div className="text">
-                <h3>News</h3>
             </div>
         </div>
         {/* <div className="border2"></div> */}
@@ -87,11 +87,11 @@ const Aboutus = (props) =>{
         </div>
         <div className="feed">
             <div className="feedlogo1">
+            <div className="text" style={{paddingRight:"10px"}}>
+                    <h3>Updates</h3>
+                </div>
                 <div className="circle1">
                     <img alt="" src={news}></img>
-                </div>
-                <div className="text">
-                    <h3>Updates</h3>
                 </div>
             </div>
             {/* <div className="border2">&nbsp;</div> */}
