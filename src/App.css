@@ -60,7 +60,7 @@ margin-left: 12.5%;
     margin-top: 10%;
 }
 .login-form{
-    margin: 12.5% 12.5%;
+    margin: 10% 12.5%;
     text-align: left;
     
 }
@@ -175,6 +175,7 @@ margin-left: 12.5%;
 .hestia-logo-reg img{
     width: 70%;
     height: auto;
+    max-width: 280px;
 }
 .already a{
     color: #00d2d2;

@@ -83,7 +83,7 @@ const Register = (props) => {
 
     
   return (
-      <div className="eqimargin">
+      <div className="loginpage">
       <div className="hestia-logo-reg">
           <img src={logo} alt="Hestialogo"></img>
       </div>
