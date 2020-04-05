@@ -96,6 +96,9 @@ const Aboutus = (props) =>{
             </div>
             </div>
         </div>
+    <div className="what">
+        <h4>We’d also like to mention that our project is completely open-source and we would welcome any Pull Requests that can help us to drive this project forward. You can find all our project repositories <a href="https://github.com/GDGVIT/akina">here</a>.</h4>
+    </div>
         <div className="buttons">
                 <div className="button1">
                     <button onClick={()=>{props.history.push("/login")}}>Visit Website</button>
