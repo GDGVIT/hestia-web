@@ -34,7 +34,7 @@ const Aboutus = (props) =>{
     <div className="feed">
     <div className="feedlogo">
         <div className="circle">
-            <img src={feed}></img>
+            <img alt="logo" src={feed}></img>
         </div>
         <div className="text">
             <h3>Feed</h3>

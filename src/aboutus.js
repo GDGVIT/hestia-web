@@ -10,7 +10,7 @@ const Aboutus = (props) =>{
     return(
         <div className="parent">
         <div className="logo">
-            <img alt="" src={logo}></img>
+            <img alt="logo" src={logo}></img>
         </div>
         <div className="what">
             <h1>Why Akina?</h1><br/>
@@ -34,7 +34,7 @@ const Aboutus = (props) =>{
         <div className="feed">
         <div className="feedlogo">
             <div className="circle">
-                <img src={feed}></img>
+                <img alt="logo" src={feed}></img>
             </div>
             <div className="text">
                 <h3>Feed</h3>
@@ -53,7 +53,7 @@ const Aboutus = (props) =>{
                     <h3>News</h3>
                 </div>
                 <div className="circle1">
-                    <img alt="" src={news}></img>
+                    <img alt="logo" src={news}></img>
                 </div>
             </div>
             {/* <div className="border2"></div> */}
@@ -91,7 +91,7 @@ const Aboutus = (props) =>{
                         <h3>Updates</h3>
                     </div>
                     <div className="circle1">
-                        <img alt="" src={news}></img>
+                        <img alt="logo" src={news}></img>
                     </div>
                 </div>
                 {/* <div className="border2">&nbsp;</div> */}
