@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Form, Input, Button } from 'antd';
 import logo from '../assets/logo.png';
 import {Link} from 'react-router-dom';
@@ -22,6 +22,7 @@ const validateMessages = {
 };
 
 const Register = (props) => {
+  const [butdis, disablez] = useState(false);
   var ct = null;
   const verifyCallback = (recaptchaToken) => {
       ct = recaptchaToken;
@@ -31,6 +32,7 @@ const Register = (props) => {
   let authcheck = false;
 
   const onFinish = values => {
+    disablez(true);
     console.log(values.user)
     fetch("https://akina.ayushpriya.tech/api/user/register", {
         method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
@@ -53,7 +55,7 @@ const Register = (props) => {
               alert.show("You have been blocked")
               break;
             case 404:
-              alert.show("No user exists with that email")
+              alert.show("Recaptcha not verified. Reload and try again.")
               break;
             default:  
               alert.show("Seems like something's wrong on our end. Please contact the developers")
@@ -150,7 +152,7 @@ const Register = (props) => {
         />
       </Form.Item>
       <Form.Item>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" disabled={butdis}>
           Register
         </Button>
         {/* <Button type="dashed" className="oauth">

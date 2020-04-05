@@ -40,7 +40,7 @@ const Login = (props) => {
         switch(response.status){
 
           case 400: 
-              alert.show("Account already exists")
+              alert.show("no such user exists")
             break;
           case 403:
             alert.show("You have been blocked")
