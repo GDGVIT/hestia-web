@@ -99,8 +99,12 @@ const Aboutus = (props) =>{
                     <h3 className="content1">We are actively finding sources, apart from W.H.O., for credible information and integrating them into the platform to provide information relevant not just to the global scope but to you as an individual.</h3>
                 </div>
                 </div>
-                    
+
+                       <div className="what">
+        <h4>We’d also like to mention that our project is completely open-source and we would welcome any Pull Requests that can help us to drive this project forward. You can find all our project repositories <a href="https://github.com/GDGVIT/akina">here</a>.</h4>
+    </div>  
         
+
         
                 <div className="buttons">
                     <div className="button1">
