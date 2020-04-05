@@ -33,7 +33,7 @@ const Login = (props) => {
     .then(response => {
       if(response.status === 401){
         alert.show("Verify your email first");
-        props.history.push("/");
+        // props.history.push("/");
       }else if(response.status === 200 || response.status===201 || response.status===202){
         return response.json();
       }else{
@@ -54,12 +54,8 @@ const Login = (props) => {
       }
       })
       .then(data => {
-        // console.log(data)
-        // window.localStorage.setItem("email", data.email);
-      })
-      .catch(error => console.error(error)
-      );
-      fetch("https://akina.ayushpriya.tech/api/user/login", {
+        if(data){
+        fetch("https://akina.ayushpriya.tech/api/user/login", {
           method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
           body: JSON.stringify(values.user), // Coordinate the body type with 'Content-Type'
           headers: new Headers({
@@ -102,6 +98,11 @@ const Login = (props) => {
           alert.show("Something went wrong. Please try again later")
         }
         );
+      }
+      })
+      .catch(error => console.error(error)
+      );
+      
    }
 
     useEffect(() => { 
