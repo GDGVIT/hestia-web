@@ -55,7 +55,7 @@ const Aboutus = (props) =>{
             <div className="circle1">
                 <img alt="" src={news}></img>
             </div>
- ]
+ 
         </div>
         {/* <div className="border2"></div> */}
         <div className="content">
