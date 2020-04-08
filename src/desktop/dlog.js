@@ -17,7 +17,7 @@ const Dlog = (props) => {
       alert.show("Wrong password")
     }
     let authcheck = false;
-    console.log('Received values of form: ', values)
+    // console.log('Received values of form: ', values)
     let cm = {
       "email": values.user.email
     }
@@ -32,7 +32,7 @@ const Dlog = (props) => {
     .then(response => {
       if(response.status === 401){
         alert.show("Verify your email first");
-        props.history.push("/dregister");
+        // props.history.push("/dregister");
       }else if(response.status === 200 || response.status===201 || response.status===202){
         return response.json();
       }else{
@@ -52,12 +52,8 @@ const Dlog = (props) => {
       }
       })
       .then(data => {
-        // console.log(data)
-        // window.localStorage.setItem("email", data.email);
-      })
-      .catch(error => console.error(error)
-      );
-      fetch("https://akina.ayushpriya.tech/api/user/login", {
+        if(data){
+        fetch("https://akina.ayushpriya.tech/api/user/login", {
           method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
           body: JSON.stringify(values.user), // Coordinate the body type with 'Content-Type'
           headers: new Headers({
@@ -98,6 +94,11 @@ const Dlog = (props) => {
           })
         .catch(error => console.error(error)
         );
+        }
+      })
+      .catch(error => console.error(error)
+      );
+      
    }
 
     useEffect(() => { 
@@ -107,7 +108,7 @@ const Dlog = (props) => {
       });
 
       const onFinishPass =(values) =>{
-        console.log(values)
+        // console.log(values)
         return fetch("https://akina.ayushpriya.tech/api/user/forgotPassword", {
         method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
         body: JSON.stringify(values), // Coordinate the body type with 'Content-Type'

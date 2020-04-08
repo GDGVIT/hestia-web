@@ -20,12 +20,12 @@ class Report extends React.Component{
         this.setState({ value });
       };
       onSubmit = () =>{
-          console.log("Submitting");
+        //   console.log("Submitting");
           var obj ={}
           obj["user_id"] = parseInt(localStorage.getItem("report"));
           obj["reason"] = this.state.value.trim();
 
-          console.log(obj);
+        //   console.log(obj);
 
         fetch('https://hestia-report-do.herokuapp.com/api/report/',{
             method:"POST",
@@ -36,7 +36,7 @@ class Report extends React.Component{
             body:JSON.stringify(obj)
         })
         .then(response => {
-             console.log(response)
+            //  console.log(response)
              if(response.status == 201){
                 this.props.alert.show("User reported")
                 this.props.history.push("/profile");
@@ -46,12 +46,12 @@ class Report extends React.Component{
                 this.props.alert.show("Something went wrong. Please try again")
              }
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log("err"))
     }
       
     componentDidMount(){
         if(localStorage.getItem("token")){
-         console.log("someone's logged in")
+        //  console.log("someone's logged in")
         }else{
             this.props.history.push("/login");
         }

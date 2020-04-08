@@ -86,12 +86,12 @@ class Feed extends React.Component {
         this.state.item_name.trim();
         this.state.quantity.trim();
         this.state.description.trim();
-        console.log(this.state)
+        // console.log(this.state)
         postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.city,this.state.description, this.props)
                 .then(data => {
                     // console.log(data)
                     if(data){
-                        console.log(data)
+                        // console.log(data)
                         this.props.alert.show("Request added")
                         this.setState({
                             visible: false
@@ -154,13 +154,13 @@ class Feed extends React.Component {
 
 
       createChat = () => {
-        console.log(parseInt(localStorage.getItem("accept_id")))
+        // console.log(parseInt(localStorage.getItem("accept_id")))
         postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
-        .then(data => console.log(data)) // Result from the `response.json()` call
+        .then(data => console.log("data")) // Result from the `response.json()` call
         .catch(error => console.error(error))
         //   Accept the item
         postRequest('https://akina.ayushpriya.tech/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
-        .then(data => console.log(data)) // Result from the `response.json()` call
+        .then(data => console.log("data")) // Result from the `response.json()` call
         .catch(error => console.error(error))
 
         function postRequest(url, data) {
@@ -192,7 +192,7 @@ class Feed extends React.Component {
           })
           .then(res => res.json())
           .then(res => {
-              console.log(res)
+            //   console.log(res)
               if(res.code == 200){
                   window.localStorage.setItem("chat_name", res.chat_room.receiver_name )
                   window.localStorage.setItem("item", res.chat_room.title)
@@ -205,7 +205,7 @@ class Feed extends React.Component {
                 this.props.alert.show("Chatroom exists.");
               }
           })
-          .catch(err => console.log(err))
+          .catch(err => console.log("err"))
       }
       handleCancel = e => {
         // console.log(e);
@@ -263,7 +263,7 @@ class Feed extends React.Component {
         });
         let token =localStorage.getItem("token");
         
-        console.log(this.state);
+        // console.log(this.state);
         fetch('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+localStorage.getItem("latitude")+'&longitude='+localStorage.getItem("longitude")+'&localityLanguage=en', {
             
             })
@@ -272,14 +272,14 @@ class Feed extends React.Component {
             return response.json()
             })
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 if(data.status===400){
                     this.props.alert.show("location not provided")
                 }
-                console.log(data.localityInfo.administrative[1].name)
+                // console.log(data.localityInfo.administrative[1].name)
                 let str = data.localityInfo.administrative[1].name
                 let s = str.split(" ")[0];
-                    console.log(s)
+                    // console.log(s)
                 this.setState({         //do not remove setState
                     city:s
                 })
@@ -294,7 +294,7 @@ class Feed extends React.Component {
                 })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data)
+                    // console.log(data)
                     if(data.message == "Location not provided"){
                         console.log("No location")
                     } else {
@@ -302,11 +302,11 @@ class Feed extends React.Component {
                             requests: data.Request,
                         });
                     }
-                console.log(this.state)
+                // console.log(this.state)
                 })
                 .catch(error => console.error(error))
     
-            console.log(this.state)
+            // console.log(this.state)
             })
             .catch(error => console.error(error))
                 

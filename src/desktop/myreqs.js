@@ -13,10 +13,10 @@ class Myreqs extends React.Component{
     }
 
     deleterequest = (id) => {
-        console.log(id)
+        // console.log(id)
                 postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/'+id+'/')
                     .then(data => {
-                        console.log(data)
+                        // console.log(data)
                         this.props.alert.show("Item deleted")
                     })
                     .catch(error => console.error(error))
@@ -59,12 +59,12 @@ class Myreqs extends React.Component{
             })
             .then(res => res.json())
             .then(data => {
-                 console.log(data)
+                //  console.log(data)
             this.setState({
                 Requests: data.Request
                 
             });
-            console.log(this.state)
+            // console.log(this.state)
             })
             .catch(error => console.error(error))
 

@@ -26,7 +26,7 @@ class Suggestions extends React.Component{
 
 
         this.setState(values)
-        console.log(this.state)
+        // console.log(this.state)
         // postForm('https://akina.ayushpriya.tech/api/recommend/',this.state)
         //         .then(data => {
         //             console.log(data)
@@ -47,7 +47,7 @@ class Suggestions extends React.Component{
                     object["extra_instruction"] = this.state.extra_instruction.trim();
                     object["description_of_shop"] = this.state.description_of_shop.trim();
                     object["phone_number"] = this.state.phone_number;
-                    console.log(object)
+                    // console.log(object)
                 fetch("https://hestia-report-do.herokuapp.com/api/recommend/", {
                     method: 'POST', // or 'PUT'
                     body: JSON.stringify(object),  // a FormData will automatically set the 'Content-Type'

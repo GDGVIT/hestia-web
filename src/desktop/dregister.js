@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react'
-import { Form, Input, Button } from 'antd';
+import React, {useEffect, useState  } from 'react'
+import { Form, Input, Button, Modal } from 'antd';
 import logo from '../assets/logo.png';
 import {Link} from 'react-router-dom';
 import { useAlert } from 'react-alert';
@@ -21,17 +21,31 @@ const validateMessages = {
 };
 
 const Register = (props) => {
+  const [butdis, disablez] = useState(false);
+  // const [visiblez, dis] = useState(false);
   var ct;
   const verifyCallback = (recaptchaToken) => {
       ct = recaptchaToken;
-      console.log(ct, "<= your recaptcha token")
+      // console.log(ct, "<= your recaptcha token")
   }
   const alert = useAlert()  
   let authcheck = false;
 
+  // const handleOk = e => {
+  //   console.log(e);
+  //   dis(false)
+  // };
+
+  // const handleCancel = e => {
+  //   console.log(e);
+  //   dis(false)
+  // };
+
+
   const onFinish = values => {
+    disablez(true);
     values.user.name = values.user.name.trim();
-    console.log(values.user)
+    // console.log(values.user)
     fetch("https://akina.ayushpriya.tech/api/user/register", {
         method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
         body: JSON.stringify(values.user), // Coordinate the body type with 'Content-Type'
@@ -47,7 +61,7 @@ const Register = (props) => {
         }else{
           switch(response.status){
             case 400: 
-                alert.show("Account already exists")
+                alert.show("Account already registered")
               break;
             case 403:
               alert.show("You have been blocked")
@@ -61,7 +75,7 @@ const Register = (props) => {
         }
         })
       .then(data => {
-        console.log(data)
+        // console.log(data)
         if(authcheck){
           alert.show(data.Verify)
           props.history.push("/dlogin")
@@ -150,7 +164,7 @@ const Register = (props) => {
         />
       </Form.Item>
       <Form.Item>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary"  htmlType="submit" disabled={butdis}>
           Register
         </Button>
         {/* <Button type="dashed" className="oauth">
@@ -168,6 +182,15 @@ const Register = (props) => {
         />
       </Form.Item>
     </Form>
+    {/* <Modal
+        title="Resend verification email"
+          visible={visiblez}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          >
+
+
+    </Modal> */}
     </div>
   );
 };

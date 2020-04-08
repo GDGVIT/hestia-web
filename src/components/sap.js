@@ -28,13 +28,13 @@ class Sap extends React.Component{
             })
                 .then(response => response.json())
                 .then(data => {
-                console.log(data)
+                // console.log(data)
                 if(data.status == "success"){
                     this.setState({
                         Suggest: data.payload
                     })
                 }
-                console.log(this.state)
+                // console.log(this.state)
                 })
                 .catch(error => console.error(error))
      }

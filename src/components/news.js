@@ -29,12 +29,12 @@ class News extends React.Component {
             })
                 .then(response => response.json())
                 .then(data => {
-                console.log(data)
+                // console.log(data)
                 this.setState({
                     news: data.items,
                     
                 });
-                console.log(this.state)
+                // console.log(this.state)
                 })
                 .catch(error => console.error(error))
      }

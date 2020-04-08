@@ -25,7 +25,7 @@ class Messages extends React.Component{
       }
       handleSubmit(e) {
         e.preventDefault();
-        console.log("submit", this.state.message);
+        // console.log("submit", this.state.message);
         if(this.state.message != ''){
           this.props.onSubmitMessage(this.state.message);
         } 
