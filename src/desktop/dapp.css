@@ -219,7 +219,9 @@
     background-color: #fafafa;
     width:17vw;
     margin-top:-48px;
-    
+    /* border-color:lightgreen;
+    border-style:solid;
+     */
     
 }
 .feedlogo1{
@@ -229,6 +231,8 @@
     padding-left: 25px;
     float:right;
     margin-top:-58px;
+    /* border-color:lightgreen;
+    border-style:solid;*/
 }
 .feedlogo3{
     /* border-color: yellowgreen; */
@@ -238,6 +242,9 @@
     padding-left: 25px;
     float:right;
     margin-top:-58px;
+    /* border-color:lightgreen;
+    border-style:solid; */
+    
 }
 .circle1{
     width:50px;
@@ -247,6 +254,8 @@
     display:inline-block;
     text-align: center;
     background-color: #ffb600;
+    /* border-color:lightgreen;
+    border-style:solid; */
 }
 .circle1 > img{
     height:22px;
