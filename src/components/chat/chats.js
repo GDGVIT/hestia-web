@@ -264,7 +264,13 @@ class Chat extends React.Component{
       body:JSON.stringify(obj)
     })
     .then(response=> response.json())
-    .then(res => {console.log(res)})
+    .then(res => {
+      console.log(res)
+      if(res.code == 200){
+        this.props.alert.show("Chats deleted")
+        this.props.history.push("/mychats");
+      }
+    })
     .catch(err => console.log(err));
   }
 
