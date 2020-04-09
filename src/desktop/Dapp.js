@@ -1,9 +1,15 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { Route, BrowserRouter, Redirect, withRouter} from 'react-router-dom';
+import { Route, BrowserRouter, Redirect, withRouter, Switch} from 'react-router-dom';
 import './dapp.css';
 import Dlog from './dlog';
 import Dmain from './main';
+import Register from './dregister';
+import Aboutus from './aboutus';
+import Orgs from '../orgs'
+import { loadReCaptcha } from 'react-recaptcha-v3';
+import POrgs from '../page404'
+
 
 class Dapp extends React.Component{
     constructor(props){
@@ -12,12 +18,25 @@ class Dapp extends React.Component{
 
         }
     }
+    componentDidMount() {
+        loadReCaptcha('6LdiB-UUAAAAACYC2AlMS9hrw18fQA4FK7-s0LDw');
+    }
+    
+    page404 = () =>{
+        return(<div>This page does not exist</div>)
+      }
     render(){
         return(
             <BrowserRouter>
                 <div className="Dapp">
-                    <Route exact path='/main' component={Dmain}/>
-                    <Route exact path='/dlogin' component={Dlog}/>
+                    <Switch>
+                        <Route exact path='/' component={Aboutus}/>
+                        <Route exact path='/main' component={Dmain}/>
+                        <Route exact path='/dlogin' component={Dlog}/>
+                        <Route exact path='/dregister' component={Register}/>
+                        <Route exact path='/organisations' component={Orgs}/>
+                        <Route component={POrgs}/>
+                    </Switch>
                 </div>
             </BrowserRouter>
         );

@@ -13,10 +13,10 @@ class Myreqs extends React.Component{
     }
 
     deleterequest = (id) => {
-        console.log(id)
-                postForm('https://akina.ayushpriya.tech/api/requests/item_requests/'+id+'/')
+        // console.log(id)
+                postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/'+id+'/')
                     .then(data => {
-                        console.log(data)
+                        // console.log(data)
                         this.props.alert.show("Item deleted")
                     })
                     .catch(error => console.error(error))
@@ -52,19 +52,19 @@ class Myreqs extends React.Component{
             this.props.history.push("/login");
         }
 
-        fetch('https://akina.ayushpriya.tech/api/requests/my_requests/', {
+        fetch('https://hestia-requests.herokuapp.com/api/requests/my_requests/', {
             headers: new Headers({
             'Authorization': localStorage.getItem("token")
             })
             })
             .then(res => res.json())
             .then(data => {
-                 console.log(data)
+                //  console.log(data)
             this.setState({
                 Requests: data.Request
                 
             });
-            console.log(this.state)
+            // console.log(this.state)
             })
             .catch(error => console.error(error))
 
@@ -97,8 +97,8 @@ class Myreqs extends React.Component{
                                 </div>
                             </Col>
                             <Col span={7} className="iconz">
-                                <div className="imgback">
-                                    <img onClick={()=>{this.deleterequest(request.id)}} src={deletez} alt="location"></img>
+                                <div className="imgback" onClick={()=>{this.deleterequest(request.id)}}>
+                                    <img src={deletez} alt="location"></img>
                                 </div>
                             </Col>
                         </Row>

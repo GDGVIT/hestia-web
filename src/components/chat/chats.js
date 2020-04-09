@@ -19,7 +19,7 @@ import {withAlert} from "react-alert";
 class Chat extends React.Component{
     constructor(props){
         super(props);
-        console.log(props);
+        // console.log(props);
         this.state={
             ws:null,
             currentUser: null,
@@ -29,6 +29,7 @@ class Chat extends React.Component{
             // receiver_id : props.location.state.id
         }
     }
+    controller = new AbortController();
     // url = 'wss://hestia-chat.herokuapp.com/api/v1/ws?chat='+`${this.state.receiver_id}`;
     gotoReport=()=>{
       this.props.history.push("/report");
@@ -44,7 +45,7 @@ class Chat extends React.Component{
       initialmsg: []
     })
     this.props.history.push("/mychats");
-    console.log(this.state)
+    // console.log(this.state)
   }
 
     scrollToBottom = () => {
@@ -117,19 +118,19 @@ class Chat extends React.Component{
       // this.connect();
 
       if(localStorage.getItem("token")){
-       console.log("someone's logged in")
+      //  console.log("someone's logged in")
       //  this.setState({receiver_id : localStorage.getItem("receiver_id")})
       }else{
           this.props.history.push("/login");
       }
-      console.log(this.state)
+      // console.log(this.state)
       //request to get messages
 
       var ob = {}
       ob["receiver"] = parseInt(localStorage.getItem("receiver_id"))
       ob["sender"] = parseInt(localStorage.getItem("sender_id"))
 
-      console.log("/getMessages", JSON.stringify(ob))
+      // console.log("/getMessages", JSON.stringify(ob))
 
       fetch('https://akina.ayushpriya.tech/api/v1/getMessages',{
         method:"POST",
@@ -148,10 +149,12 @@ class Chat extends React.Component{
         if(res.status == 404){
             this.props.alert.show("Cannot get messages")
         }
-        console.log(res)
-        console.log(this.state)
+        // console.log(res)
+        // console.log(this.state)
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err)
+      })
    }
 
    componentDidUpdate() {
@@ -165,10 +168,11 @@ class Chat extends React.Component{
     ob["receiver"] = parseInt(localStorage.getItem("receiver_id"))
     ob["sender"] = parseInt(localStorage.getItem("sender_id"))
 
-    console.log("/getMessages pseudo websocket", JSON.stringify(ob))
+    // console.log("/getMessages pseudo websocket", JSON.stringify(ob))
     try {
       setInterval(async () => { 
       const fetchResponse = await fetch('https://akina.ayushpriya.tech/api/v1/getMessages',{
+      signal: this.controller.signal,
       method:"POST",
       headers:  new Headers({
         'Authorization': localStorage.getItem("token")
@@ -176,24 +180,24 @@ class Chat extends React.Component{
       body:JSON.stringify(ob)
       })
         const data = await fetchResponse.json()
-        console.log(data);
+        // console.log(data);
         this.setState({
           initialmsg: data.messages
         })
       },2000);
     } catch(e) {
-      console.log(e);
+      // console.log(e);
     }
 
   }
    submitMessage = messageString => {
     // on submitting the ChatInput form, send the message, add it to the list and reset the input
-      console.log(messageString);
+      // console.log(messageString);
       var obj ={}
       obj["receiver"] = parseInt(localStorage.getItem("receiver_id"));
       obj["sender"] = parseInt(localStorage.getItem("sender_id"));
       obj["text"] = messageString;
-      console.log("/sendMessage", JSON.stringify(obj))
+      // console.log("/sendMessage", JSON.stringify(obj))
       fetch("https://akina.ayushpriya.tech/api/v1/sendMessage",{
         method:"POST",
         headers: new Headers({
@@ -203,7 +207,7 @@ class Chat extends React.Component{
         body:JSON.stringify(obj)
       })
       .then(response=> response.json())
-      .then(res => console.log(res,this.state))
+      .then(res => {console.log(res)})
       .catch(err => console.log(err));
 
       (async () => {
@@ -219,10 +223,13 @@ class Chat extends React.Component{
   //   if (!ws || ws.readyState == WebSocket.CLOSED) this.connect(); //check if websocket instance is closed, if so call `connect` function.
   //   };
 
+    componentWillUnmount(){
+      this.controller.abort();
+    }
     render(){
 
       const {initialmsg} = this.state;
-      console.log(initialmsg)
+      // console.log(initialmsg)
       const initial = initialmsg.length ? (
         initialmsg.map(
           msg => {

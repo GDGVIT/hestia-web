@@ -9,6 +9,7 @@ import check from '../assets/check.png';
 
 
 const Login = (props) => {
+  
   const [visible, changeV] = useState(false);   
   var chk = true;
   const alert = useAlert()
@@ -17,7 +18,7 @@ const Login = (props) => {
       alert.show("Wrong password")
     }
     let authcheck = false;
-    console.log('Received values of form: ', values)
+    // console.log('Received values of form: ', values)
     let cm = {
       "email": values.user.email
     }
@@ -32,14 +33,14 @@ const Login = (props) => {
     .then(response => {
       if(response.status === 401){
         alert.show("Verify your email first");
-        props.history.push("/");
+        // props.history.push("/");
       }else if(response.status === 200 || response.status===201 || response.status===202){
         return response.json();
       }else{
         switch(response.status){
 
           case 400: 
-              alert.show("Account already exists")
+              alert.show("no such user exists")
             break;
           case 403:
             alert.show("You have been blocked")
@@ -53,12 +54,8 @@ const Login = (props) => {
       }
       })
       .then(data => {
-        // console.log(data)
-        // window.localStorage.setItem("email", data.email);
-      })
-      .catch(error => console.error(error)
-      );
-      fetch("https://akina.ayushpriya.tech/api/user/login", {
+        if(data){
+        fetch("https://akina.ayushpriya.tech/api/user/login", {
           method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
           body: JSON.stringify(values.user), // Coordinate the body type with 'Content-Type'
           headers: new Headers({
@@ -81,7 +78,7 @@ const Login = (props) => {
                 console.log("incorrect email")
                 break;
               default:  
-                alert.show("Seems like something's wrong on our end. Please contact the developers")
+                alert.show("Something went wrong. Please try again later")
             }
           }
           })
@@ -97,14 +94,27 @@ const Login = (props) => {
             }
             // props.history.push("/feed");
           })
-        .catch(error => console.error(error)
+        .catch(error => {
+          alert.show("Something went wrong. Please try again later")
+        }
         );
+      }
+      })
+      .catch(error => console.error(error)
+      );
+      
    }
 
     useEffect(() => { 
         if(localStorage.getItem("token")){
             props.history.push("/feed")
         }
+        
+        else{
+          alert.show("Please allow location permission")
+          
+        }
+        console.log("Nox is here")
       });
       // loader = () =>{
       //   documentgetElementById("loading-spinner").style.display="block"
@@ -112,7 +122,16 @@ const Login = (props) => {
       // }
 
       const onFinishPass =(values) =>{
-        console.log(values)
+        
+        // this.useRefs.loading.style.display = "block";
+        // this.refs.login.style.display = "none";
+        // let element = document.getElementById('loading-spinner')
+        // ReactDOM.findDOMNode(element).style.display = "block"
+        // let element1 = document.getElementById('login-form')
+        // ReactDOM.findDOMNode(element1).style.display = "none"
+
+
+        // console.log(values)
         return fetch("https://akina.ayushpriya.tech/api/user/forgotPassword", {
         method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
         body: JSON.stringify(values), // Coordinate the body type with 'Content-Type'
@@ -136,10 +155,11 @@ const Login = (props) => {
        
         // documentgetElementById("loading-spinner").style.display="block"
         // documentgetElementById("login-form").style.display="none"
-      
-
+        
+        
 
     }
+    
 
   return (
     <div className="loginpage">
@@ -147,7 +167,7 @@ const Login = (props) => {
         <img src={logo} alt="Hestialogo"></img>
     </div>
       <div id="loading-spinner">
-        <div class="spin-icon"></div>
+        <div className="spin-icon"></div>
       </div>
     <Form
       name="normal_login"
@@ -162,7 +182,7 @@ const Login = (props) => {
         name={['user', 'email']}
         rules={[
           {
-            type: 'email',  
+            // type: 'email',  
             required: true,
             message: 'Please input a valid Email!',
           },
@@ -209,9 +229,9 @@ const Login = (props) => {
           >
           <Form onFinish={onFinishPass}>
           <Form.Item name="email"
-              rules={[
-                  {type: 'email', message: 'Not a valid email'}
-              ]}
+              // rules={[
+              //     {type: 'email', message: 'Not a valid email'}
+              // ]}
           >
               <Input 
                   placeholder="abc@example.com"

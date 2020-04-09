@@ -7,15 +7,22 @@
 }
 .dnav{
     position: fixed;
-    top: 8%;
+    top: 0%;
     left: 8%;
     width: 80%;
-    z-index: 2;
+    z-index: 900;
+    background-color: #fafafa;
+}
+@media(max-width:540px){
+.dnav{
+    width: 98%;
+}
 }
 .dnavbar{
-    padding-top: 10px;
+    padding-top: 8%;
     width: 100%;
 }
+
 .homeimg{
     width: 150px;
     height: auto;
@@ -35,8 +42,8 @@
     width: 50%;
     float: left;
 }
-.feedcont{
-    border-right: 1px solid rgba(180,180,180, 0.3)
+.newscont{
+    border-left: 1px solid rgba(180,180,180, 0.3)
 }
 
 @media(min-width: 600px){
@@ -51,7 +58,11 @@
     .addReq{
         left: 27%;
     }
-    .imgback{
+    .dreglog .login-form{
+        margin: 5% 12.5%;
+    }
+    .ant-btn{
+        max-width: 200px;
     }
 }
 .addReqD{
@@ -67,4 +78,300 @@
     width: 13px;
     height: auto;
     padding-top: 7px;
+}
+/* about us page css */
+
+.logo{
+
+    text-align: center;
+    margin:70px;
+}
+.logo > img{
+    height:45px;
+    width:180px;
+}
+.what{
+
+    text-align: center;
+    
+    width:60vw;
+    margin:0px auto;
+    
+}
+.what > h1{
+    color:#00d2d2;
+    
+}
+.features > h1{
+    color:#00d2d2;
+    
+    padding-top:50px;
+    padding-bottom: 45px;
+    text-align: center;
+}
+.what > h4{
+    color:#989898;
+    font-size:large;
+    text-align:center;
+    font-weight: 100;
+    letter-spacing: 1.6px;
+}
+.circle{
+    width:50px;
+    height:50px;
+    border-radius: 100%;
+    /* background-color: #ff0168; */
+    background-image: linear-gradient(to left,#ff0168,#ffcaca);
+    display:inline-block;
+    text-align: center;
+}
+.circle > img{
+    height:17px;
+    width:22px;
+    margin-top:16px;
+    
+}
+.circle2{
+    width:50px;
+    height:50px;
+    border-radius: 100%;
+    /* background-color: #02dcdc; */
+    background-image: linear-gradient(to right, #02dcdc, #dbffff);
+    display:inline-block;
+    text-align: center;
+}
+.circle2 > img{
+    height:22px;
+    width:22px;
+    margin-top:14px;
+    
+}
+
+.text{
+    display: inline-block;
+}
+.text > h3{
+    padding-left:10px;
+    font-weight: 700;
+    font-size: 22px;
+}
+.feed{
+
+    width:60vw;
+    margin:0px auto;
+    padding-top:50px;
+    padding-bottom:50px;
+
+}
+.feed2{
+   
+    width:60vw;
+    margin:0px auto;
+    padding-bottom:50px;
+    padding-top:-40px;
+}
+
+.content *{
+    
+    color:#989898;
+
+    
+}
+.border{
+    color:#989898;
+    border-style: solid;
+    border-left-style: hidden;
+    border-right-style: hidden;
+    border-bottom-style:hidden;
+    width:30vw;
+    float:right;
+    border-top-width:0.5px;
+    margin-top:-30px;
+}
+.border2{
+    color:#989898;
+    border-style: solid;
+    border-left-style: hidden;
+    border-right-style: hidden;
+    border-bottom-style:hidden;
+    width:30vw;
+    border-top-width:0.5px;
+    margin-top:-30px;
+}
+.border3{
+    color:#989898;
+    border-style: solid;
+    border-left-style: hidden;
+    border-right-style: hidden;
+    border-bottom-style:hidden;
+    width:27vw;
+    float:right;
+    border-top-width:0.5px;
+    margin-top:-30px;
+}
+.content > h3{
+    padding-top:40px;
+    font-weight: 100;
+}
+.content1{
+    padding-top:40px;
+    font-weight: 100;
+    text-align: right;
+}
+.feedlogo{
+    display: flex;
+    align-items: center;
+    background-color: #fafafa;
+    width:17vw;
+    margin-top:-48px;
+    /* border-color:lightgreen;
+    border-style:solid;
+     */
+    
+}
+.feedlogo1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fafafa;
+    width:12vw;
+    padding-left: 25px;
+    float:right;
+    margin-top:-58px;
+    /* border-color:lightgreen;
+    border-style:solid;*/
+}
+.feedlogo3{
+    /* border-color: yellowgreen; */
+    /* border-style: solid; */
+    display: flex;
+    align-items: center;
+    background-color: #fafafa;
+    width:13vw;
+    padding-left: 25px;
+    float:right;
+    margin-top:-58px;
+    /* border-color:lightgreen;
+    border-style:solid; */
+    
+}
+.circle1{
+    width:50px;
+    height:50px;
+    border-radius: 100%;
+    background-color: #02dcdc;
+    display:inline-block;
+    text-align: center;
+    /* background-color: #ffb600; */
+    background-image: linear-gradient(to bottom,#ffb600, #fff);
+}
+.circle1 > img{
+    height:22px;
+    width:22px;
+    margin-top:14px;
+    
+}
+.parent1{
+    margin-top: 20px;
+}
+.buttons{
+    margin:30px;
+    /* text-align: center; */
+    display: flex;
+    justify-content: center;
+    margin-left: 175px;
+}
+.PWA{
+    text-align: center;
+}
+.button1{
+    display:inline-block;
+    margin:8px;
+}
+.button2{
+    display:inline-block;
+    margin:8px;
+}
+.button1 > button{
+    width:170px;
+    height:55px;
+    font-size: large;
+    font-weight: 550;
+    color:white;
+    background-color:#00d2d2;
+    border-style: solid;
+    border-color: #00d2d2;
+    border-radius: 5px;
+    cursor: pointer;
+
+
+}
+.button2 > .download{
+    width:170px;
+    height:55px;
+    font-size:large;
+    font-weight:550;
+    /* border-style: solid; */
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    box-shadow:0px 0px 3px #989898;
+    -webkit-box-shadow:0px 0px 3px #989898;
+    -moz-box-shadow:0px 0px 3px #989898;
+    cursor: pointer;
+    display: block;
+    background: #fff;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    color:#242424;
+    font-weight: bold;
+
+}
+.covid{
+    margin-top: 10px;
+    color: #989898;
+    width: 20vw;
+}
+@media screen and (max-width:1400px){
+    .feedlogo1{
+        width: 25vw;
+    }
+}
+@media screen and (max-width: 700px){
+    .what{
+        width:95vw;
+    }
+    .feed{
+        width:90vw;
+    }
+    .feed2{
+        width:90vw;
+    }
+    .feedlogo{
+        width:50vw;
+    }
+    .feedlogo1{
+        width:60vw;
+    }
+    .feedlogo3{
+        width:36vw;
+    }
+    .buttons{
+        display: block;
+        margin-left: 30px;
+    }
+    .covid{
+        width: auto;
+    }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }

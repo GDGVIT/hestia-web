@@ -23,18 +23,18 @@ class News extends React.Component {
         }
 
 
-            fetch('https://akina.ayushpriya.tech/node',{
+            fetch('https://hestia-info.herokuapp.com/node',{
                 method: "GET",
                 crossDomain: true
             })
                 .then(response => response.json())
                 .then(data => {
-                console.log(data)
+                // console.log(data)
                 this.setState({
                     news: data.items,
                     
                 });
-                console.log(this.state)
+                // console.log(this.state)
                 })
                 .catch(error => console.error(error))
      }
@@ -46,7 +46,7 @@ class News extends React.Component {
             news.map(
                 request =>{
                     return(
-                        <Card key={request.isoDate}>
+                        <Card key={request.guid}>
                         <Row>
                             <Col span={24}>
                                 <div className="news-card-header">

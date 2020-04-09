@@ -21,7 +21,7 @@ class Dmain extends React.Component{
             edit: false,
             myreqs: false,
             mychats: false,
-            visible4: false,
+            explore: false,
             visible5: false,
 
         }
@@ -37,7 +37,8 @@ class Dmain extends React.Component{
           visible: false,
           edit: false,
           myreqs: false,
-          mychats: false
+          mychats: false,
+          explore: false
         });
       };
     handleSort=(e)=>{
@@ -57,9 +58,14 @@ class Dmain extends React.Component{
                             mychats: true
                         })
                         break;
+            case 'exp': 
+                        this.setState({
+                            explore: true
+                        })
+                        break;
             default: console.log('weird request')
         }
-        console.log(this.state)
+        // console.log(this.state)
     }
     componentDidMount(){
         if(!localStorage.getItem("token")){
@@ -68,7 +74,7 @@ class Dmain extends React.Component{
     }
     logoutsar=()=>{
         localStorage.removeItem("token");
-        this.props.history.push("/login")
+        this.props.history.push("/dlogin")
     }
     redirectToedit=()=>{
         this.setState({
@@ -83,17 +89,18 @@ class Dmain extends React.Component{
             <div className="dnavbar">
                     <img className="homeimg" src={homeimg} alt="Home"></img>
                     <div className="menitem">
-                        <img src={expic} alt="explore" onClick={() => this.handleSort("exp")}></img>
-                    </div>
-                    <div className="menitem">
+                        <img src={prof} alt="edit profile" onClick={()=>this.handleSort("prof")}></img>
+                   </div>
+                   <div className="menitem">
                         <img src={reqpic} alt="my requests" onClick={() => this.handleSort("myr")}></img>
                    </div>
                    <div className="menitem">
                         <img src={chatpic} alt="my chats" onClick={() => this.handleSort("myc")}></img>
                    </div>
                    <div className="menitem">
-                        <img src={prof} alt="edit profile" onClick={()=>this.handleSort("prof")}></img>
-                   </div>
+                        <img src={expic} alt="explore" onClick={() => this.handleSort("exp")}></img>
+                    </div>
+  
             </div>
             </div>
             <div className="container">
@@ -154,16 +161,16 @@ class Dmain extends React.Component{
             >
                 <Mychat />
             </Drawer>
-            {/* <Drawer
-                title="Profile"
+            <Drawer
+                title="Explore"
                 placement="right"
-                closable={true}
+                closable={false}
                 onClose={this.onClose}
-                visible={this.state.edit}
+                visible={this.state.explore}
                 width="400px"
             >
-                <Edit />
-            </Drawer> */}
+            <h3>Coming soon :)</h3>
+            </Drawer>
         </div>
         )
     }

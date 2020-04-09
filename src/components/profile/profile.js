@@ -18,7 +18,7 @@ class Profile extends React.Component{
         }
     }
     goBack = () =>{
-        console.log(this.props)
+        // console.log(this.props)
         if(this.props.p){
             this.props.p.g.history.push("/feed");
             // this.props.p.history.push("/feed");
@@ -29,7 +29,7 @@ class Profile extends React.Component{
         this.props.history.push("/feed");
     }
     redirectTo = (e) =>{
-        console.log(e)
+        // console.log(e)
     }
     redirectToreqs = () =>{
         this.props.history.push("/myreqs")
@@ -42,23 +42,23 @@ class Profile extends React.Component{
     }
     componentDidMount(){
        if(localStorage.getItem("token")){
-        console.log("someone's logged in")
+        // console.log("someone's logged in")
        }else{
            this.props.history.push("/login");
        }
 
-       fetch('https://akina.ayushpriya.tech/api/requests/my_requests/', {
+       fetch('https://hestia-requests.herokuapp.com/api/requests/my_requests/', {
             headers: new Headers({
             'Authorization': localStorage.getItem("token")
             })
             })
             .then(res => res.json())
             .then(data => {
-                 console.log(data)
+                //  console.log(data)
             this.setState({
                 Requests: data.Request
             });
-            console.log(this.state)
+            // console.log(this.state)
             })
             .catch(error => console.error(error))
 
@@ -72,7 +72,7 @@ class Profile extends React.Component{
             })
             .then(response => response.json())
             .then(data => {
-            console.log(data)
+            // console.log(data)
             if(data.status == 500){
                 console.log("err")
             }
@@ -82,7 +82,7 @@ class Profile extends React.Component{
                     
                 });
             }
-            console.log(this.state)
+            // console.log(this.state)
             })
             .catch(error => console.error(error))
 
@@ -99,7 +99,7 @@ class Profile extends React.Component{
 
         const mychatslist = mychats.length;        
         const reqlist = Requests.length;
-        console.log(reqlist)
+        // console.log(reqlist)
         return(
             
             <div>

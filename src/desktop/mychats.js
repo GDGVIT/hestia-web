@@ -3,7 +3,8 @@ import { Card, Row, Col, Drawer } from 'antd';
 import { Radio } from 'antd';
 import front from '../assets/front.png';
 import Suggestpic from '../assets/suggest.png';
-// import Chat from 'chat'
+import Chat from './chat';
+import Sap from './sap';
 
 
 class Mychat extends React.Component{
@@ -14,57 +15,62 @@ class Mychat extends React.Component{
             mychats: [],
             otherchats:[],
             Suggest:[],
-            value:'mr'
+            value:'mr',
+            visiblechat: false,
+            visiblesug: false
         }
         // console.log(this.props)
     }
     gotoShop = () => {
         // this.props.history.push("/suggestashop")
-        console.log("coming soon")
+        this.setState({
+            visiblesug: true
+        })
     }
-    gotoMyChat = (r,i,s,sn) => () => {
-        console.log(this.props)
+    gotoMyChat = (r,i,s,sn,cd) => () => {
+        // console.log(this.props)
         window.localStorage.setItem("receiver_id", s);
         window.localStorage.setItem("item",i);
         window.localStorage.setItem("sender_id", r);
         window.localStorage.setItem("report", s);
         window.localStorage.setItem("chat_name",sn);
+        window.localStorage.setItem("chat_desc", cd);
 
-        // if(this.props.history){
-        //     this.props.history.push({
-        //         pathname : "/chat", 
-        //         state:{id: localStorage.getItem("receiver_id")}
-        //     })
-        // }
+        this.setState({
+            visiblechat: true
+        })
     }
 
-    gotoOtherChat = (r,i,s,rn) => () => {
-        console.log(this.props)
+    gotoOtherChat = (r,i,s,rn,cd) => () => {
+        // console.log(this.props)
         window.localStorage.setItem("receiver_id", r);
         window.localStorage.setItem("item",i);
         window.localStorage.setItem("sender_id", s);
         window.localStorage.setItem("report", r);
         window.localStorage.setItem("chat_name",rn);
+        window.localStorage.setItem("chat_desc", cd);
 
-        // if(this.props.history){
-        //     this.props.history.push({
-        //         pathname : "/chat", 
-        //         state:{id: localStorage.getItem("receiver_id")}
-        //     })
-        // }
+        this.setState({
+            visiblechat: true
+        })
     }
     handleClick = (e) => () => {
-        console.log(e)
+        // console.log(e)
         this.setState({
             value: e
         })
     }
+    onClose=()=>{
+        this.setState({
+            visiblechat: false,
+            visiblesug: false
+        })
+    }
     componentDidMount(){
-        if(localStorage.getItem("token")){
-         console.log("someone's logged in")
-        }else{
-            this.props.history.push("/login");
+        if(!localStorage.getItem("token")){
+            this.props.history.push("/dlogin");
         }
+
         var obj = {"user_id" : parseInt(localStorage.getItem("user_id"))}
 
         // my chats
@@ -77,7 +83,7 @@ class Mychat extends React.Component{
         })
         .then(response => response.json())
         .then(data => {
-        console.log(data)
+        // console.log(data)
         if(data.status == 500){
             console.log("err")
         }
@@ -87,7 +93,7 @@ class Mychat extends React.Component{
                 
             });
         }
-        console.log(this.state)
+        // console.log(this.state)
         })
         .catch(error => console.error(error))
 
@@ -101,7 +107,7 @@ class Mychat extends React.Component{
         })
         .then(response => response.json())
         .then(data => {
-        console.log(data)
+        // console.log(data)
         if(data.status == 500){
             console.log("err")
         }
@@ -111,12 +117,12 @@ class Mychat extends React.Component{
                 
             });
         }
-        console.log(this.state)
+        // console.log(this.state)
         })
         .catch(error => console.error(error))
 
         //get suggestions number
-        fetch('https://akina.ayushpriya.tech/api/recommend/',{
+        fetch('https://hestia-report-do.herokuapp.com/api/recommend/',{
             method: "GET",
             headers: new Headers({
                 'Authorization': localStorage.getItem("token")
@@ -124,13 +130,13 @@ class Mychat extends React.Component{
         })
             .then(response => response.json())
             .then(data => {
-            console.log(data)
+            // console.log(data)
             if(data.status == "success"){
                 this.setState({
                     Suggest: data.payload
                 })
             }
-            console.log(this.state)
+            // console.log(this.state)
             })
             .catch(error => console.error(error))
 
@@ -150,7 +156,7 @@ class Mychat extends React.Component{
                                 <Col span={17}>
                                     <div className="feed-card-header">
                                         <span>
-                                            <strong>{data.sender_name}</strong>
+                                            <strong>{data.receiver_name}</strong>
                                         </span>
                                 
                                     </div>
@@ -159,7 +165,7 @@ class Mychat extends React.Component{
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    <div className="imgback" onClick={this.gotoMyChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.sender_name}`)}>
+                                    <div className="imgback" onClick={this.gotoMyChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.receiver_name}`,`${data.req_desc}`)}>
                                         <img src={front} alt="location"></img>
                                     </div>
                                 </Col>
@@ -182,7 +188,7 @@ class Mychat extends React.Component{
                                 <Col span={17}>
                                     <div className="feed-card-header">
                                         <span>
-                                            <strong>{data.receiver_name}</strong>
+                                            <strong>{data.sender_name}</strong>
                                         </span>
                                 
                                     </div>
@@ -191,7 +197,7 @@ class Mychat extends React.Component{
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    <div className="imgback" onClick={this.gotoOtherChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.receiver_name}`)}>
+                                    <div className="imgback" onClick={this.gotoOtherChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.sender_name}`, `${data.req_desc}`)}>
                                         <img src={front} alt="location"></img>
                                     </div>
                                 </Col>
@@ -229,8 +235,8 @@ class Mychat extends React.Component{
                             </div>
                         </Col>
                         <Col span={5} className="iconz">
-                            <div className="imgback">
-                                <img src={front} alt="location" style={{marginLeft:"10px"}} onClick ={this.gotoShop}></img>
+                            <div className="imgback" onClick ={this.gotoShop}>
+                                <img src={front} alt="location"></img>
                             </div>
                         </Col>
                     </Row>
@@ -245,25 +251,25 @@ class Mychat extends React.Component{
                     {this.state.value == "or" && <div>{otherchatslist}</div>}
                 </div>
                 <Drawer
-                title="My Chats"
                 placement="right"
                 closable={true}
                 onClose={this.onClose}
-                visible={this.state.mychats}
+                visible={this.state.visiblechat}
                 width="400px"
+                zIndex="2000"
             >
-                {/* <Chat /> */}
+                <Chat id={localStorage.getItem("receiver_id")}/>
                 </Drawer>
                 
                 <Drawer
-                title="My Chats"
-                placement="right"
+                placement='right'
                 closable={true}
                 onClose={this.onClose}
-                visible={this.state.mychats}
+                visible={this.state.visiblesug}
                 width="400px"
+                zIndex="2000"
             >
-                <Mychat />
+                <Sap />
                 </Drawer>
             </div>              
         );

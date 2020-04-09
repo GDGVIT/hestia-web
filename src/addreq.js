@@ -12,18 +12,18 @@ constructor(props){
     this.setState({
       visible: this.props.disp,
     });
-    console.log(this.props.disp)
+    // console.log(this.props.disp)
 
   }
   handleOk = e => {
-    console.log(e);
+    // console.log(e);
     this.setState({
       visible: false,
     });
   };
 
   handleCancel = e => {
-    console.log(e);
+    // console.log(e);
     this.setState({
       visible: false,
     });

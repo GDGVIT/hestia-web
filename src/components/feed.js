@@ -21,10 +21,10 @@ class Feed extends React.Component {
             visible1:false,
             visible2:false,
             requests: [ ],
-            city: '',
+            city: null,
             item_name: null,
             quantity: '',
-            token: '',
+            token: ''
         }
     }
     gotoProfile=()=>{
@@ -39,20 +39,27 @@ class Feed extends React.Component {
         })
     }
     handleStore = (r,i) => () => {
-        this.setState({
-            visible1: true,
-        })
         window.localStorage.setItem("receiver_id", r);
         window.localStorage.setItem("item",i);
+        if(localStorage.getItem("Sugcheck")){
+            this.suggestShop();
+        }else{
+            this.setState({
+                visible1: true
+            })
+        }
     }
     handleChat= (r,i,ri) => () =>{
-        this.setState({
-            visible2: true
-        })
         window.localStorage.setItem("receiver_id", r);
         window.localStorage.setItem("item",i);
-
         window.localStorage.setItem("accept_id", ri);
+        if(localStorage.getItem("acceptcheck")){
+            this.createChat();
+        }else{
+            this.setState({
+                visible2: true
+            })
+        }
     }
     suggestShop = () =>{
         this.props.history.push('/suggestions');
@@ -60,7 +67,6 @@ class Feed extends React.Component {
     handleOk = e => {
         // console.log(e);
         this.setState({
-          visible: false,
           visible1:false,
           visible2:false
         });
@@ -68,12 +74,24 @@ class Feed extends React.Component {
     onFinish = values => {
         // console.log(values);
         this.setState(values)
-        console.log(this.state)
-        postForm('https://akina.ayushpriya.tech/api/requests/item_requests/',this.state.item_name,this.state.quantity,'Surat',this.state.description)
-                .then(data => this.props.alert.show("Request added"))
+        this.state.item_name.trim();
+        this.state.quantity.trim();
+        this.state.description.trim();
+        // console.log(this.state)
+        postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,'noida',this.state.description, this.props)
+                .then(data => {
+                    // console.log(data)
+                    if(data){
+                        // console.log(data)
+                        this.props.alert.show("Request added")
+                        this.setState({
+                            visible: false
+                        })
+                    }
+                })
                 .catch(error => console.error(error))
 
-                function postForm(url,name,quantity,city,description) {
+                function postForm(url,name,quantity,city,description, tempprops) {
                     var object ={};
                     object["item_name"] = name;
                     object["quantity"] = quantity;
@@ -91,7 +109,13 @@ class Feed extends React.Component {
                         
                       })
                 })
-                .then(response => response.json())
+                .then(response => {
+                    if(response.status === 400){
+                        tempprops.alert.show("invalid request")
+                    }else{
+                        return response.json();
+                    }
+                })
                 }
       };
 
@@ -121,10 +145,13 @@ class Feed extends React.Component {
 
 
       createChat = () => {
-        console.log(parseInt(localStorage.getItem("accept_id")))
+        // console.log(parseInt(localStorage.getItem("accept_id")))
+        postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:'noida'})
+        .then(data => console.log("data")) // Result from the `response.json()` call
+        .catch(error => console.error(error))
         //   Accept the item
-        postRequest('https://akina.ayushpriya.tech/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:'Surat'})
-        .then(data => console.log(data)) // Result from the `response.json()` call
+        postRequest('https://akina.ayushpriya.tech/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:'noida'})
+        .then(data => console.log("data")) // Result from the `response.json()` call
         .catch(error => console.error(error))
 
         function postRequest(url, data) {
@@ -156,7 +183,7 @@ class Feed extends React.Component {
           })
           .then(res => res.json())
           .then(res => {
-              console.log(res)
+            //   console.log(res)
               if(res.code == 200){
                   window.localStorage.setItem("chat_name", res.chat_room.receiver_name )
                   window.localStorage.setItem("item", res.chat_room.title)
@@ -168,7 +195,7 @@ class Feed extends React.Component {
                 this.props.history.push("/profile");
               }
           })
-          .catch(err => console.log(err))
+          .catch(err => console.log("err"))
       }
       handleCancel = e => {
         // console.log(e);
@@ -180,6 +207,10 @@ class Feed extends React.Component {
       };
       onChange(e) {
         window.localStorage.setItem("acceptcheck", `${e.target.checked}`);
+        // console.log(localStorage.getItem("acceptcheck"))
+      }
+      onChangeSug(e) {
+        window.localStorage.setItem("Sugcheck", `${e.target.checked}`);
         // console.log(localStorage.getItem("acceptcheck"))
       }
     //   componentWillMount(){
@@ -202,7 +233,6 @@ class Feed extends React.Component {
         }else{
             this.props.history.push("/login");
         }
-    console.log(baseurl)
 
         if ("geolocation" in navigator) {
             console.log("Available");
@@ -210,29 +240,42 @@ class Feed extends React.Component {
             console.log("Not Available");
           }
           navigator.geolocation.getCurrentPosition(function(position) {
+            //   console.log('hap')
+            // console.log("latitude",position.coords.latitude)
+            // console.log("longitude",position.coords.longitude)
+            window.localStorage.setItem("latitude",position.coords.latitude);
+            window.localStorage.setItem("longitude",position.coords.longitude);
             
-            localStorage.setItem("latitude",position.coords.latitude)
-            localStorage.setItem("longitude",position.coords.longitude)
-            
-            
-          });
-          console.log(localStorage.getItem("latitude"))
+          }, function(err){
+            if(err){
+                alert("Location permission denied. You will not be able to use the full features of this app without providing location access")
+              }
+        });
         let token =localStorage.getItem("token");
-        // this.setState({
-        //     token: localStorage.getItem("token")
-        // })
-        console.log(this.state);
-            fetch('https://nominatim.openstreetmap.org/reverse?format=geojson&lat='+localStorage.getItem("latitude")+'&lon='+localStorage.getItem("longitude"), {
+        
+        // console.log(this.state);
+        fetch('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+localStorage.getItem("latitude")+'&longitude='+localStorage.getItem("longitude")+'&localityLanguage=en', {
+            
             })
             .then(response =>{
-            console.log(response)
+            // console.log(response)
             return response.json()
             })
             .then(data => {
-            console.log("LOCATIONNNNNNNNNN",data)
+                // console.log(data)
+                if(data.status===400){
+                    this.props.alert.show("location not provided")
+                }
+                // console.log(data.localityInfo.administrative[1].name)
+                let str = data.localityInfo.administrative[1].name;
+                let s = str.split(" ")[0];
+                    // console.log(s)
+                this.setState({         //do not remove setState
+                    city:s
+                })
+                    
+                fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+s[0]
                 
-                fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location=Surat'
-                // +data.features[0].properties.address.city
                  , {
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -241,33 +284,22 @@ class Feed extends React.Component {
                 })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data)
+                    // console.log(data)
                     if(data.message == "Location not provided"){
-                        console.log("No location")
+                        // console.log("No location")
                     } else {
                         this.setState({
                             requests: data.Request,
                         });
                     }
-                console.log(this.state)
+                // console.log(this.state)
                 })
                 .catch(error => console.error(error))
     
-            console.log(this.state)
+            // console.log(this.state)
             })
             .catch(error => console.error(error))
                 
-
-
-
-
-
-   
-
-
-
-
-
             
         }
             
@@ -299,7 +331,7 @@ class Feed extends React.Component {
                                         <p>{request.date_time_created.slice(0,10)}</p>
                                     </div>
                                 </Col>
-                                <Col span={7} className="iconz">
+                                <Col span={7} className="iconz tru">
                                 <div className="imgback">
                                         <img onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`,`${request.id}`)} src={check} alt="location"></img>
                                     </div>
@@ -346,6 +378,7 @@ class Feed extends React.Component {
                         closable={false}
                         className="addrequest"
                         centered
+                        width="350px"
                         >
                         <Form onFinish={this.onFinish}>
                         <Form.Item name="item_name" rules={[{
@@ -376,13 +409,13 @@ class Feed extends React.Component {
                             />
                         </Form.Item>
                         <Form.Item className="butn">
-                            <Button type="primary" htmlType="submit" onClick={this.handleOk}>
+                            <Button type="primary" htmlType="submit">
                                 Done <img src={check} alt="Check" style={{marginLeft:"10px"}}></img>
                             </Button>
                         </Form.Item>
                         <Form.Item className="butn">
                             <Button type="primary" onClick={this.handleCancel} style={{backgroundColor:"#fff",color:"#000"}}>
-                                Cancel <img src={cancel} alt="Check" style={{marginLeft:"10px"}}></img>
+                                Close <img src={cancel} alt="Check" style={{marginLeft:"10px"}}></img>
                             </Button>
                         </Form.Item>
                         </Form>
@@ -396,6 +429,7 @@ class Feed extends React.Component {
                       onCancel={this.handleCancel}
                       className="suggestshop"
                       centered
+                      width="350px"
                     > 
                         <Row>
                             <Col span={24}>
@@ -414,7 +448,7 @@ class Feed extends React.Component {
                         </Button>
                     </div>
                     <div style={{textAlign:"center"}}>
-                            <Checkbox onChange={this.onChange} style={{marginTop:"40px"}}>Do not show this again.</Checkbox>
+                            <Checkbox onChange={this.onChangeSug} style={{marginTop:"40px"}}>Do not show this again.</Checkbox>
                     </div>                    
                     </Modal>
                     {/* You have this item? modal*/}
@@ -426,6 +460,7 @@ class Feed extends React.Component {
                       onCancel={this.handleCancel}
                       className="itemconfirm"
                       centered
+                      width="350px"
                     > 
                      <Row>
                         <Col span={24}>

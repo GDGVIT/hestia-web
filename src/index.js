@@ -16,11 +16,39 @@ const options = {
   // you can also just use 'scale'
   transition: transitions.SCALE
 }
+var isMobile = {
+  Android: function() {
+      return navigator.userAgent.match(/Android/i);
+  },
+  BlackBerry: function() {
+      return navigator.userAgent.match(/BlackBerry/i);
+  },
+  iOS: function() {
+      return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+  },
+  Opera: function() {
+      return navigator.userAgent.match(/Opera Mini/i);
+  },
+  Windows: function() {
+      return navigator.userAgent.match(/IEMobile/i) || navigator.userAgent.match(/WPDesktop/i);
+  },
+  any: function() {
+      return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+  }
+};
+const deviceCheck=()=>{
+    if( isMobile.any() ){
+      return (<App />);
+    }else{
+      return (<Dapp />);
+
+    }
+};
 
 ReactDOM.render(
   <BrowserRouter>
   <AlertProvider template={AlertTemplate} {...options}>
-    <App />
+  {deviceCheck()}
   </AlertProvider>
   </BrowserRouter>,
   document.getElementById('root')

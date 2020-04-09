@@ -26,7 +26,7 @@ class Suggestions extends React.Component{
 
 
         this.setState(values)
-        console.log(this.state)
+        // console.log(this.state)
         // postForm('https://akina.ayushpriya.tech/api/recommend/',this.state)
         //         .then(data => {
         //             console.log(data)
@@ -39,17 +39,15 @@ class Suggestions extends React.Component{
         //             }
         //         })
         //         .catch(error => console.error(error))
-
-                // function postForm(url,state) {
                     var object ={};
                     object["recommended_for"] = localStorage.getItem("receiver_id");
-                    object["name_of_shop"] = this.state.name_of_shop;
+                    object["name_of_shop"] = this.state.name_of_shop.trim();
                     object["item"] = localStorage.getItem("item");
-                    object["landmark"] = this.state.landmark;
-                    object["extra_instruction"] = this.state.extra_instruction;
-                    object["description_of_shop"] = this.state.description_of_shop;
+                    object["landmark"] = this.state.landmark.trim();
+                    object["extra_instruction"] = this.state.extra_instruction.trim();
+                    object["description_of_shop"] = this.state.description_of_shop.trim();
                     object["phone_number"] = this.state.phone_number;
-                    console.log(object)
+                    // console.log(object)
                 fetch("https://hestia-report-do.herokuapp.com/api/recommend/", {
                     method: 'POST', // or 'PUT'
                     body: JSON.stringify(object),  // a FormData will automatically set the 'Content-Type'
@@ -59,18 +57,22 @@ class Suggestions extends React.Component{
                       })
                 })
                 .then(response => {
-                    console.log(response)
-                    return response.json();
+                    if(response.status === 200 || response.status===201 || response.status===202){
+                        return response.json();
+                        }else{
+                            this.props.alert.show("Something went wrong. Try again.")
+                        }
                 })
                 .then(data=>{
-                    this.props.alert.show("Suggestion successful");
-                    this.gotoFeed();
+                    if(data){
+                        this.props.alert.show("Suggestion successful");
+                        this.gotoFeed();
+                    }
                 })
                 .catch(error=>{
                     console.error(error);
                 })
-            // }
-}
+            };
     render(){
         return(
             <div>
@@ -117,9 +119,21 @@ class Suggestions extends React.Component{
                         </Form.Item>
                         <Form.Item
                             name="phone_number"
+                            rules={[
+                              {
+                                required: true,
+                                message: 'Please input your Number!',
+                              },
+                              {
+                                min: 10,
+                                max: 10,
+                                message: "Phone number has to be 10 digits!"
+                              }
+                            ]}
                         >
                             <Input 
                                 placeholder="Phone Number"
+                                type="number"
                             />
                         </Form.Item>
                         <Form.Item className="butn">

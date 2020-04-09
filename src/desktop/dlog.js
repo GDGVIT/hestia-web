@@ -17,7 +17,7 @@ const Dlog = (props) => {
       alert.show("Wrong password")
     }
     let authcheck = false;
-    console.log('Received values of form: ', values)
+    // console.log('Received values of form: ', values)
     let cm = {
       "email": values.user.email
     }
@@ -32,13 +32,13 @@ const Dlog = (props) => {
     .then(response => {
       if(response.status === 401){
         alert.show("Verify your email first");
-        props.history.push("/");
+        // props.history.push("/dregister");
       }else if(response.status === 200 || response.status===201 || response.status===202){
         return response.json();
       }else{
         switch(response.status){
-          case 401: 
-              console.log("You have been blocked")
+          case 400: 
+            alert.show("Account already exists")
             break;
           case 403:
             alert.show("You have been blocked")
@@ -47,17 +47,13 @@ const Dlog = (props) => {
             alert.show("No user exists with that email")
             break;
           default:  
-            alert.show("Seems like something's wrong on our end. Please contact the developers")
+            alert.show("Something went wrong. Please try again later.")
         }
       }
       })
       .then(data => {
-        // console.log(data)
-        // window.localStorage.setItem("email", data.email);
-      })
-      .catch(error => console.error(error)
-      );
-      fetch("https://akina.ayushpriya.tech/api/user/login", {
+        if(data){
+        fetch("https://akina.ayushpriya.tech/api/user/login", {
           method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
           body: JSON.stringify(values.user), // Coordinate the body type with 'Content-Type'
           headers: new Headers({
@@ -71,16 +67,16 @@ const Dlog = (props) => {
           }else{
             switch(response.status){
               case 401: 
-                alert.show("incorrect credentials")
+                alert.show("Incorrect credentials")
                 break;
               case 403:
-                alert.show("incorrect credentials")
+                alert.show("Incorrect credentials")
                 break;
               case 404:
-                console.log("incorrect email")
+                console.log("Incorrect email")
                 break;
               default:  
-                alert.show("Seems like something's wrong on our end. Please contact the developers")
+                alert.show("Something went wrong. Please try again later.")
             }
           }
           })
@@ -98,6 +94,11 @@ const Dlog = (props) => {
           })
         .catch(error => console.error(error)
         );
+        }
+      })
+      .catch(error => console.error(error)
+      );
+      
    }
 
     useEffect(() => { 
@@ -107,7 +108,7 @@ const Dlog = (props) => {
       });
 
       const onFinishPass =(values) =>{
-        console.log(values)
+        // console.log(values)
         return fetch("https://akina.ayushpriya.tech/api/user/forgotPassword", {
         method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
         body: JSON.stringify(values), // Coordinate the body type with 'Content-Type'
@@ -131,7 +132,7 @@ const Dlog = (props) => {
     }
 
   return (
-    <div className="loginpage">
+    <div className="loginpage dreglog">
     <div className="hestia-logo">
         <img src={logo} alt="Hestialogo"></img>
     </div>
@@ -182,7 +183,7 @@ const Dlog = (props) => {
         <a onClick={() => changeV(true)}>Forgot password?</a>
         </Form.Item>
         <Form.Item className="already">
-        <Link to="/register">Don't have an account? Register!</Link>
+        <Link to="/dregister">Don't have an account? Register!</Link>
         </Form.Item>
 
     </Form>

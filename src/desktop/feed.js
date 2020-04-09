@@ -1,14 +1,15 @@
 import React from 'react';
-import { Card, Row, Col } from 'antd';
-import profile from '../assets/profile.png';
+import { Card, Row, Col, Drawer } from 'antd';
 import store from '../assets/store.png';
 import check from '../assets/check.png';
 import plus from '../assets/plus.png';
-// import Chat from '../components/chat/chats';
+import Chat from './chat';
+import Suggestions from './suggestions';
 import { Modal, Button } from 'antd';
 import { Form, Input, Checkbox} from 'antd';
 import {withAlert} from "react-alert";
-
+import baseurl from "../url"
+import cancel from "../assets/cancel.svg";
 
 class Feed extends React.Component {
     constructor(props){
@@ -18,16 +19,25 @@ class Feed extends React.Component {
             visible1:false,
             visible2:false,
             requests: [ ],
-            city: 'surat',
+            city: '',
             item_name: null,
             quantity: '',
             token: '',
+            visiblechat1:false,
+            visiblesug: false,
         }
     }
-
+    onClose=()=>{
+        this.setState({
+            visiblechat1: false,
+            visiblesug: false
+        })
+    }
     gotoChat=()=>{
         // this.props.history.push("/chat");
-        console.log("can go to chat")
+        this.setState({
+            visiblechat1: true
+        })
     }
     handleAdd=()=>{
         this.setState({
@@ -35,25 +45,37 @@ class Feed extends React.Component {
         })
     }
     handleStore = (r,i) => () => {
-        this.setState({
-            visible1: true,
-        })
         window.localStorage.setItem("receiver_id", r);
         window.localStorage.setItem("item",i);
+        if(localStorage.getItem("Sugcheck")){
+            this.suggestShop();
+        }else{
+            this.setState({
+                visible1: true
+            })
+        }
     }
-    handleChat= (r,i,ri ) => () =>{
-        this.setState({
-            visible2: true
-        })
+    handleChat= (r,i,ri) => () =>{
         window.localStorage.setItem("receiver_id", r);
         window.localStorage.setItem("item",i);
-
         window.localStorage.setItem("accept_id", ri);
+        if(localStorage.getItem("acceptcheck")){
+            this.createChat();
+        }else{
+            this.setState({
+                visible2: true
+            })
+        }
+    }
+    suggestShop = () =>{
+        this.setState({
+            visiblesug: true,
+            visible1: false
+        })
     }
     handleOk = e => {
         // console.log(e);
         this.setState({
-          visible: false,
           visible1:false,
           visible2:false
         });
@@ -61,16 +83,29 @@ class Feed extends React.Component {
     onFinish = values => {
         // console.log(values);
         this.setState(values)
-        console.log(this.state)
-        postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.city)
-                .then(data => this.props.alert.show("Request added"))
+        this.state.item_name.trim();
+        this.state.quantity.trim();
+        this.state.description.trim();
+        // console.log(this.state)
+        postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.city,this.state.description, this.props)
+                .then(data => {
+                    // console.log(data)
+                    if(data){
+                        // console.log(data)
+                        this.props.alert.show("Request added")
+                        this.setState({
+                            visible: false
+                        })
+                    }
+                })
                 .catch(error => console.error(error))
 
-                function postForm(url,name,quantity,city) {
+                function postForm(url,name,quantity,city,description, tempprops) {
                     var object ={};
                     object["item_name"] = name;
                     object["quantity"] = quantity;
                     object["location"] = city;
+                    object["description"] = description;
                     // console.log(object)
                 
                     
@@ -83,7 +118,13 @@ class Feed extends React.Component {
                         
                       })
                 })
-                .then(response => response.json())
+                .then(response => {
+                    if(response.status === 400){
+                        tempprops.alert.show("invalid request")
+                    }else{
+                        return response.json();
+                    }
+                })
                 }
       };
 
@@ -113,14 +154,18 @@ class Feed extends React.Component {
 
 
       createChat = () => {
-        //   Accept the item
+        // console.log(parseInt(localStorage.getItem("accept_id")))
         postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
-        .then(data => console.log(data)) // Result from the `response.json()` call
+        .then(data => console.log("data")) // Result from the `response.json()` call
+        .catch(error => console.error(error))
+        //   Accept the item
+        postRequest('https://akina.ayushpriya.tech/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
+        .then(data => console.log("data")) // Result from the `response.json()` call
         .catch(error => console.error(error))
 
         function postRequest(url, data) {
         return fetch(url, {
-            credentials: 'same-origin', // 'include', default: 'omit'
+
             method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
             body: JSON.stringify(data), // Coordinate the body type with 'Content-Type'
             headers: new Headers({
@@ -132,13 +177,13 @@ class Feed extends React.Component {
         }
         
           var obj ={}
+          obj["request_sender"] = parseInt(localStorage.getItem("receiver_id"))
+          obj["request_receiver"] = parseInt(localStorage.getItem("user_id"))
           obj["receiver"] = parseInt(localStorage.getItem("receiver_id"))
           obj["sender"] = parseInt(localStorage.getItem("user_id"))
           obj["title"] = localStorage.getItem("item")
 
-          console.log(JSON.stringify(obj))
-
-          fetch('https://hestia-chat.herokuapp.com/api/v1/createChat',{
+          fetch('https://akina.ayushpriya.tech/api/v1/createChat',{
               method:"POST",
               headers: new Headers({
                 'Authorization': localStorage.getItem("token")
@@ -147,15 +192,20 @@ class Feed extends React.Component {
           })
           .then(res => res.json())
           .then(res => {
-              console.log(res)
+            //   console.log(res)
               if(res.code == 200){
-                this.props.history.push("/chat");
+                  window.localStorage.setItem("chat_name", res.chat_room.receiver_name )
+                  window.localStorage.setItem("item", res.chat_room.title)
+                  window.localStorage.setItem("chat_desc", res.chat_room.req_desc)
+                this.setState({
+                    visiblechat1: true
+                })
               }
               if(res.status == 500){
                 this.props.alert.show("Chatroom exists.");
               }
           })
-          .catch(err => console.log(err))
+          .catch(err => console.log("err"))
       }
       handleCancel = e => {
         // console.log(e);
@@ -169,78 +219,98 @@ class Feed extends React.Component {
         window.localStorage.setItem("acceptcheck", `${e.target.checked}`);
         // console.log(localStorage.getItem("acceptcheck"))
       }
+      onChangeSug(e) {
+        window.localStorage.setItem("Sugcheck", `${e.target.checked}`);
+        // console.log(localStorage.getItem("acceptcheck"))
+      }
+    //   componentWillMount(){
+    //     navigator.geolocation.getCurrentPosition(
+    //         position => this.setState({ 
+    //           latitude: position.coords.latitude, 
+    //           longitude: position.coords.longitude
+    //         }), 
+    //         err => console.log(err)
+            
+    //       );
+    //       console.log(this.state.latitude)
+            
+
+
+    //   }
       componentDidMount(){  
         if(localStorage.getItem("token")){
         //  console.log("someone's logged in")
         }else{
-            // this.props.history.push("/login");
-            console.log("u not log in :(")
+            this.props.history.push("/login");
         }
-
+        if ("geolocation" in navigator) {
+            console.log("Available");
+          } else {
+            console.log("Not Available");
+          }
+          navigator.geolocation.getCurrentPosition(function(position) {
+            //   console.log('hap')
+            // console.log("latitude",position.coords.latitude)
+            // console.log("longitude",position.coords.longitude)
+            window.localStorage.setItem("latitude",position.coords.latitude);
+            window.localStorage.setItem("longitude",position.coords.longitude);
+            
+          }, function(err){
+              if(err){
+                alert("Location permission denied. You will not be able to use the full features of this app without providing location access")
+              }
+                // console.log(err)
+        });
         let token =localStorage.getItem("token");
-
-        navigator.geolocation.getCurrentPosition(
-            position => this.setState({ 
-              latitude: position.coords.latitude, 
-              longitude: position.coords.longitude
-            }), 
-            err => console.log(err)
-          );
-          
-
-
-        // this.setState({
-        //     token: localStorage.getItem("token")
-        // })
+        
         // console.log(this.state);
-        fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+this.state.city, {
-            headers: new Headers({
-            'Authorization': localStorage.getItem("token")
+        fetch('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+localStorage.getItem("latitude")+'&longitude='+localStorage.getItem("longitude")+'&localityLanguage=en', {
+            
             })
+            .then(response =>{
+            // console.log(response)
+            return response.json()
             })
-            .then(res => res.json())
             .then(data => {
                 // console.log(data)
-            this.setState({
-                requests: data.Request,
+                if(data.status===400){
+                    this.props.alert.show("location not provided")
+                }
+                // console.log(data.localityInfo.administrative[1].name)
+                let str = data.localityInfo.administrative[1].name
+                let s = str.split(" ")[0];
+                    // console.log(s)
+                this.setState({         //do not remove setState
+                    city:s
+                })
+                    
+                fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+s[0]
                 
-            });
-            console.log(this.state)
+                 , {
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem("token")
+                })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    // console.log(data)
+                    if(data.message == "Location not provided"){
+                        console.log("No location")
+                    } else {
+                        this.setState({
+                            requests: data.Request,
+                        });
+                    }
+                // console.log(this.state)
+                })
+                .catch(error => console.error(error))
+    
+            // console.log(this.state)
             })
             .catch(error => console.error(error))
-
-            // let latitude;
-            // let longitude;
-            // function getLocation() {
-            //     if (navigator.geolocation) {
-            //         navigator.geolocation.getCurrentPosition(showPosition);
-            //             } 
-            //         }
-            // function showPosition(position) {
-            //     latitude = position.coords.latitude;
-            //     longitude = position.coords.longitude;
                 
-            //     }
-                
-
-
-            //     this.setState({
-            //         lat: latitude,
-            //         long: longitude
-            //     })
-
-
-
-                // position = async () => {
-                //     await navigator.geolocation.getCurrentPosition(
-                //       position => this.setState({ 
-                //         latitude: position.coords.latitude, 
-                //         longitude: position.coords.longitude
-                //       }), 
-                //       err => console.log(err)
-                //     );
-                //     console.log(this.state.latitude)
-                //   }   
+            
         }
             
     render(){
@@ -249,6 +319,12 @@ class Feed extends React.Component {
         const reqlist = requests.length ? (
             requests.map(
                 request =>{
+                    if(request.description == null){
+                        request.description = "NA"
+                    }
+                    if(request.description.length > 50){
+                        request.description = request.description.slice(0,50)+ "..."
+                    }
                     // console.log(request)
                     return(
                         <Card key={request.id}>
@@ -259,18 +335,19 @@ class Feed extends React.Component {
                                             <strong>{request.item_name}</strong>
                                         </span>
                                         <p>{request.quantity}</p>
+                                        <p style ={{width:"100%", marginBottom:"10px"}}>{request.description}</p>
                                     </div>
                                     <div className="feed-card-date">
                                         <p>{request.date_time_created.slice(0,10)}</p>
                                     </div>
                                 </Col>
-                                <Col span={7} className="iconz">
+                                <Col span={7} className="iconz tru">
+                                <div className="imgback" onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`,`${request.id}`)}>
+                                        <img  src={check} alt="location"></img>
+                                    </div>
                                     <div className="imgback"  onClick = {this.handleStore(`${request.request_made_by}`, `${request.item_name}`)}>
                                         <img src={store} alt="location"></img>
                                     </div> 
-                                    <div className="imgback">
-                                        <img onClick={this.handleChat(`${request.request_made_by}`, `${request.item_name}`, `${request.id}`)} src={check} alt="location"></img>
-                                    </div>
                                 </Col>
                             </Row>
                         </Card>
@@ -292,9 +369,9 @@ class Feed extends React.Component {
                         <Col span={18}>
                             <h1>Requests</h1>
                         </Col>
-                        <Col className="addReqD" onClick={this.handleAdd}>
+                        <div className="addReqD" onClick={this.handleAdd}>
                             <img src={plus} alt="add req"></img>
-                        </Col>
+                        </div>
                     </Row>
      
                     </div>
@@ -307,28 +384,46 @@ class Feed extends React.Component {
                         visible={this.state.visible}    
                         footer={null}
                         closable={false}
+                        className="addrequest"
+                        centered
+                        width="350px"
                         >
                         <Form onFinish={this.onFinish}>
-                        <Form.Item name="item_name">
+                        <Form.Item name="item_name" rules={[{
+                            max: 250, message:"Max 250 characters"
+                        }]}>
                             <Input 
                                 placeholder="Name of thing"
                             />
                         </Form.Item>
                         <Form.Item
                             name="quantity"
+                            rules={[{
+                            max: 250, message:"Max 250 characters"
+                        }]}
                         >
                             <Input 
                                 placeholder="Quantity"
                             />
                         </Form.Item>
+                        <Form.Item
+                            name="description"
+                            rules={[{
+                            max: 250, message:"Max 250 characters"
+                        }]}
+                        >
+                            <Input 
+                                placeholder="Description"
+                            />
+                        </Form.Item>
                         <Form.Item className="butn">
-                            <Button type="primary" htmlType="submit" onClick={this.handleOk}>
-                                Done <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
+                            <Button type="primary" htmlType="submit">
+                                Done <img src={check} alt="Check" style={{marginLeft:"10px"}}></img>
                             </Button>
                         </Form.Item>
                         <Form.Item className="butn">
-                            <Button type="primary" onClick={this.handleCancel}>
-                                Cancel <strong> X </strong>
+                            <Button type="primary" onClick={this.handleCancel} style={{backgroundColor:"#fff",color:"#000"}}>
+                                Close <img src={cancel} alt="Check" style={{marginLeft:"10px"}}></img>
                             </Button>
                         </Form.Item>
                         </Form>
@@ -340,6 +435,9 @@ class Feed extends React.Component {
                       onOk={this.handleOk}
                       footer={null}
                       onCancel={this.handleCancel}
+                      className="suggestshop"
+                      centered
+                      width="350px"
                     > 
                         <Row>
                             <Col span={24}>
@@ -350,15 +448,15 @@ class Feed extends React.Component {
                         </Row>
                       <h2 style={{marginTop:"20px", textAlign:"center"}}>Suggest a Shop?</h2>
                       <div style={{textAlign:"center"}}>
-                        <Button type="primary" htmlType="submit" onClick={this.createChat} >
-                            Yes <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
+                        <Button type="primary" htmlType="submit" onClick={this.suggestShop} >
+                            Yes <img src={check} alt="Check" style={{marginLeft:"10px"}}></img>
                         </Button>
                         <Button type="primary" onClick={this.handleCancel} style={{backgroundColor:"#fff",color:"#000"}}>
-                            No <strong> X </strong>
+                            No <img src={cancel} alt="Check" style={{marginLeft:"10px"}}></img>
                         </Button>
                     </div>
                     <div style={{textAlign:"center"}}>
-                            <Checkbox onChange={this.onChange} style={{marginTop:"40px"}}>Do not show this again.</Checkbox>
+                            <Checkbox onChange={this.onChangeSug} style={{marginTop:"40px"}}>Do not show this again.</Checkbox>
                     </div>                    
                     </Modal>
                     {/* You have this item? modal*/}
@@ -368,6 +466,9 @@ class Feed extends React.Component {
                       onOk={this.handleOk}
                       footer={null}
                       onCancel={this.handleCancel}
+                      className="itemconfirm"
+                      centered
+                      width="350px"
                     > 
                      <Row>
                         <Col span={24}>
@@ -379,16 +480,36 @@ class Feed extends React.Component {
                       <h2 style={{marginTop:"20px", textAlign:"center"}}>You have this item?</h2>
                         <div style={{textAlign:"center"}}>
                             <Button type="primary" htmlType="submit" onClick={this.createChat} >
-                                Yes <img src={check} alt="Check" style={{paddingLeft:"10px",paddingBottom:"4px"}}></img>
+                                Yes <img src={check} alt="Check" style={{marginLeft:"10px"}}></img>
                             </Button>
                             <Button type="primary" onClick={this.handleCancel} style={{backgroundColor:"#fff",color:"#000"}}>
-                                No <strong> X </strong>
+                                No <img src={cancel} alt="Check" style={{marginLeft:"10px"}}></img>
                             </Button>
                         </div>
                         <div style={{textAlign:"center"}}>
                             <Checkbox onChange={this.onChange} style={{marginTop:"40px"}}>Do not show this again.</Checkbox>
                         </div>
                     </Modal>
+                    <Drawer
+                        placement="left"
+                        closable={true}
+                        onClose={this.onClose}
+                        visible={this.state.visiblechat1}
+                        width="400px"
+                        zIndex="1001"
+                    >
+                        <Chat />
+                    </Drawer>
+                    <Drawer
+                        placement="left"
+                        closable={true}
+                        onClose={this.onClose}
+                        visible={this.state.visiblesug}
+                        width="400px"
+                        zIndex="1001"
+                    >
+                        <Suggestions />
+                    </Drawer>
               </div>
             );
         // })
