@@ -244,11 +244,17 @@ class Chat extends React.Component{
     });
   };
   deleteMessage = () =>{
+    let who_deleted;
     var obj={}
     obj["receiver"] = parseInt(localStorage.getItem("receiver_id"));
     obj["sender"] = parseInt(localStorage.getItem("sender_id"));
-    obj["who_deleted"] = localStorage.getItem("who_deleted");
-    console.log(obj)
+    if(localStorage.getItem("user_id") == localStorage.getItem("sender_id")){
+      who_deleted = "sender"
+    } else {
+      who_deleted = "receiver"
+    }
+    obj["who_deleted"] = who_deleted
+    console.log("Del message", JSON.stringify(obj))
     fetch('https://akina.ayushpriya.tech/api/v1/delChat',{
       method:"delete",
       headers: new Headers({
