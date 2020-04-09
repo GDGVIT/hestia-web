@@ -248,7 +248,7 @@ class Chat extends React.Component{
     obj["receiver"] = parseInt(localStorage.getItem("receiver_id"));
     obj["sender"] = parseInt(localStorage.getItem("sender_id"));
     obj["who_deleted"] = localStorage.getItem("who_deleted");
-
+    console.log(obj)
     fetch('https://akina.ayushpriya.tech/api/v1/delChat',{
       method:"delete",
       headers: new Headers({
