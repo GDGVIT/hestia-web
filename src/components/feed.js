@@ -274,7 +274,7 @@ class Feed extends React.Component {
                     city:s
                 })
                     
-                fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+s[0]
+                fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location=noida'
                 
                  , {
                 headers: new Headers({
