@@ -5,7 +5,9 @@ import report from '../assets/Report.svg';
 import backbutton from '../assets/backbutton.png';
 import './chat.css';
 import {withAlert} from "react-alert";
-import Report from './report'
+import Report from './report';
+import deletez from '../assets/delete.png';
+
 
 
 // const { Search } = Input;
@@ -215,6 +217,25 @@ onClose=()=>{
     // this.addMessage(messageString)
   }
 
+  deleteMessage = () =>{
+    var obj={}
+    obj["receiver"] = parseInt(localStorage.getItem("receiver_id"));
+    obj["sender"] = parseInt(localStorage.getItem("sender_id"));
+    obj["who_deleted"] = localStorage.getItem("who_deleted");
+
+    fetch('https://akina.ayushpriya.tech/api/v1/delChat',{
+      method:"DEL",
+      headers: new Headers({
+        // "Content-Type": "application/json",
+        'Authorization': localStorage.getItem("token")
+      }),
+      body:JSON.stringify(obj)
+    })
+    .then(response=> response.json())
+    .then(res => {console.log(res)})
+    .catch(err => console.log(err));
+  }
+
   // check = () => {
   //   const { ws } = this.state;
   //   if (!ws || ws.readyState == WebSocket.CLOSED) this.connect(); //check if websocket instance is closed, if so call `connect` function.
@@ -275,8 +296,13 @@ onClose=()=>{
                         <h2 style = {{fontSize:13, textAlign:"left"}}>{localStorage.getItem("chat_desc")}</h2>
                       </div>
                     </Col>
-                    <Col span={4}>
-                    <img src={report} alt="Report logo" style ={{ marginTop: "10px"}} onClick={this.gotoReport}></img>
+                    <Col span={2} className="iconz">
+                      <div className="imgback del" onClick={this.deleteMessage}>
+                          <img src={deletez} alt="delete"></img>
+                      </div>
+                    </Col>
+                    <Col span={3}>
+                    <img src={Report} alt="Report logo" style ={{ marginTop: "10px"}} onClick={this.gotoReport}></img>
                     </Col>
                 </Row>
             </div>

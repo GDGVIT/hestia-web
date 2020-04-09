@@ -2,6 +2,7 @@ import React from 'react'
 import Messages from './messages';
 import { Card, Row, Col } from 'antd';
 import Report from '../../assets/Report.svg';
+import deletez from '../../assets/delete.png';
 import backbutton from '../../assets/backbutton.png';
 import './chat.css';
 import Nav from '../nav';
@@ -217,6 +218,24 @@ class Chat extends React.Component{
 
     // this.addMessage(messageString)
   }
+  deleteMessage = () =>{
+    var obj={}
+    obj["receiver"] = parseInt(localStorage.getItem("receiver_id"));
+    obj["sender"] = parseInt(localStorage.getItem("sender_id"));
+    obj["who_deleted"] = localStorage.getItem("who_deleted");
+
+    fetch('https://akina.ayushpriya.tech/api/v1/delChat',{
+      method:"DEL",
+      headers: new Headers({
+        // "Content-Type": "application/json",
+        'Authorization': localStorage.getItem("token")
+      }),
+      body:JSON.stringify(obj)
+    })
+    .then(response=> response.json())
+    .then(res => {console.log(res)})
+    .catch(err => console.log(err));
+  }
 
   // check = () => {
   //   const { ws } = this.state;
@@ -266,9 +285,9 @@ class Chat extends React.Component{
       ) : (
       <div style={{textAlign:"center", marginTop:"20px"}}></div>
       )
-      if(localStorage.getItem("chat_desc").length > 20){
-        localStorage.setItem("chat_desc", localStorage.getItem("chat_desc").slice(0,20) + "..." )
-      } 
+      // if(localStorage.getItem("chat_desc").length > 20){
+      //   localStorage.setItem("chat_desc", localStorage.getItem("chat_desc").slice(0,20) + "..." )
+      // } 
         return(
             <div>
             <div>    
@@ -278,14 +297,19 @@ class Chat extends React.Component{
                         <img src={backbutton} alt = "Back-button" style = {{ marginLeft:"10px", width:"7px",paddingTop:"0"}}></img>
                       </div>
                     </Col>
-                    <Col span={16}>
+                    <Col span={15}>
                       <div style={{marginLeft:"10px"}}>
                         <h1 style = {{fontSize:15, textAlign:"left", fontWeight:"700"}}>{localStorage.getItem("chat_name")}</h1>
                         <h2 style = {{fontSize:15, textAlign:"left"}}>{localStorage.getItem("item")}</h2>
                         <h2 style = {{fontSize:13, textAlign:"left"}}>{localStorage.getItem("chat_desc")}</h2>
                       </div>
                     </Col>
-                    <Col span={4}>
+                    <Col span={2} className="iconz">
+                      <div className="imgback del" onClick={this.deleteMessage}>
+                          <img src={deletez} alt="delete"></img>
+                      </div>
+                    </Col>
+                    <Col span={3}>
                     <img src={Report} alt="Report logo" style ={{ marginTop: "10px"}} onClick={this.gotoReport}></img>
                     </Col>
                 </Row>
