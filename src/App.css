@@ -264,15 +264,18 @@ margin-left: 12.5%;
 }
 .del{
     background-color: #d95071;
-    width: 25px;
-    height: 25px;
+    width: 26px;
+    height: 26px;
     margin-top: 9px;
     margin-right: 9px;
 }
 .del img{
-    margin-left: 5px;
+    margin-left: 6px;
     margin-bottom: 4px;
     width: 11px !important;
+}
+.delc{
+    background-color: #d95071 !important;
 }
 .lil{
     padding-left: 12px;
@@ -495,6 +498,10 @@ margin-left: 12.5%;
 .suggestshop>div, 
 .itemconfirm>div{
     height: 300px;
+}
+
+.deletechat>div{
+    height: 250px;
 }
 .ant-modal-header{
     display: none;

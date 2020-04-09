@@ -242,7 +242,7 @@ class Mychat extends React.Component{
                     <div className="imgbacc">
                             <img src={back} alt="back to feed" onClick={this.gotoProfile}></img>
                         </div>
-                        <h1 style={{ 'fontSize':'24px', paddingTop:'8px', textAlign:'left'}}>Chats And Suggestions</h1>
+                        <h1 style={{ 'fontSize':'19px', paddingTop:'12px', textAlign:'left'}}>Chats And Suggestions</h1>
                     </Col>
                     {/* <Col span={6}>
                     <img onClick={this.gotoProfile} src={profile} alt="Profile logo"></img>

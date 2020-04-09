@@ -10,6 +10,12 @@ import {withRouter} from 'react-router-dom';
 import blueback from '../../assets/rectangle.png';
 import whiteback from '../../assets/rectanglew.png';
 import {withAlert} from "react-alert";
+import { Modal, Button } from 'antd';
+import { Form, Input, Checkbox} from 'antd';
+import cancel from "../../assets/cancel.svg";
+import check from '../../assets/check.png';
+
+
 
 
 
@@ -27,6 +33,7 @@ class Chat extends React.Component{
             messages: [],
             initialmsg: [],
             me: false,
+            visible:false
             // receiver_id : props.location.state.id
         }
     }
@@ -218,6 +225,24 @@ class Chat extends React.Component{
 
     // this.addMessage(messageString)
   }
+  handleDel =() => {
+    this.setState({
+      visible: true,
+    });
+  }
+  handleOk = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
   deleteMessage = () =>{
     var obj={}
     obj["receiver"] = parseInt(localStorage.getItem("receiver_id"));
@@ -225,7 +250,7 @@ class Chat extends React.Component{
     obj["who_deleted"] = localStorage.getItem("who_deleted");
 
     fetch('https://akina.ayushpriya.tech/api/v1/delChat',{
-      method:"DEL",
+      method:"delete",
       headers: new Headers({
         // "Content-Type": "application/json",
         'Authorization': localStorage.getItem("token")
@@ -305,7 +330,7 @@ class Chat extends React.Component{
                       </div>
                     </Col>
                     <Col span={2} className="iconz">
-                      <div className="imgback del" onClick={this.deleteMessage}>
+                      <div className="imgback del" onClick={this.handleDel}>
                           <img src={deletez} alt="delete"></img>
                       </div>
                     </Col>
@@ -333,6 +358,34 @@ class Chat extends React.Component{
 
             <Messages onSubmitMessage={messageString => this.submitMessage(messageString)}/>
             </div>
+            {/* Delete Chat Modal */}
+              <Modal
+                title="You have this item?"
+                visible={this.state.visible}
+                onOk={this.handleOk}
+                footer={null}
+                onCancel={this.handleCancel}
+                className="deletechat"
+                centered
+                width="350px"
+              > 
+                <Row>
+                  <Col span={24}>
+                  <div className="imgModal delc">
+                      <img src={deletez} alt="location"></img>
+                  </div>
+                  </Col>
+                  </Row>
+                <h2 style={{marginTop:"20px",marginBottom:"20px", textAlign:"center"}}>Delete Chat?</h2>
+                  <div style={{textAlign:"center"}}>
+                      <Button type="primary" htmlType="submit" onClick={this.deleteMessage} >
+                          Yes <img src={check} alt="Check" style={{marginLeft:"10px"}}></img>
+                      </Button>
+                      <Button type="primary" onClick={this.handleCancel} style={{backgroundColor:"#fff",color:"#000"}}>
+                          No <img src={cancel} alt="Check" style={{marginLeft:"10px"}}></img>
+                      </Button>
+                  </div>
+              </Modal>
             <Nav />
             </div>
         );
