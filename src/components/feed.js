@@ -183,7 +183,7 @@ class Feed extends React.Component {
           })
           .then(res => res.json())
           .then(res => {
-            //   console.log(res)
+              console.log(res)
               if(res.code == 200){
                   window.localStorage.setItem("chat_name", res.chat_room.sender_name )
                   window.localStorage.setItem("item", res.chat_room.title)

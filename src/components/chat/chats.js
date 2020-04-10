@@ -285,7 +285,7 @@ class Chat extends React.Component{
     render(){
 
       const {initialmsg} = this.state;
-      // console.log(initialmsg)
+      console.log(initialmsg)
       const initial = initialmsg.length ? (
         initialmsg.map(
           msg => {
