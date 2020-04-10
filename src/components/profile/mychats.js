@@ -29,15 +29,17 @@ class Mychat extends React.Component{
     gotoShop = () => {
         this.props.history.push("/suggestashop")
     }
-    gotoMyChat = (r,i,s,sn,wd,cd) => () => {
+    gotoMyChat = (r,i,s,sn,wd,cd,rr,rs) => () => {
         // console.log(this.props)
-        window.localStorage.setItem("receiver_id", r);
+        window.localStorage.setItem("receiver_id", s);
         window.localStorage.setItem("item",i);
-        window.localStorage.setItem("sender_id", s);
-        window.localStorage.setItem("report", r);
+        window.localStorage.setItem("sender_id", r);
+        window.localStorage.setItem("report", s);
         window.localStorage.setItem("chat_name",sn);
         window.localStorage.setItem("who_deleted",wd);
         window.localStorage.setItem("chat_desc", cd);
+        window.localStorage.setItem("request_receiver",rr);
+        window.localStorage.setItem("request_sender",rs);
 
         if(this.props.history){
             this.props.history.push({
@@ -55,7 +57,7 @@ class Mychat extends React.Component{
         }
     }
 
-    gotoOtherChat = (r,i,s,rn,wd,cd) => () => {
+    gotoOtherChat = (r,i,s,rn,wd,cd,rr,rs) => () => {
         // console.log(this.props)
         window.localStorage.setItem("receiver_id", r);
         window.localStorage.setItem("item",i);
@@ -64,6 +66,8 @@ class Mychat extends React.Component{
         window.localStorage.setItem("chat_name",rn);
         window.localStorage.setItem("who_deleted",wd);
         window.localStorage.setItem("chat_desc", cd);
+        window.localStorage.setItem("request_receiver",rr);
+        window.localStorage.setItem("request_sender",rs);
 
         if(this.props.history){
             this.props.history.push({
@@ -187,7 +191,7 @@ class Mychat extends React.Component{
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    <div className="imgback" onClick={this.gotoMyChat(`${data.request_receiver}`, `${data.title}`, `${data.request_sender}`, `${data.receiver_name}`,`${data.sender_name}`,`${data.req_desc}`)}>
+                                    <div className="imgback" onClick={this.gotoMyChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.receiver_name}`,`${data.sender_name}`,`${data.req_desc}`,`${data.request_receiver}`,`${data.request_sender}`)}>
                                         <img src={front} alt="location"></img>
                                     </div>
                                 </Col>
@@ -221,7 +225,7 @@ class Mychat extends React.Component{
                                     </div>
                                 </Col>
                                 <Col span={7} className="iconz">
-                                    <div className="imgback" onClick={this.gotoOtherChat(`${data.request_receiver}`, `${data.title}`, `${data.request_sender}`, `${data.sender_name}`,`${data.receiver_name}`,`${data.req_desc}`)}>
+                                    <div className="imgback" onClick={this.gotoOtherChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.sender_name}`,`${data.receiver_name}`,`${data.req_desc}`,`${data.request_receiver}`,`${data.request_sender}`)}>
                                         <img src={front} alt="location"></img>
                                     </div>
                                 </Col>

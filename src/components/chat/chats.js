@@ -157,6 +157,10 @@ class Chat extends React.Component{
         if(res.status == 404){
             this.props.alert.show("Cannot get messages")
         }
+        if(res.status == 400){
+          this.props.alert.show("User has been reported")
+          this.props.history.push("/mychats");
+        }
         // console.log(res)
         // console.log(this.state)
       })
@@ -246,9 +250,9 @@ class Chat extends React.Component{
   deleteMessage = () =>{
     let who_deleted;
     var obj={}
-    obj["receiver"] = parseInt(localStorage.getItem("receiver_id"));
-    obj["sender"] = parseInt(localStorage.getItem("sender_id"));
-    if(localStorage.getItem("user_id") == localStorage.getItem("sender_id")){
+    obj["receiver"] = parseInt(localStorage.getItem("request_receiver"));
+    obj["sender"] = parseInt(localStorage.getItem("request_sender"));
+    if(localStorage.getItem("user_id") == localStorage.getItem("request_sender")){
       who_deleted = "sender"
     } else {
       who_deleted = "receiver"
