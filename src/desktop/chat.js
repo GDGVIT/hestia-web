@@ -153,6 +153,10 @@ onClose=()=>{
         if(res.status == 404){
             this.props.alert.show("Cannot get messages")
         }
+        if(res.status == 400){
+          this.props.alert.show("User has been reported")
+          // this.props.history.push("/mychats");
+        }
         // console.log(res)
         // console.log(this.state)
       })
@@ -240,10 +244,17 @@ onClose=()=>{
   };
 
   deleteMessage = () =>{
+    let who_deleted;
     var obj={}
-    obj["receiver"] = parseInt(localStorage.getItem("receiver_id"));
-    obj["sender"] = parseInt(localStorage.getItem("sender_id"));
-    obj["who_deleted"] = localStorage.getItem("who_deleted");
+    obj["receiver"] = parseInt(localStorage.getItem("request_receiver"));
+    obj["sender"] = parseInt(localStorage.getItem("request_sender"));
+    if(localStorage.getItem("user_id") == localStorage.getItem("request_sender")){
+      who_deleted = "sender"
+    } else {
+      who_deleted = "receiver"
+    }
+    obj["who_deleted"] = who_deleted
+    console.log("Del message", JSON.stringify(obj))
 
     fetch('https://akina.ayushpriya.tech/api/v1/delChat',{
       method:"delete",
@@ -254,7 +265,13 @@ onClose=()=>{
       body:JSON.stringify(obj)
     })
     .then(response=> response.json())
-    .then(res => {console.log(res)})
+    .then(res => {
+      console.log(res)
+      if(res.code == 200){
+        this.props.alert.show("Chats deleted")
+        // this.props.history.push("/mychats");
+      }
+    })
     .catch(err => console.log(err));
   }
 
@@ -347,8 +364,8 @@ onClose=()=>{
 
             <Messages onSubmitMessage={messageString => this.submitMessage(messageString)}/>
             </div>
-                        {/* Delete Chat Modal */}
-                        <Modal
+              {/* Delete Chat Modal */}
+              <Modal
                 title="You have this item?"
                 visible={this.state.visible}
                 onOk={this.handleOk}
