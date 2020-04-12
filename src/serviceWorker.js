@@ -46,7 +46,6 @@ export function register(config) {
               'worker. To learn more, visit https://bit.ly/CRA-PWA'
           );
         });
-        navigator.serviceWorker.addEventListener("message", (message) => console.log(message));
       } else {
         // Is not localhost. Just register service worker
         registerValidSW(swUrl, config);
@@ -97,6 +96,18 @@ function registerValidSW(swUrl, config) {
     .catch(error => {
       console.error('Error during service worker registration:', error);
     });
+
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("./firebase-messaging-sw.js")
+        .then(function(registration) {
+          console.log("Registration successful, scope is:", registration.scope);
+        })
+        .catch(function(err) {
+          console.log("Service worker registration failed, error:", err);
+        });
+    }
+    
 }
 
 function checkValidServiceWorker(swUrl, config) {

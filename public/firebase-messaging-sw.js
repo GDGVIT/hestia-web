@@ -5,7 +5,7 @@ importScripts('https://www.gstatic.com/firebasejs/init.js');
 
 firebase.initializeApp({
     messagingSenderId: "465731117411",
-    // apiKey: "",
+    apiKey: "AIzaSyAgFUv_wlxwmPrJYPI-G1B3MG2EEd1lMfE",
     authDomain: "akina-notifs.firebaseapp.com",
     databaseURL: "https://akina-notifs.firebaseio.com",
     projectId: "akina-notifs",
@@ -14,3 +14,20 @@ firebase.initializeApp({
     measurementId: "G-9V2RVD5VSP"
 });
 const messaging = firebase.messaging();
+messaging.setBackgroundMessageHandler(function(payload) {
+    const promiseChain = clients
+      .matchAll({
+        type: "window",
+        includeUncontrolled: true
+      })
+      .then(windowClients => {
+        for (let i = 0; i < windowClients.length; i++) {
+          const windowClient = windowClients[i];
+          windowClient.postMessage(payload);
+        }
+      })
+      .then(() => {
+        return registration.showNotification("my notification title");
+      });
+    return promiseChain;
+  });
