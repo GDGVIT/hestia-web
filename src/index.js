@@ -7,6 +7,8 @@ import AlertTemplate from 'react-alert-template-basic'
 import App from './App';
 import Dapp from './desktop/Dapp'
 import * as serviceWorker from './serviceWorker';
+import { initializeFirebase, askForPermissioToReceiveNotifications } from './push-notifications';
+import * as firebase from 'firebase'
 
 const options = {
   // you can also just use 'bot,tom center'
@@ -53,7 +55,30 @@ ReactDOM.render(
   </BrowserRouter>,
   document.getElementById('root')
 );
+initializeFirebase();
+// serviceWorker();
 
+if(!localStorage.getItem("notif-token")){
+  askForPermissioToReceiveNotifications();
+}
+const messaging = firebase.messaging();
+messaging.onMessage(function(payload){
+  console.log('OnMessage :', payload)
+})
+// const messaging = firebase.messaging();
+// messaging.requestPermission()
+// .then(function() {
+//   console.log('permitted')
+
+//   return messaging.getToken();
+// })
+// .then(function(token){
+//   console.log(token)
+//   localStorage.setItem("notif-token",token)
+// })
+// .catch(function(err){
+//   console.log(err)
+// })
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
