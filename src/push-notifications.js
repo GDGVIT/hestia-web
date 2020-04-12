@@ -24,5 +24,11 @@ export const askForPermissioToReceiveNotifications = async () => {
   } catch (error) {
     console.error(error);
   }
+
+  const messaging = firebase.messaging();
+  messaging.usePublicVapidKey(
+    "BBlwmNPEo6A3oQu-YS2nuZdVfsf2KyCP4OAhk7z32Ut98J9glaNMjzw4Z_8CrJc5QvIyNXsR8LTAT_nE-kIvGGo"
+  );
+  navigator.serviceWorker.addEventListener("message", (message) => console.log(message));
 }
 
