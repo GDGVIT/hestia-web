@@ -79,5 +79,6 @@
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff",
-  "description": "Akina, an initiative by DSC-VIT"
+  "description": "Akina, an initiative by DSC-VIT",
+  "gcm_sender_id": "103953800507"
 }

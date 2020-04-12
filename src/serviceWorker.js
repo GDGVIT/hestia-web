@@ -46,6 +46,7 @@ export function register(config) {
               'worker. To learn more, visit https://bit.ly/CRA-PWA'
           );
         });
+        navigator.serviceWorker.addEventListener("message", (message) => console.log(message));
       } else {
         // Is not localhost. Just register service worker
         registerValidSW(swUrl, config);

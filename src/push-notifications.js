@@ -3,7 +3,7 @@ import * as firebase from 'firebase';
 export const initializeFirebase = () => {
   firebase.initializeApp({
     messagingSenderId: "465731117411",
-    apiKey: "AIzaSyAgFUv_wlxwmPrJYPI-G1B3MG2EEd1lMfE",
+    // apiKey: "",
     authDomain: "akina-notifs.firebaseapp.com",
     databaseURL: "https://akina-notifs.firebaseio.com",
     projectId: "akina-notifs",
