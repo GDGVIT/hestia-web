@@ -20,7 +20,7 @@ import Aboutus from './aboutus';
 import Orgs from './orgs'
 import POrgs from './page404';
 
-import { messaging } from './push-notifications';
+// import { messaging } from './push-notifications';
 
 
 
@@ -41,15 +41,19 @@ class App extends React.Component {
         showNav: false
       })
 
-      console.log('message')
-      messaging.requestPermission()
-      .then(async function() {
-      const token = await messaging.getToken();
-      })
-      .catch(function(err) {
-        console.log("Unable to get permission to notify.", err);
-      });
-    navigator.serviceWorker.addEventListener("message", (message) => console.log(message));
+      // messaging.requestPermission()
+      // .then(async function() {
+      // const token = await messaging.getToken();
+      // console.log(token);
+      // })
+      // .catch(function(err) {
+      //   console.log("Unable to get permission to notify.", err);
+      // });
+
+      // messaging.onMessage(function(payload){
+      //   console.log('Message:' + payload);
+      // })
+    // navigator.serviceWorker.addEventListener("message", (message) => console.log(message));
   
   }
   loadReCaptcha('6LdiB-UUAAAAACYC2AlMS9hrw18fQA4FK7-s0LDw');

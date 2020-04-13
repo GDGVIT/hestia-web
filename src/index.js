@@ -73,11 +73,11 @@ ReactDOM.render(
   </BrowserRouter>,
   document.getElementById('root')
 );
-// initializeFirebase();
+initializeFirebase();
 
-// if(!localStorage.getItem("notif-token")){
-//   askForPermissioToReceiveNotifications();
-// }
+if(!localStorage.getItem("notif-token")){
+  askForPermissioToReceiveNotifications();
+}
 // const messaging = firebase.messaging();
 // messaging.onMessage(function(payload){
 //   console.log('OnMessage :', payload)

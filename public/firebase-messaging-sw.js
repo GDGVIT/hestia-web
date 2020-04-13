@@ -15,6 +15,11 @@ firebase.initializeApp({
 const messaging = firebase.messaging();
 
 messaging.setBackgroundMessageHandler(function(payload) {
+  // const title = 'Hello world!';
+  // const options = {
+  //   body : payload.data.status
+  // }
+  // return self.registration.showNotification(title,options);
   const promiseChain = clients
     .matchAll({
       type: "window",
