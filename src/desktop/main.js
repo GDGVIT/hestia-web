@@ -73,6 +73,7 @@ class Dmain extends React.Component{
         }
     }
     logoutsar=()=>{
+        localStorage.clear();
         localStorage.removeItem("token");
         this.props.history.push("/dlogin")
     }

@@ -87,6 +87,26 @@ const Login = (props) => {
             if(authcheck){
             window.localStorage.setItem("user_id", data.id);
             window.localStorage.setItem("token", data.Token);
+            if(localStorage.getItem("token")){  
+              var obj ={}
+              obj["user_token"] = localStorage.getItem("token");
+              obj["registration_id"] = localStorage.getItem("notif-token");
+              console.log(JSON.stringify(obj))
+            
+              fetch('https://hestia-requests.herokuapp.com/api/notification/register_device/',{
+                method:"POST",
+                headers: new Headers({
+                  'Content-Type': 'application/json'
+                }),
+                body:JSON.stringify(obj)
+              })
+              .then(res => {
+                console.log(res)
+                return res.json()
+              })
+              .then(res => console.log(res))
+              .catch(err => console.log(err))
+          }
             window.localStorage.setItem("name", data.name);
             window.localStorage.setItem("email", data.email);
             window.localStorage.setItem("phone", data.phone);

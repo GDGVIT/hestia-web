@@ -35,26 +35,11 @@ class App extends React.Component {
     }
     // console.log(props)
   }
-  async componentDidMount(){
+  componentDidMount(){
     if(localStorage.getItem("token")){
       this.setState({
         showNav: false
-      })
-
-      // messaging.requestPermission()
-      // .then(async function() {
-      // const token = await messaging.getToken();
-      // console.log(token);
-      // })
-      // .catch(function(err) {
-      //   console.log("Unable to get permission to notify.", err);
-      // });
-
-      // messaging.onMessage(function(payload){
-      //   console.log('Message:' + payload);
-      // })
-    // navigator.serviceWorker.addEventListener("message", (message) => console.log(message));
-  
+      })  
   }
   loadReCaptcha('6LdiB-UUAAAAACYC2AlMS9hrw18fQA4FK7-s0LDw');
   }
