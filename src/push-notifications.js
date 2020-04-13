@@ -2,19 +2,19 @@ import * as firebase from 'firebase/app';
 import 'firebase/messaging';
 
 export const initializeFirebase = () => { firebase.initializeApp({
-    messagingSenderId: "465731117411",
-    apiKey: "AIzaSyAgFUv_wlxwmPrJYPI-G1B3MG2EEd1lMfE",
-    authDomain: "akina-notifs.firebaseapp.com",
-    databaseURL: "https://akina-notifs.firebaseio.com",
-    projectId: "akina-notifs",
-    storageBucket: "akina-notifs.appspot.com",
-    appId: "1:465731117411:web:9ba86105c189317daab356",
-    measurementId: "G-9V2RVD5VSP"
+  apiKey: "AIzaSyD_7Jeq5rg6eFmEPvOgeMdrOvJ_GQY8qUE",
+  authDomain: "akina-6b5c9.firebaseapp.com",
+  databaseURL: "https://akina-6b5c9.firebaseio.com",
+  projectId: "akina-6b5c9",
+  storageBucket: "akina-6b5c9.appspot.com",
+  messagingSenderId: "258042889226",
+  appId: "1:258042889226:web:05e81fe909946336584bf3",
+  measurementId: "G-XJP07W8KRT"
   });
 
   const messaging = firebase.messaging();
   messaging.usePublicVapidKey(
-    "BBlwmNPEo6A3oQu-YS2nuZdVfsf2KyCP4OAhk7z32Ut98J9glaNMjzw4Z_8CrJc5QvIyNXsR8LTAT_nE-kIvGGo"
+    "BND5DyoQuJz2lScg0BbW1SIOKO4LnPL4t85arUKPoUhFByQkmVj2CcPCsLx3cmQEm4ONzxATvyBrzyhTRHyQH6I"
   );
   // const messaging = firebase.messaging();
   messaging.onMessage(function(payload){
@@ -32,6 +32,7 @@ export const askForPermissioToReceiveNotifications = async () => {
     const token = await messaging.getToken();
     console.log('token:', token);
    localStorage.setItem("notif-token",token)
+   localStorage.setItem("registration_id", "258042889226");
     return token;
   } catch (error) {
     console.error(error);

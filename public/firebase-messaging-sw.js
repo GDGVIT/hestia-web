@@ -2,14 +2,14 @@ importScripts("https://www.gstatic.com/firebasejs/5.9.4/firebase-app.js");
 importScripts("https://www.gstatic.com/firebasejs/5.9.4/firebase-messaging.js");
 
 firebase.initializeApp({
-  messagingSenderId: "465731117411",
-  apiKey: "AIzaSyAgFUv_wlxwmPrJYPI-G1B3MG2EEd1lMfE",
-  authDomain: "akina-notifs.firebaseapp.com",
-  databaseURL: "https://akina-notifs.firebaseio.com",
-  projectId: "akina-notifs",
-  storageBucket: "akina-notifs.appspot.com",
-  appId: "1:465731117411:web:9ba86105c189317daab356",
-  measurementId: "G-9V2RVD5VSP"
+  apiKey: "AIzaSyD_7Jeq5rg6eFmEPvOgeMdrOvJ_GQY8qUE",
+  authDomain: "akina-6b5c9.firebaseapp.com",
+  databaseURL: "https://akina-6b5c9.firebaseio.com",
+  projectId: "akina-6b5c9",
+  storageBucket: "akina-6b5c9.appspot.com",
+  messagingSenderId: "258042889226",
+  appId: "1:258042889226:web:05e81fe909946336584bf3",
+  measurementId: "G-XJP07W8KRT"
 });
 
 const messaging = firebase.messaging();
