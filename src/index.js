@@ -57,6 +57,13 @@ if ("serviceWorker" in navigator) {
       console.log("Service worker registration failed, error:", err);
     });
 }
+// self.addEventListener("install", event => {
+//   event.waitUntil(
+//     caches.open(cachename)
+//     .then(cache => cache.addAll(cachelist))
+//     .catch(error => console.error('💩', error))
+//   )
+// })
 
 ReactDOM.render(
   <BrowserRouter>
@@ -66,16 +73,15 @@ ReactDOM.render(
   </BrowserRouter>,
   document.getElementById('root')
 );
-initializeFirebase();
-// serviceWorker();
+// initializeFirebase();
 
-if(!localStorage.getItem("notif-token")){
-  askForPermissioToReceiveNotifications();
-}
-const messaging = firebase.messaging();
-messaging.onMessage(function(payload){
-  console.log('OnMessage :', payload)
-})
+// if(!localStorage.getItem("notif-token")){
+//   askForPermissioToReceiveNotifications();
+// }
+// const messaging = firebase.messaging();
+// messaging.onMessage(function(payload){
+//   console.log('OnMessage :', payload)
+// })
 // const messaging = firebase.messaging();
 // messaging.requestPermission()
 // .then(function() {
@@ -93,4 +99,4 @@ messaging.onMessage(function(payload){
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// serviceWorker.unregister();

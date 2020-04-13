@@ -20,6 +20,8 @@ import Aboutus from './aboutus';
 import Orgs from './orgs'
 import POrgs from './page404';
 
+import { messaging } from './push-notifications';
+
 
 
 import { loadReCaptcha } from 'react-recaptcha-v3';
@@ -33,11 +35,22 @@ class App extends React.Component {
     }
     // console.log(props)
   }
-  componentDidMount(){
+  async componentDidMount(){
     if(localStorage.getItem("token")){
       this.setState({
         showNav: false
       })
+
+      console.log('message')
+      messaging.requestPermission()
+      .then(async function() {
+      const token = await messaging.getToken();
+      })
+      .catch(function(err) {
+        console.log("Unable to get permission to notify.", err);
+      });
+    navigator.serviceWorker.addEventListener("message", (message) => console.log(message));
+  
   }
   loadReCaptcha('6LdiB-UUAAAAACYC2AlMS9hrw18fQA4FK7-s0LDw');
   }
