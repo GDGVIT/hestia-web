@@ -11,6 +11,7 @@ import Edit from './edit';
 import Myreqs from './myreqs'
 import front from '../assets/front.png';
 import Mychat from './mychats'
+import Explore from './explore'
 
 class Dmain extends React.Component{
     constructor(props){
@@ -170,7 +171,7 @@ class Dmain extends React.Component{
                 visible={this.state.explore}
                 width="400px"
             >
-            <h3>Coming soon :)</h3>
+                <Explore />
             </Drawer>
         </div>
         )

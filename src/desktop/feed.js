@@ -238,11 +238,6 @@ class Feed extends React.Component {
 
     //   }
       componentDidMount(){  
-        if(localStorage.getItem("token")){
-        //  console.log("someone's logged in")
-        }else{
-            this.props.history.push("/login");
-        }
         if ("geolocation" in navigator) {
             console.log("Available");
           } else {
@@ -274,18 +269,17 @@ class Feed extends React.Component {
             .then(data => {
                 // console.log(data)
                 if(data.status===400){
-                    this.props.alert.show("location not provided")
+                    this.props.alert.show("Couldn't get location. Reload and try again")
                 }
-                // console.log(data.localityInfo.administrative[1].name)
-                let str = data.localityInfo.administrative[1].name
+                // console.log(data.localityInfo)
+                let str = data.localityInfo.administrative[2].name
                 let s = str.split(" ")[0];
                     // console.log(s)
                 this.setState({         //do not remove setState
                     city:s
                 })
                     
-                fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+s[0]
-                
+                fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+s
                  , {
                 headers: new Headers({
                     'Content-Type': 'application/json',

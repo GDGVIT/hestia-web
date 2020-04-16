@@ -146,12 +146,12 @@ class Feed extends React.Component {
 
       createChat = () => {
         // console.log(parseInt(localStorage.getItem("accept_id")))
-        postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:'noida'})
-        .then(data => console.log("data")) // Result from the `response.json()` call
+        postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
+        .then(data => console.log(data)) // Result from the `response.json()` call
         .catch(error => console.error(error))
         //   Accept the item
-        postRequest('https://akina.ayushpriya.tech/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:'noida'})
-        .then(data => console.log("data")) // Result from the `response.json()` call
+        postRequest('https://akina.ayushpriya.tech/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
+        .then(data => console.log(data)) // Result from the `response.json()` call
         .catch(error => console.error(error))
 
         function postRequest(url, data) {
@@ -267,14 +267,14 @@ class Feed extends React.Component {
                     this.props.alert.show("location not provided")
                 }
                 // console.log(data.localityInfo.administrative[1].name)
-                let str = data.localityInfo.administrative[1].name;
+                let str = data.localityInfo.administrative[2].name;
                 let s = str.split(" ")[0];
                     // console.log(s)
                 this.setState({         //do not remove setState
                     city:s
                 })
                     
-                fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location=noida'
+                fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+s
                 
                  , {
                 headers: new Headers({

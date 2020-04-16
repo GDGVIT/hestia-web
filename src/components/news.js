@@ -1,8 +1,8 @@
 import React from 'react';
 import { Card, Row, Col } from 'antd';
 import profile from '../assets/profile.png';
-import Profile from '../components/profile/profile';
 import Nav from './nav';
+import front from '../assets/front.png';
 
 class News extends React.Component {
     constructor(props){
@@ -38,6 +38,11 @@ class News extends React.Component {
                 })
                 .catch(error => console.error(error))
      }
+
+     gotoStats=()=>{
+         this.props.history.push("/stats")
+     }
+
     render(){
 
         const { news } = this.state;
@@ -95,7 +100,18 @@ class News extends React.Component {
                     <img onClick={this.gotoProfile} src={profile} alt="Profile logo"></img>
                     </Col>
                 </Row>
- 
+                <div style={{marginTop:'20px'}}>    
+                <Row style={{width:'100%'}} className="ant-card">
+                    <Col span={19} style={{width:'100%'}}>
+                        <h1 style={{ 'fontSize':'16px', paddingTop:'12px', paddingLeft:'10px', textAlign:'left', fontWeight:'normal'}}>Statistics</h1>
+                    </Col>
+                    <Col span={5} className="iconz">
+                            <div className="imgback" style={{margin:'10px'}} onClick={this.gotoStats}>
+                                <img style={{marginLeft:'10px'}} src={front} alt="location"></img>
+                            </div>
+                    </Col>
+                </Row>
+                </div>
                 </div>
                 <div className="main-content">
                     {newslist}

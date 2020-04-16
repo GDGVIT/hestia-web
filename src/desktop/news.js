@@ -1,12 +1,15 @@
 import React from 'react';
-import { Card, Row, Col } from 'antd';
+import { Card, Row, Col, Drawer } from 'antd';
+import front from '../assets/front.png';
+import Stats from './stats'
 
 class News extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             isEmptyState: true,
-            news:[ ]
+            news:[ ],
+            visible: false
         }
     }
     componentDidMount(){
@@ -17,7 +20,7 @@ class News extends React.Component {
         }
 
 
-            fetch('https://hestia-info.herokuapp.com/node',{
+        fetch('https://hestia-info.herokuapp.com/node',{
                 headers: new Headers({
                     'content-type': 'application/json'
                 })
@@ -33,6 +36,18 @@ class News extends React.Component {
                 })
                 .catch(error => console.error(error))
      }
+
+     gotoStats=()=>{
+        this.setState({
+            visible: true
+        })
+    }
+
+    onClose=()=>{
+        this.setState({
+            visible: false
+        })
+    }
     render(){
 
         const { news } = this.state;
@@ -87,11 +102,32 @@ class News extends React.Component {
                         <h1>News</h1>
                     </Col>
                 </Row>
- 
+                <div style={{marginTop:'20px'}}>    
+                <Row style={{width:'100%'}} className="ant-card">
+                    <Col span={19} style={{width:'100%'}}>
+                        <h1 style={{ 'fontSize':'16px', paddingTop:'12px', paddingLeft:'10px', textAlign:'left', fontWeight:'normal'}}>Statistics</h1>
+                    </Col>
+                    <Col span={5} className="iconz">
+                            <div className="imgback" style={{margin:'10px'}} onClick={this.gotoStats}>
+                                <img style={{marginLeft:'10px'}} src={front} alt="location"></img>
+                            </div>
+                    </Col>
+                </Row>
+                </div>
                 </div>
                 <div className="main-content">
                     {newslist}
                 </div>
+                <Drawer
+                        placement="right"
+                        closable={true}
+                        onClose={this.onClose}
+                        visible={this.state.visible}
+                        width="400px"
+                        zIndex="1049"
+                    >
+                    <Stats />
+                </Drawer>
           </div>
         );
     }

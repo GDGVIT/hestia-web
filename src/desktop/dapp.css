@@ -375,3 +375,9 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+
+.colp-header{
+width: 60%;
+float: left;
+}

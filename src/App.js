@@ -18,10 +18,9 @@ import Sap from './components/sap';
 import Suggestions from './components/profile/suggestions';
 import Aboutus from './aboutus';
 import Orgs from './orgs'
-import POrgs from './page404';
-
-// import { messaging } from './push-notifications';
-
+import POrgs from './page404'
+import Stats from './components/stats'
+import Explore from './components/explore'
 
 
 import { loadReCaptcha } from 'react-recaptcha-v3';
@@ -73,6 +72,8 @@ class App extends React.Component {
           <Route exact path='/suggestashop' component={Sap}/>
           <Route exact path='/suggestions' component={Suggestions}/>
           <Route exact path='/organisations' component={Orgs}/>
+          <Route exact path='/stats' component={Stats}/>
+          <Route exact path='/explore' component={Explore}/>
           <Route component={POrgs}/>
           </Switch>
           {this.showNav()}
