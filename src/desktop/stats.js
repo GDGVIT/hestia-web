@@ -233,11 +233,12 @@ export default class Stats extends React.Component{
 
 
     render(){
-
         var {allCountries} = this.state;
-        var theOptions = allCountries.map(data=>{
+
+        var theOptions = allCountries?(allCountries.map(data=>{
             return(<Option key={data} value={data}>{data}</Option>)
-        })
+        })):(<Option key="loading" value="loading">loading</Option>);
+
         var {chosen} = this.state;
         var dataToDisp = chosen==='world'?(
             <div>

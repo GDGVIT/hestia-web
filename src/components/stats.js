@@ -28,7 +28,7 @@ export default class Stats extends React.Component{
             dataLine3:[],
             chosen:'world',
             allCountries:[],
-            selected: null,
+            selected: 'india',
             currentCountry:[]
         }
     }
@@ -157,6 +157,37 @@ export default class Stats extends React.Component{
                 allCountries: data.allCountries
             })
         })
+
+        fetch(`https://hestia-info.herokuapp.com/allCountriesData/${this.state.selected}`,{
+            method: 'GET'
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data.countryData)
+            this.setState({
+                currentCountry: data.countryData,
+                dataPie2:{
+                    labels: ['Active', 'Recovered', 'Deceased' ],
+                    datasets:[{
+                        data:[
+                                data.countryData.active,
+                                data.countryData.recovered,
+                                data.countryData.deaths
+                            
+                        ],
+                        backgroundColor:[
+                        '#ffdd86',
+                        '#1fd9d9',
+                        '#ff589c',
+                        ]
+                    }]
+                    
+                }
+            })
+            console.log(this.state.currentCountry)
+            console.log(this.state.dataPie2)
+        })
+        .catch(err0r=>console.error(err0r))
     }
 
 
@@ -235,9 +266,9 @@ export default class Stats extends React.Component{
     render(){
 
         var {allCountries} = this.state;
-        var theOptions = allCountries.map(data=>{
+        var theOptions = allCountries?(allCountries.map(data=>{
             return(<Option key={data} value={data}>{data}</Option>)
-        })
+        })):(<Option key="loading" value="loading">loading</Option>);
 
         var {chosen} = this.state;
         var dataToDisp = chosen==='world'?(
@@ -367,6 +398,7 @@ export default class Stats extends React.Component{
                 showSearch
                 placeholder="Select a country"
                 optionFilterProp="children"
+                defaultValue='India'
                 onChange={this.onChange}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
