@@ -264,7 +264,7 @@ export default class Stats extends React.Component{
                         <div className="statType">Recovered</div>
                     </Col>
                     <Col span={8}>
-                        <div className="statNum" style={{color:"#ff589c"}}>{this.state.fullstat.globalData.recentRecovered}</div>
+                        <div className="statNum" style={{color:"#ff589c"}}>{this.state.fullstat.globalData.recentDeath}</div>
                         <div className="statType">Deceased</div>
                     </Col>
                 </Row>
@@ -286,7 +286,7 @@ export default class Stats extends React.Component{
                 /> 
             </div>
             <div style={{textAlign:'center', marginTop:'50px', marginBottom:'20px'}}><h1>Trend Plots</h1></div>
-            <div style={{textAlign:'center', marginTop:'50px', marginBottom:'20px'}}><h3 style={{color:'#1fd9d9'}}>Total Cases</h3></div>
+            <div style={{textAlign:'center', marginTop:'50px', marginBottom:'20px'}}><h3 style={{color:'#ffdd86'}}>Total Cases</h3></div>
             <Line
                     data={this.state.dataLine1}
                     options={{ 
@@ -311,7 +311,7 @@ export default class Stats extends React.Component{
                 /> 
             <div style={{textAlign:'center', marginBottom:'20px'}}><h3 style={{color:'#1fd9d9'}}>Time</h3></div>
             
-            <div style={{textAlign:'center', marginTop:'50px', marginBottom:'20px'}}><h3 style={{color:'#ffdd86'}}>Recovered</h3></div>
+            <div style={{textAlign:'center', marginTop:'50px', marginBottom:'20px'}}><h3 style={{color:'#1fd9d9'}}>Recovered</h3></div>
             <Line
                     data={this.state.dataLine2}
                     options={{ 
