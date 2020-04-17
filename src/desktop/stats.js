@@ -27,7 +27,7 @@ export default class Stats extends React.Component{
             dataLine3:[],
             chosen:'world',
             allCountries:[],
-            selected: null,
+            selected: 'india',
             currentCountry:[]
         }
     }
@@ -39,7 +39,7 @@ export default class Stats extends React.Component{
                 datasets:[
                 {
                     data:[
-                        (chartD.recentCase - (chartD.recentDeath+chartD.recentRecovered)),
+                        chartD.recentCase,
                         chartD.recentRecovered,
                         chartD.recentDeath
                     ],
@@ -157,6 +157,37 @@ export default class Stats extends React.Component{
                 allCountries: data.allCountries
             })
         })
+
+        fetch(`https://hestia-info.herokuapp.com/allCountriesData/${this.state.selected}`,{
+            method: 'GET'
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data.countryData)
+            this.setState({
+                currentCountry: data.countryData,
+                dataPie2:{
+                    labels: ['Active', 'Recovered', 'Deceased' ],
+                    datasets:[{
+                        data:[
+                                data.countryData.active,
+                                data.countryData.recovered,
+                                data.countryData.deaths
+                            
+                        ],
+                        backgroundColor:[
+                        '#ffdd86',
+                        '#1fd9d9',
+                        '#ff589c',
+                        ]
+                    }]
+                    
+                }
+            })
+            console.log(this.state.currentCountry)
+            console.log(this.state.dataPie2)
+        })
+        .catch(err0r=>console.error(err0r))
     }
 
 
@@ -256,7 +287,7 @@ export default class Stats extends React.Component{
             <Card key="cases" className="profcard">
                  <Row gutter={10} className="statCase">
                     <Col span={8} style={{borderRight:"1px solid lightgray"}}>
-                        <div className="statNum" style={{color:"#ffdd86"}}>{(this.state.fullstat.globalData.recentCase - (this.state.fullstat.globalData.recentDeath+this.state.fullstat.globalData.recentRecovered))}</div>
+                        <div className="statNum" style={{color:"#ffdd86"}}>{this.state.fullstat.globalData.recentCase}</div>
                         <div className="statType">Active</div>
                     </Col>
                     <Col span={8} style={{borderRight:"1px solid lightgray"}}>
@@ -367,6 +398,7 @@ export default class Stats extends React.Component{
                 showSearch
                 placeholder="Select a country"
                 optionFilterProp="children"
+                defaultValue='india'
                 onChange={this.onChange}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}

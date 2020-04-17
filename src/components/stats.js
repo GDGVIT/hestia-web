@@ -40,7 +40,7 @@ export default class Stats extends React.Component{
                 datasets:[
                 {
                     data:[
-                        (chartD.recentCase - (chartD.recentDeath+chartD.recentRecovered)),
+                        chartD.recentCase,
                         chartD.recentRecovered,
                         chartD.recentDeath
                     ],
@@ -287,7 +287,7 @@ export default class Stats extends React.Component{
             <Card key="cases" className="profcard">
                  <Row gutter={10} className="statCase">
                     <Col span={8} style={{borderRight:"1px solid lightgray"}}>
-                        <div className="statNum" style={{color:"#ffdd86"}}>{(this.state.fullstat.globalData.recentCase - (this.state.fullstat.globalData.recentDeath+this.state.fullstat.globalData.recentRecovered))}</div>
+                        <div className="statNum" style={{color:"#ffdd86"}}>{this.state.fullstat.globalData.recentCase}</div>
                         <div className="statType">Active</div>
                     </Col>
                     <Col span={8} style={{borderRight:"1px solid lightgray"}}>
