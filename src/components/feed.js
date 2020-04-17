@@ -273,8 +273,13 @@ class Feed extends React.Component {
                 this.setState({         //do not remove setState
                     city:s
                 })
+<<<<<<< Updated upstream
                     
                 fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+s
+=======
+                 if (this.state.custom_location==''){   
+                fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+s[0]
+>>>>>>> Stashed changes
                 
                  , {
                 headers: new Headers({
@@ -295,7 +300,30 @@ class Feed extends React.Component {
                 // console.log(this.state)
                 })
                 .catch(error => console.error(error))
-    
+            }
+            else{
+                fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+this.state.custom_location
+                
+                 , {
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem("token")
+                })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    // console.log(data)
+                    if(data.message == "Location not provided"){
+                        // console.log("No location")
+                    } else {
+                        this.setState({
+                            requests: data.Request,
+                        });
+                    }
+                // console.log(this.state)
+                })
+                .catch(error => console.error(error))
+            }
             // console.log(this.state)
             })
             .catch(error => console.error(error))
@@ -406,6 +434,13 @@ class Feed extends React.Component {
                         >
                             <Input 
                                 placeholder="Description"
+                            />
+                        </Form.Item>
+                        <Form.Item name="custom_location" rules={[{
+                            max: 250, message:"Max 250 characters"
+                        }]}>
+                            <Input 
+                                placeholder="Custom location"
                             />
                         </Form.Item>
                         <Form.Item className="butn">
