@@ -34,7 +34,7 @@ class Explore extends React.Component {
         })
         .then(citi=>{
             console.log(citi)
-            fetch('https://hestia-requests.herokuapp.com/api/requests/user_organization_view/?city=mumbai',{
+            fetch('https://hestia-requests.herokuapp.com/api/requests/user_organization_view/?city='+s,{
                 method: 'GET',
                 headers: new Headers({
                     'Authorization': localStorage.getItem("token")
