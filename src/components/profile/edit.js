@@ -87,7 +87,7 @@ class Edit extends React.Component{
             })
         }
         // console.log({"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone})
-        postRequest('https://akina.ayushpriya.tech/api/user/updateUser', {"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone}, this.props)
+        postRequest('https://akina.ayushpriya.tech/api/user/updateUser', {"name": this.state.name,"email": this.state.email,"phone":this.state.phone}, this.props)
             .then(data => {
                 if(data){
                     this.props.alert.show("Profile succesfully edited")
