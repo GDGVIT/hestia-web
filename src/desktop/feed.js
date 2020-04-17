@@ -25,6 +25,7 @@ class Feed extends React.Component {
             token: '',
             visiblechat1:false,
             visiblesug: false,
+            custom_location:''
         }
     }
     onClose=()=>{
@@ -286,7 +287,7 @@ class Feed extends React.Component {
 
 
     //   }
-      componentDidMount(){  
+    componentDidMount(){  
         if ("geolocation" in navigator) {
             console.log("Available");
           } else {
@@ -306,16 +307,17 @@ class Feed extends React.Component {
                 // console.log(err)
         });
         let token =localStorage.getItem("token");
+        
         // console.log(this.state);
         fetch('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+localStorage.getItem("latitude")+'&longitude='+localStorage.getItem("longitude")+'&localityLanguage=en', {
             
             })
             .then(response =>{
-            console.log(response)
+            // console.log(response)
             return response.json()
             })
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 if(data.status===400){
                     this.props.alert.show("Couldn't get location. Reload and try again")
                 }
@@ -327,7 +329,7 @@ class Feed extends React.Component {
                     city:s
                 })
                     
-                   
+                if (this.state.custom_location==''){   
                     fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+s[0]
                     
                      , {
@@ -349,37 +351,37 @@ class Feed extends React.Component {
                     // console.log(this.state)
                     })
                     .catch(error => console.error(error))
-                
-            //     // else{
-            //         fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+this.state.custom_location
+                }
+                else{
+                    fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+this.state.city
                     
-            //          , {
-            //         headers: new Headers({
-            //             'Content-Type': 'application/json',
-            //         'Authorization': localStorage.getItem("token")
-            //         })
-            //         })
-            //         .then(res => res.json())
-            //         .then(data => {
-            //             // console.log(data)
-            //             if(data.message == "Location not provided"){
-            //                 // console.log("No location")
-            //             } else {
-            //                 this.setState({
-            //                     requests: data.Request,
-            //                 });
-            //             }
-            //         // console.log(this.state)
-            //         })
-            //         .catch(error => console.error(error))
-            //     }
+                     , {
+                    headers: new Headers({
+                        'Content-Type': 'application/json',
+                    'Authorization': localStorage.getItem("token")
+                    })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        // console.log(data)
+                        if(data.message == "Location not provided"){
+                            // console.log("No location")
+                        } else {
+                            this.setState({
+                                requests: data.Request,
+                            });
+                        }
+                    // console.log(this.state)
+                    })
+                    .catch(error => console.error(error))
+                }
     
-            // // console.log(this.state)
+            // console.log(this.state)
             })
             
                 
             
-        }
+        }      
             
     render(){
         const { requests } = this.state;

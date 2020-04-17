@@ -27,7 +27,7 @@ export default class Stats extends React.Component{
             dataLine3:[],
             chosen:'world',
             allCountries:[],
-            selected: null,
+            selected: 'india',
             currentCountry:[]
         }
     }
@@ -39,7 +39,7 @@ export default class Stats extends React.Component{
                 datasets:[
                 {
                     data:[
-                        (chartD.recentCase - (chartD.recentDeath+chartD.recentRecovered)),
+                        chartD.recentCase,
                         chartD.recentRecovered,
                         chartD.recentDeath
                     ],
@@ -157,6 +157,37 @@ export default class Stats extends React.Component{
                 allCountries: data.allCountries
             })
         })
+
+        fetch(`https://hestia-info.herokuapp.com/allCountriesData/${this.state.selected}`,{
+            method: 'GET'
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data.countryData)
+            this.setState({
+                currentCountry: data.countryData,
+                dataPie2:{
+                    labels: ['Active', 'Recovered', 'Deceased' ],
+                    datasets:[{
+                        data:[
+                                data.countryData.active,
+                                data.countryData.recovered,
+                                data.countryData.deaths
+                            
+                        ],
+                        backgroundColor:[
+                        '#ffdd86',
+                        '#1fd9d9',
+                        '#ff589c',
+                        ]
+                    }]
+                    
+                }
+            })
+            console.log(this.state.currentCountry)
+            console.log(this.state.dataPie2)
+        })
+        .catch(err0r=>console.error(err0r))
     }
 
 
@@ -256,7 +287,7 @@ export default class Stats extends React.Component{
             <Card key="cases" className="profcard">
                  <Row gutter={10} className="statCase">
                     <Col span={8} style={{borderRight:"1px solid lightgray"}}>
-                        <div className="statNum" style={{color:"#ffdd86"}}>{(this.state.fullstat.globalData.recentCase - (this.state.fullstat.globalData.recentDeath+this.state.fullstat.globalData.recentRecovered))}</div>
+                        <div className="statNum" style={{color:"#ffdd86"}}>{this.state.fullstat.globalData.recentCase}</div>
                         <div className="statType">Active</div>
                     </Col>
                     <Col span={8} style={{borderRight:"1px solid lightgray"}}>
@@ -264,7 +295,7 @@ export default class Stats extends React.Component{
                         <div className="statType">Recovered</div>
                     </Col>
                     <Col span={8}>
-                        <div className="statNum" style={{color:"#ff589c"}}>{this.state.fullstat.globalData.recentRecovered}</div>
+                        <div className="statNum" style={{color:"#ff589c"}}>{this.state.fullstat.globalData.recentDeath}</div>
                         <div className="statType">Deceased</div>
                     </Col>
                 </Row>
@@ -286,7 +317,7 @@ export default class Stats extends React.Component{
                 /> 
             </div>
             <div style={{textAlign:'center', marginTop:'50px', marginBottom:'20px'}}><h1>Trend Plots</h1></div>
-            <div style={{textAlign:'center', marginTop:'50px', marginBottom:'20px'}}><h3 style={{color:'#1fd9d9'}}>Total Cases</h3></div>
+            <div style={{textAlign:'center', marginTop:'50px', marginBottom:'20px'}}><h3 style={{color:'#ffdd86'}}>Total Cases</h3></div>
             <Line
                     data={this.state.dataLine1}
                     options={{ 
@@ -311,7 +342,7 @@ export default class Stats extends React.Component{
                 /> 
             <div style={{textAlign:'center', marginBottom:'20px'}}><h3 style={{color:'#1fd9d9'}}>Time</h3></div>
             
-            <div style={{textAlign:'center', marginTop:'50px', marginBottom:'20px'}}><h3 style={{color:'#ffdd86'}}>Recovered</h3></div>
+            <div style={{textAlign:'center', marginTop:'50px', marginBottom:'20px'}}><h3 style={{color:'#1fd9d9'}}>Recovered</h3></div>
             <Line
                     data={this.state.dataLine2}
                     options={{ 
@@ -367,6 +398,7 @@ export default class Stats extends React.Component{
                 showSearch
                 placeholder="Select a country"
                 optionFilterProp="children"
+                defaultValue='india'
                 onChange={this.onChange}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}

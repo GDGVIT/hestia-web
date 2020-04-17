@@ -40,7 +40,7 @@ export default class Stats extends React.Component{
                 datasets:[
                 {
                     data:[
-                        (chartD.recentCase - (chartD.recentDeath+chartD.recentRecovered)),
+                        chartD.recentCase,
                         chartD.recentRecovered,
                         chartD.recentDeath
                     ],
@@ -276,10 +276,10 @@ export default class Stats extends React.Component{
             <div>
             <Card key="total" className="profcard">
             <Row gutter={10} className="statCase">
-                    <Col span={19}>
+                    <Col span={16}>
                         <div className="statNum" style={{textAlign:'left'}}>Total Cases</div>
                     </Col>
-                    <Col span={5}>
+                    <Col span={8}>
                         <div className="statNum" style={{color:"#ffdd86"}}>{this.state.fullstat.globalData.recentTotalCases}</div>
                     </Col>
             </Row>
@@ -287,7 +287,7 @@ export default class Stats extends React.Component{
             <Card key="cases" className="profcard">
                  <Row gutter={10} className="statCase">
                     <Col span={8} style={{borderRight:"1px solid lightgray"}}>
-                        <div className="statNum" style={{color:"#ffdd86"}}>{(this.state.fullstat.globalData.recentCase - (this.state.fullstat.globalData.recentDeath+this.state.fullstat.globalData.recentRecovered))}</div>
+                        <div className="statNum" style={{color:"#ffdd86"}}>{this.state.fullstat.globalData.recentCase}</div>
                         <div className="statType">Active</div>
                     </Col>
                     <Col span={8} style={{borderRight:"1px solid lightgray"}}>
@@ -295,7 +295,7 @@ export default class Stats extends React.Component{
                         <div className="statType">Recovered</div>
                     </Col>
                     <Col span={8}>
-                        <div className="statNum" style={{color:"#ff589c"}}>{this.state.fullstat.globalData.recentRecovered}</div>
+                        <div className="statNum" style={{color:"#ff589c"}}>{this.state.fullstat.globalData.recentDeath}</div>
                         <div className="statType">Deceased</div>
                     </Col>
                 </Row>
@@ -317,7 +317,7 @@ export default class Stats extends React.Component{
                 /> 
             </div>
             <div style={{textAlign:'center', marginTop:'50px', marginBottom:'20px'}}><h1>Trend Plots</h1></div>
-            <div style={{textAlign:'center', marginTop:'50px', marginBottom:'20px'}}><h3 style={{color:'#1fd9d9'}}>Total Cases</h3></div>
+            <div style={{textAlign:'center', marginTop:'50px', marginBottom:'20px'}}><h3 style={{color:'#ffdd86'}}>Total Cases</h3></div>
             <Line
                     data={this.state.dataLine1}
                     options={{ 
@@ -342,7 +342,7 @@ export default class Stats extends React.Component{
                 /> 
             <div style={{textAlign:'center', marginBottom:'20px'}}><h3 style={{color:'#1fd9d9'}}>Time</h3></div>
             
-            <div style={{textAlign:'center', marginTop:'50px', marginBottom:'20px'}}><h3 style={{color:'#ffdd86'}}>Total Cases</h3></div>
+            <div style={{textAlign:'center', marginTop:'50px', marginBottom:'20px'}}><h3 style={{color:'#1fd9d9'}}>Recovered</h3></div>
             <Line
                     data={this.state.dataLine2}
                     options={{ 
@@ -367,7 +367,7 @@ export default class Stats extends React.Component{
                 /> 
             <div style={{textAlign:'center', marginBottom:'20px'}}><h3 style={{color:'#ffdd86'}}>Time</h3></div>
 
-            <div style={{textAlign:'center', marginTop:'50px', marginBottom:'20px'}}><h3 style={{color:'#ff589c'}}>Total Cases</h3></div>
+            <div style={{textAlign:'center', marginTop:'50px', marginBottom:'20px'}}><h3 style={{color:'#ff589c'}}>Deaths</h3></div>
             <Line
                     data={this.state.dataLine3}
                     options={{ 

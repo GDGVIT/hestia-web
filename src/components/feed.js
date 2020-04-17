@@ -24,7 +24,8 @@ class Feed extends React.Component {
             city: null,
             item_name: null,
             quantity: '',
-            token: ''
+            token: '',
+            custom_location:''
         }
     }
     gotoProfile=()=>{
