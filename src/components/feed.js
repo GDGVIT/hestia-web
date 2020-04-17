@@ -71,18 +71,21 @@ class Feed extends React.Component {
           visible2:false
         });
       };
-    onFinish = values => {
+      onFinish = values => {
         // console.log(values);
         this.setState(values)
         this.state.item_name.trim();
         this.state.quantity.trim();
         this.state.description.trim();
-        // console.log(this.state)
-        postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,'noida',this.state.description, this.props)
+        this.state.city.trim();
+        console.log(this.state.custom_location)
+        if (this.state.custom_location=''){
+        postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.city,this.state.description, this.props)
+                // .then(res => console.log(res))
                 .then(data => {
-                    // console.log(data)
+                    console.log(data)
                     if(data){
-                        // console.log(data)
+                        console.log(data)
                         this.props.alert.show("Request added")
                         this.setState({
                             visible: false
@@ -116,7 +119,53 @@ class Feed extends React.Component {
                         return response.json();
                     }
                 })
+
+            }
+
+
+            }
+            else{
+                postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.custom_location,this.state.description, this.props)
+                // .then(res => console.log(res))
+                .then(data => {
+                    console.log(data)
+                    if(data){
+                        console.log(data)
+                        this.props.alert.show("Request added")
+                        this.setState({
+                            visible: false
+                        })
+                    }
+                })
+                .catch(error => console.error(error))
+                function postForm(url,name,quantity,city,description, tempprops) {
+                    var object ={};
+                    object["item_name"] = name;
+                    object["quantity"] = quantity;
+                    object["location"] = city;
+                    object["description"] = description;
+                    // console.log(object)
+                
+                    
+                return fetch(url, {
+                    method: 'POST', // or 'PUT'
+                    body: JSON.stringify(object),  // a FormData will automatically set the 'Content-Type'
+                    headers: new Headers({
+                        "Content-Type": "application/json",
+                        'Authorization': localStorage.getItem("token")
+                        
+                      })
+                })
+                .then(response => {
+                    if(response.status === 400){
+                        tempprops.alert.show("invalid request")
+                    }else{
+                        return response.json();
+                    }
+                })
                 }
+            }
+                
       };
 
 
@@ -227,13 +276,7 @@ class Feed extends React.Component {
 
 
     //   }
-      componentDidMount(){  
-        if(localStorage.getItem("token")){
-        //  console.log("someone's logged in")
-        }else{
-            this.props.history.push("/login");
-        }
-
+    componentDidMount(){  
         if ("geolocation" in navigator) {
             console.log("Available");
           } else {
@@ -247,9 +290,10 @@ class Feed extends React.Component {
             window.localStorage.setItem("longitude",position.coords.longitude);
             
           }, function(err){
-            if(err){
+              if(err){
                 alert("Location permission denied. You will not be able to use the full features of this app without providing location access")
               }
+                // console.log(err)
         });
         let token =localStorage.getItem("token");
         
@@ -264,72 +308,69 @@ class Feed extends React.Component {
             .then(data => {
                 // console.log(data)
                 if(data.status===400){
-                    this.props.alert.show("location not provided")
+                    this.props.alert.show("Couldn't get location. Reload and try again")
                 }
-                // console.log(data.localityInfo.administrative[1].name)
-                let str = data.localityInfo.administrative[2].name;
+                // console.log(data.localityInfo)
+                let str = data.localityInfo.administrative[2].name
                 let s = str.split(" ")[0];
                     // console.log(s)
                 this.setState({         //do not remove setState
                     city:s
                 })
-<<<<<<< Updated upstream
                     
-                fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+s
-=======
-                 if (this.state.custom_location==''){   
-                fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+s[0]
->>>>>>> Stashed changes
-                
-                 , {
-                headers: new Headers({
-                    'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem("token")
-                })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    // console.log(data)
-                    if(data.message == "Location not provided"){
-                        // console.log("No location")
-                    } else {
-                        this.setState({
-                            requests: data.Request,
-                        });
-                    }
-                // console.log(this.state)
-                })
-                .catch(error => console.error(error))
-            }
-            else{
-                fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+this.state.custom_location
-                
-                 , {
-                headers: new Headers({
-                    'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem("token")
-                })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    // console.log(data)
-                    if(data.message == "Location not provided"){
-                        // console.log("No location")
-                    } else {
-                        this.setState({
-                            requests: data.Request,
-                        });
-                    }
-                // console.log(this.state)
-                })
-                .catch(error => console.error(error))
-            }
+                if (this.state.custom_location==''){   
+                    fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+s[0]
+                    
+                     , {
+                    headers: new Headers({
+                        'Content-Type': 'application/json',
+                    'Authorization': localStorage.getItem("token")
+                    })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        // console.log(data)
+                        if(data.message == "Location not provided"){
+                            // console.log("No location")
+                        } else {
+                            this.setState({
+                                requests: data.Request,
+                            });
+                        }
+                    // console.log(this.state)
+                    })
+                    .catch(error => console.error(error))
+                }
+                else{
+                    fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+this.state.city
+                    
+                     , {
+                    headers: new Headers({
+                        'Content-Type': 'application/json',
+                    'Authorization': localStorage.getItem("token")
+                    })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        // console.log(data)
+                        if(data.message == "Location not provided"){
+                            // console.log("No location")
+                        } else {
+                            this.setState({
+                                requests: data.Request,
+                            });
+                        }
+                    // console.log(this.state)
+                    })
+                    .catch(error => console.error(error))
+                }
+    
             // console.log(this.state)
             })
-            .catch(error => console.error(error))
+            
                 
             
-        }
+        }      
             
     render(){
         const { requests } = this.state;
@@ -433,14 +474,14 @@ class Feed extends React.Component {
                         }]}
                         >
                             <Input 
-                                placeholder="Description"
+                                placeholder="Description (optional)"
                             />
                         </Form.Item>
                         <Form.Item name="custom_location" rules={[{
                             max: 250, message:"Max 250 characters"
                         }]}>
                             <Input 
-                                placeholder="Custom location"
+                                placeholder="Location (optional)"
                             />
                         </Form.Item>
                         <Form.Item className="butn">

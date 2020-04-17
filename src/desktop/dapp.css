@@ -13,6 +13,30 @@
     z-index: 900;
     background-color: #fafafa;
 }
+.team-heading{
+    text-align: center;
+    /* border-color: aquamarine;
+    border-style:solid; */
+    padding-top:60px;
+    color:#00d2d2;
+}
+.nj{
+    widows: 85vw;
+    text-align: center;
+    margin-top:80px;
+    margin-left:40px;
+    margin-right:40px;
+}
+.photo > img{
+    width:160px;
+    height:160px;   
+    border-radius: 50%;
+    margin-bottom: 20px;
+    margin-top:70px;
+}
+.content > h4{
+    color:#989898;
+}
 @media(max-width:540px){
 .dnav{
     width: 98%;
@@ -98,11 +122,11 @@
     margin:0px auto;
     
 }
-.what > h1{
+.what > h2{
     color:#00d2d2;
     
 }
-.features > h1{
+.features > h2{
     color:#00d2d2;
     
     padding-top:50px;
@@ -209,7 +233,7 @@
     border-top-width:0.5px;
     margin-top:-30px;
 }
-.content > h3{
+.content > h5{
     padding-top:40px;
     font-weight: 100;
 }
@@ -332,6 +356,30 @@
     margin-top: 10px;
     color: #989898;
     width: 20vw;
+}
+.team-heading{
+    text-align: center;
+    /* border-color: aquamarine;
+    border-style:solid; */
+    padding-top:60px;
+    color:#00d2d2;
+}
+.nj{
+    widows: 85vw;
+    text-align: center;
+    margin-top:80px;
+    margin-left:40px;
+    margin-right:40px;
+}
+.photo > img{
+    width:160px;
+    height:160px;   
+    border-radius: 50%;
+    margin-bottom: 20px;
+    margin-top:70px;
+}
+.content > h4{
+    color:#989898;
 }
 @media screen and (max-width:1400px){
     .feedlogo1{
