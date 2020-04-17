@@ -148,7 +148,7 @@ const Register = (props) => {
         ]}
       >
         <Input
-        placeholder="Number"
+        placeholder="Phone number"
         />
       </Form.Item>
       <Form.Item>
