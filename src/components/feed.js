@@ -79,7 +79,7 @@ class Feed extends React.Component {
         this.state.quantity.trim();
         this.state.description.trim();
         // console.log(this.state)
-        postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,'noida',this.state.description, this.props)
+        postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.city,this.state.description, this.props)
                 .then(data => {
                     // console.log(data)
                     if(data){
