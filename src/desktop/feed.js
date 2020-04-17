@@ -279,30 +279,8 @@ class Feed extends React.Component {
                     city:s
                 })
                     
-<<<<<<< Updated upstream
-                fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+s
-                 , {
-                headers: new Headers({
-                    'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem("token")
-                })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    // console.log(data)
-                    if(data.message == "Location not provided"){
-                        console.log("No location")
-                    } else {
-                        this.setState({
-                            requests: data.Request,
-                        });
-                    }
-                // console.log(this.state)
-                })
-                .catch(error => console.error(error))
-=======
                 if (this.state.custom_location==''){   
-                    fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+s[0]
+                    fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+s
                     
                      , {
                     headers: new Headers({
@@ -347,7 +325,6 @@ class Feed extends React.Component {
                     })
                     .catch(error => console.error(error))
                 }
->>>>>>> Stashed changes
     
             // console.log(this.state)
             })

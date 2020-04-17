@@ -273,13 +273,8 @@ class Feed extends React.Component {
                 this.setState({         //do not remove setState
                     city:s
                 })
-<<<<<<< Updated upstream
-                    
-                fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+s
-=======
                  if (this.state.custom_location==''){   
-                fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+s[0]
->>>>>>> Stashed changes
+                fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+s
                 
                  , {
                 headers: new Headers({
