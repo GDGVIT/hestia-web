@@ -80,7 +80,7 @@ class Feed extends React.Component {
         this.state.description.trim();
         this.state.city.trim();
         console.log(this.state.custom_location)
-        if (this.state.custom_location=''){
+        if (this.state.custom_location===''){
         postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.city,this.state.description, this.props)
                 // .then(res => console.log(res))
                 .then(data => {
