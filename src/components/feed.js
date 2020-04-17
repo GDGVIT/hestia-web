@@ -320,7 +320,7 @@ class Feed extends React.Component {
                 })
                     
                 if (this.state.custom_location==''){   
-                    fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+s[0]
+                    fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+s
                     
                      , {
                     headers: new Headers({
