@@ -25,6 +25,7 @@ class Feed extends React.Component {
             token: '',
             visiblechat1:false,
             visiblesug: false,
+            custom_location:''
         }
     }
     onClose=()=>{
