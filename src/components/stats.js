@@ -2,6 +2,8 @@ import React from 'react'
 import {Line, Pie} from 'react-chartjs-2'
 import back from '../assets/back.png'
 import { Card, Row, Col, Radio, Select } from 'antd'
+import { formatCountdown } from 'antd/lib/statistic/utils';
+import NumberFormat from 'react-number-format';
 
 const { Option } = Select;
 
@@ -283,22 +285,32 @@ export default class Stats extends React.Component{
                         <div className="statNum" style={{textAlign:'left'}}>Total Cases</div>
                     </Col>
                     <Col span={8}>
-                        <div className="statNum" style={{color:"#00d2d2"}}>{this.state.fullstat.globalData.recentTotalCases}</div>
+                        <div className="statNum" style={{color:"#00d2d2"}}>
+                            {/* {this.state.fullstat.globalData.recentTotalCases.toLocaleString(undefined, { minimumFractionDigits: 0 })} */}
+                            {/* {this.format(this.state.fullstat.globalData.recentTotalCases)} */}
+                            <NumberFormat thousandSeparator={true} thousandsGroupStyle="lakh" displayType={'text'} value = {this.state.fullstat.globalData.recentTotalCases} />
+                            </div>
                     </Col>
             </Row>
             </Card>
             <Card key="cases" className="profcard">
                  <Row gutter={10} className="statCase">
                     <Col span={8} style={{borderRight:"1px solid lightgray"}}>
-                        <div className="statNum" style={{color:"#ffdd86"}}>{this.state.fullstat.globalData.recentCase}</div>
+                        <div className="statNum" style={{color:"#ffdd86"}}>
+                            <NumberFormat thousandSeparator={true} thousandsGroupStyle="lakh" displayType={'text'} value =  {this.state.fullstat.globalData.recentCase} />
+                            </div>
                         <div className="statType">Active</div>
                     </Col>
                     <Col span={8} style={{borderRight:"1px solid lightgray"}}>
-                        <div className="statNum" style={{color:"#00d2d2"}}>{this.state.fullstat.globalData.recentRecovered}</div>
+                        <div className="statNum" style={{color:"#00d2d2"}}>
+                            <NumberFormat thousandSeparator={true} thousandsGroupStyle="lakh" displayType={'text'} value = {this.state.fullstat.globalData.recentRecovered} />
+                            </div>
                         <div className="statType">Recovered</div>
                     </Col>
                     <Col span={8}>
-                        <div className="statNum" style={{color:"#ff589c"}}>{this.state.fullstat.globalData.recentDeath}</div>
+                        <div className="statNum" style={{color:"#ff589c"}}>
+                        <NumberFormat thousandSeparator={true} thousandsGroupStyle="lakh" displayType={'text'} value =  {this.state.fullstat.globalData.recentDeath} />
+                            </div>
                         <div className="statType">Deceased</div>
                     </Col>
                 </Row>
@@ -419,22 +431,30 @@ export default class Stats extends React.Component{
                             <div className="statNum" style={{textAlign:'left'}}>Total Cases</div>
                         </Col>
                         <Col span={5}>
-                            <div className="statNum" style={{color:"#ffdd86"}}>{this.state.currentCountry.cases}</div>
+                            <div className="statNum" style={{color:"#ffdd86"}}>
+                            <NumberFormat thousandSeparator={true} thousandsGroupStyle="lakh" displayType={'text'} value =  {this.state.currentCountry.cases} />
+                            </div>
                         </Col>
                 </Row>
                 </Card>
                 <Card key="cases" className="profcard">
                     <Row gutter={10} className="statCase">
                         <Col span={8} style={{borderRight:"1px solid lightgray"}}>
-                            <div className="statNum" style={{color:"#ffdd86"}}>{this.state.currentCountry.active}</div>
+                            <div className="statNum" style={{color:"#ffdd86"}}>
+                            <NumberFormat thousandSeparator={true} thousandsGroupStyle="lakh" displayType={'text'} value = {this.state.currentCountry.active} />
+                            </div>
                             <div className="statType">Active</div>
                         </Col>
                         <Col span={8} style={{borderRight:"1px solid lightgray"}}>
-                            <div className="statNum" style={{color:"#00d2d2"}}>{this.state.currentCountry.recovered}</div>
+                            <div className="statNum" style={{color:"#00d2d2"}}>
+                            <NumberFormat thousandSeparator={true} thousandsGroupStyle="lakh" displayType={'text'} value = {this.state.currentCountry.recovered} />
+                            </div>
                             <div className="statType">Recovered</div>
                         </Col>
                         <Col span={8}>
-                            <div className="statNum" style={{color:"#ff589c"}}>{this.state.currentCountry.deaths}</div>
+                            <div className="statNum" style={{color:"#ff589c"}}>
+                            <NumberFormat thousandSeparator={true} thousandsGroupStyle="lakh" displayType={'text'} value = {this.state.currentCountry.deaths} />
+                            </div>
                             <div className="statType">Deceased</div>
                         </Col>
                     </Row>
