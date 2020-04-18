@@ -23,24 +23,7 @@ class Explore extends React.Component {
         if(!localStorage.getItem("token")){
             this.props.history.push("/login");
         }
-        fetch('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+localStorage.getItem("latitude")+'&longitude='+localStorage.getItem("longitude")+'&localityLanguage=en', {
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            if(data.status===400){
-                this.props.alert.show("Couldn't get location. Reload and try again")
-            }
-            let str = data.localityInfo.administrative[2].name
-            let s = str.split(" ")[0];
-            this.setState({         //do not remove setState
-                city:s
-            })
-            return s;
-        })
-        .then(citi=>{
-            console.log(citi)
-            fetch('https://hestia-requests.herokuapp.com/api/requests/user_organization_view/?city=',{
+            fetch('https://hestia-requests.herokuapp.com/api/requests/user_organization_view/',{
                 method: 'GET',
                 headers: new Headers({
                     'Authorization': localStorage.getItem("token")
@@ -54,22 +37,22 @@ class Explore extends React.Component {
                 })
             })
             .catch(error=>console.error(error))
-        })
-        .catch(error=>console.error(error))
      }
 
      tileIcon=(email, number, link)=>{
         return(
         <div>
-            <a className="imgback" href={'mailto:'+email}>
-                <img  style={{marginLeft:'8px'}} src={emailI} alt="Click to mail"></img>
+            <a className="imgback" href={link}>
+                <img style={{marginLeft:'8px'}} src={linkI} alt="Website link"></img>
             </a>
+             
             <a className="imgback" href={'tel:'+number} >
                 <img style={{marginLeft:'8px'}} src={phone} alt="Click to call"></img>
             </a> 
-            <a className="imgback" href={link}>
-                <img style={{marginLeft:'8px'}} src={linkI} alt="Website link"></img>
-            </a> 
+
+            <a className="imgback" href={'mailto:'+email}>
+                <img  style={{marginLeft:'8px'}} src={emailI} alt="Click to mail"></img>
+            </a>
         </div>
         )
      }
@@ -82,11 +65,9 @@ class Explore extends React.Component {
             news.map(
                 request =>{
                     return(
-                        <Collapse defaultActiveKey={['1']} className="site-collapse-custom-collapse">
                             <Panel showArrow={false} header={<div className='colp-header'>{request.name}</div>} key={request.email} extra={this.tileIcon(request.email, request.phone_no, request.web_links)} className="ant-card">
                             <p>{request.description}</p>
                             </Panel>
-                      </Collapse>
                     )
                 }
             )
@@ -117,7 +98,9 @@ class Explore extends React.Component {
                 </Row>
                 </div>
                 <div className="main-content">
-                    {newslist}
+                    <Collapse defaultActiveKey={['1']} className="site-collapse-custom-collapse">
+                        {newslist}
+                    </Collapse>
                 </div>
                 <Nav />
           </div>

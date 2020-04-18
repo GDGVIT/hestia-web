@@ -1,6 +1,7 @@
 import React from 'react'
 import {Line, Pie} from 'react-chartjs-2'
 import { Card, Row, Col, Radio, Select } from 'antd'
+import NumberFormat from 'react-number-format';
 
 const { Option } = Select;
 
@@ -52,6 +53,7 @@ export default class Stats extends React.Component{
                 ]
             }
         })
+        console.log(this.state.dataPie)
     }
 
     setLineData = (sike) =>{
@@ -157,6 +159,7 @@ export default class Stats extends React.Component{
                 allCountries: data.allCountries
             })
         })
+        .catch(error=>console.error(error))
 
         fetch(`https://hestia-info.herokuapp.com/allCountriesData/${this.state.selected}`,{
             method: 'GET'
@@ -280,22 +283,30 @@ export default class Stats extends React.Component{
                         <div className="statNum" style={{textAlign:'left'}}>Total Cases</div>
                     </Col>
                     <Col span={8}>
-                        <div className="statNum" style={{color:"#00d2d2"}}>{this.state.fullstat.globalData.recentTotalCases}</div>
+                        <div className="statNum" style={{color:"#00d2d2"}}>
+                        <NumberFormat thousandSeparator={true} thousandsGroupStyle="lakh" displayType={'text'} value = {this.state.fullstat.globalData.recentTotalCases} />
+                        </div>
                     </Col>
             </Row>
             </Card>
             <Card key="cases" className="profcard">
                  <Row gutter={10} className="statCase">
                     <Col span={8} style={{borderRight:"1px solid lightgray"}}>
-                        <div className="statNum" style={{color:"#ffdd86"}}>{this.state.fullstat.globalData.recentCase}</div>
+                        <div className="statNum" style={{color:"#ffdd86"}}>
+                        <NumberFormat thousandSeparator={true} thousandsGroupStyle="lakh" displayType={'text'} value = {this.state.fullstat.globalData.recentCase} />
+                        </div>
                         <div className="statType">Active</div>
                     </Col>
                     <Col span={8} style={{borderRight:"1px solid lightgray"}}>
-                        <div className="statNum" style={{color:"#00d2d2"}}>{this.state.fullstat.globalData.recentRecovered}</div>
+                        <div className="statNum" style={{color:"#00d2d2"}}>
+                        <NumberFormat thousandSeparator={true} thousandsGroupStyle="lakh" displayType={'text'} value = {this.state.fullstat.globalData.recentRecovered} />
+                        </div>
                         <div className="statType">Recovered</div>
                     </Col>
                     <Col span={8}>
-                        <div className="statNum" style={{color:"#ff589c"}}>{this.state.fullstat.globalData.recentDeath}</div>
+                        <div className="statNum" style={{color:"#ff589c"}}>
+                        <NumberFormat thousandSeparator={true} thousandsGroupStyle="lakh" displayType={'text'} value = {this.state.fullstat.globalData.recentDeath} />
+                        </div>
                         <div className="statType">Deceased</div>
                     </Col>
                 </Row>
@@ -310,11 +321,31 @@ export default class Stats extends React.Component{
                     options={{ 
                         maintainAspectRatio: false,
                         legend:{
-                            display:false
+                            display:false   
                         }
                     }}
                 
                 /> 
+                <div className="chart-legenD">
+                    <div>
+                        <div className="casesBG" style={{backgroundColor:'#ffdd86'}}></div>
+                        <span className="percent">
+                        {parseFloat(100*this.state.fullstat.globalData.recentCase/(this.state.fullstat.globalData.recentCase+this.state.fullstat.globalData.recentRecovered+this.state.fullstat.globalData.recentDeath)).toFixed(2)}%
+                        </span>
+                    </div>
+                    <div>
+                        <div className="casesBG" style={{backgroundColor:'#00d2d2'}}></div>    
+                         <span className="percent">
+                        {parseFloat(100*this.state.fullstat.globalData.recentRecovered/(this.state.fullstat.globalData.recentCase+this.state.fullstat.globalData.recentRecovered+this.state.fullstat.globalData.recentDeath)).toFixed(2)}%
+                        </span>
+                    </div>
+                    <div>
+                        <div className="casesBG" style={{backgroundColor:'#ff589c'}}></div>    
+                         <span className="percent">
+                        {parseFloat(100*this.state.fullstat.globalData.recentDeath/(this.state.fullstat.globalData.recentCase+this.state.fullstat.globalData.recentRecovered+this.state.fullstat.globalData.recentDeath)).toFixed(2)}%
+                        </span>
+                    </div>
+                </div>
             </div>
             <div style={{textAlign:'center', marginTop:'50px', marginBottom:'20px'}}><h1>Trend Plots</h1></div>
             <div style={{textAlign:'center', marginTop:'50px', marginBottom:'20px'}}><h3 style={{color:'#ffdd86'}}>Total Cases</h3></div>
@@ -417,22 +448,30 @@ export default class Stats extends React.Component{
                             <div className="statNum" style={{textAlign:'left'}}>Total Cases</div>
                         </Col>
                         <Col span={7}>
-                            <div className="statNum" style={{color:"#ffdd86"}}>{this.state.currentCountry.cases}</div>
+                            <div className="statNum" style={{color:"#ffdd86"}}>
+                            <NumberFormat thousandSeparator={true} thousandsGroupStyle="lakh" displayType={'text'} value = {this.state.currentCountry.cases} />
+                            </div>
                         </Col>
                 </Row>
                 </Card>
                 <Card key="cases" className="profcard">
                     <Row gutter={10} className="statCase">
                         <Col span={8} style={{borderRight:"1px solid lightgray"}}>
-                            <div className="statNum" style={{color:"#ffdd86"}}>{this.state.currentCountry.active}</div>
+                            <div className="statNum" style={{color:"#ffdd86"}}>
+                            <NumberFormat thousandSeparator={true} thousandsGroupStyle="lakh" displayType={'text'} value = {this.state.currentCountry.active} />
+                            </div>
                             <div className="statType">Active</div>
                         </Col>
                         <Col span={8} style={{borderRight:"1px solid lightgray"}}>
-                            <div className="statNum" style={{color:"#00d2d2"}}>{this.state.currentCountry.recovered}</div>
+                            <div className="statNum" style={{color:"#00d2d2"}}>
+                            <NumberFormat thousandSeparator={true} thousandsGroupStyle="lakh" displayType={'text'} value =  {this.state.currentCountry.recovered} />
+                            </div>
                             <div className="statType">Recovered</div>
                         </Col>
                         <Col span={8}>
-                            <div className="statNum" style={{color:"#ff589c"}}>{this.state.currentCountry.deaths}</div>
+                            <div className="statNum" style={{color:"#ff589c"}}>
+                            <NumberFormat thousandSeparator={true} thousandsGroupStyle="lakh" displayType={'text'} value = {this.state.currentCountry.deaths} />
+                            </div>
                             <div className="statType">Deceased</div>
                         </Col>
                     </Row>
@@ -451,6 +490,26 @@ export default class Stats extends React.Component{
                     }}
                 
                 /> 
+                <div className="chart-legenD">
+                    <div>
+                        <div className="casesBG" style={{backgroundColor:'#ffdd86'}}></div>
+                        <span className="percent">
+                        {parseFloat(100*this.state.fullstat.globalData.recentCase/(this.state.fullstat.globalData.recentCase+this.state.fullstat.globalData.recentRecovered+this.state.fullstat.globalData.recentDeath)).toFixed(2)}%
+                        </span>
+                    </div>
+                    <div>
+                        <div className="casesBG" style={{backgroundColor:'#00d2d2'}}></div>    
+                         <span className="percent">
+                        {parseFloat(100*this.state.fullstat.globalData.recentRecovered/(this.state.fullstat.globalData.recentCase+this.state.fullstat.globalData.recentRecovered+this.state.fullstat.globalData.recentDeath)).toFixed(2)}%
+                        </span>
+                    </div>
+                    <div>
+                        <div className="casesBG" style={{backgroundColor:'#ff589c'}}></div>    
+                         <span className="percent">
+                        {parseFloat(100*this.state.fullstat.globalData.recentDeath/(this.state.fullstat.globalData.recentCase+this.state.fullstat.globalData.recentRecovered+this.state.fullstat.globalData.recentDeath)).toFixed(2)}%
+                        </span>
+                    </div>
+                </div>
             </div>
             </div>
             );
