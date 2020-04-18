@@ -16,7 +16,10 @@ const options = {
   timeout: 5000,
   offset: '90px',
   // you can also just use 'scale'
-  transition: transitions.SCALE
+  transition: transitions.SCALE,
+  containerStyle: {
+    zIndex: 3500
+  }
 }
 var isMobile = {
   Android: function() {

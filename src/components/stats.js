@@ -157,6 +157,9 @@ export default class Stats extends React.Component{
                 allCountries: data.allCountries
             })
         })
+        .catch(error=>{
+            error?console.log(error):(console.log(''));
+        })
 
         fetch(`https://hestia-info.herokuapp.com/allCountriesData/${this.state.selected}`,{
             method: 'GET'

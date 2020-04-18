@@ -341,7 +341,7 @@ onClose=()=>{
                       </div>
                     </Col>
                     <Col span={3}>
-                    <img src={Report} alt="Report logo" style ={{ marginTop: "10px"}} onClick={this.gotoReport}></img>
+                    <img src={report} alt="Report logo" style ={{ marginTop: "10px", cursor:'pointer'}} onClick={this.gotoReport}></img>
                     </Col>
                 </Row>
             </div>
@@ -366,7 +366,7 @@ onClose=()=>{
             </div>
               {/* Delete Chat Modal */}
               <Modal
-                title="You have this item?"
+          
                 visible={this.state.visible}
                 onOk={this.handleOk}
                 footer={null}
@@ -374,6 +374,7 @@ onClose=()=>{
                 className="deletechat"
                 centered
                 width="350px"
+                zIndex='3000'
               > 
                 <Row>
                   <Col span={24}>
