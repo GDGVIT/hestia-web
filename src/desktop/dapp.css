@@ -21,11 +21,11 @@
     color:#00d2d2;
 }
 .nj{
-    widows: 85vw;
+    /* widows: 85vw; */
     text-align: center;
     margin-top:80px;
-    margin-left:40px;
-    margin-right:40px;
+    /* margin-left:40px; */
+    /* margin-right:40px; */
 }
 .photo > img{
     width:160px;
@@ -358,18 +358,18 @@
     width: 20vw;
 }
 .team-heading{
-    text-align: center;
+    /* text-align: center; */
     /* border-color: aquamarine;
     border-style:solid; */
     padding-top:60px;
     color:#00d2d2;
 }
 .nj{
-    widows: 85vw;
+    /* width: 100vw; */
     text-align: center;
     margin-top:80px;
-    margin-left:40px;
-    margin-right:40px;
+    /* margin-left:40px; */
+    /* margin-right:40px; */
 }
 .photo > img{
     width:160px;
