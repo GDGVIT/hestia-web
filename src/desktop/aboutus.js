@@ -130,7 +130,7 @@ const Aboutus = (props) =>{
             </div>
         
             <Row gutter={[16, 16]} style={{textAlign:'center', margin:'auto auto', width: '90%'}}>
-            <Col span={6}>
+            <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <div className="photo">
                 <img src="./assets/nirmit.jpeg"/>
             </div>
@@ -139,7 +139,7 @@ const Aboutus = (props) =>{
                 <h5>Role</h5>
             </div>
             </Col>
-            <Col span={6} >
+            <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <div className="photo">
                 <img src="./assets/nirmit.jpeg"/>
             </div>
@@ -148,7 +148,7 @@ const Aboutus = (props) =>{
                 <h5>Role</h5>
             </div>
             </Col>
-            <Col span={6} >
+            <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <div className="photo">
                 <img src="./assets/nirmit.jpeg"/>
             </div>
@@ -157,7 +157,79 @@ const Aboutus = (props) =>{
                 <h5>Role</h5>
             </div>
             </Col>
-            <Col span={6} >
+            <Col xs={24} sm={24} md={12} lg={8} xl={6}>
+            <div className="photo">
+                <img src="./assets/nirmit.jpeg"/>
+            </div>
+            <div className="content">
+                <h4>Name</h4>
+                <h5>Role</h5>
+            </div>
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={8} xl={6}>
+            <div className="photo">
+                <img src="./assets/nirmit.jpeg"/>
+            </div>
+            <div className="content">
+                <h4>Name</h4>
+                <h5>Role</h5>
+            </div>
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={8} xl={6}>
+            <div className="photo">
+                <img src="./assets/nirmit.jpeg"/>
+            </div>
+            <div className="content">
+                <h4>Name</h4>
+                <h5>Role</h5>
+            </div>
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={8} xl={6}>
+            <div className="photo">
+                <img src="./assets/nirmit.jpeg"/>
+            </div>
+            <div className="content">
+                <h4>Name</h4>
+                <h5>Role</h5>
+            </div>
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={8} xl={6}>
+            <div className="photo">
+                <img src="./assets/nirmit.jpeg"/>
+            </div>
+            <div className="content">
+                <h4>Name</h4>
+                <h5>Role</h5>
+            </div>
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={8} xl={6}>
+            <div className="photo">
+                <img src="./assets/nirmit.jpeg"/>
+            </div>
+            <div className="content">
+                <h4>Name</h4>
+                <h5>Role</h5>
+            </div>
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={8} xl={6}>
+            <div className="photo">
+                <img src="./assets/nirmit.jpeg"/>
+            </div>
+            <div className="content">
+                <h4>Name</h4>
+                <h5>Role</h5>
+            </div>
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={8} xl={6}>
+            <div className="photo">
+                <img src="./assets/nirmit.jpeg"/>
+            </div>
+            <div className="content">
+                <h4>Name</h4>
+                <h5>Role</h5>
+            </div>
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <div className="photo">
                 <img src="./assets/nirmit.jpeg"/>
             </div>
@@ -167,79 +239,6 @@ const Aboutus = (props) =>{
             </div>
             </Col>
 
-            <Col span={6} >
-            <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
-            </div>
-            <div className="content">
-                <h4>Name</h4>
-                <h5>Role</h5>
-            </div>
-            </Col>
-            <Col span={6} >
-            <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
-            </div>
-            <div className="content">
-                <h4>Name</h4>
-                <h5>Role</h5>
-            </div>
-            </Col>
-            <Col span={6} >
-            <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
-            </div>
-            <div className="content">
-                <h4>Name</h4>
-                <h5>Role</h5>
-            </div>
-            </Col>
-            <Col span={6} >
-            <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
-            </div>
-            <div className="content">
-                <h4>Name</h4>
-                <h5>Role</h5>
-            </div>
-            </Col>
-
-            <Col span={6} >
-            <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
-            </div>
-            <div className="content">
-                <h4>Name</h4>
-                <h5>Role</h5>
-            </div>
-            </Col>
-            <Col span={6} >
-            <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
-            </div>
-            <div className="content">
-                <h4>Name</h4>
-                <h5>Role</h5>
-            </div>
-            </Col>
-            <Col span={6} >
-            <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
-            </div>
-            <div className="content">
-                <h4>Name</h4>
-                <h5>Role</h5>
-            </div>
-            </Col>
-            <Col span={6} >
-            <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
-            </div>
-            <div className="content">
-                <h4>Name</h4>
-                <h5>Role</h5>
-            </div>
-            </Col>
             </Row>
             {/* <Row gutter={[16, 16]}>
             <Col span={6} />

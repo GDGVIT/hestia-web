@@ -4,6 +4,8 @@ import explore from './assets/explore.png';
 import feed from './assets/feed.png';
 import news from './assets/news2.png';
 import Akina from './assets/akina.apk';
+import { Row, Col } from 'antd';
+
 
 
 const Aboutus = (props) =>{
@@ -131,10 +133,8 @@ const Aboutus = (props) =>{
             <div className="team-heading">
         <h1 style={{color:"#00d2d2"}}>The Team</h1>
             </div>
-    <div className="nj">
-    <div className="kid">
-      <div className="row">
-        <div className="col">
+            <Row gutter={16} style={{textAlign:'center', margin:'auto auto', width: '90%'}}>
+            <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <div className="photo">
                 <img src="./assets/nirmit.jpeg"/>
             </div>
@@ -142,8 +142,8 @@ const Aboutus = (props) =>{
                 <h4>Name</h4>
                 <h5>Role</h5>
             </div>
-        </div>
-        <div className="col">
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <div className="photo">
                 <img src="./assets/nirmit.jpeg"/>
             </div>
@@ -151,8 +151,8 @@ const Aboutus = (props) =>{
                 <h4>Name</h4>
                 <h5>Role</h5>
             </div>
-        </div>
-        <div className="col">
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <div className="photo">
                 <img src="./assets/nirmit.jpeg"/>
             </div>
@@ -160,8 +160,8 @@ const Aboutus = (props) =>{
                 <h4>Name</h4>
                 <h5>Role</h5>
             </div>
-        </div>
-        <div className="col">
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <div className="photo">
                 <img src="./assets/nirmit.jpeg"/>
             </div>
@@ -169,10 +169,8 @@ const Aboutus = (props) =>{
                 <h4>Name</h4>
                 <h5>Role</h5>
             </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col">
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <div className="photo">
                 <img src="./assets/nirmit.jpeg"/>
             </div>
@@ -180,8 +178,8 @@ const Aboutus = (props) =>{
                 <h4>Name</h4>
                 <h5>Role</h5>
             </div>
-        </div>
-        <div className="col">
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <div className="photo">
                 <img src="./assets/nirmit.jpeg"/>
             </div>
@@ -189,8 +187,8 @@ const Aboutus = (props) =>{
                 <h4>Name</h4>
                 <h5>Role</h5>
             </div>
-        </div>
-        <div className="col">
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <div className="photo">
                 <img src="./assets/nirmit.jpeg"/>
             </div>
@@ -198,8 +196,8 @@ const Aboutus = (props) =>{
                 <h4>Name</h4>
                 <h5>Role</h5>
             </div>
-        </div>
-        <div className="col">
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <div className="photo">
                 <img src="./assets/nirmit.jpeg"/>
             </div>
@@ -207,57 +205,9 @@ const Aboutus = (props) =>{
                 <h4>Name</h4>
                 <h5>Role</h5>
             </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col">
-            <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
-            </div>
-            <div className="content">
-                <h4>Name</h4>
-                <h5>Role</h5>
-            </div>
-        </div>
-        <div className="col">
-            <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
-            </div>
-            <div className="content">
-                <h4>Name</h4>
-                <h5>Role</h5>
-            </div>
-        </div>
-        <div className="col">
-            <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
-            </div>
-            <div className="content">
-                <h4>Name</h4>
-                <h5>Role</h5>
-            </div>
-        </div>
-        <div className="col">
-            <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
-            </div>
-            <div className="content">
-                <h4>Name</h4>
-                <h5>Role</h5>
-            </div>
-        </div>
-      </div>
-    </div>
-</div> 
-
-
-
-
-
-
-        </div>
-        
-        
+            </Col>
+            </Row>
+</div>         
         
         
         );
