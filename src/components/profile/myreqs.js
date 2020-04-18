@@ -8,13 +8,15 @@ import Nav from '../nav';
 import front from '../../assets/front.png';
 import back from '../../assets/back.png';
 import {withAlert} from "react-alert";
+import Loader1 from '../../loader';
 
 
 class Myreqs extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            Requests: []
+            Requests: [],
+            loading: false
         }
     }
     
@@ -26,7 +28,7 @@ class Myreqs extends React.Component{
         // console.log(id)
                 postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/'+id+'/')
                     .then(data => {
-                        // console.log(data)
+                        console.log(data)
                         this.props.alert.show("Item deleted")
                     })
                     .catch(error => console.error(error))
@@ -61,6 +63,9 @@ class Myreqs extends React.Component{
         }else{
             this.props.history.push("/login");
         }
+        this.setState({
+            loading:true
+        })
 
         fetch('https://hestia-requests.herokuapp.com/api/requests/my_requests/', {
             headers: new Headers({
@@ -71,8 +76,8 @@ class Myreqs extends React.Component{
             .then(data => {
                 //  console.log(data)
             this.setState({
-                Requests: data.Request
-                
+                Requests: data.Request,
+                loading:false
             });
             // console.log(this.state)
             })
@@ -82,9 +87,9 @@ class Myreqs extends React.Component{
      }
 
     render(){
-
+        const {loading} = this.state;
         const {Requests} = this.state;
-        
+        const mssg = loading?(''):('No requests available')
         const reqlist = Requests.length ? (
             Requests.map(
                 request =>{
@@ -117,7 +122,7 @@ class Myreqs extends React.Component{
                 }
             )
         ) : (
-            <div>You have not made any request</div>
+            <div>{mssg}</div>
         )
             return(
             <div className="myreqs">
@@ -137,6 +142,7 @@ class Myreqs extends React.Component{
                 </div>
 
                 <div className="main-content">
+                {loading && <Loader1 />}
                     {reqlist}
                 </div>
                 {/* <div className="addReq">

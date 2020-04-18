@@ -15,6 +15,7 @@
     "react-chartjs-2": "^2.9.0",
     "react-chat-ui": "^0.3.2",
     "react-dom": "^16.13.1",
+    "react-loader-spinner": "^3.1.14",
     "react-number-format": "^4.4.1",
     "react-recaptcha-v3": "^1.1.0",
     "react-router-dom": "^5.1.2",

@@ -5,6 +5,7 @@ import emailI from '../assets/email.svg';
 import phone from '../assets/call.svg';
 import linkI from '../assets/link.svg';
 import Nav from './nav';
+import Loader1 from '../loader';
 
 const { Panel } = Collapse;
 
@@ -12,7 +13,7 @@ class Explore extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            isEmptyState: true,
+            loading: false,
             news:[]
         }
     }
@@ -23,6 +24,7 @@ class Explore extends React.Component {
         if(!localStorage.getItem("token")){
             this.props.history.push("/login");
         }
+        this.setState({loading:true})
             fetch('https://hestia-requests.herokuapp.com/api/requests/user_organization_view/',{
                 method: 'GET',
                 headers: new Headers({
@@ -33,8 +35,10 @@ class Explore extends React.Component {
             .then(data=>{
                 console.log(data)
                 this.setState({
-                    news:data.Organization
+                    news:data.Organization,
+                    loading:false
                 })
+
             })
             .catch(error=>console.error(error))
      }
@@ -58,9 +62,10 @@ class Explore extends React.Component {
      }
 
     render(){
-
+        const {loading} = this.state;
         const { news } = this.state;
         // console.log(requests)
+        const mssg = loading?(''):('No organisations available')
         const newslist = news.length?(
             news.map(
                 request =>{
@@ -76,7 +81,7 @@ class Explore extends React.Component {
 
 
         ) : (
-            <div>No organizations available in your area</div>
+            <div>{mssg}</div>
         )
 
 
@@ -99,6 +104,7 @@ class Explore extends React.Component {
                 </div>
                 <div className="main-content">
                     <Collapse defaultActiveKey={['1']} className="site-collapse-custom-collapse">
+                        {loading && <Loader1 />}
                         {newslist}
                     </Collapse>
                 </div>

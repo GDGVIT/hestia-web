@@ -494,19 +494,19 @@ export default class Stats extends React.Component{
                     <div>
                         <div className="casesBG" style={{backgroundColor:'#ffdd86'}}></div>
                         <span className="percent">
-                        {parseFloat(100*this.state.fullstat.globalData.recentCase/(this.state.fullstat.globalData.recentCase+this.state.fullstat.globalData.recentRecovered+this.state.fullstat.globalData.recentDeath)).toFixed(2)}%
+                        {parseFloat(100*this.state.currentCountry.active/(this.state.currentCountry.active+this.state.currentCountry.recovered+this.state.currentCountry.deaths)).toFixed(2)}%
                         </span>
                     </div>
                     <div>
                         <div className="casesBG" style={{backgroundColor:'#00d2d2'}}></div>    
                          <span className="percent">
-                        {parseFloat(100*this.state.fullstat.globalData.recentRecovered/(this.state.fullstat.globalData.recentCase+this.state.fullstat.globalData.recentRecovered+this.state.fullstat.globalData.recentDeath)).toFixed(2)}%
+                        {parseFloat(100*this.state.currentCountry.recovered/(this.state.currentCountry.active+this.state.currentCountry.recovered+this.state.currentCountry.deaths)).toFixed(2)}%
                         </span>
                     </div>
                     <div>
                         <div className="casesBG" style={{backgroundColor:'#ff589c'}}></div>    
                          <span className="percent">
-                        {parseFloat(100*this.state.fullstat.globalData.recentDeath/(this.state.fullstat.globalData.recentCase+this.state.fullstat.globalData.recentRecovered+this.state.fullstat.globalData.recentDeath)).toFixed(2)}%
+                        {parseFloat(100*this.state.currentCountry.deaths/(this.state.currentCountry.active+this.state.currentCountry.recovered+this.state.currentCountry.deaths)).toFixed(2)}%
                         </span>
                     </div>
                 </div>

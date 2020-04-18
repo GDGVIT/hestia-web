@@ -10,6 +10,7 @@ import { Form, Input, Checkbox} from 'antd';
 import {withAlert} from "react-alert";
 import baseurl from "../url"
 import cancel from "../assets/cancel.svg";
+import Loader1 from '../loader'
 
 class Feed extends React.Component {
     constructor(props){
@@ -25,7 +26,8 @@ class Feed extends React.Component {
             token: '',
             visiblechat1:false,
             visiblesug: false,
-            custom_location:''
+            custom_location:'',
+            loading: false
         }
     }
     onClose=()=>{
@@ -293,6 +295,9 @@ class Feed extends React.Component {
           } else {
             console.log("Not Available");
           }
+          this.setState({
+              loading: true
+          })
           navigator.geolocation.getCurrentPosition(function(position) {
             //   console.log('hap')
             // console.log("latitude",position.coords.latitude)
@@ -346,6 +351,7 @@ class Feed extends React.Component {
                         } else {
                             this.setState({
                                 requests: data.Request,
+                                loading: false
                             });
                         }
                     // console.log(this.state)
@@ -369,6 +375,7 @@ class Feed extends React.Component {
                         } else {
                             this.setState({
                                 requests: data.Request,
+                                loading: false
                             });
                         }
                     // console.log(this.state)
@@ -384,7 +391,9 @@ class Feed extends React.Component {
         }      
             
     render(){
+        const {loading} = this.state;
         const { requests } = this.state;
+        const mssg = loading?(''):('No requests in your area')
         // console.log(requests)
         const reqlist = requests.length ? (
             requests.map(
@@ -429,7 +438,7 @@ class Feed extends React.Component {
 
 
         ) : (
-            <div>No requests in your area</div>
+            <div>{mssg}</div>
         )
         
             return(
@@ -446,6 +455,7 @@ class Feed extends React.Component {
      
                     </div>
                     <div className="main-content">
+                        {loading && <Loader1 />}
                         {reqlist}
                     </div>
  
