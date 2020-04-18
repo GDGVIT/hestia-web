@@ -128,9 +128,46 @@ const Aboutus = (props) =>{
     <div className="team-heading">
         <h1 style={{color:"#00d2d2"}}>The Team</h1> 
             </div>
+        
+            <Row gutter={[16, 16]} style={{textAlign:'center', margin:'auto auto', width: '90%'}}>
+            <Col span={6}>
+            <div className="photo">
+                <img src="./assets/nirmit.jpeg"/>
+            </div>
+            <div className="content">
+                <h4>Name</h4>
+                <h5>Role</h5>
+            </div>
+            </Col>
+            <Col span={6} >
+            <div className="photo">
+                <img src="./assets/nirmit.jpeg"/>
+            </div>
+            <div className="content">
+                <h4>Name</h4>
+                <h5>Role</h5>
+            </div>
+            </Col>
+            <Col span={6} >
+            <div className="photo">
+                <img src="./assets/nirmit.jpeg"/>
+            </div>
+            <div className="content">
+                <h4>Name</h4>
+                <h5>Role</h5>
+            </div>
+            </Col>
+            <Col span={6} >
+            <div className="photo">
+                <img src="./assets/nirmit.jpeg"/>
+            </div>
+            <div className="content">
+                <h4>Name</h4>
+                <h5>Role</h5>
+            </div>
+            </Col>
 
-            <Row gutter={[16, 16]} style={{textAlign:'center'}}>
-            <Col span={5}>
+            <Col span={6} >
             <div className="photo">
                 <img src="./assets/nirmit.jpeg"/>
             </div>
@@ -139,7 +176,7 @@ const Aboutus = (props) =>{
                 <h5>Role</h5>
             </div>
             </Col>
-            <Col span={5} >
+            <Col span={6} >
             <div className="photo">
                 <img src="./assets/nirmit.jpeg"/>
             </div>
@@ -148,7 +185,7 @@ const Aboutus = (props) =>{
                 <h5>Role</h5>
             </div>
             </Col>
-            <Col span={5} >
+            <Col span={6} >
             <div className="photo">
                 <img src="./assets/nirmit.jpeg"/>
             </div>
@@ -157,7 +194,7 @@ const Aboutus = (props) =>{
                 <h5>Role</h5>
             </div>
             </Col>
-            <Col span={5} >
+            <Col span={6} >
             <div className="photo">
                 <img src="./assets/nirmit.jpeg"/>
             </div>
@@ -166,10 +203,8 @@ const Aboutus = (props) =>{
                 <h5>Role</h5>
             </div>
             </Col>
-            </Row>
 
-            <Row gutter={[16, 16]} style={{textAlign:'center'}}>
-            <Col span={5} >
+            <Col span={6} >
             <div className="photo">
                 <img src="./assets/nirmit.jpeg"/>
             </div>
@@ -178,7 +213,7 @@ const Aboutus = (props) =>{
                 <h5>Role</h5>
             </div>
             </Col>
-            <Col span={5} >
+            <Col span={6} >
             <div className="photo">
                 <img src="./assets/nirmit.jpeg"/>
             </div>
@@ -187,7 +222,7 @@ const Aboutus = (props) =>{
                 <h5>Role</h5>
             </div>
             </Col>
-            <Col span={5} >
+            <Col span={6} >
             <div className="photo">
                 <img src="./assets/nirmit.jpeg"/>
             </div>
@@ -196,46 +231,7 @@ const Aboutus = (props) =>{
                 <h5>Role</h5>
             </div>
             </Col>
-            <Col span={5} >
-            <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
-            </div>
-            <div className="content">
-                <h4>Name</h4>
-                <h5>Role</h5>
-            </div>
-            </Col>
-            </Row>
-
-            <Row gutter={[16, 16]} style={{textAlign:'center'}}>
-            <Col span={5} >
-            <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
-            </div>
-            <div className="content">
-                <h4>Name</h4>
-                <h5>Role</h5>
-            </div>
-            </Col>
-            <Col span={5} >
-            <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
-            </div>
-            <div className="content">
-                <h4>Name</h4>
-                <h5>Role</h5>
-            </div>
-            </Col>
-            <Col span={5} >
-            <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
-            </div>
-            <div className="content">
-                <h4>Name</h4>
-                <h5>Role</h5>
-            </div>
-            </Col>
-            <Col span={5} >
+            <Col span={6} >
             <div className="photo">
                 <img src="./assets/nirmit.jpeg"/>
             </div>

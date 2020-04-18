@@ -371,12 +371,19 @@
     margin-left:40px;
     margin-right:40px;
 }
+.photo{
+    text-align: center;
+}
 .photo > img{
     width:160px;
     height:160px;   
     border-radius: 50%;
+    margin: auto;
     margin-bottom: 20px;
     margin-top:70px;
+}
+.content{
+    text-align: center;
 }
 .content > h4{
     color:#989898;
