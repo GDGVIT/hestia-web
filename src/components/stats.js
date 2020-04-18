@@ -283,7 +283,7 @@ export default class Stats extends React.Component{
                         <div className="statNum" style={{textAlign:'left'}}>Total Cases</div>
                     </Col>
                     <Col span={8}>
-                        <div className="statNum" style={{color:"#ffdd86"}}>{this.state.fullstat.globalData.recentTotalCases}</div>
+                        <div className="statNum" style={{color:"#00d2d2"}}>{this.state.fullstat.globalData.recentTotalCases}</div>
                     </Col>
             </Row>
             </Card>

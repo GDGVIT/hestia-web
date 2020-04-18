@@ -126,7 +126,7 @@
     color:#00d2d2;
     
 }
-.features > h2{
+.features > h1{
     color:#00d2d2;
     
     padding-top:50px;
@@ -233,7 +233,7 @@
     border-top-width:0.5px;
     margin-top:-30px;
 }
-.content > h5{
+.content > h3{
     padding-top:40px;
     font-weight: 100;
 }

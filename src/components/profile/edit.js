@@ -75,16 +75,19 @@ class Edit extends React.Component{
             this.setState({
                 name: values.user.name.trim()
             })
+            localStorage.setItem("name",values.user.name)
         }   
         if(values.user.email){
             this.setState({
                 email: values.user.email
             })
+            localStorage.setItem("email",values.user.email)
         }   
         if(values.user.phone){
             this.setState({
                 phone: values.user.phone
             })
+            localStorage.setItem("phone",values.user.phone)
         }
         // console.log({"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone})
         postRequest('https://akina.ayushpriya.tech/api/user/updateUser', {"name": this.state.name,"email": this.state.email,"phone":this.state.phone}, this.props)
