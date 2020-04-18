@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Row, Col, Drawer } from 'antd';
 import front from '../assets/front.png';
 import Stats from './stats'
+import Loader1 from '../loader'
 
 class News extends React.Component {
     constructor(props){
@@ -9,7 +10,8 @@ class News extends React.Component {
         this.state = {
             isEmptyState: true,
             news:[ ],
-            visible: false
+            visible: false,
+            loading: false
         }
     }
     componentDidMount(){
@@ -18,7 +20,9 @@ class News extends React.Component {
         }else{
             this.props.history.push("/dlogin");
         }
-
+        this.setState({
+            loading: true
+        })
 
         fetch('https://hestia-info.herokuapp.com/node',{
                 headers: new Headers({
@@ -30,7 +34,7 @@ class News extends React.Component {
                 // console.log(data)
                 this.setState({
                     news: data.items,
-                    
+                    loading: false
                 });
                 // console.log(this.state)
                 })
@@ -49,8 +53,11 @@ class News extends React.Component {
         })
     }
     render(){
+        const {loading} = this.state;
 
         const { news } = this.state;
+        const mssg = loading?(''):('No requests in your area')
+
         // console.log(requests)
         const newslist = news.length ? (
             news.map(
@@ -85,7 +92,7 @@ class News extends React.Component {
 
 
         ) : (
-            <div>No news for now</div>
+            <div>{mssg}</div>
         )
 
 
@@ -116,6 +123,7 @@ class News extends React.Component {
                 </div>
                 </div>
                 <div className="main-content">
+                {loading && <Loader1 />}
                     {newslist}
                 </div>
                 <Drawer

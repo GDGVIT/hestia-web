@@ -1,5 +1,6 @@
 import React from 'react';
 import 'antd/dist/antd.css';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import { Route, BrowserRouter, Redirect, withRouter, Switch} from 'react-router-dom';
 import './App.css';
 import Login from "./components/login";
@@ -21,6 +22,7 @@ import Orgs from './orgs'
 import POrgs from './page404'
 import Stats from './components/stats'
 import Explore from './components/explore'
+
 
 
 import { loadReCaptcha } from 'react-recaptcha-v3';

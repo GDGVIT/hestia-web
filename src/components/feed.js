@@ -3,15 +3,13 @@ import { Card, Row, Col } from 'antd';
 import profile from '../assets/profile.png';
 import store from '../assets/store.png';
 import check from '../assets/check.png';
-import Profile from './profile/profile';
 import plus from '../assets/plus.png';
-import Chat from '../components/chat/chats';
 import { Modal, Button } from 'antd';
 import { Form, Input, Checkbox} from 'antd';
 import Nav from './nav';
 import {withAlert} from "react-alert";
-import baseurl from "../url"
 import cancel from "../assets/cancel.svg";
+import Loader1 from '../loader'
 
 class Feed extends React.Component {
     constructor(props){
@@ -25,7 +23,9 @@ class Feed extends React.Component {
             item_name: null,
             quantity: '',
             token: '',
-            custom_location:''
+            custom_location:'',
+            loader:false,
+            messageFeed:''
         }
     }
     gotoProfile=()=>{
@@ -283,6 +283,9 @@ class Feed extends React.Component {
           } else {
             console.log("Not Available");
           }
+          this.setState({
+              loader:true
+          })
           navigator.geolocation.getCurrentPosition(function(position) {
             //   console.log('hap')
             // console.log("latitude",position.coords.latitude)
@@ -330,7 +333,15 @@ class Feed extends React.Component {
                     })
                     .then(res => res.json())
                     .then(data => {
-                        // console.log(data)
+                        if(data.Request.length>0){
+                            this.setState({
+                                messageFeed:''
+                            })
+                        }else{
+                            this.setState({
+                                messageFeed:'No requests in your area'
+                            })
+                        }
                         if(data.message == "Location not provided"){
                             // console.log("No location")
                         } else {
@@ -338,6 +349,9 @@ class Feed extends React.Component {
                                 requests: data.Request,
                             });
                         }
+                        this.setState({
+                            loader:false
+                        })
                     // console.log(this.state)
                     })
                     .catch(error => console.error(error))
@@ -354,6 +368,15 @@ class Feed extends React.Component {
                     .then(res => res.json())
                     .then(data => {
                         // console.log(data)
+                        if(data.Request.length>0){
+                            this.setState({
+                                messageFeed:''
+                            })
+                        }else{
+                            this.setState({
+                                messageFeed:'No requests in your area'
+                            })
+                        }
                         if(data.message == "Location not provided"){
                             // console.log("No location")
                         } else {
@@ -361,6 +384,10 @@ class Feed extends React.Component {
                                 requests: data.Request,
                             });
                         }
+                        this.setState({
+                            loader:false
+                        })
+                        
                     // console.log(this.state)
                     })
                     .catch(error => console.error(error))
@@ -419,9 +446,9 @@ class Feed extends React.Component {
 
 
         ) : (
-            <div>No requests in your area</div>
+            <div>{this.state.messageFeed}</div>
         )
-        
+        const {loader} = this.state
             return(
                 <div>
                     <div className="main-title">    
@@ -436,6 +463,7 @@ class Feed extends React.Component {
      
                     </div>
                     <div className="main-content">
+                    { loader && <Loader1 />}
                         {reqlist}
                     </div>
                     <div className="addReq" onClick={this.handleAdd}>

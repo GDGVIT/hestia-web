@@ -2,13 +2,16 @@ import React from 'react';
 import deletez from '../assets/delete.png';
 import { Card, Row, Col } from 'antd';
 import {withAlert} from "react-alert";
+import Loader1 from '../loader'
 
 
 class Myreqs extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            Requests: []
+            Requests: [],
+            loading: false
+
         }
     }
 
@@ -46,6 +49,10 @@ class Myreqs extends React.Component{
 
     }
     componentDidMount(){
+        this.setState({
+            loading: true
+        })
+
         if(localStorage.getItem("token")){
         //  console.log("someone's logged in")
         }else{
@@ -61,8 +68,8 @@ class Myreqs extends React.Component{
             .then(data => {
                 //  console.log(data)
             this.setState({
-                Requests: data.Request
-                
+                Requests: data.Request,
+                loading: false
             });
             // console.log(this.state)
             })
@@ -74,7 +81,9 @@ class Myreqs extends React.Component{
     render(){
 
         const {Requests} = this.state;
-        
+        const {loading} = this.state;
+        const mssg = loading?(''):('No requests made by you');
+
         const reqlist = Requests.length ? (
             Requests.map(
                 request =>{
@@ -107,7 +116,7 @@ class Myreqs extends React.Component{
                 }
             )
         ) : (
-            <div>You have not made any request</div>
+            <div>{mssg}</div>
         )
             return(
             <div className="myreqs">
@@ -121,6 +130,7 @@ class Myreqs extends React.Component{
                 </div>
 
                 <div className="main-content">
+                {loading && <Loader1 />}
                     {reqlist}
                 </div>
                 {/* <div className="addReq">

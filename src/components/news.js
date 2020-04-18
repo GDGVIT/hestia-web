@@ -3,13 +3,16 @@ import { Card, Row, Col } from 'antd';
 import profile from '../assets/profile.png';
 import Nav from './nav';
 import front from '../assets/front.png';
+import Loader1 from '../loader'
 
 class News extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             isEmptyState: true,
-            news:[ ]
+            news:[ ],
+            loading: false,
+            postMessage:''
         }
     }
     gotoProfile=()=>{
@@ -21,7 +24,9 @@ class News extends React.Component {
         }else{
             this.props.history.push("/login");
         }
-
+        this.setState({
+            loading:true
+        })
 
             fetch('https://hestia-info.herokuapp.com/node',{
                 method: "GET",
@@ -30,10 +35,12 @@ class News extends React.Component {
                 .then(response => response.json())
                 .then(data => {
                 // console.log(data)
+                
                 this.setState({
                     news: data.items,
-                    
+                    loading: false
                 });
+                
                 // console.log(this.state)
                 })
                 .catch(error => console.error(error))
@@ -44,8 +51,10 @@ class News extends React.Component {
      }
 
     render(){
+        const {loading} = this.state
 
         const { news } = this.state;
+        const mssg = loading?(''):('No news for now')
         // console.log(requests)
         const newslist = news.length ? (
             news.map(
@@ -80,9 +89,8 @@ class News extends React.Component {
 
 
         ) : (
-            <div>No news for now</div>
+            <div>{mssg}</div>
         )
-
 
 
 
@@ -114,6 +122,7 @@ class News extends React.Component {
                 </div>
                 </div>
                 <div className="main-content">
+                    {loading && <Loader1 />}
                     {newslist}
                 </div>
                 <Nav />
