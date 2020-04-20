@@ -241,7 +241,7 @@ class Feed extends React.Component {
                 this.props.history.push("/chat");
               }
               if(res.status == 500){
-                this.props.alert.show("Chatroom exists.");
+                this.props.alert.show("Chat with person exists.");
                 this.props.history.push("/profile");
               }
           })
