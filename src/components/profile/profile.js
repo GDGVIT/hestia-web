@@ -111,9 +111,9 @@ class Profile extends React.Component{
                         </div>
                             <h1>Profile</h1>
                         </Col>
-                        <Col span={6}>
+                        {/* <Col span={6}>
                         <img src={profile} alt="Profile logo"></img>
-                        </Col>
+                        </Col> */}
                     </Row>
  
                 </div>
