@@ -211,7 +211,7 @@ class Feed extends React.Component {
         .then(data => console.log("data")) // Result from the `response.json()` call
         .catch(error => console.error(error))
         //   Accept the item
-        postRequest('https://akina.ayushpriya.tech/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
+        postRequest('https://akina.ayushpriya.tech/api/v1/createChat', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
         .then(data => console.log("data")) // Result from the `response.json()` call
         .catch(error => console.error(error))
 
