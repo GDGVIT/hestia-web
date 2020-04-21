@@ -15,6 +15,8 @@ import Satkriti from '../assets/Satkriti.jpg';
 import Siddhartha from '../assets/Siddhartha.jpg';
 import Nirmit from '../assets/nirmit.jpeg';
 import abhishek from '../assets/abhishek.jpeg';
+import samarth from '../assets/samarth.jpg';
+import ayush from '../assets/ayush.jpg';
 
 
 const Aboutus = (props) =>{
@@ -142,7 +144,7 @@ const Aboutus = (props) =>{
             <Row gutter={[16, 16]} style={{textAlign:'center', margin:'auto auto', width: '90%'}}>
             <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
+                <img src={samarth}/>
             </div>
             <div className="content">
                 <h4>Samarth Nayyar</h4>
@@ -151,7 +153,7 @@ const Aboutus = (props) =>{
             </Col>
             <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
+                <img src={ayush}/>
             </div>
             <div className="content">
                 <h4>Ayush Priya</h4>
