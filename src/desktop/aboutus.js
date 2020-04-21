@@ -14,6 +14,7 @@ import Riddhi from '../assets/Riddhi.jpg';
 import Satkriti from '../assets/Satkriti.jpg';
 import Siddhartha from '../assets/Siddhartha.jpg';
 import Nirmit from '../assets/nirmit.jpeg';
+import abhishek from '../assets/abhishek.jpeg';
 
 
 const Aboutus = (props) =>{
@@ -240,7 +241,7 @@ const Aboutus = (props) =>{
             </Col>
             <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
+                <img src={abhishek}/>
             </div>
             <div className="content">
                 <h4>Abhishek Kushwaha</h4>
