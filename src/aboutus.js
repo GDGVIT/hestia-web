@@ -13,8 +13,8 @@ import Pragati from './assets/pragati.jpg';
 import Riddhi from './assets/Riddhi.jpg';
 import Satkriti from './assets/Satkriti.jpg';
 import Siddhartha from './assets/Siddhartha.jpg';
-import Nirmit from './assets/nirmit.jpeg';
-import abhishek from './assets/abhishek.jpeg';
+import Nirmit from './assets/nirmit.jpg';
+import abhishek from './assets/abhishek.jpg';
 import samarth from './assets/samarth.jpg';
 import ayush from './assets/ayush.jpg';
 
