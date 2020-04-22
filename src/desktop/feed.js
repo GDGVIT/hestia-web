@@ -453,12 +453,15 @@ class Feed extends React.Component {
                 <div>
                     <div className="main-title">    
                     <Row>
-                        <Col span={18}>
+                        <Col span={20}>
                             <h1>Requests</h1>
                         </Col>
-                        <div className="addReqD" onClick={this.handleAdd}>
+                        <Col span={4} style={{textAlign:'right'}}>
+                        <div className="addReqD" onClick={this.handleAdd} style={{display:'inline-block'}}>
                             <img src={plus} alt="add req"></img>
                         </div>
+                        </Col>
+  
                     </Row>
      
                     </div>
