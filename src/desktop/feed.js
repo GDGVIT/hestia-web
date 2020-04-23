@@ -126,7 +126,7 @@ class Feed extends React.Component {
                 })
                 .then(response => {
                     if(response.status === 400){
-                        tempprops.alert.show("invalid request")
+                        tempprops.alert.show("Can't submit more than 5 requests at a time!")
                     }else{
                         return response.json();
                     }

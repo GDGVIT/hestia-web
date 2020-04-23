@@ -17,7 +17,10 @@ import Nirmit from '../assets/nirmit.jpg';
 import abhishek from '../assets/abhishek.jpg';
 import samarth from '../assets/samarth.jpg';
 import ayush from '../assets/ayush.jpg';
-
+ 
+// header colot
+// header icon
+// 
 
 const Aboutus = (props) =>{
     return(
