@@ -39,7 +39,7 @@ const Aboutus = (props) =>{
                     <p style={{marginTop:"10px",cursor:"pointer",color:"#989898"}} onClick={()=>{props.history.push("/dlogin")}}>PWA available on the web app.</p>
                 </div>
                 <div className="button2">
-                    <a className="download" href={Akina} download="Akina">Download App</a>
+                    <a className="download" href={Akina} download="Akina" style={{lineHeight: 2.1}}>Download App</a>
                     <p className="covid">Due to Covid-19 our app is taking some time to process on the Play Store, meanwhile you can download it from our server.</p>
                 </div>
             </div>
@@ -127,7 +127,7 @@ const Aboutus = (props) =>{
                     <p style={{marginTop:"10px",cursor:"pointer",color:"#989898"}} onClick={()=>{props.history.push("/dlogin")}}>PWA available on the web app.</p>
                 </div>
                 <div className="button2">
-                    <a className="download" href={Akina} download="Akina">Download App</a>
+                    <a className="download" href={Akina} download="Akina" style={{lineHeight: 2.1}}>Download App</a>
                     <p className="covid">Due to Covid-19 our app is taking some time to process on the Play Store, meanwhile you can download it from our server.</p>
                 </div>
             </div>
