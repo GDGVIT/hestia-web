@@ -22,7 +22,7 @@ const Dlog = (props) => {
       "email": values.user.email
     }
 
-    fetch("https://akina.ayushpriya.tech/api/user/verifyuser", {
+    fetch("https://akina-auth.herokuapp.com/api/user/verifyuser", {
       method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
       body: JSON.stringify(cm), // Coordinate the body type with 'Content-Type'
       headers: new Headers({
@@ -53,7 +53,7 @@ const Dlog = (props) => {
       })
       .then(data => {
         if(data){
-        fetch("https://akina.ayushpriya.tech/api/user/login", {
+        fetch("https://akina-auth.herokuapp.com/api/user/login", {
           method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
           body: JSON.stringify(values.user), // Coordinate the body type with 'Content-Type'
           headers: new Headers({
