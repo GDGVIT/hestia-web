@@ -75,7 +75,7 @@ const Register = (props) => {
         }
         })
       .then(data => {
-        // console.log(data)
+        console.log(data)
         if(authcheck){
           alert.show(data.Verify)
           props.history.push("/dlogin")

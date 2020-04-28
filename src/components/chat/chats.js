@@ -6,12 +6,12 @@ import deletez from '../../assets/delete.png';
 import backbutton from '../../assets/backbutton.png';
 import './chat.css';
 import Nav from '../nav';
-import {withRouter} from 'react-router-dom';
-import blueback from '../../assets/rectangle.png';
-import whiteback from '../../assets/rectanglew.png';
+// import {withRouter} from 'react-router-dom';
+// import blueback from '../../assets/rectangle.png';
+// import whiteback from '../../assets/rectanglew.png';
 import {withAlert} from "react-alert";
 import { Modal, Button } from 'antd';
-import { Form, Input, Checkbox} from 'antd';
+// import { Form, Input, Checkbox} from 'antd';
 import cancel from "../../assets/cancel.svg";
 import check from '../../assets/check.png';
 

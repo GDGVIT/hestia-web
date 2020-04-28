@@ -102,6 +102,7 @@ class Edit extends React.Component{
                 }),
             })
             .then(response => {
+                console.log(response.status)
                 if(response.status === 200 || response.status===201 || response.status===202){
                     return response.json();
                     }else{

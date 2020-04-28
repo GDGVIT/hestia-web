@@ -126,7 +126,7 @@ class Feed extends React.Component {
                 })
                 .then(response => {
                     if(response.status === 400){
-                        tempprops.alert.show("invalid request")
+                        tempprops.alert.show("Can't submit more than 5 requests at a time!")
                     }else{
                         return response.json();
                     }
@@ -211,7 +211,7 @@ class Feed extends React.Component {
         .then(data => console.log("data")) // Result from the `response.json()` call
         .catch(error => console.error(error))
         //   Accept the item
-        postRequest('https://akina.ayushpriya.tech/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
+        postRequest('https://akina.ayushpriya.tech/api/v1/createChat', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
         .then(data => console.log("data")) // Result from the `response.json()` call
         .catch(error => console.error(error))
 
@@ -298,23 +298,21 @@ class Feed extends React.Component {
           this.setState({
               loading: true
           })
-          navigator.geolocation.getCurrentPosition(function(position) {
+
+          var long = '';
+          var lat = '';
+          navigator.geolocation.getCurrentPosition((position)=> {
             //   console.log('hap')
             // console.log("latitude",position.coords.latitude)
             // console.log("longitude",position.coords.longitude)
+             long = position.coords.longitude;
+            lat = position.coords.latitude;
+            console.log(long,lat)
             window.localStorage.setItem("latitude",position.coords.latitude);
             window.localStorage.setItem("longitude",position.coords.longitude);
-            
-          }, function(err){
-              if(err){
-                alert("Location permission denied. You will not be able to use the full features of this app without providing location access")
-              }
-                // console.log(err)
-        });
-        let token =localStorage.getItem("token");
-        
-        // console.log(this.state);
-        fetch('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+localStorage.getItem("latitude")+'&longitude='+localStorage.getItem("longitude")+'&localityLanguage=en', {
+
+
+            fetch('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+lat+'&longitude='+long+'&localityLanguage=en', {
             
             })
             .then(response =>{
@@ -326,11 +324,11 @@ class Feed extends React.Component {
                 if(data.status===400){
                     this.props.alert.show("Couldn't get location. Reload and try again")
                 }
-                // console.log(data.localityInfo)
+                console.log(data.localityInfo)
                 let str = data.localityInfo.administrative[2].name
                 let s = str.split(" ")[0];
                     // console.log(s)
-                this.setState({         //do not remove setState
+                this.setState({        
                     city:s
                 })
                     
@@ -385,6 +383,16 @@ class Feed extends React.Component {
     
             // console.log(this.state)
             })
+            
+          }, function(err){
+              if(err){
+                alert("Couldn't access location. You will not be able to use the full features of this app without providing location access")
+              }
+                // console.log(err)
+        });
+        
+        // console.log(this.state);
+        
             
                 
             
@@ -445,12 +453,15 @@ class Feed extends React.Component {
                 <div>
                     <div className="main-title">    
                     <Row>
-                        <Col span={18}>
+                        <Col span={20}>
                             <h1>Requests</h1>
                         </Col>
-                        <div className="addReqD" onClick={this.handleAdd}>
+                        <Col span={4} style={{textAlign:'right'}}>
+                        <div className="addReqD" onClick={this.handleAdd} style={{display:'inline-block'}}>
                             <img src={plus} alt="add req"></img>
                         </div>
+                        </Col>
+  
                     </Row>
      
                     </div>

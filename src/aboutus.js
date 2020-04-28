@@ -5,7 +5,18 @@ import feed from './assets/feed.png';
 import news from './assets/news2.png';
 import Akina from './assets/akina.apk';
 import { Row, Col } from 'antd';
-
+import Amogh from './assets/Amogh.jpg';
+import Ananya from './assets/Ananya.jpg';
+import Ashutosh from './assets/Ashutosh.jpg';
+import Hishaam from './assets/Hishaam.jpg';
+import Pragati from './assets/pragati.jpg';
+import Riddhi from './assets/Riddhi.jpg';
+import Satkriti from './assets/Satkriti.jpg';
+import Siddhartha from './assets/Siddhartha.jpg';
+import Nirmit from './assets/nirmit.jpg';
+import abhishek from './assets/abhishek.jpg';
+import samarth from './assets/samarth.jpg';
+import ayush from './assets/ayush.jpg';
 
 
 const Aboutus = (props) =>{
@@ -133,79 +144,116 @@ const Aboutus = (props) =>{
             <div className="team-heading">
         <h1 style={{color:"#00d2d2"}}>The Team</h1>
             </div>
-            <Row gutter={16} style={{textAlign:'center', margin:'auto auto', width: '90%'}}>
+            <Row gutter={[16, 16]} style={{textAlign:'center', margin:'auto auto', width: '90%'}}>
             <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
+                <img src={samarth}/>
             </div>
             <div className="content">
-                <h4>Name</h4>
-                <h5>Role</h5>
+                <h4>Samarth Nayyar</h4>
+                <h5>Designer</h5>
             </div>
             </Col>
             <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
+                <img src={ayush}/>
             </div>
             <div className="content">
-                <h4>Name</h4>
-                <h5>Role</h5>
+                <h4>Ayush Priya</h4>
+                <h5>Dev-ops</h5>
             </div>
             </Col>
             <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
+                <img src={Ashutosh}/>
             </div>
             <div className="content">
-                <h4>Name</h4>
-                <h5>Role</h5>
+                <h4>Ashutosh Kaushik</h4>
+                <h5>Web</h5>
             </div>
             </Col>
             <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
+                <img src={Ananya}/>
             </div>
             <div className="content">
-                <h4>Name</h4>
-                <h5>Role</h5>
+                <h4>Ananya Ganesh</h4>
+                <h5>Web</h5>
             </div>
             </Col>
             <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
+                <img src={Nirmit}/>
             </div>
             <div className="content">
-                <h4>Name</h4>
-                <h5>Role</h5>
+                <h4>Nirmit Jatana</h4>
+                <h5>Web</h5>
             </div>
             </Col>
             <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
+                <img src={Satkriti}/>
             </div>
             <div className="content">
-                <h4>Name</h4>
-                <h5>Role</h5>
+                <h4>Satkriti Singh</h4>
+                <h5>Android</h5>
             </div>
             </Col>
             <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
+                <img src={Siddhartha}/>
             </div>
             <div className="content">
-                <h4>Name</h4>
-                <h5>Role</h5>
+                <h4>Siddharth Verma</h4>
+                <h5>Android</h5>
             </div>
             </Col>
             <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <div className="photo">
-                <img src="./assets/nirmit.jpeg"/>
+                <img src={Amogh}/>
             </div>
             <div className="content">
-                <h4>Name</h4>
-                <h5>Role</h5>
+                <h4>Amogh Lele</h4>
+                <h5>Backend</h5>
             </div>
             </Col>
+            <Col xs={24} sm={24} md={12} lg={8} xl={6}>
+            <div className="photo">
+                <img src={Riddhi}/>
+            </div>
+            <div className="content">
+                <h4>Riddhi Gupta</h4>
+                <h5>Backend</h5>
+            </div>
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={8} xl={6}>
+            <div className="photo">
+                <img src={Hishaam}/>
+            </div>
+            <div className="content">
+                <h4>Md Hishaam Akhtar</h4>
+                <h5>Backend</h5>
+            </div>
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={8} xl={6}>
+            <div className="photo">
+                <img src={Pragati}/>
+            </div>
+            <div className="content">
+                <h4>Pragati</h4>
+                <h5>Backend</h5>
+            </div>
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={8} xl={6}>
+            <div className="photo">
+                <img src={abhishek}/>
+            </div>
+            <div className="content">
+                <h4>Abhishek Kushwaha</h4>
+                <h5>Backend</h5>
+            </div>
+            </Col>
+
             </Row>
 </div>         
         
