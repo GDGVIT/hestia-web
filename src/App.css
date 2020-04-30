@@ -1,0 +1,529 @@
+#root{
+    background-color: #fafafa;
+}
+.App{
+    width: 100vw;
+    height: auto;
+    text-align: left;
+    background-color: #fafafa;
+}
+
+
+.eqimargin{
+    margin-top: 25%;
+}
+
+/* Home page css */
+
+.hestia-logo{
+padding-top: 20vh;
+margin-left: 12.5%;
+}
+.hestia-logo img{
+    width: 70%;
+    height: auto;
+}
+.home-but{
+    margin: auto auto;
+    margin-top: 10vh;
+}
+.home-but a{
+    display: block;
+    width: 100%;
+    margin-bottom: 3vh;
+}
+.home-but a button{
+    width: 30vw;
+    height: 5vh;
+    background-color: #00d2d2;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+
+/* Main page cdd */
+.ant-tabs-bar, .ant-tabs-nav-container, .ant-tabs-nav-wrap, .ant-tabs-nav-scroll, .ant-tabs-nav, .ant-tabs-nav > div{
+    width: 100%;
+}
+.ant-tabs-tab{
+    width: 40%;
+}
+
+.ant-tabs-bottom .ant-tabs-bottom-bar .ant-tabs-ink-bar{
+    display: none !important;
+}
+
+
+/* login page css */
+.loginpage{
+    margin-top: 10%;
+}
+.login-form{
+    margin: 10% 12.5%;
+    text-align: left;
+    
+}
+.ant-input, .ant-input-number{
+    width: 100%;
+    border: 2px solid #00d2d2;
+    border-radius: 6px;
+    height: 60px;
+}   
+.login-form-button, .ant-btn-primary{
+    width: 30vw;
+    height: 44px;
+    background-color: #00d2d2;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-right: 20px;
+    box-shadow: 0px 0px 4px lightgray;
+}
+.ant-btn-primary img{
+    width: 12px;
+    height: auto;
+     margin-left: 6px;
+}
+.oauth{
+    width: 30vw;
+    height: 44px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    box-shadow: 0px 0px 4px lightgray;
+}
+
+
+
+/* loader css */
+
+#loading-spinner {
+    display: none;
+    position: relative;
+    z-index: 999999;
+  }
+  
+  #loading-spinner .spin-icon {
+    margin: auto;
+    width: 80px;
+    height: 80px;
+  
+    border: solid 3px transparent;
+    border-top-color:  #00d2d2;
+    border-left-color: #00d2d2;
+    border-radius: 80px;
+  
+    -webkit-animation: loading-spinner 500ms linear infinite;
+    -moz-animation:    loading-spinner 500ms linear infinite;
+    -ms-animation:     loading-spinner 500ms linear infinite;
+    -o-animation:      loading-spinner 500ms linear infinite;
+    animation:         loading-spinner 500ms linear infinite;
+  }
+  
+  @-webkit-keyframes loading-spinner {
+    0%   { -webkit-transform: rotate(0deg);   transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+  }
+  
+  @-moz-keyframes loading-spinner {
+    0%   { -moz-transform: rotate(0deg);   transform: rotate(0deg); }
+    100% { -moz-transform: rotate(360deg); transform: rotate(360deg); }
+  }
+  
+  @-o-keyframes loading-spinner {
+    0%   { -o-transform: rotate(0deg);   transform: rotate(0deg); }
+    100% { -o-transform: rotate(360deg); transform: rotate(360deg); }
+  }
+  
+  @-ms-keyframes loading-spinner {
+    0%   { -ms-transform: rotate(0deg);   transform: rotate(0deg); }
+    100% { -ms-transform: rotate(360deg); transform: rotate(360deg); }
+  }
+  
+  @keyframes loading-spinner {
+    0%   { transform: rotate(0deg);   transform: rotate(0deg); }
+    100% { transform: rotate(360deg); transform: rotate(360deg); }
+  }
+
+
+
+
+
+
+
+
+
+
+@media(max-width: 400px){
+    .login-form-button, .oauth{
+        width: 40vw;
+    }
+}
+.oauth img{
+    width: 20px;
+    height: auto;
+    padding-left: 4px;
+    padding-bottom: 4px;
+}
+
+/* reg page css */
+
+.hestia-logo-reg{
+margin-left: 12.5%;
+}
+.hestia-logo-reg img{
+    width: 70%;
+    height: auto;
+    max-width: 280px;
+}
+.already a{
+    color: #00d2d2;
+}
+
+/* Nav css */
+.ant-menu{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 65px;
+    box-shadow: 0px -2px 8px lightgray;
+    background-color: white;
+    opacity: 1;
+    width: 100%;
+}
+.ant-menu-item{
+    border-bottom: none !important;
+    width: 50%;
+    height: 100%;
+    text-align: center;
+}
+.ant-menu-item a{
+    position: relative;
+    top: 18%;
+}
+.ant-menu-horizontal > .ant-menu-item > a:hover{
+    color: #00d2d2;
+}
+.ant-menu-horizontal > .ant-menu-item-selected > a{
+    color: #00d2d2;
+}
+.ant-btn-primary:hover, .ant-btn-primary:focus{
+    background-color: #00d2d2;
+}
+
+.addReq{
+    background-color: #00d2d2;
+    position: fixed;
+    bottom: 95px;
+    left: 46%;
+    width: 55px;
+    height: 55px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0px 0px 10px lightgray;
+}
+.addReq img{
+    width: 13px;
+    height: auto;
+    padding-top: 20px;
+}
+/* Main content css */
+.main-title{
+    width: 80%;
+    margin: auto auto;
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
+.main-title h1{
+    font-size: 32px;
+    letter-spacing: 1.14px;
+    font-weight: 900;
+}
+.ant-card{
+    width: 80%;
+    margin: auto auto;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    box-shadow: 0px 0px 3px lightgray;
+}
+.ant-card-body{
+    padding: 20px
+}
+.imgback{
+    background-color: #00d2d2;
+    border: none;
+    border-radius: 14px;
+    float: right;
+    width: 30px;
+    height: 30px;
+    margin-right: 4px;
+    margin-top: 7px;
+    box-shadow: 0px 0px 5px lightgray;
+}
+.lil{
+    padding-left: 12px;
+    margin-top: 0px !important;
+}
+.lil img{
+    width: 8px !important;
+    height: auto;
+}
+.imgbacc{
+    background-color: #00d2d2;
+    border: none;
+    border-radius: 14px;
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin-right: 15px;
+    margin-top: 12px;
+    box-shadow: 0px 0px 5px lightgray;
+    text-align: center;
+}
+.imgbacc img{
+    padding-top: 4px;
+    width: 8px;
+    height: auto;
+    margin-right: 2px;
+}
+.imgModal{
+    background-color: #00d2d2;
+    display: block;
+    text-align: center;
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    margin: auto;
+}
+.imgModal img {
+    transform: translateY(13px);
+}
+.imgback img{
+    padding-top: 4px;
+    width: 12px;
+    height: auto;
+}
+.ant-checkbox-checked .ant-checkbox-inner {
+    background-color: #00d2d2;
+    border-color: #00d2d2;
+}
+.ant-checkbox-wrapper:hover .ant-checkbox-inner, .ant-checkbox:hover .ant-checkbox-inner, .ant-checkbox-input:focus + .ant-checkbox-inner{
+    border-color: #00d2d2;
+}
+.iconz{
+    float: right;
+}
+.iconz .imgback img{
+    width: 9px;
+    height: auto;
+    padding-left: 2px;
+}
+.tru .imgback img{
+    width: 12px !important;
+    height: auto;
+    padding-left: 0px;
+}
+.ant-col-6{
+    text-align: right;
+}
+.ant-col-6 img{
+    width: 40px;
+    margin-top: 6px;
+}
+.ant-col-18 h1{
+    font-size: 24px;
+    padding-top: 8px;
+}
+.main-content{
+    margin-bottom: 150px;
+    text-align: center;
+}
+.feed-card-header{
+    width: 100%;
+    text-align: left;
+}
+.feed-card-header span {
+    width: 60%;
+    text-align: left;
+}
+.feed-card-header p{
+    width: 40%;
+    text-align: left;
+    margin: 0px;
+}
+.feed-card-date p{
+    margin: 0px;
+    color: #989898;
+    font-size: 10px;
+}
+.feed-card-date{
+    width: 100%;
+    text-align: left;
+}
+
+.ant-tabs-tabpane{
+    background-color: #fafafa;
+}
+
+/* news tab css */
+
+.news-card-header{
+    width: 100%;
+}
+.news-card-header span {
+    width: 100%;     
+    float: left;
+    text-align: left;
+    font-size: 14px;
+    color: #141414;
+    letter-spacing: 0.5px;
+}
+.news-card-header p{
+    width: 100%;
+    float: left;
+    text-align: left;
+    margin: 0px;
+    font-weight: bold;
+}
+.news-card-content p{
+    float: left;
+    margin: 0px;
+    text-align: left;
+    color: #989898;
+}
+.news-bottom-select p{
+    float: left;
+    margin: 0px;
+    color: #989898;
+    font-size: 10px;
+}
+.news-bottom-select a{
+    float: right;
+    color: #00d2d2;
+    font-size: 10px;
+}
+.news-bottom-select{
+    margin-top: 5px;
+}
+.prof-card-title{
+    float: left;
+    width: 40%;
+}
+
+/* my Requests css */
+.myreqs .imgback{
+    background-color: #d95071;
+}
+.mychats{
+    text-align: center;
+}
+
+.logouthr{
+    color: #fafafa;
+    opacity: 0.3;
+    width: 80%;
+}
+.logoutbtn{
+    background-color:#d95071;
+    text-align: center;
+    margin-top: 20px;
+}
+.logoutbtn .prof-card-title{
+    color: white;
+    text-align: center;
+    width: 100%;
+    font-weight: 600;
+}
+
+/* my chats css */
+.ant-radio-group{
+    margin-bottom: 20px;
+}
+.ant-radio-button-wrapper{
+    border-radius: 6px !important;
+    font-size: 12px;
+    border: none;
+    box-shadow: 0px 0px 5px lightgray;
+}
+.ant-radio-button-wrapper-checked:not([class*=' ant-radio-button-wrapper-disabled']).ant-radio-button-wrapper:first-child {
+    border: none;
+}
+.ant-radio-button-wrapper-checked{
+    background: #00d2d2;
+}
+.ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover{
+    background: #00d2d2;
+    border: none;
+}
+.ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled){
+    background: #00d2d2;
+}
+.ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled){
+    background: #00d2d2;
+}
+
+/* modal css */
+.butn{
+    width: 40%;
+    float: left;
+    max-width: 190px;
+}
+.butn button{
+    width: 90%;
+}
+.ant-modal-content{
+    height: 360px;
+
+}
+.addrequest>div{
+    height: 360px;
+}
+.suggestshop>div, 
+.itemconfirm>div{
+    height: 300px;
+}
+.ant-modal-header{
+    display: none;
+}
+
+#__react-alert__>div>div>div{
+    background-color: #fff !important;
+    color: #000;
+    border-radius: 7px !important;
+    box-shadow: 0px 0px 4px lightgray;
+}
+#__react-alert__>div>div>div>svg{
+    display: none;
+}
+#__react-alert__>div>div>div>span{
+    color: #000;
+    text-align: center;
+}
+#__react-alert__>div>div>div>button>svg{
+    stroke: #000;
+}
+
+.Send{
+    border-radius: 10px !important;
+}
+.grecaptcha-badge{
+    display: none !important;
+}
+
+.tru .imgback{
+    margin-top: 30px
+}
+/* for number */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
