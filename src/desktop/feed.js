@@ -405,7 +405,7 @@ class Feed extends React.Component {
     render(){
         const {loading} = this.state;
         const { requests } = this.state;
-        const mssg = loading?(''):('No requests in your area')
+        const mssg = 'No requests in your area';
         // console.log(requests)
         const reqlist = requests.length ? (
             requests.map(
@@ -470,7 +470,7 @@ class Feed extends React.Component {
      
                     </div>
                     <div className="main-content">
-                        {loading && <Loader1 />}
+                        {/* {loading && <Loader1 />} */}
                         {reqlist}
                     </div>
  

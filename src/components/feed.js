@@ -450,7 +450,7 @@ class Feed extends React.Component {
 
 
         ) : (
-            <div>{this.state.messageFeed}</div>
+            <div>No requests in your area</div>
         )
         const {loader} = this.state
             return(
@@ -467,7 +467,7 @@ class Feed extends React.Component {
      
                     </div>
                     <div className="main-content">
-                    { loader && <Loader1 />}
+                    {/* { loader && <Loader1 />} */}
                         {reqlist}
                     </div>
                     <div className="addReq" onClick={this.handleAdd}>

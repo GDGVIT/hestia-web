@@ -160,7 +160,7 @@ const Aboutus = (props) =>{
             </div>
             <div className="content">
                 <h4>Ayush Priya</h4>
-                <h5>Dev-ops</h5>
+                <h5>Project manager</h5>
             </div>
             </Col>
             <Col xs={24} sm={24} md={12} lg={8} xl={6}>
@@ -214,7 +214,7 @@ const Aboutus = (props) =>{
             </div>
             <div className="content">
                 <h4>Amogh Lele</h4>
-                <h5>Backend</h5>
+                <h5>DevOps</h5>
             </div>
             </Col>
             <Col xs={24} sm={24} md={12} lg={8} xl={6}>
