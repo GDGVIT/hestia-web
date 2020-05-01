@@ -59,9 +59,13 @@ class Suggestions extends React.Component{
                 .then(response => {
                     if(response.status === 200 || response.status===201 || response.status===202){
                         return response.json();
-                        }else{
-                            this.props.alert.show("Something went wrong. Try again.")
                         }
+                    else if(response.status === 409){
+                        this.props.alert.show("Shop already recommended for this item")
+                    }
+                    else{
+                        this.props.alert.show("Something went wrong. Try again.")
+                    }
                 })
                 .then(data=>{
                     if(data){

@@ -47,6 +47,23 @@ class Report extends React.Component{
              }
         })
         .catch(err => console.log("err"))
+
+        var ob = {}
+        ob["request_receiver"] = parseInt(localStorage.getItem("request_receiver"));
+        ob["request_sender"] = parseInt(localStorage.getItem("request_sender"));
+        ob["is_reported"] = true
+        // Amogh's route
+        fetch('https://akina.ayushpriya.tech/api/v1/updateChat', {
+            method:'POST',
+            headers: new Headers({
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem("token")
+            }),
+            body:JSON.stringify(ob)
+        })
+        .then(resp => console.log(resp))
+        .catch(err => console.log(err))
+    
     }
       
     componentDidMount(){
