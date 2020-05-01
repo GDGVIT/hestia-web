@@ -166,9 +166,9 @@ class Mychat extends React.Component{
                                         </span>
                                 
                                     </div>
-                                    <div className="feed-card-date">
+                                    {/* <div className="feed-card-date">
                                         <p>{data.title}</p>
-                                    </div>
+                                    </div> */}
                                 </Col>
                                 <Col span={7} className="iconz">
                                     <div className="imgback" onClick={this.gotoMyChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.receiver_name}`,`${data.sender_name}`,`${data.req_desc}`,`${data.request_receiver}`,`${data.request_sender}`)}>
@@ -192,15 +192,15 @@ class Mychat extends React.Component{
                             <Card key = {data.receiver}>
                             <Row>
                                 <Col span={17}>
-                                    <div className="feed-card-header">
+                                    <div className="feed-card-header" style={{marginTop:'8px', fontSize:'15px'}}>
                                         <span>
                                             <strong>{data.sender_name}</strong>
                                         </span>
                                 
                                     </div>
-                                    <div className="feed-card-date">
+                                    {/* <div className="feed-card-date">
                                         <p>{data.title}</p>
-                                    </div>
+                                    </div> */}
                                 </Col>
                                 <Col span={7} className="iconz">
                                     <div className="imgback" onClick={this.gotoOtherChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.sender_name}`,`${data.receiver_name}`, `${data.req_desc}`,`${data.request_receiver}`,`${data.request_sender}`)}>
