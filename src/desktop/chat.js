@@ -334,7 +334,7 @@ onClose=()=>{
                       <div style={{marginLeft:"10px"}}>
                         <h1 style = {{fontSize:15, textAlign:"left", fontWeight:"700"}}>{localStorage.getItem("chat_name")}</h1>
                         <h2 style = {{fontSize:15, textAlign:"left"}}>{localStorage.getItem("items")}</h2>
-                        <h2 style = {{fontSize:13, textAlign:"left"}}>{localStorage.getItem("chat_desc")}</h2>
+                        {/* <h2 style = {{fontSize:13, textAlign:"left"}}>{localStorage.getItem("chat_desc")}</h2> */}
                       </div>
                     </Col>
                     <Col span={2} className="iconz">

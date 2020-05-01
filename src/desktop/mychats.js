@@ -160,7 +160,7 @@ class Mychat extends React.Component{
                             <Card key = {data.receiver}>
                             <Row>
                                 <Col span={17}>
-                                    <div className="feed-card-header">
+                                    <div className="feed-card-header" style={{marginTop:"8px", fontSize:"15px"}}>
                                         <span>
                                             <strong>{data.receiver_name}</strong>
                                         </span>
