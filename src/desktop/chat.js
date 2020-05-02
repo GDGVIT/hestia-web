@@ -1,6 +1,8 @@
 import React from 'react'
 import Messages from './messages';
 import { Card, Row, Col, Drawer } from 'antd';
+import { Menu, Dropdown } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 import report from '../assets/Report.svg';
 import backbutton from '../assets/backbutton.png';
 import './chat.css';
@@ -25,6 +27,7 @@ class Chat extends React.Component{
             ws:null,
             currentUser: null,
             messages: [],
+            info:[],
             initialmsg: [],
             me: false,
             visreport: false,
@@ -149,7 +152,8 @@ onClose=()=>{
         localStorage.setItem('items', res.items)
         if(res.code == 200){
           this.setState({
-            initialmsg: res.messages
+            initialmsg: res.messages,
+            info: res.items
           })
         }
         if(res.status == 404){
@@ -302,7 +306,7 @@ onClose=()=>{
           }
         )
       ) : (
-        <div style={{textAlign:"center", marginTop:"20px"}}>  </div>
+        <div style={{textAlign:"center", marginTop:"20px"}}> There are no messages yet ...  </div>
       )
       const {messages} = this.state;
       messages.reverse();
@@ -326,16 +330,47 @@ onClose=()=>{
       if(localStorage.getItem("chat_desc").length > 20){
         localStorage.setItem("chat_desc", localStorage.getItem("chat_desc").slice(0,20) + "..." )
       } 
+
+
+      const {info} = this.state;
+      console.log(info)
+      const menu = info.length ? (
+        info.map(
+          li => {
+            return(
+              <Menu.Item key= {li.ID} >
+                <h6 style={{color:"#00d2d2"}}>{li.item}</h6>
+                <p>{li.req_desc}</p>
+              </Menu.Item>
+            )
+          }
+        )
+      ) : (
+        <div> Nothing to display </div>
+      )
+      const menus = (
+        <Menu style={{padding:"10px"}}>
+          {menu}
+        </Menu>
+      );
+
         return(
             <div>
             <div>    
                 <Row style={{marginTop:50}}>
-                    <Col span={16}>
+                    <Col span={14}>
                       <div style={{marginLeft:"10px"}}>
                         <h1 style = {{fontSize:15, textAlign:"left", fontWeight:"700"}}>{localStorage.getItem("chat_name")}</h1>
-                        <h2 style = {{fontSize:15, textAlign:"left"}}>{localStorage.getItem("items")}</h2>
+                        {/* <h2 style = {{fontSize:15, textAlign:"left"}}>{localStorage.getItem("items")}</h2> */}
                         {/* <h2 style = {{fontSize:13, textAlign:"left"}}>{localStorage.getItem("chat_desc")}</h2> */}
                       </div>
+                    </Col>
+                    <Col span={2} >
+                      <Dropdown overlay={menus} trigger={['click']} zIndex="3000" placement="bottomRight" className="imgback info" style={{marginRight:"12px"}}>
+                        <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                          <DownOutlined  style={{color:"white", marginTop:"5px", marginLeft:"8px"}}/>
+                        </a>
+                      </Dropdown>
                     </Col>
                     <Col span={2} className="iconz">
                       <div className="imgback del" onClick={this.handleDel}>

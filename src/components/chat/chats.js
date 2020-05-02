@@ -1,6 +1,8 @@
 import React from 'react'
 import Messages from './messages';
 import { Card, Row, Col } from 'antd';
+import { Menu, Dropdown } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 import Report from '../../assets/Report.svg';
 import deletez from '../../assets/delete.png';
 import backbutton from '../../assets/backbutton.png';
@@ -32,6 +34,7 @@ class Chat extends React.Component{
             currentUser: null,
             messages: [],
             initialmsg: [],
+            info:[],
             me: false,
             visible:false
             // receiver_id : props.location.state.id
@@ -153,7 +156,8 @@ class Chat extends React.Component{
         localStorage.setItem('items', res.items)
         if(res.code == 200){
           this.setState({
-            initialmsg: res.messages
+            initialmsg: res.messages,
+            info: res.items
           })
         }
         if(res.status == 404){
@@ -291,7 +295,7 @@ class Chat extends React.Component{
     render(){
 
       const {initialmsg} = this.state;
-      console.log(initialmsg)
+      // console.log(initialmsg)
       const initial = initialmsg.length ? (
         initialmsg.map(
           msg => {
@@ -307,7 +311,7 @@ class Chat extends React.Component{
           }
         )
       ) : (
-        <div style={{textAlign:"center", marginTop:"20px"}}>  </div>
+        <div style={{textAlign:"center", marginTop:"20px"}}> There are no messages yet ... </div>
       )
       const {messages} = this.state;
       messages.reverse();
@@ -331,6 +335,29 @@ class Chat extends React.Component{
       // if(localStorage.getItem("chat_desc").length > 20){
       //   localStorage.setItem("chat_desc", localStorage.getItem("chat_desc").slice(0,20) + "..." )
       // } 
+
+      const {info} = this.state;
+      console.log(info)
+      const menu = info.length ? (
+        info.map(
+          li => {
+            return(
+              <Menu.Item key= {li.ID} >
+                <h6 style={{color:"#00d2d2"}}>{li.item}</h6>
+                <p>{li.req_desc}</p>
+              </Menu.Item>
+            )
+          }
+        )
+      ) : (
+        <div> Nothing to display </div>
+      )
+      const menus = (
+        <Menu style={{padding:"10px"}}>
+          {menu}
+        </Menu>
+      );
+
         return(
             <div>
             <div>    
@@ -340,12 +367,19 @@ class Chat extends React.Component{
                         <img src={backbutton} alt = "Back-button" style = {{ marginLeft:"10px", width:"7px",paddingTop:"0"}}></img>
                       </div>
                     </Col>
-                    <Col span={15}>
+                    <Col span={13}>
                       <div style={{marginLeft:"10px"}}>
-                        <h1 style = {{fontSize:15, textAlign:"left", fontWeight:"700"}}>{localStorage.getItem("chat_name")}</h1>
-                        <h2 style = {{fontSize:15, textAlign:"left"}}>{localStorage.getItem("items")}</h2>
+                        <h1 style = {{fontSize:17, textAlign:"left", fontWeight:"700", marginTop:"5px"}}>{localStorage.getItem("chat_name")}</h1>
+                        {/* <h2 style = {{fontSize:15, textAlign:"left"}}>{localStorage.getItem("items")}</h2> */}
                         {/* <h2 style = {{fontSize:13, textAlign:"left"}}>{localStorage.getItem("chat_desc")}</h2> */}
                       </div>
+                    </Col>
+                    <Col span={2}>
+                      <Dropdown overlay={menus} trigger={['click']} placement="bottomRight" className="imgback info">
+                        <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                          <DownOutlined style={{color:"white", marginTop:"5px", marginLeft:"8px"}}/>
+                        </a>
+                      </Dropdown>
                     </Col>
                     <Col span={2} className="iconz">
                       <div className="imgback del" onClick={this.handleDel}>
