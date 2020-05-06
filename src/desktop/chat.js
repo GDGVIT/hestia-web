@@ -350,6 +350,7 @@ onClose=()=>{
       )
       const menus = (
         <Menu style={{padding:"10px"}}>
+          <Menu.Item style={{display: 'none'}} />
           {menu}
         </Menu>
       );
