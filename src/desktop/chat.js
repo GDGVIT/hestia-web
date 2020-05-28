@@ -170,7 +170,7 @@ onClose=()=>{
    }
 
    componentDidUpdate() {
-      this.scrollToBottom();
+      // this.scrollToBottom();
   }
    addMessage = message =>
    this.setState(state => ({ messages: [message, ...state.messages] }))
