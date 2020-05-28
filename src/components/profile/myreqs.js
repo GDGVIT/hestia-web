@@ -26,7 +26,7 @@ class Myreqs extends React.Component{
 
     deleterequest = (id) => {
         // console.log(id)
-                postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/'+id+'/')
+                postForm('https://akina.ayushpriya.tech/api/requests/item_requests/'+id+'/')
                     .then(data => {
                         console.log(data)
                         this.props.alert.show("Item deleted")
@@ -67,7 +67,7 @@ class Myreqs extends React.Component{
             loading:true
         })
 
-        fetch('https://hestia-requests.herokuapp.com/api/requests/my_requests/', {
+        fetch('https://akina.ayushpriya.tech/api/requests/my_requests/', {
             headers: new Headers({
             'Authorization': localStorage.getItem("token")
             })
