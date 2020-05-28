@@ -50,9 +50,9 @@ class Chat extends React.Component{
     this.controller.abort();
 
   }
-    scrollToBottom = () => {
-      this.messagesEnd.scrollIntoView({ behavior: "smooth" });
-    }
+    // scrollToBottom = () => {
+    //   this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+    // }
     timeout = 250; 
 onClose=()=>{
   this.setState({
@@ -120,7 +120,7 @@ onClose=()=>{
     // }
 
      componentDidMount(){
-      this.scrollToBottom();
+      // this.scrollToBottom();
       // this.connect();
 
       if(localStorage.getItem("token")){
