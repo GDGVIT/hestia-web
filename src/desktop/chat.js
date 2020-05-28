@@ -169,9 +169,9 @@ onClose=()=>{
       .catch(err => console.log("err"))
    }
 
-   componentDidUpdate() {
-      // this.scrollToBottom();
-  }
+  //  componentDidUpdate() {
+  //     // this.scrollToBottom();
+  // }
    addMessage = message =>
    this.setState(state => ({ messages: [message, ...state.messages] }))
 
