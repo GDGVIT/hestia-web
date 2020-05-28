@@ -48,7 +48,7 @@ class Suggestions extends React.Component{
                     object["description_of_shop"] = this.state.description_of_shop.trim();
                     object["phone_number"] = this.state.phone_number;
                     // console.log(object)
-                fetch("https://hestia-report-do.herokuapp.com/api/recommend/", {
+                fetch("https://akina.ayushpriya.tech/api/recommend/", {
                     method: 'POST', // or 'PUT'
                     body: JSON.stringify(object),  // a FormData will automatically set the 'Content-Type'
                     headers: new Headers({

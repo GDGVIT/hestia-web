@@ -128,7 +128,7 @@ class Mychat extends React.Component{
         .catch(error => console.error(error))
 
         //get suggestions number
-        fetch('https://hestia-report-do.herokuapp.com/api/recommend/',{
+        fetch('https://akina.ayushpriya.tech/api/recommend/',{
             method: "GET",
             headers: new Headers({
                 'Authorization': localStorage.getItem("token")

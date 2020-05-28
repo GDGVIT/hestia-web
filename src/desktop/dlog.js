@@ -22,7 +22,7 @@ const Dlog = (props) => {
       "email": values.user.email
     }
 
-    fetch("https://akina-auth.herokuapp.com/api/user/verifyuser", {
+    fetch("https://akina.ayushpriya.tech/api/user/verifyuser", {
       method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
       body: JSON.stringify(cm), // Coordinate the body type with 'Content-Type'
       headers: new Headers({
@@ -53,7 +53,7 @@ const Dlog = (props) => {
       })
       .then(data => {
         if(data){
-        fetch("https://akina-auth.herokuapp.com/api/user/login", {
+        fetch("https://akina.ayushpriya.tech/api/user/login", {
           method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
           body: JSON.stringify(values.user), // Coordinate the body type with 'Content-Type'
           headers: new Headers({
@@ -91,7 +91,7 @@ const Dlog = (props) => {
                 obj["registration_id"] = localStorage.getItem("notif-token");
                 console.log(JSON.stringify(obj))
               
-                fetch('https://hestia-requests.herokuapp.com/api/notification/register_device/',{
+                fetch('https://akina.ayushpriya.tech/api/notification/register_device/',{
                   method:"POST",
                   headers: new Headers({
                     'Content-Type': 'application/json'
