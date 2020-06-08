@@ -375,7 +375,7 @@ export default class Stats extends React.Component{
                     }}
                 
                 /> 
-            <div style={{textAlign:'center', marginBottom:'20px'}}><h3 style={{color:'#1fd9d9'}}>Time</h3></div>
+            <div style={{textAlign:'center', marginBottom:'20px'}}><h3 style={{color:'#ffdd86'}}>Time</h3></div>
             
             <div style={{textAlign:'center', marginTop:'50px', marginBottom:'20px'}}><h3 style={{color:'#1fd9d9'}}>Recovered</h3></div>
             <Line
@@ -400,7 +400,7 @@ export default class Stats extends React.Component{
                     }}
                 
                 /> 
-            <div style={{textAlign:'center', marginBottom:'20px'}}><h3 style={{color:'#ffdd86'}}>Time</h3></div>
+            <div style={{textAlign:'center', marginBottom:'20px'}}><h3 style={{color:'#1fd9d9'}}>Time</h3></div>
 
             <div style={{textAlign:'center', marginTop:'50px', marginBottom:'20px'}}><h3 style={{color:'#ff589c'}}>Deaths</h3></div>
             <Line
@@ -451,7 +451,7 @@ export default class Stats extends React.Component{
                             <div className="statNum" style={{textAlign:'left'}}>Total Cases</div>
                         </Col>
                         <Col span={5}>
-                            <div className="statNum" style={{color:"#ffdd86"}}>
+                            <div className="statNum" style={{color:"#00d2d2"}}>
                             <NumberFormat thousandSeparator={true} thousandsGroupStyle="lakh" displayType={'text'} value =  {this.state.currentCountry.cases} />
                             </div>
                         </Col>
