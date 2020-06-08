@@ -67,6 +67,7 @@ class Mychat extends React.Component{
         })
     }
     onClose=()=>{
+
         this.setState({
             visiblechat: false,
             visiblesug: false
@@ -263,6 +264,7 @@ class Mychat extends React.Component{
                 visible={this.state.visiblechat}
                 width="400px"
                 zIndex="2000"
+                destroyOnClose={true}
             >
                 <Chat id={localStorage.getItem("receiver_id")}/>
                 </Drawer>

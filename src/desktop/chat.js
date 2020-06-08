@@ -122,14 +122,14 @@ onClose=()=>{
       // this.scrollToBottom();
       // this.connect();
 
-      if(localStorage.getItem("token")){
-      //  console.log("someone's logged in")
-      //  this.setState({receiver_id : localStorage.getItem("receiver_id")})
-      }else{
-          while(1==1){
-            alert("HACKERMAN ALERT")
-          }
-      }
+      // if(localStorage.getItem("token")){
+      // //  console.log("someone's logged in")
+      // //  this.setState({receiver_id : localStorage.getItem("receiver_id")})
+      // }else{
+      //     while(1==1){
+      //       alert("HACKERMAN ALERT")
+      //     }
+      // }
       // console.log(this.state)
       //request to get messages
 
