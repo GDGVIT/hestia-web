@@ -77,7 +77,7 @@ class News extends React.Component {
                                 <p>
                                     {request.isoDate.slice(0,10)}
                                 </p>
-                                <a href={request.link}> Read full story </a>
+                                <a href={request.link} target="_blank"> Read full story </a>
                             </Col>
                         </Row>
                     </Card>
