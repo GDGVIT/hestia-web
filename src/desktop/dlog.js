@@ -21,7 +21,7 @@ const Dlog = (props) => {
     let cm = {
       "email": values.user.email
     }
-
+    console.log(cm)
     fetch("https://akina-auth.herokuapp.com/api/user/verifyuser", {
       method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
       body: JSON.stringify(cm), // Coordinate the body type with 'Content-Type'
