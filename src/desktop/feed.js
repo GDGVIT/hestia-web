@@ -96,7 +96,7 @@ class Feed extends React.Component {
         }
         console.log(this.state.custom_location)
         if (this.state.custom_location === ''){
-        postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.city,this.state.description, this.props)
+        postForm('https://akina.ayushpriya.tech/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.city,this.state.description, this.props)
                 // .then(res => console.log(res))
                 .then(data => {
                     console.log(data)
@@ -141,7 +141,7 @@ class Feed extends React.Component {
 
             }
             else{
-                postForm('https://hestia-requests.herokuapp.com/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.custom_location,this.state.description, this.props)
+                postForm('https://akina.ayushpriya.tech/api/requests/item_requests/',this.state.item_name,this.state.quantity,this.state.custom_location,this.state.description, this.props)
                 // .then(res => console.log(res))
                 .then(data => {
                     console.log(data)
@@ -211,7 +211,7 @@ class Feed extends React.Component {
 
       createChat = () => {
         // console.log(parseInt(localStorage.getItem("accept_id")))
-        postRequest('https://hestia-requests.herokuapp.com/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
+        postRequest('https://akina.ayushpriya.tech/api/requests/accept/', {request_id: parseInt(localStorage.getItem("accept_id")),location:this.state.city})
         .then(data => console.log("data")) // Result from the `response.json()` call
         .catch(error => console.error(error))
         //   Accept the item
@@ -337,7 +337,7 @@ class Feed extends React.Component {
                 })
                     
                 if (this.state.custom_location==''){   
-                    fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+s
+                    fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location='+s
                     
                      , {
                     headers: new Headers({
@@ -361,7 +361,7 @@ class Feed extends React.Component {
                     .catch(error => console.error(error))
                 }
                 else{
-                    fetch('https://hestia-requests.herokuapp.com/api/requests/view_all_item_requests/?location='+this.state.city
+                    fetch('https://akina.ayushpriya.tech/api/requests/view_all_item_requests/?location='+this.state.city
                     
                      , {
                     headers: new Headers({

@@ -30,7 +30,7 @@ class Edit extends React.Component{
        let values={
             'email': localStorage.getItem("email")
         }
-        return fetch("https://akina-auth.herokuapp.com/api/user/forgotPassword", {
+        return fetch("https://akina.ayushpriya.tech/api/user/forgotPassword", {
         method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
         body: JSON.stringify(values), // Coordinate the body type with 'Content-Type'
         headers: new Headers({
@@ -90,7 +90,7 @@ class Edit extends React.Component{
             localStorage.setItem("phone",values.user.phone)
         }
         // console.log({"name": this.state.user.name,"email": this.state.user.email,"phone":this.state.user.phone})
-        postRequest('https://akina-auth.herokuapp.com/api/user/updateUser', {"name": this.state.name,"email": this.state.email,"phone":this.state.phone}, this.props)
+        postRequest('https://akina.ayushpriya.tech/api/user/updateUser', {"name": this.state.name,"email": this.state.email,"phone":this.state.phone}, this.props)
             .then(data => {
                 if(data){
                     this.props.alert.show("Profile succesfully edited")
