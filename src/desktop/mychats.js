@@ -17,7 +17,8 @@ class Mychat extends React.Component{
             Suggest:[],
             value:'mr',
             visiblechat: false,
-            visiblesug: false
+            visiblesug: false,
+            key:0
         }
         // console.log(this.props)
     }
@@ -40,7 +41,8 @@ class Mychat extends React.Component{
         window.localStorage.setItem("request_sender",rs);
 
         this.setState({
-            visiblechat: true
+            visiblechat: true,
+            key: this.state.key + 1
         })
     }
 
@@ -57,7 +59,8 @@ class Mychat extends React.Component{
         window.localStorage.setItem("request_sender",rs);
 
         this.setState({
-            visiblechat: true
+            visiblechat: true,
+            key: this.state.key + 1
         })
     }
     handleClick = (e) => () => {
@@ -157,29 +160,31 @@ class Mychat extends React.Component{
             const mychatslist = mychats.length ? (
                 mychats.map(
                     data => {
-                        return (
-                            <Card key = {data.receiver}>
-                            <Row>
-                                <Col span={17}>
-                                    <div className="feed-card-header" style={{marginTop:"8px", fontSize:"15px"}}>
-                                        <span>
-                                            <strong>{data.receiver_name}</strong>
-                                        </span>
-                                
-                                    </div>
-                                    {/* <div className="feed-card-date">
-                                        <p>{data.title}</p>
-                                    </div> */}
-                                </Col>
-                                <Col span={7} className="iconz">
-                                    <div className="imgback" onClick={this.gotoMyChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.receiver_name}`,`${data.sender_name}`,`${data.req_desc}`,`${data.request_receiver}`,`${data.request_sender}`)}>
-                                        <img src={front} alt="location"></img>
-                                    </div>
-                                </Col>
-                            </Row>
-                        </Card>
-                        )
-
+                        console.log(data)
+                        if(data.sender_name != '' && data.receiver_name != '' && data.is_reported != true) {
+                            return (
+                                <Card key = {data.sender}>
+                                <Row>
+                                    <Col span={17}>
+                                        <div className="feed-card-header" style={{marginTop:"8px", fontSize:"15px"}}>
+                                            <span>
+                                                <strong>{data.receiver_name}</strong>
+                                            </span>
+                                    
+                                        </div>
+                                        {/* <div className="feed-card-date">
+                                            <p>{data.title}</p>
+                                        </div> */}
+                                    </Col>
+                                    <Col span={7} className="iconz">
+                                        <div className="imgback" onClick={this.gotoMyChat(`${data.receiver}`, `${data.title}`, `${data.sender}`, `${data.receiver_name}`,`${data.sender_name}`,`${data.req_desc}`,`${data.request_receiver}`,`${data.request_sender}`)}>
+                                            <img src={front} alt="location"></img>
+                                        </div>
+                                    </Col>
+                                </Row>
+                            </Card>
+                            )
+                        }
                     }
                 )
             ) : (
@@ -189,6 +194,7 @@ class Mychat extends React.Component{
             const otherchatslist = otherchats.length ? (
                 otherchats.map(
                     data => {
+                        if(data.sender_name != '' && data.receiver_name != '' && data.is_reported != true) {
                         return (
                             <Card key = {data.receiver}>
                             <Row>
@@ -211,6 +217,7 @@ class Mychat extends React.Component{
                             </Row>
                         </Card>
                         )
+                    }
 
                     }
                 )
