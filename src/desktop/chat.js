@@ -3,12 +3,11 @@ import Messages from './messages';
 import { Card, Row, Col, Drawer } from 'antd';
 import { Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-import report from '../assets/Report.svg';
+import reportz from '../assets/Report.svg';
 import backbutton from '../assets/backbutton.png';
 import './chat.css';
 import {withAlert} from "react-alert";
-// import Report from './report';
-import Report from '../assets/Report.svg';
+import Report from './report';
 import deletez from '../assets/delete.png';
 import { Modal, Button } from 'antd';
 import cancel from "../assets/cancel.svg";
@@ -379,7 +378,7 @@ onClose=()=>{
                       </div>
                     </Col>
                     <Col span={3}>
-                    <img src={report} alt="Report logo" style ={{ marginTop: "10px", cursor:'pointer'}} onClick={this.gotoReport}></img>
+                    <img src={reportz} alt="Report logo" style ={{ marginTop: "10px", cursor:'pointer'}} onClick={this.gotoReport}></img>
                     </Col>
                 </Row>
             </div>
