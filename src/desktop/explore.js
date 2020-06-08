@@ -20,7 +20,7 @@ class Explore extends React.Component {
         this.setState({
             loading:true
         })
-            fetch('https://hestia-requests.herokuapp.com/api/requests/user_organization_view/',{
+            fetch('https://akina.ayushpriya.tech/api/requests/user_organization_view/',{
                 method: 'GET',
                 headers: new Headers({
                     'Authorization': localStorage.getItem("token")
