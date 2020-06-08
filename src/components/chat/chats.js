@@ -343,8 +343,8 @@ class Chat extends React.Component{
           li => {
             return(
               <Menu.Item key= {li.ID} >
-                <h6 style={{color:"#00d2d2"}}>{li.item}</h6>
-                <p>{li.req_desc}</p>
+                <p style={{color:"#00d2d2"}}>{li.item}</p>
+                <h5>{li.req_desc}</h5>
               </Menu.Item>
             )
           }
@@ -353,7 +353,7 @@ class Chat extends React.Component{
         <div> Nothing to display </div>
       )
       const menus = (
-        <Menu style={{padding:"10px"}}>
+        <Menu style={{padding:"10px", width:"20vw"}}>
           <Menu.Item style={{display: 'none'}} />
           {menu}
         </Menu>
