@@ -429,7 +429,7 @@ export default class Stats extends React.Component{
                 showSearch
                 placeholder="Select a country"
                 optionFilterProp="children"
-                defaultValue='india'
+                defaultValue='India'
                 onChange={this.onChange}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
