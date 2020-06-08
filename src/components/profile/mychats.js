@@ -175,7 +175,7 @@ class Mychat extends React.Component{
             const mychatslist = mychats.length ? (
                 mychats.map(
                     data => {
-                        if(data.sender_name != '' && data.receiver_name != '') {
+                        if(data.sender_name != '' && data.receiver_name != '' && data.is_reported != true) {
                             return (
                                 <Card key = {data.receiver}>
                                 <Row>
@@ -212,7 +212,7 @@ class Mychat extends React.Component{
                 otherchats.map(
                     data => {
                         console.log(data)
-                        if(data.sender_name != '' && data.receiver_name != '') {
+                        if(data.sender_name != '' && data.receiver_name != '' && data.is_reported != true) {
                             return (
                                 <Card key = {data.receiver}>
                                 <Row>

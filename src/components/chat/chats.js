@@ -291,6 +291,7 @@ class Chat extends React.Component{
 
     componentWillUnmount(){
       this.controller.abort();
+      console.log('ABORT')
     }
     render(){
 

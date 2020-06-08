@@ -278,10 +278,12 @@ onClose=()=>{
   //   if (!ws || ws.readyState == WebSocket.CLOSED) this.connect(); //check if websocket instance is closed, if so call `connect` function.
   //   };
 
+  
   componentWillUnmount(){
     // this.setState({
     //   initialmsg: []
     // })
+    console.log('ABORT')
     this.controller.abort();
 
   }
@@ -295,7 +297,7 @@ onClose=()=>{
           msg => {
             var date = new Date(msg.CreatedAt)
             return(
-              <Card style={{ width: "80%", backgroundColor: msg.sender == localStorage.getItem("user_id") ? `#fff` : `#00d2d2`  , float: msg.sender == localStorage.getItem("user_id") ? "right" : "left", color: msg.sender == localStorage.getItem("user_id") ? "#000" : "#fff", boxShadow:"none", paddingLeft: msg.sender == localStorage.getItem("user_id") ? "none" : "35px", marginLeft: msg.sender == localStorage.getItem("user_id") ? "none" : "10px"}} >
+              <Card key = {Math.random()} style={{ width: "80%", backgroundColor: msg.sender == localStorage.getItem("user_id") ? `#fff` : `#00d2d2`  , float: msg.sender == localStorage.getItem("user_id") ? "right" : "left", color: msg.sender == localStorage.getItem("user_id") ? "#000" : "#fff", boxShadow:"none", paddingLeft: msg.sender == localStorage.getItem("user_id") ? "none" : "35px", marginLeft: msg.sender == localStorage.getItem("user_id") ? "none" : "10px"}} >
               {/* <p style={{fontWeight:700}}>Receiver: {msg.receiver}</p> */}
               {/* <p style={{fontWeight:700}}>Sender: {msg.sender}</p> */}
               <p>{msg.text}</p>
