@@ -42,13 +42,6 @@ class Chat extends React.Component{
       })
       // this.props.alert.show("alerting will be available soon")
     }
-  componentWillUnmount(){
-    this.setState({
-      initialmsg: []
-    })
-    this.controller.abort();
-
-  }
     // scrollToBottom = () => {
     //   this.messagesEnd.scrollIntoView({ behavior: "smooth" });
     // }
@@ -285,6 +278,13 @@ onClose=()=>{
   //   if (!ws || ws.readyState == WebSocket.CLOSED) this.connect(); //check if websocket instance is closed, if so call `connect` function.
   //   };
 
+  componentWillUnmount(){
+    // this.setState({
+    //   initialmsg: []
+    // })
+    this.controller.abort();
+
+  }
 
     render(){
 
