@@ -21,13 +21,8 @@ const Dlog = (props) => {
     let cm = {
       "email": values.user.email
     }
-<<<<<<< HEAD
-    console.log(cm)
-    fetch("https://akina-auth.herokuapp.com/api/user/verifyuser", {
-=======
 
     fetch("https://akina.ayushpriya.tech/api/user/verifyuser", {
->>>>>>> 188a5bf17875a85a7b15df6fb2a6dd6ddfe8881c
       method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
       body: JSON.stringify(cm), // Coordinate the body type with 'Content-Type'
       headers: new Headers({
