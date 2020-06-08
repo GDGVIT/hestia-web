@@ -40,7 +40,7 @@ class Explore extends React.Component {
      tileIcon=(email, number, link)=>{
         return(
         <div>
-            <a className="imgback" href={link}>
+            <a className="imgback" href={link} target="_blank">
                 <img style={{marginLeft:'8px'}} src={linkI} alt="Website link"></img>
             </a> 
 
