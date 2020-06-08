@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Row, Col, Drawer } from 'antd';
+import { Card, Row, Col, Drawer, message } from 'antd';
 import store from '../assets/store.png';
 import check from '../assets/check.png';
 import plus from '../assets/plus.png';
@@ -229,7 +229,12 @@ class Feed extends React.Component {
             'Authorization': localStorage.getItem("token")
             }),
         })
-        .then(response => response.json())
+        .then(response => {
+            if(response.status===500){
+                message.info('Chatroom already exists')
+            }
+            return response.json()
+        })
         }
         
           var obj ={}
