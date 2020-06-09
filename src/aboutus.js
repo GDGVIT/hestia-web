@@ -144,7 +144,7 @@ const Aboutus = (props) =>{
             <div className="team-heading">
         <h1 style={{color:"#00d2d2"}}>The Team</h1>
             </div>
-            <Row gutter={[16, 16]} style={{textAlign:'center', margin:'auto auto', width: '90%'}}>
+            <Row gutter={[16, 16]} style={{textAlign:'center', margin:'auto auto', width: '90%', paddingBottom:"60px"}}>
             <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <div className="photo">
                 <img src={samarth}/>
