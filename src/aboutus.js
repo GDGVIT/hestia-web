@@ -75,12 +75,12 @@ const Aboutus = (props) =>{
             </div>
             </div>
         </div>
-        <div className="features">
+        {/* <div className="features">
             <h1>Upcoming Features</h1>
         </div>
         <div className="what">
             <h4>The times are changing and with them so our the needs of everyone around the world. To make sure we stay ahead, we have a few features that we are working hard to bring them to you as soon as possible.</h4>
-        </div>
+        </div> */}
         <div className="parent1">
             <div className="feed">
                 <div className="feedlogo">
