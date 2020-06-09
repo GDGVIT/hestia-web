@@ -4,7 +4,7 @@ import logo from '../assets/logo.png';
 import explore from '../assets/explore.png';
 import feed from '../assets/feed.png';
 import news from '../assets/news2.png';
-import Akina from '../assets/akina.apk';
+import Akina from '../assets/akinav2.apk';
 import Amogh from '../assets/Amogh.jpg';
 import Ananya from '../assets/Ananya.jpg';
 import Ashutosh from '../assets/Ashutosh.jpg';
