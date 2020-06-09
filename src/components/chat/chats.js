@@ -291,7 +291,7 @@ class Chat extends React.Component{
 
     componentWillUnmount(){
       this.controller.abort();
-      console.log('ABORT')
+      // console.log('ABORT')
     }
     render(){
 
@@ -338,7 +338,7 @@ class Chat extends React.Component{
       // } 
 
       const {info} = this.state;
-      console.log(info)
+      // console.log(info)
       const menu = info.length ? (
         info.map(
           li => {

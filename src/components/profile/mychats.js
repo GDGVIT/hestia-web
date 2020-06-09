@@ -108,7 +108,7 @@ class Mychat extends React.Component{
         })
         .then(response => response.json())
         .then(data => {
-        console.log(data)
+        // console.log(data)
         if(data.status == 500){
             // console.log("err")
         }
@@ -132,7 +132,7 @@ class Mychat extends React.Component{
         })
         .then(response => response.json())
         .then(data => {
-        console.log(data)
+        // console.log(data)
         if(data.status == 500){
             // console.log("err")
         }
@@ -211,7 +211,7 @@ class Mychat extends React.Component{
             const otherchatslist = otherchats.length ? (
                 otherchats.map(
                     data => {
-                        console.log(data)
+                        // console.log(data)
                         if(data.sender_name != '' && data.receiver_name != '' && data.is_reported != true) {
                             return (
                                 <Card key = {data.receiver}>
