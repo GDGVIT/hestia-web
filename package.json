@@ -10,7 +10,7 @@
     "chart.js": "^2.9.3",
     "firebase": "^7.14.0",
     "react": "^16.13.1",
-    "react-alert": "^7.0.0",
+    "react-alert": "^7.0.2",
     "react-alert-template-basic": "^1.0.0",
     "react-chartjs-2": "^2.9.0",
     "react-chat-ui": "^0.3.2",
